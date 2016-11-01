@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SNCRegistrationModelStoreContainer" CdmEntityContainer="SNCRegistrationEntities">
+    <EntitySetMapping Name="FamilyMembers">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.FamilyMember">
+        <MappingFragment StoreEntitySet="FamilyMembers">
+          <ScalarProperty Name="FamilyMemberID" ColumnName="FamilyMemberID" />
+          <ScalarProperty Name="FamilyMemberFirstName" ColumnName="FamilyMemberFirstName" />
+          <ScalarProperty Name="FamilyMemberLastName" ColumnName="FamilyMemberLastName" />
+          <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
+          <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
+          <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
+          <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Guardians">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.Guardian">
+        <MappingFragment StoreEntitySet="Guardians">
+          <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
+          <ScalarProperty Name="GuardianFirstName" ColumnName="GuardianFirstName" />
+          <ScalarProperty Name="GuardianLastName" ColumnName="GuardianLastName" />
+          <ScalarProperty Name="GuardianAddress" ColumnName="GuardianAddress" />
+          <ScalarProperty Name="GuardianCity" ColumnName="GuardianCity" />
+          <ScalarProperty Name="GuardianZip" ColumnName="GuardianZip" />
+          <ScalarProperty Name="GuardianPhone" ColumnName="GuardianPhone" />
+          <ScalarProperty Name="GuardianEmail" ColumnName="GuardianEmail" />
+          <ScalarProperty Name="PacketSentDate" ColumnName="PacketSentDate" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="ConfirmationSentDate" ColumnName="ConfirmationSentDate" />
+          <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
+          <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
+          <ScalarProperty Name="Tent" ColumnName="Tent" />
+          <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeadContacts">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.LeadContact">
+        <MappingFragment StoreEntitySet="LeadContacts">
+          <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
+          <ScalarProperty Name="BSType" ColumnName="BSType" />
+          <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
+          <ScalarProperty Name="LeadContactFirstName" ColumnName="LeadContactFirstName" />
+          <ScalarProperty Name="LeadContactLastName" ColumnName="LeadContactLastName" />
+          <ScalarProperty Name="LeadContactAddress" ColumnName="LeadContactAddress" />
+          <ScalarProperty Name="LeadContactCity" ColumnName="LeadContactCity" />
+          <ScalarProperty Name="LeadContactState" ColumnName="LeadContactState" />
+          <ScalarProperty Name="LeadContactZip" ColumnName="LeadContactZip" />
+          <ScalarProperty Name="LeadContactPhone" ColumnName="LeadContactPhone" />
+          <ScalarProperty Name="LeadContactEmail" ColumnName="LeadContactEmail" />
+          <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
+          <ScalarProperty Name="SaturdayDinner" ColumnName="SaturdayDinner" />
+          <ScalarProperty Name="TotalFee" ColumnName="TotalFee" />
+          <ScalarProperty Name="Booth" ColumnName="Booth" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="LeadContactShirtOrder" ColumnName="LeadContactShirtOrder" />
+          <ScalarProperty Name="LeadContactShirtSize" ColumnName="LeadContactShirtSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participants">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.Participant">
+        <MappingFragment StoreEntitySet="Participants">
+          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+          <ScalarProperty Name="ParticipantFirstName" ColumnName="ParticipantFirstName" />
+          <ScalarProperty Name="ParticipantLastName" ColumnName="ParticipantLastName" />
+          <ScalarProperty Name="ParticipantAge" ColumnName="ParticipantAge" />
+          <ScalarProperty Name="ParticipantSchool" ColumnName="ParticipantSchool" />
+          <ScalarProperty Name="ParticipantTeacher" ColumnName="ParticipantTeacher" />
+          <ScalarProperty Name="ClassroomScouting" ColumnName="ClassroomScouting" />
+          <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
+          <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
+          <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
+          <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Volunteers">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
+        <MappingFragment StoreEntitySet="Volunteers">
+          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+          <ScalarProperty Name="VolunteerFirstName" ColumnName="VolunteerFirstName" />
+          <ScalarProperty Name="VolunteerLastName" ColumnName="VolunteerLastName" />
+          <ScalarProperty Name="VolunteerAge" ColumnName="VolunteerAge" />
+          <ScalarProperty Name="LeaderID" ColumnName="LeaderID" />
+          <ScalarProperty Name="VolunteerShirtOrder" ColumnName="VolunteerShirtOrder" />
+          <ScalarProperty Name="VolunteerShirtSize" ColumnName="VolunteerShirtSize" />
+          <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
+          <ScalarProperty Name="SaturdayDinner" ColumnName="SaturdayDinner" />
+          <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="database_firewall_rules">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.database_firewall_rules">
+        <MappingFragment StoreEntitySet="database_firewall_rules">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
