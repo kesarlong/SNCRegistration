@@ -225,6 +225,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\footer.png" />
     <Content Include="img\intro-bg.jpg" />
     <Content Include="Models\SNCRegistration.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -245,6 +246,7 @@
     <Content Include="Models\SNCRegistration.edmx.diagram">
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\SNCRegistration - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
