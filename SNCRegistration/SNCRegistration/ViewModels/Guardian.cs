@@ -7,19 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SNCRegistration.Models
+namespace SNCRegistration.ViewModels
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class FamilyMember
+    public partial class Guardian
     {
-        public int FamilyMemberID { get; set; }
-        public string FamilyMemberFirstName { get; set; }
-        public string FamilyMemberLastName { get; set; }
         public int GuardianID { get; set; }
+        public string GuardianFirstName { get; set; }
+        public string GuardianLastName { get; set; }
+        public string GuardianAddress { get; set; }
+        public string GuardianCity { get; set; }
+        public int GuardianZip { get; set; }
+        public string GuardianPhone { get; set; }
+        public string GuardianEmail { get; set; }
+        public Nullable<System.DateTime> PacketSentDate { get; set; }
+        public Nullable<System.DateTime> ReceiptDate { get; set; }
+        public Nullable<System.DateTime> ConfirmationSentDate { get; set; }
         public Nullable<bool> HealthForm { get; set; }
         public Nullable<bool> PhotoAck { get; set; }
+        public bool Tent { get; set; }
         public string AttendingCode { get; set; }
         public string Comments { get; set; }
     }

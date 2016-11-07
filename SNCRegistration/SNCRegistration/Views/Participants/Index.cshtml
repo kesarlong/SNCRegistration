@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.Participant>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<div class="panel-body">
+    <h2>Participants</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+
+<table class="table table-condensed table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantAge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantSchool)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantTeacher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassroomScouting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HealthForm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoAck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttendingCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>Edit</th>
+        <th>Details</th>
+        <th>Delete</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantAge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantSchool)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantTeacher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassroomScouting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HealthForm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoAck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttendingCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>
+        <td>@Html.ActionLink("Details", "Details", new { id=item.ParticipantID })</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })</td>
+    </tr>
+}
+
+</table>
+</div>
