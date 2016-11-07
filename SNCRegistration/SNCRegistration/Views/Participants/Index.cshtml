@@ -1,15 +1,18 @@
-﻿@model IEnumerable<SNCRegistration.Models.Participant>
+﻿@model IEnumerable<SNCRegistration.ViewModels.Participant>
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Index</h2>
+<div class="panel-body">
+    <h2>Participants</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-condensed table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ParticipantFirstName)
@@ -44,7 +47,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Comments)
         </th>
-        <th></th>
+        <th>Edit</th>
+        <th>Details</th>
+        <th>Delete</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -82,12 +87,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Comments)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ParticipantID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })
-        </td>
+        <td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>
+        <td>@Html.ActionLink("Details", "Details", new { id=item.ParticipantID })</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })</td>
     </tr>
 }
 
 </table>
+</div>

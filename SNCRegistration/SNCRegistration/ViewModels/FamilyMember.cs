@@ -7,18 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SNCRegistration.Models
+namespace SNCRegistration.ViewModels
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class database_firewall_rules
+    public partial class FamilyMember
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string start_ip_address { get; set; }
-        public string end_ip_address { get; set; }
-        public System.DateTime create_date { get; set; }
-        public System.DateTime modify_date { get; set; }
+        public int FamilyMemberID { get; set; }
+        public string FamilyMemberFirstName { get; set; }
+        public string FamilyMemberLastName { get; set; }
+        public int GuardianID { get; set; }
+        public Nullable<bool> HealthForm { get; set; }
+        public Nullable<bool> PhotoAck { get; set; }
+        public string AttendingCode { get; set; }
+        public string Comments { get; set; }
     }
 }

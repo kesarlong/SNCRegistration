@@ -1,0 +1,115 @@
+﻿@model SNCRegistration.ViewModels.Volunteer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Volunteer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerShirtOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerShirtOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerShirtSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerShirtSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerAttendingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaturdayDinner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaturdayDinner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitChapterNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteers1.VolunteerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteers1.VolunteerFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer1.VolunteerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer1.VolunteerFirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

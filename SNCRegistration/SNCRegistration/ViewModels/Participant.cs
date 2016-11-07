@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SNCRegistration.Models
+namespace SNCRegistration.ViewModels
 {
     using System;
     using System.Collections.Generic;

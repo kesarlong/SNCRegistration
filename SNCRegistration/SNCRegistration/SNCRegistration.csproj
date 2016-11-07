@@ -174,43 +174,44 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
+    <Compile Include="Controllers\VolunteersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\database_firewall_rules.cs">
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\database_firewall_rules.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FamilyMember.cs">
+    <Compile Include="ViewModels\FamilyMember.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Guardian.cs">
+    <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LeadContact.cs">
+    <Compile Include="ViewModels\IdentityModels.cs" />
+    <Compile Include="ViewModels\LeadContact.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Participant.cs">
+    <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SNCRegistration.Context.cs">
+    <Compile Include="ViewModels\SNCRegistration.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SNCRegistration.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SNCRegistration.cs">
+    <Compile Include="ViewModels\SNCRegistration.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SNCRegistration.Designer.cs">
+    <Compile Include="ViewModels\SNCRegistration.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Volunteer.cs">
+    <Compile Include="ViewModels\Volunteer.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,29 +222,28 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="img\footer.png" />
-    <Content Include="img\intro-bg.jpg" />
-    <Content Include="Models\SNCRegistration.Context.tt">
+    <Content Include="ViewModels\SNCRegistration.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
       <LastGenOutput>SNCRegistration.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\SNCRegistration.tt">
+    <Content Include="ViewModels\SNCRegistration.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
       <LastGenOutput>SNCRegistration.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\SNCRegistration.edmx">
+    <EntityDeploy Include="ViewModels\SNCRegistration.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SNCRegistration.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\SNCRegistration.edmx.diagram">
+    <Content Include="ViewModels\SNCRegistration.edmx.diagram">
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\SNCRegistration - Web Deploy.pubxml" />
@@ -305,6 +305,17 @@
     <Content Include="Views\Guardians\Details.cshtml" />
     <Content Include="Views\Guardians\Edit.cshtml" />
     <Content Include="Views\Guardians\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPanel.cshtml" />
+    <Content Include="Views\Participants\Create.cshtml" />
+    <Content Include="Views\Participants\Delete.cshtml" />
+    <Content Include="Views\Participants\Details.cshtml" />
+    <Content Include="Views\Participants\Edit.cshtml" />
+    <Content Include="Views\Participants\Index.cshtml" />
+    <Content Include="Views\Volunteers\Create.cshtml" />
+    <Content Include="Views\Volunteers\Delete.cshtml" />
+    <Content Include="Views\Volunteers\Details.cshtml" />
+    <Content Include="Views\Volunteers\Edit.cshtml" />
+    <Content Include="Views\Volunteers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
