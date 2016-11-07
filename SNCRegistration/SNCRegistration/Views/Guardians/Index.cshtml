@@ -1,0 +1,117 @@
+﻿@model IEnumerable<SNCRegistration.Models.Guardian>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PacketSentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConfirmationSentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HealthForm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoAck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttendingCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PacketSentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiptDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConfirmationSentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HealthForm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoAck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttendingCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GuardianID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GuardianID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GuardianID })
+        </td>
+    </tr>
+}
+
+</table>

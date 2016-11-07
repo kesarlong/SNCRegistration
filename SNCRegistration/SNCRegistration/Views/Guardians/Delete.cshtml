@@ -1,0 +1,144 @@
+﻿@model SNCRegistration.Models.Guardian
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Guardian</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PacketSentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PacketSentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiptDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiptDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfirmationSentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfirmationSentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HealthForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HealthForm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoAck)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhotoAck)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttendingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttendingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
