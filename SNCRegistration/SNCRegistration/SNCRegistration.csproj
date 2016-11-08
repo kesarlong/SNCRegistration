@@ -174,7 +174,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
-    <Compile Include="Controllers\VolunteersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,13 +210,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Volunteer.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\GuardiansViewModel.cs" />
-    <Compile Include="ViewModels\ParticipantsViewModel.cs" />
+    <Compile Include="Controllers\VolunteersController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="SNCRegistrationModel.Participant" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SNCRegistrationModel.Volunteer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SNCRegistrationModel.database_firewall_rules" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="SNCRegistrationModel.FK_Volunteers_Volunteers" ManuallyRouted="false" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_Volunteers_Volunteers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

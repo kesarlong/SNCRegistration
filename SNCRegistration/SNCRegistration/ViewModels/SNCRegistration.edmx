@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SNCRegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SNCRegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="FamilyMembers">
           <Key>
             <PropertyRef Name="FamilyMemberID" />
@@ -146,8 +146,7 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
             <End Role="Volunteers1" EntitySet="Volunteers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SNCRegistrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -240,8 +239,8 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="SaturdayDinner" Type="Boolean" Nullable="false" />
           <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Volunteers1" Relationship="Self.FK_Volunteers_Volunteers" FromRole="Volunteers" ToRole="Volunteers1" />
-          <NavigationProperty Name="Volunteer1" Relationship="Self.FK_Volunteers_Volunteers" FromRole="Volunteers1" ToRole="Volunteers" />
+          <NavigationProperty Name="Volunteers1" Relationship="SNCRegistrationModel.FK_Volunteers_Volunteers" FromRole="Volunteer" ToRole="Volunteer1" />
+          <NavigationProperty Name="Volunteer1" Relationship="SNCRegistrationModel.FK_Volunteers_Volunteers" FromRole="Volunteer1" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -259,18 +258,6 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <Association Name="FK_Volunteers_Volunteers">
-          <End Role="Volunteers" Type="Self.Volunteer" Multiplicity="1" />
-          <End Role="Volunteers1" Type="Self.Volunteer" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Volunteers">
-              <PropertyRef Name="VolunteerID" />
-            </Principal>
-            <Dependent Role="Volunteers1">
-              <PropertyRef Name="VolunteerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SNCRegistrationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMember" />
           <EntitySet Name="Guardians" EntityType="Self.Guardian" />
@@ -278,11 +265,23 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <EntitySet Name="Participants" EntityType="Self.Participant" />
           <EntitySet Name="Volunteers" EntityType="Self.Volunteer" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-          <AssociationSet Name="FK_Volunteers_Volunteers" Association="Self.FK_Volunteers_Volunteers">
-            <End Role="Volunteers" EntitySet="Volunteers" />
-            <End Role="Volunteers1" EntitySet="Volunteers" />
+          <AssociationSet Name="FK_Volunteers_Volunteers" Association="SNCRegistrationModel.FK_Volunteers_Volunteers">
+            <End Role="Volunteer" EntitySet="Volunteers" />
+            <End Role="Volunteer1" EntitySet="Volunteers" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Volunteers_Volunteers">
+          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="1" />
+          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Volunteer">
+              <PropertyRef Name="VolunteerID" />
+            </Principal>
+            <Dependent Role="Volunteer1">
+              <PropertyRef Name="VolunteerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
