@@ -313,6 +313,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="font-awesome\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
