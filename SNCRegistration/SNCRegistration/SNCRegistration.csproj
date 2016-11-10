@@ -178,6 +178,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Admins.cs" />
     <Compile Include="ViewModels\database_firewall_rules.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
