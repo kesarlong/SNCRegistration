@@ -1,0 +1,74 @@
+﻿@model SNCRegistration.ViewModels.FamilyMember
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FamilyMember</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FamilyMemberFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FamilyMemberFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FamilyMemberLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FamilyMemberLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuardianID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuardianID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HealthForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HealthForm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoAck)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhotoAck)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttendingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttendingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyMemberID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

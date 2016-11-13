@@ -179,6 +179,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FamilyMembersController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
@@ -378,6 +379,11 @@
     <Content Include="Views\LeadContacts\Details.cshtml" />
     <Content Include="Views\LeadContacts\Edit.cshtml" />
     <Content Include="Views\LeadContacts\Index.cshtml" />
+    <Content Include="Views\FamilyMembers\Create.cshtml" />
+    <Content Include="Views\FamilyMembers\Delete.cshtml" />
+    <Content Include="Views\FamilyMembers\Details.cshtml" />
+    <Content Include="Views\FamilyMembers\Edit.cshtml" />
+    <Content Include="Views\FamilyMembers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
