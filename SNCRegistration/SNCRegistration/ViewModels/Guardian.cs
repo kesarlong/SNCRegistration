@@ -34,7 +34,7 @@ namespace SNCRegistration.ViewModels
         public int GuardianZip { get; set; }
 
         
-        [DisplayName("Phone")]
+        [DisplayName("Cell Phone")]
         [DataType(DataType.PhoneNumber)]
         public string GuardianPhone { get; set; }
 
