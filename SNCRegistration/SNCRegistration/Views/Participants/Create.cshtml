@@ -97,9 +97,6 @@
                 </div>
             </div>
 
-            <!--set initial value for classroom scouting to false-->
-           @* @Html.HiddenFor(model => model.ClassroomScouting, new { value = false })*@
-
             <div class="row">
                 @Html.LabelFor(model => model.ClassroomScouting, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
@@ -118,8 +115,7 @@
         </div>
     </div>
 
-    @Html.HiddenFor(model => model.HealthForm, new { value = false})
-    @Html.HiddenFor(model => model.PhotoAck, new { value = false })
+
 
     <div class="row">
         @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
