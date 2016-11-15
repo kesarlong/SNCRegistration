@@ -11,16 +11,35 @@ namespace SNCRegistration.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class FamilyMember
     {
+ 
         public int FamilyMemberID { get; set; }
+
+        [Required]
+        [DisplayName("First Name")]
         public string FamilyMemberFirstName { get; set; }
+
+        [Required]
+        [DisplayName("Last Name")]
         public string FamilyMemberLastName { get; set; }
+
+
         public int GuardianID { get; set; }
+
+        [DisplayName("Health Form")]
         public Nullable<bool> HealthForm { get; set; }
+
+        [DisplayName("Photo Ack")]
         public Nullable<bool> PhotoAck { get; set; }
+
+        [DisplayName("Attendance")]
         public string AttendingCode { get; set; }
+
+        [DisplayName("Comments")]
         public string Comments { get; set; }
     }
 }
