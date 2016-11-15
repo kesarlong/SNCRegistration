@@ -12,15 +12,13 @@ namespace SNCRegistration.ViewModels
     using System;
     using System.Collections.Generic;
     
-    public partial class FamilyMember
+    public partial class AspNetUserClaim
     {
-        public int FamilyMemberID { get; set; }
-        public string FamilyMemberFirstName { get; set; }
-        public string FamilyMemberLastName { get; set; }
-        public int GuardianID { get; set; }
-        public Nullable<bool> HealthForm { get; set; }
-        public Nullable<bool> PhotoAck { get; set; }
-        public string AttendingCode { get; set; }
-        public string Comments { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
