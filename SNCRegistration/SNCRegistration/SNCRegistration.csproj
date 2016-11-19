@@ -195,6 +195,24 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Admin.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AspNetRole.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AspNetUser.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AspNetUserClaim.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AspNetUserLogin.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\C__MigrationHistory.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\database_firewall_rules.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
