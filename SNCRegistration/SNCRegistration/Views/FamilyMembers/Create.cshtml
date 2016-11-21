@@ -1,24 +1,18 @@
 ﻿@model SNCRegistration.ViewModels.FamilyMember
-
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutRegister.cshtml";
 }
-
 @using (Html.BeginForm())
-{
+    {
     @Html.AntiForgeryToken()
-
     <h4>Additional Attendees</h4>
     <hr />
-
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
         <!--TO DO remove in form Manually populate during initial development-->
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-
                 @Html.LabelFor(model => model.FamilyMemberID, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.FamilyMemberID, new { htmlAttributes = new { @class = "form-control" } })
@@ -26,7 +20,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-6">
             <div class="row">
                 @Html.LabelFor(model => model.GuardianID, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -37,9 +30,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="row">
         <div class="col-md-6">
             <div class="row">
@@ -49,7 +39,6 @@
                     @Html.ValidationMessageFor(model => model.FamilyMemberFirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="row">
                 @Html.LabelFor(model => model.FamilyMemberLastName, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-6">
@@ -58,18 +47,14 @@
                 </div>
             </div>
         </div>
-
-
-
         <div class="col-md-6">
             <div class="row">
-                @Html.Label("Age", htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    <!--TO DO: ADD FIELD WHEN CREATED IN DATABASE-->
-                    @Html.Label("<<NEW FIELD>>", htmlAttributes: new { @class = "control-label col-md-9" })
+                @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.FamilyMemberAge, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="row">
                 @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-6">
@@ -78,30 +63,22 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-        <div class="row">
-            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-            </div>
+    <div class="row">
+        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
         </div>
-
+    </div>
         <hr />
-
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
-
-
-}
-
+    }
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

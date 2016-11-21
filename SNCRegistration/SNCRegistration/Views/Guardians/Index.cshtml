@@ -28,7 +28,7 @@
             @Html.DisplayNameFor(model => model.GuardianZip)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GuardianPhone)
+            @Html.DisplayNameFor(model => model.GuardianCellPhone)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.GuardianEmail)
@@ -57,7 +57,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Comments)
         </th>
-        <th></th>
+        <th>@Html.DisplayNameFor(model => model.Relationship)</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -78,7 +78,7 @@
             @Html.DisplayFor(modelItem => item.GuardianZip)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GuardianPhone)
+            @Html.DisplayFor(modelItem => item.GuardianCellPhone)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GuardianEmail)
@@ -106,6 +106,10 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Relationship)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.GuardianID }) |
