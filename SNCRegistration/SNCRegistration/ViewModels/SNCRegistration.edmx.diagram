@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c9975929d4634b34adf69a873463726e" Name="Diagram1" ZoomLevel="86">
+      <Diagram DiagramId="c9975929d4634b34adf69a873463726e" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="SNCRegistrationModel.FamilyMember" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Guardian" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.LeadContact" Width="1.5" PointX="7" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Participant" Width="1.5" PointX="9" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Guardian" Width="2" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.LeadContact" Width="1.875" PointX="7" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Participant" Width="1.5" PointX="10.125" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SNCRegistrationModel.Volunteer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SNCRegistrationModel.database_firewall_rules" Width="1.5" PointX="2" PointY="6.5" IsExpanded="true" />
         <AssociationConnector Association="SNCRegistrationModel.FK_Volunteers_Volunteers" />
@@ -21,6 +21,9 @@
         <AssociationConnector Association="SNCRegistrationModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="SNCRegistrationModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="SNCRegistrationModel.AspNetUserRoles" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_FamilyMembers_ToTable" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_Participants_ToTable" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_Volunteers_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

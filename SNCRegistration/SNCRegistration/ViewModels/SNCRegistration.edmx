@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="AdminID" />
           </Key>
-          <Property Name="AdminID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="AdminID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdminUserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdminFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdminLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -81,9 +81,10 @@
           <Key>
             <PropertyRef Name="FamilyMemberID" />
           </Key>
-          <Property Name="FamilyMemberID" Type="int" Nullable="false" />
+          <Property Name="FamilyMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FamilyMemberFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FamilyMemberLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FamilyMemberAge" Type="int" />
           <Property Name="GuardianID" Type="int" Nullable="false" />
           <Property Name="HealthForm" Type="bit" />
           <Property Name="PhotoAck" Type="bit" />
@@ -94,13 +95,14 @@
           <Key>
             <PropertyRef Name="GuardianID" />
           </Key>
-          <Property Name="GuardianID" Type="int" Nullable="false" />
+          <Property Name="GuardianID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GuardianFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GuardianLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
           <Property Name="GuardianAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GuardianCity" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GuardianZip" Type="int" Nullable="false" />
-          <Property Name="GuardianPhone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="GuardianCellPhone" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="GuardianEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PacketSentDate" Type="date" />
           <Property Name="ReceiptDate" Type="date" />
@@ -115,7 +117,7 @@
           <Key>
             <PropertyRef Name="LeadContactID" />
           </Key>
-          <Property Name="LeadContactID" Type="int" Nullable="false" />
+          <Property Name="LeadContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BSType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="LeadContactFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -124,7 +126,7 @@
           <Property Name="LeadContactCity" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LeadContactState" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="LeadContactZip" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="LeadContactPhone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LeadContactCellPhone" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="LeadContactEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SaturdayDinner" Type="bit" Nullable="false" />
@@ -138,13 +140,14 @@
           <Key>
             <PropertyRef Name="ParticipantID" />
           </Key>
-          <Property Name="ParticipantID" Type="int" Nullable="false" />
+          <Property Name="ParticipantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ParticipantFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParticipantLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParticipantAge" Type="int" Nullable="false" />
           <Property Name="ParticipantSchool" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParticipantTeacher" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="ClassroomScouting" Type="bit" Nullable="false" />
+          <Property Name="Returning" Type="bit" />
           <Property Name="HealthForm" Type="bit" />
           <Property Name="PhotoAck" Type="bit" />
           <Property Name="AttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -155,11 +158,11 @@
           <Key>
             <PropertyRef Name="VolunteerID" />
           </Key>
-          <Property Name="VolunteerID" Type="int" Nullable="false" />
+          <Property Name="VolunteerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VolunteerFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VolunteerLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VolunteerAge" Type="int" Nullable="false" />
-          <Property Name="LeaderID" Type="int" Nullable="false" />
+          <Property Name="LeadContactID" Type="int" Nullable="false" />
           <Property Name="VolunteerShirtOrder" Type="bit" Nullable="false" />
           <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -241,15 +244,39 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Volunteers_Volunteers">
-          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1" />
-          <End Role="Volunteers1" Type="Self.Volunteers" Multiplicity="0..1" />
+        <Association Name="FK_FamilyMembers_ToTable">
+          <End Role="Guardians" Type="Self.Guardians" Multiplicity="1" />
+          <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Volunteers">
-              <PropertyRef Name="VolunteerID" />
+            <Principal Role="Guardians">
+              <PropertyRef Name="GuardianID" />
             </Principal>
-            <Dependent Role="Volunteers1">
-              <PropertyRef Name="VolunteerID" />
+            <Dependent Role="FamilyMembers">
+              <PropertyRef Name="GuardianID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participants_ToTable">
+          <End Role="Guardians" Type="Self.Guardians" Multiplicity="0..1" />
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guardians">
+              <PropertyRef Name="GuardianID" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="GuardianID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volunteers_ToTable">
+          <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="1" />
+          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeadContacts">
+              <PropertyRef Name="LeadContactID" />
+            </Principal>
+            <Dependent Role="Volunteers">
+              <PropertyRef Name="LeadContactID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -292,9 +319,17 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Volunteers_Volunteers" Association="Self.FK_Volunteers_Volunteers">
+          <AssociationSet Name="FK_FamilyMembers_ToTable" Association="Self.FK_FamilyMembers_ToTable">
+            <End Role="Guardians" EntitySet="Guardians" />
+            <End Role="FamilyMembers" EntitySet="FamilyMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participants_ToTable" Association="Self.FK_Participants_ToTable">
+            <End Role="Guardians" EntitySet="Guardians" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volunteers_ToTable" Association="Self.FK_Volunteers_ToTable">
+            <End Role="LeadContacts" EntitySet="LeadContacts" />
             <End Role="Volunteers" EntitySet="Volunteers" />
-            <End Role="Volunteers1" EntitySet="Volunteers" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -313,6 +348,8 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="PhotoAck" Type="Boolean" />
           <Property Name="AttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyMemberAge" Type="Int32" />
+          <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_FamilyMembers_ToTable" FromRole="FamilyMember" ToRole="Guardian" />
         </EntityType>
         <EntityType Name="Guardian">
           <Key>
@@ -324,7 +361,6 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="GuardianAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GuardianCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GuardianZip" Type="Int32" Nullable="false" />
-          <Property Name="GuardianPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="GuardianEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PacketSentDate" Type="DateTime" Precision="0" />
           <Property Name="ReceiptDate" Type="DateTime" Precision="0" />
@@ -334,6 +370,10 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="Tent" Type="Boolean" Nullable="false" />
           <Property Name="AttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianCellPhone" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK_FamilyMembers_ToTable" FromRole="Guardian" ToRole="FamilyMember" />
+          <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK_Participants_ToTable" FromRole="Guardian" ToRole="Participant" />
         </EntityType>
         <EntityType Name="LeadContact">
           <Key>
@@ -348,7 +388,6 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="LeadContactCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LeadContactState" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="LeadContactZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="LeadContactPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="LeadContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VolunteerAttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SaturdayDinner" Type="Boolean" Nullable="false" />
@@ -357,6 +396,8 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LeadContactShirtOrder" Type="Boolean" Nullable="false" />
           <Property Name="LeadContactShirtSize" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LeadContactCellPhone" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK_Volunteers_ToTable" FromRole="LeadContact" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="Participant">
           <Key>
@@ -374,6 +415,8 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="AttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GuardianID" Type="Int32" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Returning" Type="Boolean" />
+          <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_Participants_ToTable" FromRole="Participant" ToRole="Guardian" />
         </EntityType>
         <EntityType Name="Volunteer">
           <Key>
@@ -383,7 +426,6 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="VolunteerFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VolunteerLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VolunteerAge" Type="Int32" Nullable="false" />
-          <Property Name="LeaderID" Type="Int32" Nullable="false" />
           <Property Name="VolunteerShirtOrder" Type="Boolean" Nullable="false" />
           <Property Name="VolunteerShirtSize" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="VolunteerAttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -392,6 +434,8 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Volunteers1" Relationship="SNCRegistrationModel.FK_Volunteers_Volunteers" FromRole="Volunteer" ToRole="Volunteer1" />
           <NavigationProperty Name="Volunteer1" Relationship="SNCRegistrationModel.FK_Volunteers_Volunteers" FromRole="Volunteer1" ToRole="Volunteer" />
+          <Property Name="LeadContactID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LeadContact" Relationship="SNCRegistrationModel.FK_Volunteers_ToTable" FromRole="Volunteer" ToRole="LeadContact" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -438,6 +482,18 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_FamilyMembers_ToTable" Association="SNCRegistrationModel.FK_FamilyMembers_ToTable">
+            <End Role="Guardian" EntitySet="Guardians" />
+            <End Role="FamilyMember" EntitySet="FamilyMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participants_ToTable" Association="SNCRegistrationModel.FK_Participants_ToTable">
+            <End Role="Guardian" EntitySet="Guardians" />
+            <End Role="Participant" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volunteers_ToTable" Association="SNCRegistrationModel.FK_Volunteers_ToTable">
+            <End Role="LeadContact" EntitySet="LeadContacts" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Volunteers_Volunteers">
           <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="1" />
@@ -465,7 +521,7 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Key>
             <PropertyRef Name="AdminID" />
           </Key>
-          <Property Name="AdminID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AdminID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -553,6 +609,42 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <End Type="SNCRegistrationModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="SNCRegistrationModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <Association Name="FK_FamilyMembers_ToTable">
+          <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="1" />
+          <End Type="SNCRegistrationModel.FamilyMember" Role="FamilyMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guardian">
+              <PropertyRef Name="GuardianID" />
+            </Principal>
+            <Dependent Role="FamilyMember">
+              <PropertyRef Name="GuardianID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participants_ToTable">
+          <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="0..1" />
+          <End Type="SNCRegistrationModel.Participant" Role="Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guardian">
+              <PropertyRef Name="GuardianID" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="GuardianID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Volunteers_ToTable">
+          <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="1" />
+          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeadContact">
+              <PropertyRef Name="LeadContactID" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="LeadContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -562,6 +654,7 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <EntitySetMapping Name="FamilyMembers">
             <EntityTypeMapping TypeName="SNCRegistrationModel.FamilyMember">
               <MappingFragment StoreEntitySet="FamilyMembers">
+                <ScalarProperty Name="FamilyMemberAge" ColumnName="FamilyMemberAge" />
                 <ScalarProperty Name="FamilyMemberID" ColumnName="FamilyMemberID" />
                 <ScalarProperty Name="FamilyMemberFirstName" ColumnName="FamilyMemberFirstName" />
                 <ScalarProperty Name="FamilyMemberLastName" ColumnName="FamilyMemberLastName" />
@@ -576,13 +669,14 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <EntitySetMapping Name="Guardians">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Guardian">
               <MappingFragment StoreEntitySet="Guardians">
+                <ScalarProperty Name="GuardianCellPhone" ColumnName="GuardianCellPhone" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
                 <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
                 <ScalarProperty Name="GuardianFirstName" ColumnName="GuardianFirstName" />
                 <ScalarProperty Name="GuardianLastName" ColumnName="GuardianLastName" />
                 <ScalarProperty Name="GuardianAddress" ColumnName="GuardianAddress" />
                 <ScalarProperty Name="GuardianCity" ColumnName="GuardianCity" />
                 <ScalarProperty Name="GuardianZip" ColumnName="GuardianZip" />
-                <ScalarProperty Name="GuardianPhone" ColumnName="GuardianPhone" />
                 <ScalarProperty Name="GuardianEmail" ColumnName="GuardianEmail" />
                 <ScalarProperty Name="PacketSentDate" ColumnName="PacketSentDate" />
                 <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
@@ -598,6 +692,7 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <EntitySetMapping Name="LeadContacts">
             <EntityTypeMapping TypeName="SNCRegistrationModel.LeadContact">
               <MappingFragment StoreEntitySet="LeadContacts">
+                <ScalarProperty Name="LeadContactCellPhone" ColumnName="LeadContactCellPhone" />
                 <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
                 <ScalarProperty Name="BSType" ColumnName="BSType" />
                 <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
@@ -607,7 +702,6 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
                 <ScalarProperty Name="LeadContactCity" ColumnName="LeadContactCity" />
                 <ScalarProperty Name="LeadContactState" ColumnName="LeadContactState" />
                 <ScalarProperty Name="LeadContactZip" ColumnName="LeadContactZip" />
-                <ScalarProperty Name="LeadContactPhone" ColumnName="LeadContactPhone" />
                 <ScalarProperty Name="LeadContactEmail" ColumnName="LeadContactEmail" />
                 <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
                 <ScalarProperty Name="SaturdayDinner" ColumnName="SaturdayDinner" />
@@ -622,6 +716,7 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <EntitySetMapping Name="Participants">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Participant">
               <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="Returning" ColumnName="Returning" />
                 <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
                 <ScalarProperty Name="ParticipantFirstName" ColumnName="ParticipantFirstName" />
                 <ScalarProperty Name="ParticipantLastName" ColumnName="ParticipantLastName" />
@@ -640,11 +735,11 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <EntitySetMapping Name="Volunteers">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteers">
+                <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
                 <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
                 <ScalarProperty Name="VolunteerFirstName" ColumnName="VolunteerFirstName" />
                 <ScalarProperty Name="VolunteerLastName" ColumnName="VolunteerLastName" />
                 <ScalarProperty Name="VolunteerAge" ColumnName="VolunteerAge" />
-                <ScalarProperty Name="LeaderID" ColumnName="LeaderID" />
                 <ScalarProperty Name="VolunteerShirtOrder" ColumnName="VolunteerShirtOrder" />
                 <ScalarProperty Name="VolunteerShirtSize" ColumnName="VolunteerShirtSize" />
                 <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
