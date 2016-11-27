@@ -28,7 +28,7 @@ namespace SNCRegistration.ViewModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GuardianID { get; set; }
         [Required]
-        [DisplayName("First Name")]
+
         public string GuardianFirstName { get; set; }
 
         [Required]

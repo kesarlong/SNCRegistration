@@ -227,6 +227,8 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\Metadata.cs" />
+    <Compile Include="ViewModels\PartialClasses.cs" />
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>

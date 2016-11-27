@@ -26,7 +26,7 @@ namespace SNCRegistration.ViewModels
         public string AttendingCode { get; set; }
         public Nullable<int> GuardianID { get; set; }
         public string Comments { get; set; }
-        public Nullable<bool> Returning { get; set; }
+        public bool Returning { get; set; }
     
         public virtual Guardian Guardian { get; set; }
     }
