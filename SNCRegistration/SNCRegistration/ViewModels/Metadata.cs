@@ -84,7 +84,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
 
         [Display(Name="Age")]
-        public int ParticipantAge ;
+        public string ParticipantAge ;
 
 
         [Display(Name="School")]
@@ -100,10 +100,10 @@ namespace SNCRegistration.ViewModels.Metadata
         public bool ClassroomScouting ;
 
         [Display(Name="Health Form")]
-        public Nullable<bool> HealthForm ;
+        public bool? HealthForm ;
 
         [Display(Name="Photo Acknowledgment")]
-        public Nullable<bool> PhotoAck ;
+        public bool? PhotoAck ;
 
         [Display(Name="Attendance")]
         public string AttendingCode ;

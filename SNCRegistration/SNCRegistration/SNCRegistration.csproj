@@ -319,6 +319,7 @@
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
       <LastGenOutput>SNCRegistration.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="ViewModels\SNCRegistration.edmx.sql" />
     <Content Include="ViewModels\SNCRegistration.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
