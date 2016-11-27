@@ -536,7 +536,7 @@ namespace SNCRegistration.ReportingDataSet {
                 base.Columns.Add(this.columnParticipantFirstName);
                 this.columnParticipantLastName = new global::System.Data.DataColumn("ParticipantLastName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnParticipantLastName);
-                this.columnParticipantAge = new global::System.Data.DataColumn("ParticipantAge", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnParticipantAge = new global::System.Data.DataColumn("ParticipantAge", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnParticipantAge);
                 this.columnParticipantSchool = new global::System.Data.DataColumn("ParticipantSchool", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnParticipantSchool);

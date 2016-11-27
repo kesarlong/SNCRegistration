@@ -26,7 +26,7 @@ namespace SNCRegistration.ViewModels
         public string GuardianLastName { get; set; }
         public string GuardianAddress { get; set; }
         public string GuardianCity { get; set; }
-        public Nullable<int> GuardianZip { get; set; }
+        public string GuardianZip { get; set; }
         public string GuardianEmail { get; set; }
         public Nullable<System.DateTime> PacketSentDate { get; set; }
         public Nullable<System.DateTime> ReceiptDate { get; set; }

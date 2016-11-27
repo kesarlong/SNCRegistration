@@ -169,7 +169,7 @@ CREATE TABLE [dbo].[Volunteers] (
     [VolunteerID] int  NOT NULL,
     [VolunteerFirstName] nvarchar(50)  NOT NULL,
     [VolunteerLastName] nvarchar(50)  NOT NULL,
-    [VolunteerAge] int  NOT NULL,
+    [VolunteerAge] string  NOT NULL,
     [VolunteerShirtOrder] bit  NOT NULL,
     [VolunteerShirtSize] char(10)  NOT NULL,
     [VolunteerAttendingCode] nvarchar(50)  NOT NULL,
@@ -180,25 +180,25 @@ CREATE TABLE [dbo].[Volunteers] (
 );
 GO
 
--- Creating table 'database_firewall_rules'
-CREATE TABLE [dbo].[database_firewall_rules] (
-    [id] int IDENTITY(1,1) NOT NULL,
-    [name] nvarchar(128)  NOT NULL,
-    [start_ip_address] varchar(45)  NOT NULL,
-    [end_ip_address] varchar(45)  NOT NULL,
-    [create_date] datetime  NOT NULL,
-    [modify_date] datetime  NOT NULL
-);
-GO
+---- Creating table 'database_firewall_rules'
+--CREATE TABLE [dbo].[database_firewall_rules] (
+--    [id] int IDENTITY(1,1) NOT NULL,
+--    [name] nvarchar(128)  NOT NULL,
+--    [start_ip_address] varchar(45)  NOT NULL,
+--    [end_ip_address] varchar(45)  NOT NULL,
+--    [create_date] datetime  NOT NULL,
+--    [modify_date] datetime  NOT NULL
+--);
+--GO
 
--- Creating table 'C__MigrationHistory'
-CREATE TABLE [dbo].[C__MigrationHistory] (
-    [MigrationId] nvarchar(150)  NOT NULL,
-    [ContextKey] nvarchar(300)  NOT NULL,
-    [Model] varbinary(max)  NOT NULL,
-    [ProductVersion] nvarchar(32)  NOT NULL
-);
-GO
+---- Creating table 'C__MigrationHistory'
+--CREATE TABLE [dbo].[C__MigrationHistory] (
+--    [MigrationId] nvarchar(150)  NOT NULL,
+--    [ContextKey] nvarchar(300)  NOT NULL,
+--    [Model] varbinary(max)  NOT NULL,
+--    [ProductVersion] nvarchar(32)  NOT NULL
+--);
+--GO
 
 -- Creating table 'Admins'
 CREATE TABLE [dbo].[Admins] (
@@ -293,17 +293,17 @@ ADD CONSTRAINT [PK_Volunteers]
     PRIMARY KEY CLUSTERED ([VolunteerID] ASC);
 GO
 
--- Creating primary key on [id], [name], [start_ip_address], [end_ip_address], [create_date], [modify_date] in table 'database_firewall_rules'
-ALTER TABLE [dbo].[database_firewall_rules]
-ADD CONSTRAINT [PK_database_firewall_rules]
-    PRIMARY KEY CLUSTERED ([id], [name], [start_ip_address], [end_ip_address], [create_date], [modify_date] ASC);
-GO
+---- Creating primary key on [id], [name], [start_ip_address], [end_ip_address], [create_date], [modify_date] in table 'database_firewall_rules'
+--ALTER TABLE [dbo].[database_firewall_rules]
+--ADD CONSTRAINT [PK_database_firewall_rules]
+--    PRIMARY KEY CLUSTERED ([id], [name], [start_ip_address], [end_ip_address], [create_date], [modify_date] ASC);
+--GO
 
 -- Creating primary key on [MigrationId], [ContextKey] in table 'C__MigrationHistory'
-ALTER TABLE [dbo].[C__MigrationHistory]
-ADD CONSTRAINT [PK_C__MigrationHistory]
-    PRIMARY KEY CLUSTERED ([MigrationId], [ContextKey] ASC);
-GO
+--ALTER TABLE [dbo].[C__MigrationHistory]
+--ADD CONSTRAINT [PK_C__MigrationHistory]
+--    PRIMARY KEY CLUSTERED ([MigrationId], [ContextKey] ASC);
+--GO
 
 -- Creating primary key on [AdminID] in table 'Admins'
 ALTER TABLE [dbo].[Admins]

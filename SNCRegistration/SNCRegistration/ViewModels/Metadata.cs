@@ -1,11 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SNCRegistration.ViewModels.Metadata
 {
     public class Guardian_Metadata
     {
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+          public int GuardianID;
 
         [Required]
         [Display(Name = "First Name")]
@@ -21,7 +25,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name ="City")]
         public string GuardianCity;
 
-
+        [MaxLength(10)]
         [Display(Name = "Zip")]
         //TO DO: review field type (should be string as it is not used numerically) - Erika review (SP-245 created 11/21/16)
         public int GuardianZip;

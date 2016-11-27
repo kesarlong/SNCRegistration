@@ -210,10 +210,7 @@
     <Compile Include="ViewModels\AspNetUserLogin.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\C__MigrationHistory.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\database_firewall_rules.cs">
+    <Compile Include="ViewModels\Attendance.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FamilyMember.cs">
@@ -228,6 +225,16 @@
     </Compile>
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Metadata.cs" />
+    <Compile Include="ViewModels\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\PartialClasses.cs" />
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -249,6 +256,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\User.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Volunteer.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -314,6 +324,16 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="ViewModels\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>SNCRegistration.edmx</DependentUpon>
+    </Content>
+    <Content Include="ViewModels\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>SNCRegistration.edmx</DependentUpon>
+    </Content>
     <Content Include="ViewModels\SNCRegistration.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
