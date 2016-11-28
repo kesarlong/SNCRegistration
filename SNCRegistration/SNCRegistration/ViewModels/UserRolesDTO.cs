@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SNCRegistration.Models {
+namespace SNCRegistration.ViewModels {
     public class ExpandedUserDTO {
         [Key]
         [Display(Name = "User Name")]

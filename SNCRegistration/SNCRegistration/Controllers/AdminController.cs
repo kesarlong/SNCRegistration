@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SNCRegistration.ViewModels;
 using PagedList;
-using SNCRegistration.Models;
+
 
 
 namespace SNCRegistration.Controllers {
@@ -88,9 +88,9 @@ namespace SNCRegistration.Controllers {
             }
         }
 
-        // Users *****************************
+        // Users Part
 
-        // GET: /Admin/Edit/Create 
+        // GET: /Admin/ManageUsers/Edit/Create 
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Create() {
             ExpandedUserDTO objExpandedUserDTO = new ExpandedUserDTO();
@@ -100,7 +100,7 @@ namespace SNCRegistration.Controllers {
             return View(objExpandedUserDTO);
         }
 
-        // PUT: /Admin/Create
+        // PUT: /Admin/ManageUsers/Create
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -157,7 +157,7 @@ namespace SNCRegistration.Controllers {
         }
 
 
-        // GET: /Admin/Edit/User 
+        // GET: /Admin/ManageUsers/Edit/User 
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult EditUser(string UserName) {
             if (UserName == null) {
@@ -170,7 +170,7 @@ namespace SNCRegistration.Controllers {
             return View(objExpandedUserDTO);
         }
 
-        // PUT: /Admin/EditUser
+        // PUT: /Admin/ManageUsers/EditUser
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -196,7 +196,7 @@ namespace SNCRegistration.Controllers {
         }
         #endregion
 
-        // DELETE: /Admin/DeleteUser
+        // DELETE: /Admin/ManageUsers/DeleteUser
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         #region public ActionResult DeleteUser(string UserName)
         public ActionResult DeleteUser(string UserName) {
@@ -230,7 +230,7 @@ namespace SNCRegistration.Controllers {
         }
         #endregion
 
-        // GET: /Admin/EditRoles/TestUser 
+        // GET: /Admin/ManageUsers/EditRoles/TestUser 
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult EditRoles(string UserName) {
             if (UserName == null) {
@@ -239,7 +239,7 @@ namespace SNCRegistration.Controllers {
 
             UserName = UserName.ToLower();
 
-            // Check that we have an actual user
+            // Checks if user exists
             ExpandedUserDTO objExpandedUserDTO = GetUser(UserName);
 
             if (objExpandedUserDTO == null) {
@@ -253,7 +253,7 @@ namespace SNCRegistration.Controllers {
         }
 
 
-        // PUT: /Admin/EditRoles/TestUser 
+        // PUT: /Admin/ManageUsers/EditRoles/TestUser 
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -267,7 +267,7 @@ namespace SNCRegistration.Controllers {
                 string strNewRole = Convert.ToString(Request.Form["AddRole"]);
 
                 if (strNewRole != "No Roles Found") {
-                    // Go get the User
+                    // Gets the User
                     ApplicationUser user = UserManager.FindByName(UserName);
 
                     // Put user in role
@@ -287,7 +287,7 @@ namespace SNCRegistration.Controllers {
             }
         }
 
-        // DELETE: /Admin/DeleteRole?UserName="TestUser&RoleName=SystemAdmin
+        // DELETE: /Admin/ManageUsers/DeleteRole?UserName="TestUser&RoleName=SystemAdmin
         [Authorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult DeleteRole(string UserName, string RoleName) {
             try {
@@ -297,7 +297,7 @@ namespace SNCRegistration.Controllers {
 
                 UserName = UserName.ToLower();
 
-                // Check that we have an actual user
+                // Checks that we have a user
                 ExpandedUserDTO objExpandedUserDTO = GetUser(UserName);
 
                 if (objExpandedUserDTO == null) {
@@ -310,7 +310,7 @@ namespace SNCRegistration.Controllers {
                         "Error: Cannot delete SystemAdmin Role for the current user");
                 }
 
-                // Go get the User
+                // Get the User
                 ApplicationUser user = UserManager.FindByName(UserName);
                 // Remove User from role
                 UserManager.RemoveFromRoles(user.Id, RoleName);
@@ -332,10 +332,10 @@ namespace SNCRegistration.Controllers {
             }
         }
 
-        // Roles *****************************
+        // Roles 
 
         // GET: /Admin/ViewAllRoles
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [Authorize(Roles = "SystemAdmin")]
         #region public ActionResult ViewAllRoles()
         public ActionResult ViewAllRoles() {
             var roleManager =
@@ -354,7 +354,7 @@ namespace SNCRegistration.Controllers {
         }
         #endregion
 
-        // GET: /Admin/AddRole
+        // GET: /Admin/ManageUsers/AddRole
         [Authorize(Roles = "SystemAdmin")]
         #region public ActionResult AddRole()
         public ActionResult AddRole() {
@@ -399,7 +399,7 @@ namespace SNCRegistration.Controllers {
         }
 
 
-        // DELETE: /Admin/DeleteUserRole?RoleName=TestRole
+        // DELETE: /Admin/ManageUsers/DeleteUserRole?RoleName=TestRole
         [Authorize(Roles = "SystemAdmin")]
         public ActionResult DeleteUserRole(string RoleName) {
             try {
@@ -418,10 +418,7 @@ namespace SNCRegistration.Controllers {
                 var UsersInRole = roleManager.FindByName(RoleName).Users.Count();
                 if (UsersInRole > 0) {
                     throw new Exception(
-                        String.Format(
-                            "Canot delete {0} Role because it still has users.",
-                            RoleName)
-                            );
+                        String.Format("Canot delete {0} Role because it still has users.",RoleName));
                 }
 
                 var objRoleToDelete = (from objRole in roleManager.Roles
@@ -440,9 +437,9 @@ namespace SNCRegistration.Controllers {
 
                 List<RoleDTO> colRoleDTO = (from objRole in roleManager.Roles
                                             select new RoleDTO {
-                                                Id = objRole.Id,
-                                                RoleName = objRole.Name
-                                            }).ToList();
+                                                                Id = objRole.Id,
+                                                                RoleName = objRole.Name
+                                                                }).ToList();
 
                 return View("ViewAllRoles", colRoleDTO);
             }
@@ -455,22 +452,21 @@ namespace SNCRegistration.Controllers {
 
                 List<RoleDTO> colRoleDTO = (from objRole in roleManager.Roles
                                             select new RoleDTO {
-                                                Id = objRole.Id,
-                                                RoleName = objRole.Name
-                                            }).ToList();
+                                                                Id = objRole.Id,
+                                                                RoleName = objRole.Name
+                                                                }).ToList();
 
                 return View("ViewAllRoles", colRoleDTO);
             }
         }
 
 
-        // Utility
 
+        //
         public ApplicationUserManager UserManager {
             get {
                 return _userManager ??
-                    HttpContext.GetOwinContext()
-                    .GetUserManager<ApplicationUserManager>();
+                    HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set {
                 _userManager = value;
