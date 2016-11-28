@@ -25,7 +25,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
 
             </div>
@@ -61,6 +61,7 @@
                                         </li>
                                     </ul>
                                 <li><a href="#"><i class="glyphicon glyphicon-off"></i>Logout</a></li>
+
                             </ul>
                             </div>
                         </div>
@@ -84,15 +85,15 @@
                    <div class="footer-top"></div>
     
      <footer>
-                        <div class="container">
-                            <div class="row">
+        <div class="container">
+            <div class="row">
 
-                                <div class="col-lg-12">
-                                    <p class="copyright">&copy; @DateTime.Now.Year - Special Needs Camporee</p>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
+                <div class="col-lg-12">
+                    <p class="copyright">&copy; @DateTime.Now.Year - Special Needs Camporee</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
                     @Scripts.Render("~/bundles/jquery")
                     @Scripts.Render("~/bundles/bootstrap")

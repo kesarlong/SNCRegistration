@@ -9,9 +9,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SNCRegistration.ViewModels;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 namespace SNCRegistration.Controllers
 {
+    
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -75,11 +79,12 @@ namespace SNCRegistration.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                 //   return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Admin");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -151,10 +156,15 @@ namespace SNCRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    //New users registered will have Unassigned roles
+                    UserManager.AddToRole(user.Id, "UnassignedUser");
+
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -163,7 +173,7 @@ namespace SNCRegistration.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 AddErrors(result);
             }
@@ -385,6 +395,13 @@ namespace SNCRegistration.Controllers
             return View(model);
         }
 
+
+        
+        public ActionResult AdminHome() {
+            return View();
+        }
+
+
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -422,6 +439,9 @@ namespace SNCRegistration.Controllers
 
             base.Dispose(disposing);
         }
+
+       
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -481,5 +501,8 @@ namespace SNCRegistration.Controllers
             }
         }
         #endregion
+
+       
+
     }
 }
