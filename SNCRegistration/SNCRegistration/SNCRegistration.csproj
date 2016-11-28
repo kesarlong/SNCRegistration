@@ -416,8 +416,12 @@
     <Content Include="Views\Shared\_LayoutRegister.cshtml" />
     <Content Include="Views\Shared\_LayoutLogInStart.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\TestIndex.cshtml" />
     <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Admin\ViewAllRoles.cshtml" />
+    <Content Include="Views\Admin\AddRole.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\EditRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

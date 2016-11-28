@@ -61,6 +61,9 @@ namespace SNCRegistration.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // Create the Admin account using setting in Web.Config (if needed)
+            CreateAdminIfNeeded();
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -502,7 +505,41 @@ namespace SNCRegistration.Controllers
         }
         #endregion
 
-       
+        // Add RoleManager
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager {
+            get {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+            private set {
+                _roleManager = value;
+            }
+        }
 
+        // Add CreateAdminIfNeeded
+        private void CreateAdminIfNeeded() {
+            // Get Admin Account
+            string AdminEmail = ConfigurationManager.AppSettings["AdminEmail"];
+            string AdminUserName = ConfigurationManager.AppSettings["AdminUserName"];
+            string AdminPassword = ConfigurationManager.AppSettings["AdminPassword"];
+
+            // See if Admin exists
+            var objAdminUser = UserManager.FindByName(AdminUserName);
+
+            if (objAdminUser == null) {
+                //See if the Admin role exists
+                if (!RoleManager.RoleExists("SystemAdmin")) {
+                    // Create the Admin Role (if needed)
+                    IdentityRole objAdminRole = new IdentityRole("SystemAdmin");
+                    RoleManager.Create(objAdminRole);
+                }
+
+                // Create Admin user
+                var objNewAdminUser = new ApplicationUser { UserName = AdminUserName, Email = AdminEmail };
+                var AdminUserCreateResult = UserManager.Create(objNewAdminUser, AdminPassword);
+                // Put user in Admin role
+                UserManager.AddToRole(objNewAdminUser.Id, "SystemAdmin");
+            }
+        }
     }
 }

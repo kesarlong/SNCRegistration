@@ -23,8 +23,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Admin")</li>
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
 
@@ -47,7 +46,10 @@
                             <ul class="nav nav-stacked">
                                 <li class="nav-header">
                                     <ul class="nav nav-stacked collapse in">
-                                        <li><a href="@Url.Action("Index", "Home")"><em class="glyphicon glyphicon-home"></em>Home</a></li>
+                                        <li><a href="@Url.Action("Index", "Admin")"><em class="glyphicon glyphicon-home"></em>Home</a></li>
+                                    </ul>
+                                    <ul class="nav nav-stacked collapse in">
+                                        <li><a href="@Url.Action("ManageUsers", "Admin")">Manage Admin Users</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-header">
@@ -59,6 +61,7 @@
                                         <li>
                                             <a href="@Url.Action("Index", "Volunteers")">Volunteers</a>
                                         </li>
+
                                     </ul>
                                 <li><a href="#"><i class="glyphicon glyphicon-off"></i>Logout</a></li>
 
