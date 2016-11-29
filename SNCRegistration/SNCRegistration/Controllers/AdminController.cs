@@ -11,20 +11,19 @@ using SNCRegistration.ViewModels;
 using PagedList;
 
 
-
 namespace SNCRegistration.Controllers {
     public class AdminController : Controller {
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
 
-
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Index() {
             return View();
         }
 
 
         // GET: /ManageUsers/
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult ManageUsers(string searchStringUserNameOrEmail, string currentFilter, int? page) {
             try {
                 int intPage = 1;
@@ -91,7 +90,7 @@ namespace SNCRegistration.Controllers {
         // Users Part
 
         // GET: /Admin/ManageUsers/Edit/Create 
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Create() {
             ExpandedUserDTO objExpandedUserDTO = new ExpandedUserDTO();
 
@@ -101,7 +100,7 @@ namespace SNCRegistration.Controllers {
         }
 
         // PUT: /Admin/ManageUsers/Create
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ExpandedUserDTO paramExpandedUserDTO) {
@@ -158,7 +157,7 @@ namespace SNCRegistration.Controllers {
 
 
         // GET: /Admin/ManageUsers/Edit/User 
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult EditUser(string UserName) {
             if (UserName == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -171,10 +170,9 @@ namespace SNCRegistration.Controllers {
         }
 
         // PUT: /Admin/ManageUsers/EditUser
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        #region public ActionResult EditUser(ExpandedUserDTO paramExpandedUserDTO)
         public ActionResult EditUser(ExpandedUserDTO paramExpandedUserDTO) {
             try {
                 if (paramExpandedUserDTO == null) {
@@ -194,11 +192,9 @@ namespace SNCRegistration.Controllers {
                 return View("EditUser", GetUser(paramExpandedUserDTO.UserName));
             }
         }
-        #endregion
 
         // DELETE: /Admin/ManageUsers/DeleteUser
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
-        #region public ActionResult DeleteUser(string UserName)
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult DeleteUser(string UserName) {
             try {
                 if (UserName == null) {
@@ -228,10 +224,9 @@ namespace SNCRegistration.Controllers {
                 return View("EditUser", GetUser(UserName));
             }
         }
-        #endregion
 
         // GET: /Admin/ManageUsers/EditRoles/TestUser 
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult EditRoles(string UserName) {
             if (UserName == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -254,7 +249,7 @@ namespace SNCRegistration.Controllers {
 
 
         // PUT: /Admin/ManageUsers/EditRoles/TestUser 
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditRoles(UserAndRolesDTO paramUserAndRolesDTO) {
@@ -288,7 +283,7 @@ namespace SNCRegistration.Controllers {
         }
 
         // DELETE: /Admin/ManageUsers/DeleteRole?UserName="TestUser&RoleName=SystemAdmin
-        [Authorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult DeleteRole(string UserName, string RoleName) {
             try {
                 if ((UserName == null) || (RoleName == null)) {
@@ -335,8 +330,7 @@ namespace SNCRegistration.Controllers {
         // Roles 
 
         // GET: /Admin/ViewAllRoles
-        [Authorize(Roles = "SystemAdmin")]
-        #region public ActionResult ViewAllRoles()
+        [CustomAuthorize(Roles = "SystemAdmin")]
         public ActionResult ViewAllRoles() {
             var roleManager =
                 new RoleManager<IdentityRole>
@@ -352,20 +346,17 @@ namespace SNCRegistration.Controllers {
 
             return View(colRoleDTO);
         }
-        #endregion
 
         // GET: /Admin/ManageUsers/AddRole
-        [Authorize(Roles = "SystemAdmin")]
-        #region public ActionResult AddRole()
+        [CustomAuthorize(Roles = "SystemAdmin")]
         public ActionResult AddRole() {
             RoleDTO objRoleDTO = new RoleDTO();
 
             return View(objRoleDTO);
         }
-        #endregion
 
         // PUT: /Admin/AddRole
-        [Authorize(Roles = "SystemAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddRole(RoleDTO paramRoleDTO) {
@@ -400,7 +391,7 @@ namespace SNCRegistration.Controllers {
 
 
         // DELETE: /Admin/ManageUsers/DeleteUserRole?RoleName=TestRole
-        [Authorize(Roles = "SystemAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin")]
         public ActionResult DeleteUserRole(string RoleName) {
             try {
                 if (RoleName == null) {

@@ -44,6 +44,11 @@ namespace SNCRegistration.Controllers
             }
         }
 
+        public ActionResult AccessDenied() {
+            return View();
+        }
+
+
         public ApplicationUserManager UserManager
         {
             get
