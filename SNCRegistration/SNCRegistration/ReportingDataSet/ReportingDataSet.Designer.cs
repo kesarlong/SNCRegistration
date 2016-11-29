@@ -469,7 +469,7 @@ namespace SNCRegistration.ReportingDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ParticipantsRow AddParticipantsRow(int ParticipantID, string ParticipantFirstName, string ParticipantLastName, int ParticipantAge, string ParticipantSchool, string ParticipantTeacher, bool ClassroomScouting, bool HealthForm, bool PhotoAck, string AttendingCode, int GuardianID, string Comments) {
+            public ParticipantsRow AddParticipantsRow(int ParticipantID, string ParticipantFirstName, string ParticipantLastName, string ParticipantAge, string ParticipantSchool, string ParticipantTeacher, bool ClassroomScouting, bool HealthForm, bool PhotoAck, string AttendingCode, int GuardianID, string Comments) {
                 ParticipantsRow rowParticipantsRow = ((ParticipantsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ParticipantID,
@@ -536,7 +536,7 @@ namespace SNCRegistration.ReportingDataSet {
                 base.Columns.Add(this.columnParticipantFirstName);
                 this.columnParticipantLastName = new global::System.Data.DataColumn("ParticipantLastName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnParticipantLastName);
-                this.columnParticipantAge = new global::System.Data.DataColumn("ParticipantAge", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnParticipantAge = new global::System.Data.DataColumn("ParticipantAge", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnParticipantAge);
                 this.columnParticipantSchool = new global::System.Data.DataColumn("ParticipantSchool", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnParticipantSchool);
@@ -746,9 +746,9 @@ namespace SNCRegistration.ReportingDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ParticipantAge {
+            public string ParticipantAge {
                 get {
-                    return ((int)(this[this.tableParticipants.ParticipantAgeColumn]));
+                    return ((string)(this[this.tableParticipants.ParticipantAgeColumn]));
                 }
                 set {
                     this[this.tableParticipants.ParticipantAgeColumn] = value;

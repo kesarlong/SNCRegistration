@@ -22,7 +22,7 @@ namespace SNCRegistration.ViewModels
         public Nullable<bool> PhotoAck { get; set; }
         public string AttendingCode { get; set; }
         public string Comments { get; set; }
-        public Nullable<int> FamilyMemberAge { get; set; }
+        public string FamilyMemberAge { get; set; }
     
         public virtual Guardian Guardian { get; set; }
     }

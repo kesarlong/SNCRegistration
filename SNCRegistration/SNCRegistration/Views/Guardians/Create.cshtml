@@ -24,7 +24,7 @@
 
                 @Html.LabelFor(model => model.GuardianID, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @Html.EditorFor(model => model.GuardianID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DisplayFor(model => model.GuardianID, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.GuardianID, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -65,11 +65,23 @@
                 </div>
             </div>
 
+            @*TO DO: Erika add field to table (ticket SP-249)*@
+            <div class="row">
+                @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.Label("<<ADD FIELD>>", htmlAttributes: new { @class = "control-label col-md-6" })
+                
+                @*<div class="col-md-9">
+                    @Html.EditorFor(model => model.GuardianCity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GuardianCity, "", new { @class = "text-danger" })*@
+                @*</div>*@
+            </div>
+
             <div class="row">
                 @Html.LabelFor(model => model.GuardianZip, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     @Html.EditorFor(model => model.GuardianZip, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.GuardianZip, "", new { @class = "text-danger" })
+
                 </div>
             </div>
         </div>
@@ -132,11 +144,19 @@
             </div>
         </div>
 
+        <div>
+            @*Set default values for check box fields not displayed on form*@
+            @*@Html.HiddenFor(model => model.PacketSentDate, new {@Value = false} )
+            @Html.HiddenFor(model => model.ReceiptDate, new { @Value = false })
+            @Html.HiddenFor(model => model.ConfirmationSentDate, new { @Value = false })*@
+            @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
+            @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+        </div>
 
         <hr />
 
         <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-default" onsubmit="Submitted"/>
 
         </div>
 

@@ -17,7 +17,7 @@ namespace SNCRegistration.ViewModels
         public int VolunteerID { get; set; }
         public string VolunteerFirstName { get; set; }
         public string VolunteerLastName { get; set; }
-        public int VolunteerAge { get; set; }
+        public string VolunteerAge { get; set; }
         public bool VolunteerShirtOrder { get; set; }
         public string VolunteerShirtSize { get; set; }
         public string VolunteerAttendingCode { get; set; }
