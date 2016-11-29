@@ -161,7 +161,7 @@
           <Property Name="VolunteerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VolunteerFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VolunteerLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="VolunteerAge" Type="int" Nullable="false" />
+          <Property Name="VolunteerAge" Type="nvarchar" Nullable="false" />
           <Property Name="LeadContactID" Type="int" Nullable="false" />
           <Property Name="VolunteerShirtOrder" Type="bit" Nullable="false" />
           <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" Nullable="false" />
@@ -425,7 +425,7 @@ warning 6002: The table/view 'SNCRegistration.sys.database_firewall_rules' does 
           <Property Name="VolunteerID" Type="Int32" Nullable="false" />
           <Property Name="VolunteerFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VolunteerLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VolunteerAge" Type="Int32" Nullable="false" />
+          <Property Name="VolunteerAge" Type="String" Nullable="false" />
           <Property Name="VolunteerShirtOrder" Type="Boolean" Nullable="false" />
           <Property Name="VolunteerShirtSize" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="VolunteerAttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />

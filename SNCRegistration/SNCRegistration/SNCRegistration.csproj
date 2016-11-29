@@ -403,6 +403,8 @@
     <Content Include="Views\FamilyMembers\Edit.cshtml" />
     <Content Include="Views\FamilyMembers\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutRegister.cshtml" />
+    <Content Include="Views\Shared\_LayoutL_Register.cshtml" />
+    <Content Include="Views\Shared\_LayoutV_Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
