@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.Participant>
+
+@{
+    ViewBag.Title = "Participants List";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Participants List</h2>
+
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-10"><a href="@Url.Action("ExportParticipants")" class="btn btn-primary btn-lg active" role="button"> Report PDF </a></div>
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ParticipantFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParticipantLastName)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantLastName)
+                </td>
+
+            </tr>
+            }
+
+    </table>
+</div>

@@ -56,7 +56,7 @@
                                     <a href="#" data-toggle="collapse" data-target="#menu2">Reports<i class="glyphicon glyphicon-chevron-right"></i></a>
                                     <ul class="nav nav-stacked collapse" id="menu2">
                                         <li>
-                                            <a href="@Url.Action("Index", "Participants")">Participants</a>
+                                            <a href="@Url.Action("Index", "Reporting")">Participants</a>
                                         </li>
                                         <li>
                                             <a href="@Url.Action("Index", "Volunteers")">Volunteers</a>
@@ -74,7 +74,7 @@
                     <div class="panel panel-default">
                         <!-- Dashboard panel contents -->
                         <div class="panel-heading"><h3><span class="glyphicon glyphicon-dashboard"></span>Dashboard</h3></div>
-                            <div style="overflow:scroll;padding: 5px 5px 15px 5px;">
+                            <div class="panel-body">
                                 @RenderBody()
                             </div>
                         </div>
