@@ -39,7 +39,16 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.EditorFor(model => model.FamilyMemberAge, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.DropDownListFor(model => model.FamilyMemberAge,
+            new List<SelectListItem>{
+                new SelectListItem{ Value = "", Text = "-Select Age-" },
+                new SelectListItem{ Value = "Under 6", Text = "Under 6" },
+                new SelectListItem{ Value = "7-10", Text = "7-10" },
+                new SelectListItem{ Value = "11-13", Text = "11-13" },
+                new SelectListItem{ Value = "14-16", Text = "14-16" },
+                new SelectListItem{ Value = "17-18", Text = "17-18" },
+                new SelectListItem{ Value = "Over 18", Text = "Over 18" }
+            }, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
     </div>
 
@@ -56,9 +65,9 @@
     </div>
 
     <hr />
-    
+
     <div class="form-group pull-right">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type = "submit" value="Create" class="btn btn-primary" />
     </div>
 }
 @*<div>

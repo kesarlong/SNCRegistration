@@ -11,6 +11,7 @@ using System.Data.Entity.Validation;
 
 namespace SNCRegistration.Controllers
 {
+
     public class ParticipantsController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
@@ -144,6 +145,8 @@ namespace SNCRegistration.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
 
     }
 }
