@@ -76,6 +76,8 @@ namespace SNCRegistration.ViewModels.Metadata
 
     public class Participant_Metadata
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ParticipantID;
 
         [Required]
         [Display(Name = "First Name")]
@@ -120,6 +122,8 @@ namespace SNCRegistration.ViewModels.Metadata
 
     public class FamilyMember_Metadata
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int FamilyMemberID;
 
         [Required]
         [Display(Name="First Name")]
