@@ -168,8 +168,8 @@
 
         <div>
             <!--set default values for fields not set in initial form-->
-            @Html.HiddenFor(model => model.TotalFee, new { value = false })
-            @Html.HiddenFor(model => model.LeadContactState, new { value = false })
+            @Html.HiddenFor(model => model.TotalFee, new { @Value = 0 })
+            @Html.HiddenFor(model => model.LeadContactState, new { @Value = false })
         </div>
 
         <hr />

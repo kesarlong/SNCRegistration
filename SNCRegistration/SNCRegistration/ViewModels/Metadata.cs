@@ -161,119 +161,123 @@ namespace SNCRegistration.ViewModels.Metadata
 
     public class LeadContact_Metadata
     {
-  
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int LeadContactID { get; set; }
+        public int LeadContactID;
 
         [Required]
-        [DisplayName("First Name")]
-        public string LeadContactFirstName { get; set; }
+        [Display(Name = "First Name")]
+        public string LeadContactFirstName;
 
         [Required]
-        [DisplayName("Last Name")]
-        public string LeadContactLastName { get; set; }
+        [Display(Name = "Last Name")]
+        public string LeadContactLastName;
 
         [Required]
-        [DisplayName("Street Address")]
-        public string LeadContactAddress { get; set; }
+        [Display(Name = "Street Address")]
+        public string LeadContactAddress;
 
         [Required]
-        [DisplayName("City")]
-        public string LeadContactCity { get; set; }
+        [Display(Name = "City")]
+        public string LeadContactCity;
 
         [Required]
-        public string LeadContactState { get; set; }
+        public string LeadContactState;
 
         [Required]
-        [DisplayName("Zip Code")]
-        public string LeadContactZip { get; set; }
+        [Display(Name = "Zip Code")]
+        public string LeadContactZip ;
 
         [Required]
-        [DisplayName("Cell Phone")]
+        [Display(Name = "Cell Phone")]
         [DataType(DataType.PhoneNumber)]
-        public string LeadContactCellPhone { get; set; }
+        public string LeadContactCellPhone ;
 
         [Required]
-        [DisplayName("Email Address")]
+        [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
-        public string LeadContactEmail { get; set; }
+        public string LeadContactEmail ;
 
         [Required]
-        [DisplayName("T-Shirt Order")]
-        public bool LeadContactShirtOrder { get; set; }
+        [Display(Name = "T-Shirt Order")]
+        public bool LeadContactShirtOrder ;
 
         [Required]
-        [DisplayName("T-Shirt Size")]
-        public string LeadContactShirtSize { get; set; }
+        [Display(Name = "T-Shirt Size")]
+        public string LeadContactShirtSize ;
 
         [Required]
-        [DisplayName("Troop/Chapter/Unit")]
-        public string BSType { get; set; }
+        [Display(Name = "Troop/Chapter/Unit")]
+        public string BSType ;
 
         [Required]
-        [DisplayName("Troop/Chapter/Unit Number")]
-        public string UnitChapterNumber { get; set; }
+        [Display(Name = "Troop/Chapter/Unit Number")]
+        public string UnitChapterNumber ;
 
         [Required]
-        [DisplayName("Attending")]
-        public string VolunteerAttendingCode { get; set; }
+        [Display(Name = "Attending")]
+        public string VolunteerAttendingCode ;
 
         [Required]
-        [DisplayName("Saturday Dinner?")]
-        public bool SaturdayDinner { get; set; }
+        [Display(Name = "Saturday Dinner?")]
+        public bool SaturdayDinner ;
 
         [Required]
-        [DisplayName("Booth Name")]
-        public string Booth { get; set; }
+        [Display(Name = "Booth Name")]
+        public string Booth ;
 
         [Required]
-        [DisplayName("Comments")]
-        public string Comments { get; set; }
+        [Display(Name = "Comments")]
+        public string Comments ;
 
 
-        public Decimal TotalFee { get; set; }
+        public Decimal TotalFee ;
 
     }
         public class Volunteer_Metadata
         {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VolunteerID { get; set; }
+        public int VolunteerID ;
 
         [Required]
-        [DisplayName("First Name")]
-        public string VolunteerFirstName { get; set; }
+        [Display(Name = "First Name")]
+        public string VolunteerFirstName ;
 
         [Required]
-        [DisplayName("Last Name")]
-        public string VolunteerLastName { get; set; }
+        [Display(Name = "Last Name")]
+        public string VolunteerLastName ;
 
-        [DisplayName("Age")]
-        public string VolunteerAge { get; set; }
+        [Required]
+        [Display(Name = "Age")]
+        public string VolunteerAge ;
 
-        [DisplayName("T-Shirt Order")]
-        public Nullable<bool> VolunteerShirtOrder { get; set; }
+        [Required]
+        [Display(Name = "T-Shirt Order")]
+        public Nullable<bool> VolunteerShirtOrder ;
 
-        [DisplayName("T-Shirt Size")]
-        public string VolunteerShirtSize { get; set; }
+        [Required]
+        [Display(Name = "T-Shirt Size")]
+        public string VolunteerShirtSize ;
 
-        [DisplayName("Attending")]
-        public string VolunteerAttendingCode { get; set; }
+        [Required]
+        [Display(Name = "Attending")]
+        public string VolunteerAttendingCode ;
 
-        [DisplayName("Saturday Dinner?")]
-        public Nullable<bool> SaturdayDinner { get; set; }
+        [Required]
+        [Display(Name = "Saturday Dinner?")]
+        public Nullable<bool> SaturdayDinner ;
 
-        [DisplayName("Troop/Chapter/Unit Number")]
-        public string UnitChapterNumber { get; set; }
+        [Required]
+        [Display(Name = "Troop/Chapter/Unit Number")]
+        public string UnitChapterNumber ;
 
-        [DisplayName("Comments")]
-        public string Comments { get; set; }
+        [Required]
+        [Display(Name = "Comments")]
+        public string Comments ;
 
-        public Nullable<int> LeadContactID { get; set; }
+        public Nullable<int> LeadContactID ;
 
-        public virtual Volunteer Volunteers1 { get; set; }
-
-        public virtual Volunteer Volunteer1 { get; set; }
 
     }
     }
