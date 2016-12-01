@@ -37,6 +37,10 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
+        public ActionResult Registered() {
+            return View();
+        }
+
         // GET: Volunteers/Create
         public ActionResult Create()
         {
@@ -76,7 +80,7 @@ namespace SNCRegistration.Controllers
                     throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
                 }
                 
-                return RedirectToAction("Index");
+                return RedirectToAction("Registered");
             }
 
             //ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);

@@ -27,85 +27,102 @@
             </div>
         </div>
     -->
+    @Html.LabelFor(model => model.VolunteerFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
-        @Html.LabelFor(model => model.VolunteerFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+        
         <div class="col-md-9">
             @Html.EditorFor(model => model.VolunteerFirstName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.VolunteerFirstName, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    @Html.LabelFor(model => model.VolunteerLastName, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
-        @Html.LabelFor(model => model.VolunteerLastName, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9">
             @Html.EditorFor(model => model.VolunteerLastName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.VolunteerLastName, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="row">
+    <div class="form-group">
         @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9">
-            @Html.EditorFor(model => model.VolunteerAge, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.VolunteerAge, "", new { @class = "text-danger" })
-        </div>
+        @Html.DropDownListFor(model => model.VolunteerAge,
+            new List<SelectListItem>{
+                new SelectListItem{ Value = "", Text = "-Select Age-" },
+                new SelectListItem{ Value = "Under 6", Text = "Under 6" },
+                new SelectListItem{ Value = "7-10", Text = "7-10" },
+                new SelectListItem{ Value = "11-13", Text = "11-13" },
+                new SelectListItem{ Value = "14-16", Text = "14-16" },
+                new SelectListItem{ Value = "17-21", Text = "17-18" },
+                new SelectListItem{ Value = "Over 21", Text = "Over 21" }
+            }, new { @class = "form-control" })
     </div>
 
+    @Html.LabelFor(model => model.LeadContactID, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
-      @Html.LabelFor(model => model.LeadContactID, htmlAttributes: new { @class = "control-label col-md-3" })
+      
         <div class="col-md-9">
             @Html.EditorFor(model => model.LeadContactID, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.LeadContactID, "", new { @class = "text-danger" })
         </div>
     </div>
 
-
-    <div class="row">
+    <div class="form-group">
         @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-8">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.VolunteerShirtOrder)
-                @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { id = "radio_VolunteerShirtOrder_True" }) Yes
+        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { id = "radio_VolunteerShirtOrder_False" }) No
+        @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
     </div>
 
-    <div class="row">
+    <div class="form-group">
         @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9">
-            @Html.EditorFor(model => model.VolunteerShirtSize, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
-        </div>
+        @Html.DropDownListFor(model => model.VolunteerShirtSize,
+            new List<SelectListItem>{
+                new SelectListItem{ Value = "", Text = "-Select Size-" },
+                 new SelectListItem{ Value = "YX", Text = "Youth - Extra Small" },
+                new SelectListItem{ Value = "YS", Text = "Youth - Small" },
+                new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
+                new SelectListItem{ Value = "YL", Text = "Youth - Large" },
+                new SelectListItem{ Value = "YX", Text = "Youth - Extra Large" },
+                new SelectListItem{ Value = "YX", Text = "Adult - Extra Small" },
+                new SelectListItem{ Value = "YS", Text = "Adult - Small" },
+                new SelectListItem{ Value = "YM", Text = "Adult - Medium" },
+                new SelectListItem{ Value = "YL", Text = "Adult - Large" },
+                new SelectListItem{ Value = "YX", Text = "Adult - Extra Large" },
+            }, new { @class = "form-control" })
     </div>
 
-    <div class="row">
-        @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-9">
-            @Html.EditorFor(model => model.VolunteerAttendingCode, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="row">
+        <div class="form-group">
+            @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.DropDownListFor(model => model.VolunteerAttendingCode,
+            new List<SelectListItem>{
+                new SelectListItem{ Value = "", Text = "-Select-" },
+                new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
+                new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
+                new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+            }, new { @class = "form-control" })
+        </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-8">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.SaturdayDinner)
-                @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "radio_SaturdayDinner_True" }) Yes
+        @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "radio_SaturdayDinner_False" }) No
+        @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
     </div>
 
+    @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
-        @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+
         <div class="col-md-9">
             @Html.EditorFor(model => model.UnitChapterNumber, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
-        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-3" })
+
         <div class="col-md-9">
             @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
@@ -114,10 +131,10 @@
 
     <hr />
 
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-default" />
+    <div class="form-group pull-right">
+        <input type="submit" value="Create" class="btn btn-primary" />
 
-        </div>
+    </div>
 
 }
 
