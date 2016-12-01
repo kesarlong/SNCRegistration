@@ -54,7 +54,7 @@ namespace SNCRegistration.ViewModels
         public string LeadContactEmail { get; set; }
 
         [DisplayName("T-Shirt Order")]
-        public Nullable<bool> LeadContactShirtOrder { get; set; }
+        public bool LeadContactShirtOrder { get; set; }
 
         [DisplayName("T-Shirt Size")]
         public string LeadContactShirtSize { get; set; }
@@ -69,7 +69,7 @@ namespace SNCRegistration.ViewModels
         public string VolunteerAttendingCode { get; set; }
 
         [DisplayName("Saturday Dinner?")]
-        public Nullable<bool> SaturdayDinner { get; set; }
+        public bool SaturdayDinner { get; set; }
 
         [DisplayName("Booth Name")]
         public string Booth { get; set; }
