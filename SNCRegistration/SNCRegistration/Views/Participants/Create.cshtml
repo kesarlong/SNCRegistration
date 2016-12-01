@@ -79,15 +79,15 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Returning, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.RadioButtonFor(model => model.Returning, true, new { id = "radio_Returning_True" }) Yes
-        @Html.RadioButtonFor(model => model.Returning, false, new { id = "radio_Returning_False" }) No
+        @Html.RadioButtonFor(model => model.Returning, true, new { id = "radio_returning_true" }) Yes
+        @Html.RadioButtonFor(model => model.Returning, false, new { id = "radio_returning_false" }) No
         @Html.ValidationMessageFor(model => model.Returning, "", new { @class = "text-danger" })
     </div>
 
     <div>
         <!--set default values for fields not set in initial form-->
-        @Html.HiddenFor(model => model.HealthForm, new { value = false })
-        @Html.HiddenFor(model => model.PhotoAck, new { value = false })
+        @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
+        @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
     </div>
 
     <div class="form-group">
