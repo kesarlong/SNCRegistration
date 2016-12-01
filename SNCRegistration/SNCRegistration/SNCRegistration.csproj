@@ -483,9 +483,9 @@
     <Content Include="Views\Admin\EditRoles.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
     <Content Include="Views\Reporting\Index.cshtml" />
+    <Content Include="Views\Participants\Registered.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="font-awesome\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
