@@ -52,7 +52,7 @@ namespace SNCRegistration.Controllers
             {
                 db.Guardians.Add(guardian);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Participants");
             }
 
             return View(guardian);

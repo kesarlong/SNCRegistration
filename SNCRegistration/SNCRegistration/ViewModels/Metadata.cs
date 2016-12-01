@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace SNCRegistration.ViewModels.Metadata
 {
@@ -76,6 +78,8 @@ namespace SNCRegistration.ViewModels.Metadata
 
     public class Participant_Metadata
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ParticipantID;
 
         [Required]
         [Display(Name = "First Name")]
@@ -87,39 +91,45 @@ namespace SNCRegistration.ViewModels.Metadata
         public string ParticipantLastName;
 
 
-        [Display(Name="Age")]
-        public string ParticipantAge ;
+        [Display(Name = "Age")]
+        public string ParticipantAge;
 
-
-        [Display(Name="School")]
-        public string ParticipantSchool ;
+        //TO DO: make field not required
+        [Required]
+        [Display(Name = "School")]
+        public string ParticipantSchool;
 
 
         //TO DO: database field size increased (Erika)
-        [Display(Name="Teacher")]
-        public string ParticipantTeacher ;
+        //TO DO: make field not required
+        [Required]
+        [Display(Name = "Teacher")]
+        public string ParticipantTeacher;
 
 
-        [Display(Name="Classroom Scouting")]
-        public bool ClassroomScouting ;
+        [Display(Name = "Classroom Scouting")]
+        public bool ClassroomScouting;
 
-        [Display(Name="Health Form")]
-        public bool? HealthForm ;
+        [Display(Name = "Health Form")]
+        public bool? HealthForm;
 
-        [Display(Name="Photo Acknowledgment")]
-        public bool? PhotoAck ;
+        [Display(Name = "Photo Acknowledgment")]
+        public bool? PhotoAck;
 
-        [Display(Name="Attendance")]
-        public string AttendingCode ;
+        [Required]
+        [Display(Name = "Attendance")]
+        public string AttendingCode;
 
         [Display(Name = "Returning")]
         public bool? Returning;
 
-
+       
     }
 
     public class FamilyMember_Metadata
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int FamilyMemberID;
 
         [Required]
         [Display(Name="First Name")]
@@ -136,6 +146,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name="Photo Ack")]
         public Nullable<bool> PhotoAck;
 
+        [Required]
         [Display(Name="Attendance")]
         public string AttendingCode;
 
