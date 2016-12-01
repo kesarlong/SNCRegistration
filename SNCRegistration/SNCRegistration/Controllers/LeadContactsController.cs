@@ -47,12 +47,12 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize")] LeadContact leadContact)
+        public ActionResult Create([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactCellPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize")] LeadContact leadContact)
         {
             if (ModelState.IsValid)
             {
                 db.LeadContacts.Add(leadContact);
-                return RedirectToAction("Create", "Volunteers");
+               
                 try
                 {
                     db.SaveChanges();
@@ -75,8 +75,8 @@ namespace SNCRegistration.Controllers
                 }
             }
 
-                return View(leadContact);
-            
+            return RedirectToAction("Create", "Volunteers");
+
         }
 
         // GET: LeadContacts/Edit/5

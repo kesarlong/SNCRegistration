@@ -22,4 +22,17 @@ namespace SNCRegistration.ViewModels
 
     }
 
+    [MetadataType(typeof(LeadContact_Metadata))]
+    public partial class LeadContact
+    {
+
+    }
+
+    [MetadataType(typeof(Volunteer_Metadata))]
+    public partial class Volunteer
+    {
+
+    }
+
+
 }
