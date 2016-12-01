@@ -140,13 +140,14 @@
         @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="row">
                 
-                <div class="col-md-8">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.SaturdayDinner)
-                        @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "radio_LeadContactShirtOrder_True" }) Yes
+                @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "radio_LeadContactShirtOrder_False" }) No
+                @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
             </div>
+            </div>
+
 
         @Html.LabelFor(model => model.Booth, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="row">
