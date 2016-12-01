@@ -505,7 +505,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Reporting\" />
     <Folder Include="font-awesome\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
