@@ -18,8 +18,8 @@ namespace SNCRegistration.Controllers
         // GET: Volunteers
         public ActionResult Index()
         {
-            var volunteers = db.Volunteers.Include(v => v.Volunteers1).Include(v => v.Volunteer1);
-            return View(volunteers.ToList());
+            
+            return View(db.Volunteers.ToList());
         }
 
         // GET: Volunteers/Details/5

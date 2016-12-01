@@ -215,9 +215,6 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="ViewModels\Admin.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\AspNetRole.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -245,16 +242,6 @@
     </Compile>
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Metadata.cs" />
-    <Compile Include="ViewModels\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\PartialClasses.cs" />
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -364,6 +351,10 @@
     <Content Include="ReportingDataSet\ReportingDataSet.xsc">
       <DependentUpon>ReportingDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="App_Data\PDF\MediaRelease.pdf" />
+    <Content Include="App_Data\PDF\ParticipantHealthForm.pdf" />
+    <Content Include="App_Data\PDF\ParticipantWelcomePacket.pdf" />
+    <Content Include="App_Data\PDF\VolunteerInformation.pdf" />
     <None Include="ReportingDataSet\ReportingDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -388,16 +379,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="ViewModels\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>SNCRegistration.edmx</DependentUpon>
-    </Content>
-    <Content Include="ViewModels\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-      <DependentUpon>SNCRegistration.edmx</DependentUpon>
-    </Content>
     <Content Include="ViewModels\SNCRegistration.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
@@ -506,6 +487,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="font-awesome\" />
+    <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
   </ItemGroup>

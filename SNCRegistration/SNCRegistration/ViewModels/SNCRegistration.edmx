@@ -84,9 +84,10 @@
           <Property Name="GuardianID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GuardianFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GuardianLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Relationship" Type="nvarchar" MaxLength="50" StoreGeneratedPattern="Identity" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
           <Property Name="GuardianAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="GuardianCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GuardianCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="GuardianState" Type="nchar" MaxLength="2" />
           <Property Name="GuardianZip" Type="nchar" MaxLength="10" />
           <Property Name="GuardianCellPhone" Type="nchar" MaxLength="10" />
           <Property Name="GuardianEmail" Type="nvarchar" MaxLength="50" />
@@ -104,23 +105,23 @@
             <PropertyRef Name="LeadContactID" />
           </Key>
           <Property Name="LeadContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BSType" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="BSType" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
           <Property Name="LeadContactFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LeadContactLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LeadContactAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LeadContactCity" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LeadContactState" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="LeadContactZip" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="LeadContactCellPhone" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="LeadContactEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SaturdayDinner" Type="bit" Nullable="false" />
+          <Property Name="LeadContactAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadContactCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadContactState" Type="char" MaxLength="10" />
+          <Property Name="LeadContactZip" Type="nchar" MaxLength="10" />
+          <Property Name="LeadContactCellPhone" Type="nchar" MaxLength="10" />
+          <Property Name="LeadContactEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaturdayDinner" Type="bit" />
           <Property Name="TotalFee" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Booth" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Booth" Type="nvarchar" MaxLength="50" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-          <Property Name="LeadContactShirtOrder" Type="bit" Nullable="false" />
-          <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="LeadContactShirtOrder" Type="bit" />
+          <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" />
         </EntityType>
         <EntityType Name="Participants">
           <Key>
@@ -130,8 +131,8 @@
           <Property Name="ParticipantFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParticipantLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParticipantAge" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ParticipantSchool" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ParticipantTeacher" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ParticipantSchool" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParticipantTeacher" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="ClassroomScouting" Type="bit" Nullable="false" />
           <Property Name="Returning" Type="bit" />
           <Property Name="HealthForm" Type="bit" />
@@ -154,13 +155,13 @@
           <Property Name="VolunteerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VolunteerFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VolunteerLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="VolunteerAge" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LeadContactID" Type="int" Nullable="false" />
-          <Property Name="VolunteerShirtOrder" Type="bit" Nullable="false" />
-          <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SaturdayDinner" Type="bit" Nullable="false" />
-          <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="VolunteerAge" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadContactID" Type="int" />
+          <Property Name="VolunteerShirtOrder" Type="bit" />
+          <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" />
+          <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaturdayDinner" Type="bit" />
+          <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -219,7 +220,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FamilyMembers_ToTable">
+        <Association Name="FK_FamilyMembers">
           <End Role="Guardians" Type="Self.Guardians" Multiplicity="1" />
           <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -231,7 +232,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Participants_ToTable">
+        <Association Name="FK_Participants">
           <End Role="Guardians" Type="Self.Guardians" Multiplicity="0..1" />
           <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
           <ReferentialConstraint>
@@ -243,8 +244,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Volunteers_ToTable">
-          <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="1" />
+        <Association Name="FK_Volunteers">
+          <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="0..1" />
           <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LeadContacts">
@@ -284,15 +285,15 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_FamilyMembers_ToTable" Association="Self.FK_FamilyMembers_ToTable">
+          <AssociationSet Name="FK_FamilyMembers" Association="Self.FK_FamilyMembers">
             <End Role="Guardians" EntitySet="Guardians" />
             <End Role="FamilyMembers" EntitySet="FamilyMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Participants_ToTable" Association="Self.FK_Participants_ToTable">
+          <AssociationSet Name="FK_Participants" Association="Self.FK_Participants">
             <End Role="Guardians" EntitySet="Guardians" />
             <End Role="Participants" EntitySet="Participants" />
           </AssociationSet>
-          <AssociationSet Name="FK_Volunteers_ToTable" Association="Self.FK_Volunteers_ToTable">
+          <AssociationSet Name="FK_Volunteers" Association="Self.FK_Volunteers">
             <End Role="LeadContacts" EntitySet="LeadContacts" />
             <End Role="Volunteers" EntitySet="Volunteers" />
           </AssociationSet>
@@ -301,107 +302,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SNCRegistrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="FamilyMember">
-          <Key>
-            <PropertyRef Name="FamilyMemberID" />
-          </Key>
-          <Property Name="FamilyMemberID" Type="Int32" Nullable="false" />
-          <Property Name="FamilyMemberFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FamilyMemberLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GuardianID" Type="Int32" Nullable="false" />
-          <Property Name="HealthForm" Type="Boolean" />
-          <Property Name="PhotoAck" Type="Boolean" />
-          <Property Name="AttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FamilyMemberAge" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_FamilyMembers_ToTable" FromRole="FamilyMember" ToRole="Guardian" />
-        </EntityType>
-        <EntityType Name="Guardian">
-          <Key>
-            <PropertyRef Name="GuardianID" />
-          </Key>
-          <Property Name="GuardianID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GuardianFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GuardianLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GuardianAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GuardianZip" Type="String" Unicode="true" FixedLength="true" MaxLength="10" />
-          <Property Name="GuardianEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PacketSentDate" Type="DateTime" Precision="0" />
-          <Property Name="ReceiptDate" Type="DateTime" Precision="0" />
-          <Property Name="ConfirmationSentDate" Type="DateTime" Precision="0" />
-          <Property Name="HealthForm" Type="Boolean" />
-          <Property Name="PhotoAck" Type="Boolean" />
-          <Property Name="Tent" Type="Boolean" />
-          <Property Name="AttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GuardianCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK_FamilyMembers_ToTable" FromRole="Guardian" ToRole="FamilyMember" />
-          <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK_Participants_ToTable" FromRole="Guardian" ToRole="Participant" />
-        </EntityType>
-        <EntityType Name="LeadContact">
-          <Key>
-            <PropertyRef Name="LeadContactID" />
-          </Key>
-          <Property Name="LeadContactID" Type="Int32" Nullable="false" />
-          <Property Name="BSType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="LeadContactFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LeadContactLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LeadContactAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LeadContactCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LeadContactState" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="LeadContactZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="LeadContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VolunteerAttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SaturdayDinner" Type="Boolean" Nullable="false" />
-          <Property Name="TotalFee" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Booth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LeadContactShirtOrder" Type="Boolean" Nullable="false" />
-          <Property Name="LeadContactShirtSize" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="LeadContactCellPhone" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK_Volunteers_ToTable" FromRole="LeadContact" ToRole="Volunteer" />
-        </EntityType>
-        <EntityType Name="Participant">
-          <Key>
-            <PropertyRef Name="ParticipantID" />
-          </Key>
-          <Property Name="ParticipantID" Type="Int32" Nullable="false" />
-          <Property Name="ParticipantFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ParticipantLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ParticipantAge" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="ParticipantSchool" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ParticipantTeacher" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ClassroomScouting" Type="Boolean" Nullable="false" />
-          <Property Name="HealthForm" Type="Boolean" />
-          <Property Name="PhotoAck" Type="Boolean" />
-          <Property Name="AttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GuardianID" Type="Int32" />
-          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Returning" Type="Boolean" />
-          <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_Participants_ToTable" FromRole="Participant" ToRole="Guardian" />
-        </EntityType>
-        <EntityType Name="Volunteer">
-          <Key>
-            <PropertyRef Name="VolunteerID" />
-          </Key>
-          <Property Name="VolunteerID" Type="Int32" Nullable="false" />
-          <Property Name="VolunteerFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VolunteerLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VolunteerAge" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="VolunteerShirtOrder" Type="Boolean" Nullable="false" />
-          <Property Name="VolunteerShirtSize" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="VolunteerAttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SaturdayDinner" Type="Boolean" Nullable="false" />
-          <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Volunteers1" Relationship="SNCRegistrationModel.FK_Volunteers_Volunteers" FromRole="Volunteer" ToRole="Volunteer1" />
-          <NavigationProperty Name="Volunteer1" Relationship="SNCRegistrationModel.FK_Volunteers_Volunteers" FromRole="Volunteer1" ToRole="Volunteer" />
-          <Property Name="LeadContactID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="LeadContact" Relationship="SNCRegistrationModel.FK_Volunteers_ToTable" FromRole="Volunteer" ToRole="LeadContact" />
-        </EntityType>
         <!--<EntityType Name="database_firewall_rules">
           <Key>
             <PropertyRef Name="id" />
@@ -419,22 +319,24 @@
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>-->
         <EntityContainer Name="SNCRegistrationEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMember" />
-          <EntitySet Name="Guardians" EntityType="Self.Guardian" />
-          <EntitySet Name="LeadContacts" EntityType="Self.LeadContact" />
-          <EntitySet Name="Participants" EntityType="Self.Participant" />
-          <EntitySet Name="Volunteers" EntityType="Self.Volunteer" />
           <!--<EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />-->
-          <AssociationSet Name="FK_Volunteers_Volunteers" Association="SNCRegistrationModel.FK_Volunteers_Volunteers">
-            <End Role="Volunteer" EntitySet="Volunteers" />
-            <End Role="Volunteer1" EntitySet="Volunteers" />
-          </AssociationSet>
           <!--<EntitySet Name="C__MigrationHistory" EntityType="SNCRegistrationModel.C__MigrationHistory" />-->
           <!--<EntitySet Name="Admins" EntityType="SNCRegistrationModel.Admin" />-->
+          <!--<AssociationSet Name="AspNetUserRoles" Association="SNCRegistrationModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>-->
           <EntitySet Name="AspNetRoles" EntityType="SNCRegistrationModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="SNCRegistrationModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="SNCRegistrationModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="SNCRegistrationModel.AspNetUser" />
+          <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
+          <EntitySet Name="FamilyMembers" EntityType="SNCRegistrationModel.FamilyMember" />
+          <EntitySet Name="Guardians" EntityType="SNCRegistrationModel.Guardian" />
+          <EntitySet Name="LeadContacts" EntityType="SNCRegistrationModel.LeadContact" />
+          <EntitySet Name="Participants" EntityType="SNCRegistrationModel.Participant" />
+          <EntitySet Name="Users" EntityType="SNCRegistrationModel.User" />
+          <EntitySet Name="Volunteers" EntityType="SNCRegistrationModel.Volunteer" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="SNCRegistrationModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -443,62 +345,23 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_FamilyMembers" Association="SNCRegistrationModel.FK_FamilyMembers">
+            <End Role="Guardian" EntitySet="Guardians" />
+            <End Role="FamilyMember" EntitySet="FamilyMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participants" Association="SNCRegistrationModel.FK_Participants">
+            <End Role="Guardian" EntitySet="Guardians" />
+            <End Role="Participant" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Volunteers" Association="SNCRegistrationModel.FK_Volunteers">
+            <End Role="LeadContact" EntitySet="LeadContacts" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="SNCRegistrationModel.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_FamilyMembers_ToTable" Association="SNCRegistrationModel.FK_FamilyMembers_ToTable">
-            <End Role="Guardian" EntitySet="Guardians" />
-            <End Role="FamilyMember" EntitySet="FamilyMembers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Participants_ToTable" Association="SNCRegistrationModel.FK_Participants_ToTable">
-            <End Role="Guardian" EntitySet="Guardians" />
-            <End Role="Participant" EntitySet="Participants" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Volunteers_ToTable" Association="SNCRegistrationModel.FK_Volunteers_ToTable">
-            <End Role="LeadContact" EntitySet="LeadContacts" />
-            <End Role="Volunteer" EntitySet="Volunteers" />
-          </AssociationSet>
-          <!--<AssociationSet Name="AspNetUserRoles" Association="SNCRegistrationModel.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-          </AssociationSet>-->
-          <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
-          <EntitySet Name="Users" EntityType="SNCRegistrationModel.User" />
         </EntityContainer>
-        <Association Name="FK_Volunteers_Volunteers">
-          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Volunteer">
-              <PropertyRef Name="VolunteerID" />
-            </Principal>
-            <Dependent Role="Volunteer1">
-              <PropertyRef Name="VolunteerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <!--<EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="AdminID" />
-          </Key>
-          <Property Name="AdminID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdminUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdminFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdminLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdminType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdminPWHash" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>-->
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -506,7 +369,6 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="SNCRegistrationModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
-          <!--<NavigationProperty Name="AspNetUsers1" Relationship="SNCRegistrationModel.AspNetUserRoles1" FromRole="AspNetRole" ToRole="AspNetUser" />-->
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -548,7 +410,120 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="SNCRegistrationModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="SNCRegistrationModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="SNCRegistrationModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-          <!--<NavigationProperty Name="AspNetRoles1" Relationship="SNCRegistrationModel.AspNetUserRoles1" FromRole="AspNetUser" ToRole="AspNetRole" />-->
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FamilyMember">
+          <Key>
+            <PropertyRef Name="FamilyMemberID" />
+          </Key>
+          <Property Name="FamilyMemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FamilyMemberFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyMemberLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyMemberAge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianID" Type="Int32" Nullable="false" />
+          <Property Name="HealthForm" Type="Boolean" />
+          <Property Name="PhotoAck" Type="Boolean" />
+          <Property Name="AttendingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="FamilyMember" ToRole="Guardian" />
+        </EntityType>
+        <EntityType Name="Guardian">
+          <Key>
+            <PropertyRef Name="GuardianID" />
+          </Key>
+          <Property Name="GuardianID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuardianFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianState" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="GuardianZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GuardianCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GuardianEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PacketSentDate" Type="DateTime" Precision="0" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="0" />
+          <Property Name="ConfirmationSentDate" Type="DateTime" Precision="0" />
+          <Property Name="HealthForm" Type="Boolean" />
+          <Property Name="PhotoAck" Type="Boolean" />
+          <Property Name="Tent" Type="Boolean" />
+          <Property Name="AttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="Guardian" ToRole="FamilyMember" />
+          <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Guardian" ToRole="Participant" />
+        </EntityType>
+        <EntityType Name="LeadContact">
+          <Key>
+            <PropertyRef Name="LeadContactID" />
+          </Key>
+          <Property Name="LeadContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BSType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LeadContactFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadContactLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadContactAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadContactCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadContactState" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LeadContactZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LeadContactCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LeadContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VolunteerAttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaturdayDinner" Type="Boolean" />
+          <Property Name="TotalFee" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Booth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadContactShirtOrder" Type="Boolean" />
+          <Property Name="LeadContactShirtSize" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK_Volunteers" FromRole="LeadContact" ToRole="Volunteer" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ParticipantID" />
+          </Key>
+          <Property Name="ParticipantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParticipantFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantAge" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantSchool" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantTeacher" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ClassroomScouting" Type="Boolean" Nullable="false" />
+          <Property Name="Returning" Type="Boolean" />
+          <Property Name="HealthForm" Type="Boolean" />
+          <Property Name="PhotoAck" Type="Boolean" />
+          <Property Name="AttendingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianID" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Participant" ToRole="Guardian" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Volunteer">
+          <Key>
+            <PropertyRef Name="VolunteerID" />
+          </Key>
+          <Property Name="VolunteerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VolunteerFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VolunteerLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VolunteerAge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadContactID" Type="Int32" />
+          <Property Name="VolunteerShirtOrder" Type="Boolean" />
+          <Property Name="VolunteerShirtSize" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="VolunteerAttendingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaturdayDinner" Type="Boolean" />
+          <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LeadContact" Relationship="SNCRegistrationModel.FK_Volunteers" FromRole="Volunteer" ToRole="LeadContact" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="SNCRegistrationModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -578,11 +553,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="SNCRegistrationModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="SNCRegistrationModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_FamilyMembers_ToTable">
+        <Association Name="FK_FamilyMembers">
           <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="1" />
           <End Type="SNCRegistrationModel.FamilyMember" Role="FamilyMember" Multiplicity="*" />
           <ReferentialConstraint>
@@ -594,7 +565,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Participants_ToTable">
+        <Association Name="FK_Participants">
           <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="0..1" />
           <End Type="SNCRegistrationModel.Participant" Role="Participant" Multiplicity="*" />
           <ReferentialConstraint>
@@ -606,8 +577,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Volunteers_ToTable">
-          <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="1" />
+        <Association Name="FK_Volunteers">
+          <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="0..1" />
           <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LeadContact">
@@ -618,187 +589,173 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="SNCRegistrationModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="SNCRegistrationModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <!--<EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminUserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminPWHash" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>-->
         <!--<Association Name="AspNetUserRoles1">
           <End Type="SNCRegistrationModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="SNCRegistrationModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>-->
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="AttendanceID" />
-          </Key>
-          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SNCRegistrationModelStoreContainer" CdmEntityContainer="SNCRegistrationEntities">
-    <EntitySetMapping Name="FamilyMembers">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.FamilyMember)">
-        <MappingFragment StoreEntitySet="FamilyMembers">
-          <ScalarProperty Name="FamilyMemberID" ColumnName="FamilyMemberID" />
-          <ScalarProperty Name="FamilyMemberFirstName" ColumnName="FamilyMemberFirstName" />
-          <ScalarProperty Name="FamilyMemberLastName" ColumnName="FamilyMemberLastName" />
-          <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
-          <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
-          <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
-          <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="FamilyMemberAge" ColumnName="FamilyMemberAge" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Guardians">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.Guardian)">
-        <MappingFragment StoreEntitySet="Guardians">
-          <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
-          <ScalarProperty Name="GuardianFirstName" ColumnName="GuardianFirstName" />
-          <ScalarProperty Name="GuardianLastName" ColumnName="GuardianLastName" />
-          <ScalarProperty Name="GuardianAddress" ColumnName="GuardianAddress" />
-          <ScalarProperty Name="GuardianCity" ColumnName="GuardianCity" />
-          <ScalarProperty Name="GuardianZip" ColumnName="GuardianZip" />
-          <ScalarProperty Name="GuardianEmail" ColumnName="GuardianEmail" />
-          <ScalarProperty Name="PacketSentDate" ColumnName="PacketSentDate" />
-          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
-          <ScalarProperty Name="ConfirmationSentDate" ColumnName="ConfirmationSentDate" />
-          <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
-          <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
-          <ScalarProperty Name="Tent" ColumnName="Tent" />
-          <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-          <ScalarProperty Name="GuardianCellPhone" ColumnName="GuardianCellPhone" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LeadContacts">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.LeadContact)">
-        <MappingFragment StoreEntitySet="LeadContacts">
-          <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
-          <ScalarProperty Name="BSType" ColumnName="BSType" />
-          <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
-          <ScalarProperty Name="LeadContactFirstName" ColumnName="LeadContactFirstName" />
-          <ScalarProperty Name="LeadContactLastName" ColumnName="LeadContactLastName" />
-          <ScalarProperty Name="LeadContactAddress" ColumnName="LeadContactAddress" />
-          <ScalarProperty Name="LeadContactCity" ColumnName="LeadContactCity" />
-          <ScalarProperty Name="LeadContactState" ColumnName="LeadContactState" />
-          <ScalarProperty Name="LeadContactZip" ColumnName="LeadContactZip" />
-          <ScalarProperty Name="LeadContactEmail" ColumnName="LeadContactEmail" />
-          <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
-          <ScalarProperty Name="SaturdayDinner" ColumnName="SaturdayDinner" />
-          <ScalarProperty Name="TotalFee" ColumnName="TotalFee" />
-          <ScalarProperty Name="Booth" ColumnName="Booth" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="LeadContactShirtOrder" ColumnName="LeadContactShirtOrder" />
-          <ScalarProperty Name="LeadContactShirtSize" ColumnName="LeadContactShirtSize" />
-          <ScalarProperty Name="LeadContactCellPhone" ColumnName="LeadContactCellPhone" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Participants">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.Participant)">
-        <MappingFragment StoreEntitySet="Participants">
-          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
-          <ScalarProperty Name="ParticipantFirstName" ColumnName="ParticipantFirstName" />
-          <ScalarProperty Name="ParticipantLastName" ColumnName="ParticipantLastName" />
-          <ScalarProperty Name="ParticipantAge" ColumnName="ParticipantAge" />
-          <ScalarProperty Name="ParticipantSchool" ColumnName="ParticipantSchool" />
-          <ScalarProperty Name="ParticipantTeacher" ColumnName="ParticipantTeacher" />
-          <ScalarProperty Name="ClassroomScouting" ColumnName="ClassroomScouting" />
-          <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
-          <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
-          <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
-          <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="Returning" ColumnName="Returning" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Volunteers">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.Volunteer)">
-        <MappingFragment StoreEntitySet="Volunteers">
-          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
-          <ScalarProperty Name="VolunteerFirstName" ColumnName="VolunteerFirstName" />
-          <ScalarProperty Name="VolunteerLastName" ColumnName="VolunteerLastName" />
-          <ScalarProperty Name="VolunteerAge" ColumnName="VolunteerAge" />
-          <ScalarProperty Name="VolunteerShirtOrder" ColumnName="VolunteerShirtOrder" />
-          <ScalarProperty Name="VolunteerShirtSize" ColumnName="VolunteerShirtSize" />
-          <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
-          <ScalarProperty Name="SaturdayDinner" ColumnName="SaturdayDinner" />
-          <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.AspNetRole)">
-        <MappingFragment StoreEntitySet="AspNetRoles">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.AspNetUserClaim)">
-        <MappingFragment StoreEntitySet="AspNetUserClaims">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.AspNetUserLogin)">
-        <MappingFragment StoreEntitySet="AspNetUserLogins">
-          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="IsTypeOf(SNCRegistrationModel.AspNetUser)">
-        <MappingFragment StoreEntitySet="AspNetUsers">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-   
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="SNCRegistrationModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilyMembers">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.FamilyMember">
+              <MappingFragment StoreEntitySet="FamilyMembers">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
+                <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
+                <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
+                <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
+                <ScalarProperty Name="FamilyMemberAge" ColumnName="FamilyMemberAge" />
+                <ScalarProperty Name="FamilyMemberLastName" ColumnName="FamilyMemberLastName" />
+                <ScalarProperty Name="FamilyMemberFirstName" ColumnName="FamilyMemberFirstName" />
+                <ScalarProperty Name="FamilyMemberID" ColumnName="FamilyMemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guardians">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.Guardian">
+              <MappingFragment StoreEntitySet="Guardians">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
+                <ScalarProperty Name="Tent" ColumnName="Tent" />
+                <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
+                <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
+                <ScalarProperty Name="ConfirmationSentDate" ColumnName="ConfirmationSentDate" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="PacketSentDate" ColumnName="PacketSentDate" />
+                <ScalarProperty Name="GuardianEmail" ColumnName="GuardianEmail" />
+                <ScalarProperty Name="GuardianCellPhone" ColumnName="GuardianCellPhone" />
+                <ScalarProperty Name="GuardianZip" ColumnName="GuardianZip" />
+                <ScalarProperty Name="GuardianState" ColumnName="GuardianState" />
+                <ScalarProperty Name="GuardianCity" ColumnName="GuardianCity" />
+                <ScalarProperty Name="GuardianAddress" ColumnName="GuardianAddress" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="GuardianLastName" ColumnName="GuardianLastName" />
+                <ScalarProperty Name="GuardianFirstName" ColumnName="GuardianFirstName" />
+                <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadContacts">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.LeadContact">
+              <MappingFragment StoreEntitySet="LeadContacts">
+                <ScalarProperty Name="LeadContactShirtSize" ColumnName="LeadContactShirtSize" />
+                <ScalarProperty Name="LeadContactShirtOrder" ColumnName="LeadContactShirtOrder" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Booth" ColumnName="Booth" />
+                <ScalarProperty Name="TotalFee" ColumnName="TotalFee" />
+                <ScalarProperty Name="SaturdayDinner" ColumnName="SaturdayDinner" />
+                <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
+                <ScalarProperty Name="LeadContactEmail" ColumnName="LeadContactEmail" />
+                <ScalarProperty Name="LeadContactCellPhone" ColumnName="LeadContactCellPhone" />
+                <ScalarProperty Name="LeadContactZip" ColumnName="LeadContactZip" />
+                <ScalarProperty Name="LeadContactState" ColumnName="LeadContactState" />
+                <ScalarProperty Name="LeadContactCity" ColumnName="LeadContactCity" />
+                <ScalarProperty Name="LeadContactAddress" ColumnName="LeadContactAddress" />
+                <ScalarProperty Name="LeadContactLastName" ColumnName="LeadContactLastName" />
+                <ScalarProperty Name="LeadContactFirstName" ColumnName="LeadContactFirstName" />
+                <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
+                <ScalarProperty Name="BSType" ColumnName="BSType" />
+                <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.Participant">
+              <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
+                <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
+                <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
+                <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
+                <ScalarProperty Name="Returning" ColumnName="Returning" />
+                <ScalarProperty Name="ClassroomScouting" ColumnName="ClassroomScouting" />
+                <ScalarProperty Name="ParticipantTeacher" ColumnName="ParticipantTeacher" />
+                <ScalarProperty Name="ParticipantSchool" ColumnName="ParticipantSchool" />
+                <ScalarProperty Name="ParticipantAge" ColumnName="ParticipantAge" />
+                <ScalarProperty Name="ParticipantLastName" ColumnName="ParticipantLastName" />
+                <ScalarProperty Name="ParticipantFirstName" ColumnName="ParticipantFirstName" />
+                <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -810,7 +767,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-  </EntityContainerMapping>
+          <EntitySetMapping Name="Volunteers">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
+              <MappingFragment StoreEntitySet="Volunteers">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
+                <ScalarProperty Name="SaturdayDinner" ColumnName="SaturdayDinner" />
+                <ScalarProperty Name="VolunteerAttendingCode" ColumnName="VolunteerAttendingCode" />
+                <ScalarProperty Name="VolunteerShirtSize" ColumnName="VolunteerShirtSize" />
+                <ScalarProperty Name="VolunteerShirtOrder" ColumnName="VolunteerShirtOrder" />
+                <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
+                <ScalarProperty Name="VolunteerAge" ColumnName="VolunteerAge" />
+                <ScalarProperty Name="VolunteerLastName" ColumnName="VolunteerLastName" />
+                <ScalarProperty Name="VolunteerFirstName" ColumnName="VolunteerFirstName" />
+                <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="SNCRegistrationModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

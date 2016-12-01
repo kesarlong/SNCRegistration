@@ -27,6 +27,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name ="City")]
         public string GuardianCity;
 
+        [Display(Name = "State")]
+        public string GuardianState;
+
         [MaxLength(10)]
         [Display(Name = "Zip")]
         //TO DO: review field type (should be string as it is not used numerically) - Erika review (SP-245 created 11/21/16)

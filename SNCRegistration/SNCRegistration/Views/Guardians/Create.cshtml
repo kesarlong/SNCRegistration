@@ -47,11 +47,10 @@
         @Html.ValidationMessageFor(model => model.GuardianCity, "", new { @class = "text-danger" })
     </div>
 
-    @*TO DO: Erika add field to table (ticket SP-249)*@
     <div class="form-group">
-        @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.Label("<<ADD FIELD>>", htmlAttributes: new { @class = "control-label col-md-6" })
-
+        @Html.LabelFor(model => model.GuardianState, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.EditorFor(model => model.GuardianState, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.GuardianState, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
@@ -113,8 +112,8 @@
 
     <div class="form-group pull-right">
         <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
-
-    </div>
+    
+      </div>
 
 }
 
