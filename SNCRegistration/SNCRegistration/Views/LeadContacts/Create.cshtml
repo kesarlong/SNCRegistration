@@ -91,12 +91,11 @@
             </div>
 
         <div class="row">
-                
 
             <div class="form-group">
                 @Html.LabelFor(model => model.LeadContactShirtOrder, htmlAttributes: new { @class = "control-label col-md-3" })
-                @Html.RadioButtonFor(model => model.LeadContactShirtOrder, true, new { id = "radio_LeadContactShirtOrder_True" }) Yes
-                @Html.RadioButtonFor(model => model.LeadContactShirtOrder, false, new { id = "radio_LeadContactShirtOrder_False" }) No
+                @Html.RadioButtonFor(model => model.LeadContactShirtOrder, true, new { id = "radio_LeadContactShirtOrder_True switch" }) Yes
+                @Html.RadioButtonFor(model => model.LeadContactShirtOrder, false, new { id = "radio_LeadContactShirtOrder_False switch" }) No
                 @Html.ValidationMessageFor(model => model.LeadContactShirtOrder, "", new { @class = "text-danger" })
             </div>
         </div>
