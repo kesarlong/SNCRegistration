@@ -11,23 +11,50 @@ namespace SNCRegistration.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Volunteer
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VolunteerID { get; set; }
+
+        [Required]
+        [DisplayName("First Name")]
         public string VolunteerFirstName { get; set; }
+
+        [Required]
+        [DisplayName("Last Name")]
         public string VolunteerLastName { get; set; }
+
+        [DisplayName("Age")]
         public string VolunteerAge { get; set; }
-        public bool VolunteerShirtOrder { get; set; }
+
+        [DisplayName("T-Shirt Order")]
+        public Nullable<bool> VolunteerShirtOrder { get; set; }
+
+        [DisplayName("T-Shirt Size")]
         public string VolunteerShirtSize { get; set; }
+
+        [DisplayName("Attending")]
         public string VolunteerAttendingCode { get; set; }
-        public bool SaturdayDinner { get; set; }
+
+        [DisplayName("Saturday Dinner?")]
+        public Nullable<bool> SaturdayDinner { get; set; }
+
+        [DisplayName("Troop/Chapter/Unit Number")]
         public string UnitChapterNumber { get; set; }
+
+        [DisplayName("Comments")]
         public string Comments { get; set; }
-        public int LeadContactID { get; set; }
+
+        public Nullable<int> LeadContactID { get; set; }
     
         public virtual Volunteer Volunteers1 { get; set; }
+
         public virtual Volunteer Volunteer1 { get; set; }
+
         public virtual LeadContact LeadContact { get; set; }
     }
 }
