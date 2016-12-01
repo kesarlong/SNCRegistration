@@ -34,7 +34,6 @@ namespace SNCRegistration.ViewModels.Metadata
 
 
         [Display(Name = "Cell Phone")]
-        [DataType(DataType.PhoneNumber)]
         public string GuardianCellPhone;
 
 
@@ -63,6 +62,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Photo Ack Received")]
         public Nullable<bool> PhotoAck;
 
+        [Required]
         [Display(Name = "Tent Required")]
         public bool Tent;
 
@@ -90,7 +90,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Last Name")]
         public string ParticipantLastName;
 
-
+        [Required]
         [Display(Name = "Age")]
         public string ParticipantAge;
 
@@ -106,7 +106,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Teacher")]
         public string ParticipantTeacher;
 
-
+        [Required]
         [Display(Name = "Classroom Scouting")]
         public bool ClassroomScouting;
 
@@ -120,6 +120,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Attendance")]
         public string AttendingCode;
 
+        [Required]
         [Display(Name = "Returning")]
         public bool? Returning;
 
@@ -153,6 +154,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name="Comments")]
         public string Comments;
 
+        [Required]
         [Display(Name="Age")]
         public int FamilyMemberAge;
 
