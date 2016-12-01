@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
+using System.Net.Mime;
+using System.IO;
 
 namespace SNCRegistration.Controllers
 {
@@ -135,6 +137,22 @@ namespace SNCRegistration.Controllers
             db.Participants.Remove(participant);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult GetFile(string file) {
+            var appData = Server.MapPath("~/App_Data/PDF");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData)) {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(path)) {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Application.Pdf);
         }
 
         protected override void Dispose(bool disposing)

@@ -364,6 +364,10 @@
     <Content Include="ReportingDataSet\ReportingDataSet.xsc">
       <DependentUpon>ReportingDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="App_Data\PDF\MediaRelease.pdf" />
+    <Content Include="App_Data\PDF\ParticipantHealthForm.pdf" />
+    <Content Include="App_Data\PDF\ParticipantWelcomePacket.pdf" />
+    <Content Include="App_Data\PDF\VolunteerInformation.pdf" />
     <None Include="ReportingDataSet\ReportingDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -372,7 +376,6 @@
     <Content Include="ReportingDataSet\ReportingDataSet.xss">
       <DependentUpon>ReportingDataSet.xsd</DependentUpon>
     </Content>
-    <None Include="Resources\PDF\Test" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -505,8 +508,8 @@
     <Content Include="Views\Reporting\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="font-awesome\" />
+    <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
   </ItemGroup>
