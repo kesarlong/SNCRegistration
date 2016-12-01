@@ -178,60 +178,57 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Last Name")]
         public string LeadContactLastName;
 
-        [Required]
+
         [Display(Name = "Street Address")]
         public string LeadContactAddress;
 
-        [Required]
         [Display(Name = "City")]
         public string LeadContactCity;
 
-        [Required]
+
+        [Display(Name = "State")]
         public string LeadContactState;
 
-        [Required]
+
         [Display(Name = "Zip Code")]
         public string LeadContactZip ;
-
-        [Required]
         [Display(Name = "Cell Phone")]
         [DataType(DataType.PhoneNumber)]
         public string LeadContactCellPhone ;
 
-        [Required]
+
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public string LeadContactEmail ;
 
-        [Required]
+
         [Display(Name = "T-Shirt Order")]
         public bool LeadContactShirtOrder ;
 
-        [Required]
+
         [Display(Name = "T-Shirt Size")]
         public string LeadContactShirtSize ;
 
-        [Required]
+
         [Display(Name = "Troop/Chapter/Unit")]
         public string BSType ;
 
-        [Required]
+
         [Display(Name = "Troop/Chapter/Unit Number")]
         public string UnitChapterNumber ;
 
-        [Required]
+
         [Display(Name = "Attending")]
         public string VolunteerAttendingCode ;
 
-        [Required]
+
         [Display(Name = "Saturday Dinner?")]
         public bool SaturdayDinner ;
 
-        [Required]
+
         [Display(Name = "Booth Name")]
         public string Booth ;
 
-        [Required]
         [Display(Name = "Comments")]
         public string Comments ;
 
@@ -253,31 +250,29 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Last Name")]
         public string VolunteerLastName ;
 
-        [Required]
+     
         [Display(Name = "Age")]
         public string VolunteerAge ;
 
-        [Required]
         [Display(Name = "T-Shirt Order")]
         public Nullable<bool> VolunteerShirtOrder ;
 
-        [Required]
         [Display(Name = "T-Shirt Size")]
         public string VolunteerShirtSize ;
 
-        [Required]
+
         [Display(Name = "Attending")]
         public string VolunteerAttendingCode ;
 
-        [Required]
+
         [Display(Name = "Saturday Dinner?")]
         public Nullable<bool> SaturdayDinner ;
 
-        [Required]
+
         [Display(Name = "Troop/Chapter/Unit Number")]
         public string UnitChapterNumber ;
 
-        [Required]
+
         [Display(Name = "Comments")]
         public string Comments ;
 
