@@ -69,13 +69,13 @@
                                     <a href="#" data-toggle="collapse" data-target="#menu3">Forms<i class="glyphicon glyphicon-chevron-right"></i></a>
                                     <ul class="nav nav-stacked collapse" id="menu3">
                                         <li>
-                                            <a href="@Url.Action("Index", "EventInfo")">Event Info</a>
+                                            <a href="~/Guardians/GetFile?file=ParticipantWelcomePacket.pdf" target="_blank">Event Info</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("Index", "HealthForm")">Health Form</a>
+                                            <a href="~/Guardians/GetFile?file=ParticipantHealthForm.pdf" target="_blank">Health Form</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("Index", "PhotoAck")">Photo/Media</a>
+                                            <a href="~/Guardians/GetFile?file=MediaRelease.pdf" target="_blank">Media Release Form</a>
                                         </li>
                                     </ul>
 
@@ -89,9 +89,9 @@
                     <div class="panel panel-default">
                         <!-- Dashboard panel contents -->
                         <div class="panel-heading"><h3>Participant Registration</h3></div>
-                           
-                                @RenderBody()
-                            </div>
+                        <div class="panel-body">
+                            @RenderBody()
+                        </div>
                         </div>
                      </div>
                 </div>

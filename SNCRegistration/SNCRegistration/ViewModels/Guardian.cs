@@ -24,9 +24,12 @@ namespace SNCRegistration.ViewModels
         public int GuardianID { get; set; }
         public string GuardianFirstName { get; set; }
         public string GuardianLastName { get; set; }
+        public string Relationship { get; set; }
         public string GuardianAddress { get; set; }
         public string GuardianCity { get; set; }
+        public string GuardianState { get; set; }
         public string GuardianZip { get; set; }
+        public string GuardianCellPhone { get; set; }
         public string GuardianEmail { get; set; }
         public Nullable<System.DateTime> PacketSentDate { get; set; }
         public Nullable<System.DateTime> ReceiptDate { get; set; }
@@ -36,8 +39,6 @@ namespace SNCRegistration.ViewModels
         public Nullable<bool> Tent { get; set; }
         public string AttendingCode { get; set; }
         public string Comments { get; set; }
-        public string Relationship { get; set; }
-        public string GuardianCellPhone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMember> FamilyMembers { get; set; }

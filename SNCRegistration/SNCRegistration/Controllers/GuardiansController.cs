@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
+using System.IO;
+using System.Net.Mime;
 
 namespace SNCRegistration.Controllers
 {
@@ -46,7 +48,7 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
+        public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianState,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +74,25 @@ namespace SNCRegistration.Controllers
             }
             return View(guardian);
         }
+
+
+        public ActionResult GetFile(string file) {
+            var appData = Server.MapPath("~/App_Data/PDF");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData)) {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(path)) {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Application.Pdf);
+        }
+
 
         // POST: Guardians/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
