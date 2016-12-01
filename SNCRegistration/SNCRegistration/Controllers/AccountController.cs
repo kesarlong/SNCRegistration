@@ -9,9 +9,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SNCRegistration.ViewModels;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 namespace SNCRegistration.Controllers
 {
+    
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -40,6 +44,11 @@ namespace SNCRegistration.Controllers
             }
         }
 
+        public ActionResult AccessDenied() {
+            return View();
+        }
+
+
         public ApplicationUserManager UserManager
         {
             get
@@ -57,6 +66,9 @@ namespace SNCRegistration.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // Create the Admin account using setting in Web.Config (if needed)
+            CreateAdminIfNeeded();
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -75,11 +87,12 @@ namespace SNCRegistration.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                 //   return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Admin");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -151,10 +164,15 @@ namespace SNCRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    //New users registered will have Unassigned roles
+                    UserManager.AddToRole(user.Id, "UnassignedUser");
+
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -163,7 +181,7 @@ namespace SNCRegistration.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 AddErrors(result);
             }
@@ -385,6 +403,13 @@ namespace SNCRegistration.Controllers
             return View(model);
         }
 
+
+        
+        public ActionResult AdminHome() {
+            return View();
+        }
+
+
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -422,6 +447,9 @@ namespace SNCRegistration.Controllers
 
             base.Dispose(disposing);
         }
+
+       
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -481,5 +509,42 @@ namespace SNCRegistration.Controllers
             }
         }
         #endregion
+
+        // Add RoleManager
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager {
+            get {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+            private set {
+                _roleManager = value;
+            }
+        }
+
+        // Add CreateAdminIfNeeded
+        private void CreateAdminIfNeeded() {
+            // Get Admin Account
+            string AdminEmail = ConfigurationManager.AppSettings["AdminEmail"];
+            string AdminUserName = ConfigurationManager.AppSettings["AdminUserName"];
+            string AdminPassword = ConfigurationManager.AppSettings["AdminPassword"];
+
+            // See if Admin exists
+            var objAdminUser = UserManager.FindByName(AdminUserName);
+
+            if (objAdminUser == null) {
+                //See if the Admin role exists
+                if (!RoleManager.RoleExists("SystemAdmin")) {
+                    // Create the Admin Role (if needed)
+                    IdentityRole objAdminRole = new IdentityRole("SystemAdmin");
+                    RoleManager.Create(objAdminRole);
+                }
+
+                // Create Admin user
+                var objNewAdminUser = new ApplicationUser { UserName = AdminUserName, Email = AdminEmail };
+                var AdminUserCreateResult = UserManager.Create(objNewAdminUser, AdminPassword);
+                // Put user in Admin role
+                UserManager.AddToRole(objNewAdminUser.Id, "SystemAdmin");
+            }
+        }
     }
 }

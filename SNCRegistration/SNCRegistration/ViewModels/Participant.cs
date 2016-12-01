@@ -17,7 +17,7 @@ namespace SNCRegistration.ViewModels
         public int ParticipantID { get; set; }
         public string ParticipantFirstName { get; set; }
         public string ParticipantLastName { get; set; }
-        public int ParticipantAge { get; set; }
+        public string ParticipantAge { get; set; }
         public string ParticipantSchool { get; set; }
         public string ParticipantTeacher { get; set; }
         public bool ClassroomScouting { get; set; }
