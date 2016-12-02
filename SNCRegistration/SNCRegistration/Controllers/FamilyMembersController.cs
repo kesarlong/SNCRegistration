@@ -43,15 +43,19 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments")] FamilyMember familyMember)
+        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,FamilyMemberAge")] FamilyMember familyMember)
         {
             if (ModelState.IsValid)
             {
+                //familyMember.GuardianID = (int)Session["gSession"];
                 db.FamilyMembers.Add(familyMember);
 
                 try
                 {
                     db.SaveChanges();
+                    this.Session["gSession"] = familyMember.GuardianID;
+                    return RedirectToAction("Create", "FamilyMembers", new { GuardianID = this.Session["gSession"]});
+
                 }
                 catch (DbEntityValidationException ex)
                 {

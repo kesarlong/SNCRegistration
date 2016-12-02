@@ -21,6 +21,20 @@ namespace SNCRegistration.Controllers
         // GET: Participants
         public ActionResult Index()
         {
+            try
+            {
+                return View(db.Participants.ToList());
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+            }
             return View(db.Participants.ToList());
         }
 
@@ -42,26 +56,30 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        public ActionResult Create()
+        public ActionResult Create() 
         {
+
             return View();
         }
+
+        
 
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Returning,Comments")] Participant participant)
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,Comments")] Participant participant)
         {
             if (ModelState.IsValid)
             {
                 db.Participants.Add(participant);
 
-
                 try
                 {
-                    db.SaveChanges();
+                db.SaveChanges();
+                this.Session["gSession"] = participant.GuardianID;
+                return RedirectToAction("Create", "FamilyMembers", new { GuardianId = this.Session["gSession"] });
                 }
                 catch (DbEntityValidationException ex)
                 {

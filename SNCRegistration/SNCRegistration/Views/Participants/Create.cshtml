@@ -13,23 +13,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-    <div class="form-group">
-        <!--TO DO remove in form Need to auto populate for the child record-->
-        @Html.LabelFor(model => model.GuardianID, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.DisplayFor(model => model.GuardianID, new { @Value = (Session["pSession"] )})
-        @*@Html.DisplayFor(model => model.GuardianID, new { htmlAttributes = new { @class = "form-control" } })*@
-        @Html.ValidationMessageFor(model => model.GuardianID, "", new { @class = "text-danger" })
-    </div>
-
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ParticipantID, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.DisplayFor(model => model.ParticipantID, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.ParticipantID, "", new { @class = "text-danger" })
-        <br /><br />
-    </div>
+    @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
 
     <div class="form-group">
         @Html.LabelFor(model => model.ParticipantFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -54,14 +38,20 @@
                 new SelectListItem{ Value = "14-16", Text = "14-16" },
                 new SelectListItem{ Value = "17-21", Text = "17-18" },
                 new SelectListItem{ Value = "Over 21", Text = "Over 21" }
-            },  new {@class = "form-control"})
+            }, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.ParticipantLastName, "", new { @class = "text-danger" })
     </div>
 
+
     <div class="form-group">
-        <!--TO DO need to link attending code to code table **in all tables**-->
         @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.EditorFor(model => model.AttendingCode, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.DropDownListFor(model => model.AttendingCode,
+             new List<SelectListItem>{
+               new SelectListItem{ Value = "", Text = "-Select-" },
+               new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
+               new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
+               new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+           }, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
     </div>
 
@@ -109,9 +99,7 @@
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
 }
-@*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
+
 
 @section Scripts
         {
