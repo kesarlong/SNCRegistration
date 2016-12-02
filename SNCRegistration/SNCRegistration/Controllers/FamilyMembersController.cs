@@ -67,7 +67,7 @@ namespace SNCRegistration.Controllers
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
-                        return RedirectToAction("Registered");
+                        return Redirect("Registered");
                     }
                 }
                 catch (DbEntityValidationException ex)
@@ -155,6 +155,11 @@ namespace SNCRegistration.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Registered()
+        {
+            return View();
         }
     }
 }

@@ -199,7 +199,10 @@ namespace SNCRegistration.Controllers
             base.Dispose(disposing);
         }
 
-        
+        public ActionResult Registered()
+        {
+            return View();
+        }
 
     }
 }
