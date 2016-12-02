@@ -69,7 +69,8 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,Comments")] Participant participant)
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,Comments"),
+            ] Participant participant,string submit)
         {
             if (ModelState.IsValid)
             {
@@ -77,9 +78,23 @@ namespace SNCRegistration.Controllers
 
                 try
                 {
-                db.SaveChanges();
-                this.Session["gSession"] = participant.GuardianID;
-                return RedirectToAction("Create", "FamilyMembers", new { GuardianId = this.Session["gSession"] });
+                    db.SaveChanges();
+
+                    this.Session["gSession"] = participant.GuardianID;
+
+                    if (Request["submit"].Equals("Add another participant"))
+                        //add another participant for guardian
+                        { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+
+                    if (Request["submit"].Equals("Add a family member"))
+                    //add a family member
+                        {return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] });}
+
+                    if (Request["submit"].Equals("Complete registration"))
+                    //registration complete, no more people to add
+                    { return View(); }
+                    
+
                 }
                 catch (DbEntityValidationException ex)
                 {

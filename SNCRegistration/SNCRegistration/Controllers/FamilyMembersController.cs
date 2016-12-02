@@ -54,7 +54,19 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
                     this.Session["gSession"] = familyMember.GuardianID;
-                    return RedirectToAction("Create", "FamilyMembers", new { GuardianID = this.Session["gSession"]});
+                    //return RedirectToAction("Create", "FamilyMembers", new { GuardianID = this.Session["gSession"]});
+
+                    if (Request["submit"].Equals("Add another participant"))
+                    //add another participant for guardian
+                    { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+
+                    if (Request["submit"].Equals("Add a family member"))
+                    //add a family member
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
+
+                    if (Request["submit"].Equals("Complete registration"))
+                    //registration complete, no more people to add
+                    { return View(); }
 
                 }
                 catch (DbEntityValidationException ex)
