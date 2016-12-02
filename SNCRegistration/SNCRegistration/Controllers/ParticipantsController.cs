@@ -73,7 +73,8 @@ namespace SNCRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                var gID = this.Session["gSession"] = participant.GuardianID;
+                //var gID = this.Session["gSession"] = participant.GuardianID;
+               participant.GuardianID = (int)this.Session["gSession"] ;
                 db.Participants.Add(participant);
 
 

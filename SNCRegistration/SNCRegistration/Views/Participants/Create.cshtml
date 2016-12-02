@@ -40,7 +40,7 @@
                 new SelectListItem{ Value = "14-16", Text = "14-16" },
                 new SelectListItem{ Value = "17-21", Text = "17-18" },
                 new SelectListItem{ Value = "Over 21", Text = "Over 21" }
-            },  new {@class = "form-control"})
+            }, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.ParticipantLastName, "", new { @class = "text-danger" })
     </div>
 
@@ -101,9 +101,7 @@
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
 }
-@*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
+
 
 @section Scripts
         {

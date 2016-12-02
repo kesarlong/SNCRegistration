@@ -66,6 +66,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Tent Required")]
         public bool Tent;
 
+        [Required]
         [Display(Name = "Attending")]
         public string AttendingCode;
 
@@ -213,8 +214,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Display(Name = "Troop/Chapter/Unit Number")]
         public string UnitChapterNumber ;
-
-
+        
         [Display(Name = "Attending")]
         public string VolunteerAttendingCode ;
 

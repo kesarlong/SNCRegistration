@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,7 +13,7 @@ namespace SNCRegistration.Controllers
     public class GuardiansController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
-        private string exceptionMessage;
+
 
         // GET: Guardians
         public ActionResult Index()
@@ -58,7 +55,6 @@ namespace SNCRegistration.Controllers
         {
             return View();
         }
-
 
 
         // POST: Guardians/Create

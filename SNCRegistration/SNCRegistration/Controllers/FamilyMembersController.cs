@@ -47,6 +47,7 @@ namespace SNCRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
+                familyMember.GuardianID = (int)Session["gSession"];
                 db.FamilyMembers.Add(familyMember);
 
                 try
