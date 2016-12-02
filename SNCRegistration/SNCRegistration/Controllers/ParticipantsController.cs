@@ -21,6 +21,20 @@ namespace SNCRegistration.Controllers
         // GET: Participants
         public ActionResult Index()
         {
+            try
+            {
+                return View(db.Participants.ToList());
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+            }
             return View(db.Participants.ToList());
         }
 
