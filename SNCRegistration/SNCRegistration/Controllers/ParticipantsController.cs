@@ -73,14 +73,13 @@ namespace SNCRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var gID = this.Session["gSession"] = participant.GuardianID;
-               participant.GuardianID = (int)this.Session["gSession"] ;
                 db.Participants.Add(participant);
-
 
                 try
                 {
-                    db.SaveChanges();
+                db.SaveChanges();
+                this.Session["gSession"] = participant.GuardianID;
+                return RedirectToAction("Create", "FamilyMembers", new { GuardianId = this.Session["gSession"] });
                 }
                 catch (DbEntityValidationException ex)
                 {
