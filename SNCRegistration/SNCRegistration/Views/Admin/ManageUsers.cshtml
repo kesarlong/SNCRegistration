@@ -26,22 +26,35 @@
 <table class="table">
     <tr>
         <th>
-            Email
+            User Name
         </th>
         <th>
-            @*Locked Out*@
+            Email
         </th>
+        @*<th>
+            Admin Permissions
+        </th>*@
+        @*<th>
+            Locked Out
+        </th>*@
+
         <th></th>
     </tr>
 
     @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
+                  
             </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
+            </td>*@
             <td>
                 @Html.ActionLink("Edit", "EditUser", new { UserName = item.UserName }) |
                 @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower())) {

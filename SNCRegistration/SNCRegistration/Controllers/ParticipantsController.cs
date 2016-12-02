@@ -24,6 +24,8 @@ namespace SNCRegistration.Controllers
             return View(db.Participants.ToList());
         }
 
+
+
         // GET: Participants/Details/5
         public ActionResult Details(int? id)
         {

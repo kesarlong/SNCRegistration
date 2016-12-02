@@ -9,16 +9,32 @@ using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.IO;
 using System.Net.Mime;
+using System.Data.Entity.Validation;
 
 namespace SNCRegistration.Controllers
 {
     public class GuardiansController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
+        private string exceptionMessage;
 
         // GET: Guardians
         public ActionResult Index()
         {
+            try
+            {
+                return View(db.Guardians.ToList());
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+            }
             return View(db.Guardians.ToList());
         }
 
@@ -53,9 +69,26 @@ namespace SNCRegistration.Controllers
             if (ModelState.IsValid)
             {
                 db.Guardians.Add(guardian);
-                db.SaveChanges();
+                
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
+
                 return RedirectToAction("Create", "Participants");
             }
+
+            Session["pSession"] = guardian.GuardianID;
 
             return View(guardian);
         }
