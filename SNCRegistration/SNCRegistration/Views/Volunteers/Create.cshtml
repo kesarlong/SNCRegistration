@@ -35,7 +35,7 @@
             @Html.ValidationMessageFor(model => model.VolunteerFirstName, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <br />
     @Html.LabelFor(model => model.VolunteerLastName, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
         <div class="col-md-9">
@@ -43,9 +43,9 @@
             @Html.ValidationMessageFor(model => model.VolunteerLastName, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <br />
     <div class="form-group">
-        @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.VolunteerAge,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Age-" },
@@ -55,9 +55,9 @@
                 new SelectListItem{ Value = "14-16", Text = "14-16" },
                 new SelectListItem{ Value = "17-21", Text = "17-18" },
                 new SelectListItem{ Value = "Over 21", Text = "Over 21" }
-            }, new { @class = "form-control" })
+            }, new { @class = "form-control", style = "width: 220px" })
     </div>
-
+    <br />
     @Html.LabelFor(model => model.LeadContactID, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
       
@@ -66,16 +66,16 @@
             @Html.ValidationMessageFor(model => model.LeadContactID, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <br />
     <div class="form-group">
         @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label col-md-3" })
         @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { id = "radio_VolunteerShirtOrder_True" }) Yes
         @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { id = "radio_VolunteerShirtOrder_False" }) No
         @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
     </div>
-
+    <br />
     <div class="form-group">
-        @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.VolunteerShirtSize,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Size-" },
@@ -89,28 +89,28 @@
                 new SelectListItem{ Value = "YM", Text = "Adult - Medium" },
                 new SelectListItem{ Value = "YL", Text = "Adult - Large" },
                 new SelectListItem{ Value = "YX", Text = "Adult - Extra Large" },
-            }, new { @class = "form-control" })
+            }, new { @class = "form-control", style = "width: 220px" })
     </div>
 
-
+    <br />
         <div class="form-group">
-            @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
             @Html.DropDownListFor(model => model.VolunteerAttendingCode,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select-" },
                 new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
                 new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
                 new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
-            }, new { @class = "form-control" })
+            }, new { @class = "form-control", style = "width: 220px" })
         </div>
-
+        <br />
     <div class="form-group">
         @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label col-md-3" })
         @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "radio_SaturdayDinner_True" }) Yes
         @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "radio_SaturdayDinner_False" }) No
         @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
     </div>
-
+    <br />
     @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
 
@@ -119,7 +119,7 @@
             @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <br />
     @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
 
