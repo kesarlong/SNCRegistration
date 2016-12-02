@@ -63,6 +63,7 @@
       
         <div class="col-md-9">
             @Html.EditorFor(model => model.LeadContactID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.LeadContactID, new { @Value = (Session["lSession"]) })
             @Html.ValidationMessageFor(model => model.LeadContactID, "", new { @class = "text-danger" })
         </div>
     </div>

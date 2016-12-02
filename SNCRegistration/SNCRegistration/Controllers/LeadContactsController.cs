@@ -75,6 +75,8 @@ namespace SNCRegistration.Controllers
                 }
             }
 
+            Session["lSession"] = leadContact.LeadContactID;
+
             return RedirectToAction("Create", "Volunteers");
 
         }

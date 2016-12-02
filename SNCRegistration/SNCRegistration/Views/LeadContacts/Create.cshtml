@@ -147,6 +147,17 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.DropDownListFor(model => model.VolunteerAttendingCode,
+            new List<SelectListItem>{
+                new SelectListItem{ Value = "", Text = "-Select-" },
+                new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
+                new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
+                new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+            }, new { @class = "form-control" })
+            </div>
+
         <div class="row">
                 
             <div class="form-group">
