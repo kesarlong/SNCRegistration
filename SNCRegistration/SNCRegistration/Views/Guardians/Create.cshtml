@@ -23,6 +23,7 @@
         @Html.ValidationMessageFor(model => model.GuardianID, "", new { @class = "text-danger" })
     </div>
 
+
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
         @Html.EditorFor(model => model.GuardianFirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -79,16 +80,23 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.EditorFor(model => model.AttendingCode, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => model.AttendingCode,
+             new List<SelectListItem>{
+               new SelectListItem{ Value = "", Text = "-Select-" },
+               new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
+               new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
+               new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+           }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+
+        </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label col-md-3" })
-    </div>
-    <div class="form-group">
-        @Html.HiddenFor(model => model.HealthForm, new { @Value = false }) 
         @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tent_True" }) Yes
         @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
         @Html.ValidationMessageFor(model => model.Tent, "", new { @class = "text-danger" })
@@ -97,7 +105,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
-        @Html.TextArea("Comments", null, new { @class = "form-control" })  
+        @Html.TextArea("Comments", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
     </div>
 
@@ -112,8 +120,8 @@
 
     <div class="form-group pull-right">
         <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
-    
-      </div>
+
+    </div>
 
 }
 

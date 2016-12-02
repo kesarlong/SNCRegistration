@@ -28,6 +28,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string GuardianCity;
 
         [Display(Name = "State")]
+        [MaxLength(2)]
         public string GuardianState;
 
         [MaxLength(10)]
@@ -53,10 +54,6 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Paperwork Received")]
         public Nullable<System.DateTime> ReceiptDate;
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Date Confirmed")]
-        //TO DO: review if this field was kept - JS
-        public Nullable<System.DateTime> ConfirmationSentDate; 
 
         [Display(Name="Health Form Received")]
         public Nullable<bool> HealthForm;
