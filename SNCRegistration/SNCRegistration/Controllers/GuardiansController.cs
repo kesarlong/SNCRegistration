@@ -88,6 +88,8 @@ namespace SNCRegistration.Controllers
                 return RedirectToAction("Create", "Participants");
             }
 
+            Session["pSession"] = guardian.GuardianID;
+
             return View(guardian);
         }
 
