@@ -130,6 +130,7 @@
                 new SelectListItem{ Value = "YL", Text = "Adult - Large" },
                 new SelectListItem{ Value = "YX", Text = "Adult - Extra Large" },
             }, new { @class = "form-control", style = "width: 200px" })
+                @Html.ValidationMessageFor(model => model.LeadContactShirtSize , "", new { @class = "text-danger" })
             </div>
 
 
@@ -143,8 +144,10 @@
                 new SelectListItem{ Value = "OAChapter", Text = "OA Chapter" },
                 new SelectListItem{ Value = "Individual", Text = "Individual" }
             }, new { @class = "form-control", style = "width: 200px" })
+            @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
         </div>
         <br />
+
         @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="row">
                 
@@ -163,6 +166,7 @@
                 new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
                 new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
             }, new { @class = "form-control", style = "width: 200px" })
+                @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
             </div>
             <br />
         <div class="row">

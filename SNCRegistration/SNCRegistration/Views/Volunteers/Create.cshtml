@@ -56,6 +56,7 @@
                 new SelectListItem{ Value = "17-21", Text = "17-18" },
                 new SelectListItem{ Value = "Over 21", Text = "Over 21" }
             }, new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.VolunteerAge, "", new { @class = "text-danger" })
     </div>
 <!--
     <br />
@@ -92,6 +93,7 @@
                 new SelectListItem{ Value = "YL", Text = "Adult - Large" },
                 new SelectListItem{ Value = "YX", Text = "Adult - Extra Large" },
             }, new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
     </div>
 
     <br />
@@ -104,6 +106,7 @@
                 new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
                 new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
             }, new { @class = "form-control", style = "width: 220px" })
+            @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
         </div>
         <br />
     <div class="form-group">

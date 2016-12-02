@@ -194,6 +194,8 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Display(Name = "Zip Code")]
         public string LeadContactZip ;
+
+
         [Display(Name = "Cell Phone")]
         [DataType(DataType.PhoneNumber)]
         public string LeadContactCellPhone ;
@@ -203,7 +205,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [DataType(DataType.EmailAddress)]
         public string LeadContactEmail ;
 
-
+        [Required]
         [Display(Name = "T-Shirt Order")]
         public bool LeadContactShirtOrder ;
 
@@ -211,18 +213,19 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "T-Shirt Size")]
         public string LeadContactShirtSize ;
 
-
+        [Required]
         [Display(Name = "Troop/Chapter/Unit")]
         public string BSType ;
 
-
+        [Required]
         [Display(Name = "Troop/Chapter/Unit Number")]
         public string UnitChapterNumber ;
         
+        [Required]
         [Display(Name = "Attending")]
         public string VolunteerAttendingCode ;
 
-
+        [Required]
         [Display(Name = "Saturday Dinner?")]
         public bool SaturdayDinner ;
 
@@ -230,6 +233,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Booth Name")]
         public string Booth ;
 
+        [MaxLength(50)]
         [Display(Name = "Comments")]
         public string Comments ;
 
@@ -251,29 +255,30 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Last Name")]
         public string VolunteerLastName ;
 
-     
+        [Required]
         [Display(Name = "Age")]
         public string VolunteerAge ;
 
+        [Required]
         [Display(Name = "T-Shirt Order")]
         public Nullable<bool> VolunteerShirtOrder ;
 
         [Display(Name = "T-Shirt Size")]
         public string VolunteerShirtSize ;
 
-
+        [Required]
         [Display(Name = "Attending")]
         public string VolunteerAttendingCode ;
 
-
+        [Required]
         [Display(Name = "Saturday Dinner?")]
         public Nullable<bool> SaturdayDinner ;
 
-
+        [Required]
         [Display(Name = "Troop/Chapter/Unit Number")]
         public string UnitChapterNumber ;
 
-
+        [MaxLength(50)]
         [Display(Name = "Comments")]
         public string Comments ;
 
