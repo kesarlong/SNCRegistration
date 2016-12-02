@@ -135,7 +135,7 @@
 
         <br />
         <div class="form-group">
-            @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
             @Html.DropDownListFor(model => model.BSType,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Type-" },
