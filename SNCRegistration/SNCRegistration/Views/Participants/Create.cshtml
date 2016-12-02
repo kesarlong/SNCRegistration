@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ParticipantAge, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.ParticipantAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.ParticipantAge,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Age-" },
@@ -38,20 +38,20 @@
                 new SelectListItem{ Value = "14-16", Text = "14-16" },
                 new SelectListItem{ Value = "17-21", Text = "17-18" },
                 new SelectListItem{ Value = "Over 21", Text = "Over 21" }
-            }, new { @class = "form-control" })
+            }, new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.ParticipantLastName, "", new { @class = "text-danger" })
     </div>
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.AttendingCode,
              new List<SelectListItem>{
                new SelectListItem{ Value = "", Text = "-Select-" },
                new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
                new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
                new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
-           }, new { @class = "form-control" })
+           }, new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
     </div>
 

@@ -76,14 +76,14 @@
     <div class="form-group">
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
             @Html.DropDownListFor(model => model.AttendingCode,
              new List<SelectListItem>{
                new SelectListItem{ Value = "", Text = "-Select-" },
                new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
                new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
                new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
-           }, new { @class = "form-control" })
+           }, new { @class = "form-control", style = "width: 220px" })
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
 
         </div>
