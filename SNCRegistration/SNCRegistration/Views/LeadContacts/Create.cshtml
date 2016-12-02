@@ -197,6 +197,7 @@
         <div>
             <!--set default values for fields not set in initial form-->
             @Html.HiddenFor(model => model.TotalFee, new { @Value = 0 })
+            @*@Html.HiddenFor(model => model.LeadContactID, new { @Value = (int)Session["lSession"] })*@
         </div>
 
         <hr />

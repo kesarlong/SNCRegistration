@@ -56,9 +56,14 @@ namespace SNCRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments")] Volunteer volunteer)
         {
+
             if (ModelState.IsValid)
             {
+                //var lID = this.Session["lSession"] = volunteer.LeadContactID;
+                volunteer.LeadContactID = (int)this.Session["lSession"];
                 db.Volunteers.Add(volunteer);
+
+
                 try
                 {
                     db.SaveChanges();
