@@ -70,6 +70,8 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Attending")]
         public string AttendingCode;
 
+        [MaxLength(50)]
+        //TO DO: this needs to be a larger field
         [Display(Name = "Comments")]
         public string Comments;
 
@@ -152,6 +154,8 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name="Attendance")]
         public string AttendingCode;
 
+        [MaxLength(50)]
+        //to do: this needs to be a larger field
         [Display(Name="Comments")]
         public string Comments;
 
