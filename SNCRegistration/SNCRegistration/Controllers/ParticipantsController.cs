@@ -92,7 +92,7 @@ namespace SNCRegistration.Controllers
 
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
-                    { return View(); }
+                    { return RedirectToAction("Registered"); }
                     
 
                 }

@@ -557,6 +557,8 @@
     <Content Include="Views\Account\AccessDenied.cshtml" />
     <Content Include="Views\Reporting\Index.cshtml" />
     <Content Include="Views\Volunteers\Registered.cshtml" />
+    <Content Include="Views\Participants\Registered.cshtml" />
+    <Content Include="Views\FamilyMembers\Registered.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
