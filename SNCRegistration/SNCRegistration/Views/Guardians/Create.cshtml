@@ -21,6 +21,7 @@
         @Html.LabelFor(model => model.GuardianFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
         @Html.EditorFor(model => model.GuardianFirstName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianFirstName, "", new { @class = "text-danger" })
+
     </div>
 
     <div class="form-group">
@@ -114,6 +115,7 @@
     <div class="form-group pull-right">
         <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
 
+
     </div>
 
 }
@@ -122,6 +124,10 @@
         @Html.ActionLink("Back to List", "Index")
     </div>*@
 
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
 }

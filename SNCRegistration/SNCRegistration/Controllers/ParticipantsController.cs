@@ -56,20 +56,24 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        public ActionResult Create()
+        public ActionResult Create() 
         {
+
             return View();
         }
+
+        
 
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Returning,Comments")] Participant participant)
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,Comments")] Participant participant)
         {
             if (ModelState.IsValid)
             {
+                var gID = this.Session["gSession"] = participant.GuardianID;
                 db.Participants.Add(participant);
 
 

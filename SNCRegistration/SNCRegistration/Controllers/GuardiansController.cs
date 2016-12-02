@@ -59,6 +59,8 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
+
+
         // POST: Guardians/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -69,10 +71,13 @@ namespace SNCRegistration.Controllers
             if (ModelState.IsValid)
             {
                 db.Guardians.Add(guardian);
-                
+
+
                 try
                 {
                     db.SaveChanges();
+                    this.Session["gSession"] = guardian.GuardianID;
+                    return RedirectToAction("Create", "Participants",new { GuardianId = this.Session["gSession"]});
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -85,10 +90,10 @@ namespace SNCRegistration.Controllers
                     }
                 }
 
-                return RedirectToAction("Create", "Participants");
+                
             }
 
-            Session["pSession"] = guardian.GuardianID;
+           
 
             return View(guardian);
         }
@@ -169,13 +174,13 @@ namespace SNCRegistration.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
