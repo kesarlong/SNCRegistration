@@ -36,12 +36,17 @@ namespace SNCRegistration.ViewModels.Metadata
         //TO DO: review field type (should be string as it is not used numerically) - Erika review (SP-245 created 11/21/16)
         public int GuardianZip;
 
-
+        [MaxLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage ="Please enter phone number as numbers only.")]
         [Display(Name = "Cell Phone")]
+        [DisplayFormat(DataFormatString ="{0;##########}")]
         public string GuardianCellPhone;
 
 
+
         //TO DO: is 50 characters sufficient for length - Erika review
+        [MaxLength(50)]
         [Display(Name="Email Address")]
         [DataType(DataType.EmailAddress)]
         public string GuardianEmail;
@@ -75,7 +80,8 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Comments")]
         public string Comments;
 
-        [Display(Name = "Relationship")]
+        [Required]
+        [Display(Name = "Relationship to Participant")]
         public string Relationship;
     }
 
@@ -102,10 +108,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "School")]
         public string ParticipantSchool;
 
-
-        //TO DO: database field size increased (Erika)
-        //TO DO: make field not required
-        [Required]
+        [MaxLength(50)]
         [Display(Name = "Teacher")]
         public string ParticipantTeacher;
 
