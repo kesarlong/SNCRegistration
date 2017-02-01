@@ -1,0 +1,47 @@
+﻿@using SNCRegistration.ViewModels
+@model LoginViewModel
+@{
+    ViewBag.Title = "Special Needs Camporee Log In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    
+ <div class="wrapper">
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin animated slideInLeft", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            <h2 class="form-signin-heading">Please Login</h2>
+                    
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                 
+                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-12 control-label" })
+                     
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                     
+                   
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-12 control-label" })
+                     
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+           
+                        
+                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox col-md-1" })@Html.LabelFor(m => m.RememberMe, new { @class = "col-md-6 control-label" })
+                         
+            <br />
+
+                            <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block" />
+                <br />
+                    <p>
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </p>
+             
+            }
+</div>
+         
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

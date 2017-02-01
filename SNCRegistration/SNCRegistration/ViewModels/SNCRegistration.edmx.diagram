@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9975929d4634b34adf69a873463726e" Name="Diagram1" ZoomLevel="67">
+        <!--<EntityTypeShape EntityType="SNCRegistrationModel.database_firewall_rules" Width="1.5" PointX="2" PointY="6.5" IsExpanded="true" />-->
+        <!--<EntityTypeShape EntityType="SNCRegistrationModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="9.75" />-->
+        <EntityTypeShape EntityType="SNCRegistrationModel.Admin" Width="1.5" PointX="2.75" PointY="10.75" />
+        <AssociationConnector Association="SNCRegistrationModel.AspNetUserRoles1" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Attendance" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.FamilyMember" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Guardian" Width="1.5" PointX="0.75" PointY="8.5" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.LeadContact" Width="1.5" PointX="5.75" PointY="7" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Participant" Width="1.5" PointX="3" PointY="10.875" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.User" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Volunteer" Width="1.5" PointX="8" PointY="7.75" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_FamilyMembers" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_Participants" />
+        <AssociationConnector Association="SNCRegistrationModel.FK_Volunteers" />
+        <AssociationConnector Association="SNCRegistrationModel.AspNetUserRoles" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

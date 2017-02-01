@@ -1,0 +1,155 @@
+﻿@model SNCRegistration.ViewModels.LeadContact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LeadContact</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BSType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BSType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitChapterNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerAttendingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaturdayDinner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaturdayDinner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Booth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Booth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactShirtOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactShirtOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactShirtSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactShirtSize)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LeadContactID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

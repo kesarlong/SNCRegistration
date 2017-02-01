@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Access Denied";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h3 text-align: center >Sorry @User.Identity.Name. You do not have authorized access to this page. Please contact your administrator.</h3>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

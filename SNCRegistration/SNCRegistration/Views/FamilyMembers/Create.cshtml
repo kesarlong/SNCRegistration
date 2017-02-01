@@ -1,0 +1,87 @@
+﻿@model SNCRegistration.ViewModels.FamilyMember
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h4>Additional Attendees</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    //to do: remove - testsing only
+    //Session["gSession"] = 135;
+
+    @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FamilyMemberFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.EditorFor(model => model.FamilyMemberFirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.FamilyMemberFirstName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FamilyMemberLastName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.EditorFor(model => model.FamilyMemberLastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.FamilyMemberLastName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.FamilyMemberAge,
+            new List<SelectListItem>{
+                new SelectListItem{ Value = "", Text = "-Select Age-" },
+                new SelectListItem{ Value = "Under 6", Text = "Under 6" },
+                new SelectListItem{ Value = "7-10", Text = "7-10" },
+                new SelectListItem{ Value = "11-13", Text = "11-13" },
+                new SelectListItem{ Value = "14-16", Text = "14-16" },
+                new SelectListItem{ Value = "17-21", Text = "17-18" },
+                new SelectListItem{ Value = "Over 21", Text = "Over 21" }
+            }, new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.AttendingCode,
+             new List<SelectListItem>{
+               new SelectListItem{ Value = "", Text = "-Select-" },
+               new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
+               new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
+               new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+           }, new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
+            @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+    </div>
+
+    <!--Set default values for check box fields not displayed on form-->
+    @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
+    @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+
+    <hr />
+
+
+    <div class="form-group pull-right">
+        <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
+    </div>
+    <div class="form-group pull-right">
+        <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
+    </div>
+    <div class="form-group pull-right">
+        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+    </div>
+}
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

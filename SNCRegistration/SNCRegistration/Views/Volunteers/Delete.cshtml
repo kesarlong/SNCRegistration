@@ -1,0 +1,121 @@
+﻿@model SNCRegistration.ViewModels.Volunteer
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Volunteer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadContactID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadContactID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerShirtOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerShirtOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerShirtSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerShirtSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerAttendingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaturdayDinner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaturdayDinner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitChapterNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteers1.VolunteerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteers1.VolunteerFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer1.VolunteerFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer1.VolunteerFirstName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

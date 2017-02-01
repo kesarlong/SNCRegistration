@@ -1,0 +1,130 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.LeadContact>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BSType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactCellPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaturdayDinner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactShirtOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadContactShirtSize)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BSType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitChapterNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactCellPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerAttendingCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaturdayDinner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Booth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactShirtOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactShirtSize)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LeadContactID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LeadContactID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LeadContactID })
+        </td>
+    </tr>
+}
+
+</table>

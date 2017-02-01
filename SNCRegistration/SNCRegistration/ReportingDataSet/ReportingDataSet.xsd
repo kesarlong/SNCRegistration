@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportingDataSet" targetNamespace="http://tempuri.org/ReportingDataSet.xsd" xmlns:mstns="http://tempuri.org/ReportingDataSet.xsd" xmlns="http://tempuri.org/ReportingDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="SNCRegistrationConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="SNCRegistrationConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.SNCRegistrationConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportingDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportingDataSet" msprop:Generator_UserDSName="ReportingDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Participants" msprop:Generator_TableClassName="ParticipantsDataTable" msprop:Generator_TableVarName="tableParticipants" msprop:Generator_TablePropName="Participants" msprop:Generator_RowDeletingName="ParticipantsRowDeleting" msprop:Generator_RowChangingName="ParticipantsRowChanging" msprop:Generator_RowEvHandlerName="ParticipantsRowChangeEventHandler" msprop:Generator_RowDeletedName="ParticipantsRowDeleted" msprop:Generator_UserTableName="Participants" msprop:Generator_RowChangedName="ParticipantsRowChanged" msprop:Generator_RowEvArgName="ParticipantsRowChangeEvent" msprop:Generator_RowClassName="ParticipantsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ParticipantID" msprop:Generator_ColumnVarNameInTable="columnParticipantID" msprop:Generator_ColumnPropNameInRow="ParticipantID" msprop:Generator_ColumnPropNameInTable="ParticipantIDColumn" msprop:Generator_UserColumnName="ParticipantID" type="xs:int" />
+              <xs:element name="ParticipantFirstName" msprop:Generator_ColumnVarNameInTable="columnParticipantFirstName" msprop:Generator_ColumnPropNameInRow="ParticipantFirstName" msprop:Generator_ColumnPropNameInTable="ParticipantFirstNameColumn" msprop:Generator_UserColumnName="ParticipantFirstName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ParticipantLastName" msprop:Generator_ColumnVarNameInTable="columnParticipantLastName" msprop:Generator_ColumnPropNameInRow="ParticipantLastName" msprop:Generator_ColumnPropNameInTable="ParticipantLastNameColumn" msprop:Generator_UserColumnName="ParticipantLastName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ParticipantAge" msprop:Generator_ColumnVarNameInTable="columnParticipantAge" msprop:Generator_ColumnPropNameInRow="ParticipantAge" msprop:Generator_ColumnPropNameInTable="ParticipantAgeColumn" msprop:Generator_UserColumnName="ParticipantAge" type="xs:int" />
+              <xs:element name="ParticipantSchool" msprop:Generator_ColumnVarNameInTable="columnParticipantSchool" msprop:Generator_ColumnPropNameInRow="ParticipantSchool" msprop:Generator_ColumnPropNameInTable="ParticipantSchoolColumn" msprop:Generator_UserColumnName="ParticipantSchool">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ParticipantTeacher" msprop:Generator_ColumnVarNameInTable="columnParticipantTeacher" msprop:Generator_ColumnPropNameInRow="ParticipantTeacher" msprop:Generator_ColumnPropNameInTable="ParticipantTeacherColumn" msprop:Generator_UserColumnName="ParticipantTeacher">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ClassroomScouting" msprop:Generator_ColumnVarNameInTable="columnClassroomScouting" msprop:Generator_ColumnPropNameInRow="ClassroomScouting" msprop:Generator_ColumnPropNameInTable="ClassroomScoutingColumn" msprop:Generator_UserColumnName="ClassroomScouting" type="xs:boolean" />
+              <xs:element name="HealthForm" msprop:Generator_ColumnVarNameInTable="columnHealthForm" msprop:Generator_ColumnPropNameInRow="HealthForm" msprop:Generator_ColumnPropNameInTable="HealthFormColumn" msprop:Generator_UserColumnName="HealthForm" type="xs:boolean" minOccurs="0" />
+              <xs:element name="PhotoAck" msprop:Generator_ColumnVarNameInTable="columnPhotoAck" msprop:Generator_ColumnPropNameInRow="PhotoAck" msprop:Generator_ColumnPropNameInTable="PhotoAckColumn" msprop:Generator_UserColumnName="PhotoAck" type="xs:boolean" minOccurs="0" />
+              <xs:element name="AttendingCode" msprop:Generator_ColumnVarNameInTable="columnAttendingCode" msprop:Generator_ColumnPropNameInRow="AttendingCode" msprop:Generator_ColumnPropNameInTable="AttendingCodeColumn" msprop:Generator_UserColumnName="AttendingCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GuardianID" msprop:Generator_ColumnVarNameInTable="columnGuardianID" msprop:Generator_ColumnPropNameInRow="GuardianID" msprop:Generator_ColumnPropNameInTable="GuardianIDColumn" msprop:Generator_UserColumnName="GuardianID" type="xs:int" minOccurs="0" />
+              <xs:element name="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" msprop:Generator_UserColumnName="Comments" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Participants" />
+      <xs:field xpath="mstns:ParticipantID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
