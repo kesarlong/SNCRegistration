@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="SNCRegistration.Controllers.AccountController">
+    <Position X="0.5" Y="0.5" Width="3.5" />
+    <NestedTypes>
+      <Class Name="SNCRegistration.Controllers.AccountController.ChallengeResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\AccountController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAChICAAAAAAAAHgEgAwBAABMKIAAAMRAAQgAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.AdminController" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABBACAASQAAAAEhgAAAAAgAAAAAEAgEAEAAAAAAgA=</HashCode>
+      <FileName>Controllers\AdminController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.CustomAuthorize">
+    <Position X="13" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\CustomAuthorize.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.FamilyMembersController">
+    <Position X="6.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAEAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\FamilyMembersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.GuardiansController">
+    <Position X="6.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAARAACAAAAAAAAAAAEAAEACAAEEAAAAAAA=</HashCode>
+      <FileName>Controllers\GuardiansController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.HomeController">
+    <Position X="4.5" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.LeadContactsController">
+    <Position X="8.5" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\LeadContactsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.ManageController">
+    <Position X="12" Y="2" Width="3" />
+    <NestedTypes>
+      <Enum Name="SNCRegistration.Controllers.ManageController.ManageMessageId" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\ManageController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABACAQiAAgAAAAEFhAAAAAAEAIMIAAEEEgAAkAAA=</HashCode>
+      <FileName>Controllers\ManageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.ParticipantsController">
+    <Position X="8.75" Y="3.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAEAAAAAAAAAEAAEACAAEEAAAAAAA=</HashCode>
+      <FileName>Controllers\ParticipantsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.ReportingController">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAgAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ReportingController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.Controllers.VolunteersController">
+    <Position X="10" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACARAACAEAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\VolunteersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

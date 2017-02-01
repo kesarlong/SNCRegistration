@@ -44,20 +44,87 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianState, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.EditorFor(model => model.GuardianState, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.GuardianState, "", new { @class = "text-danger" })
-    </div>
+        @*@Html.EditorFor(model => model.GuardianState, new { htmlAttributes = new { @class = "form-control" } })*@
+        @Html.DropDownListFor(model => model.GuardianState,
+             new List<SelectListItem>
+            {
+                    new SelectListItem() {Text="Alabama", Value="AL"},
+                    new SelectListItem() { Text="Alaska", Value="AK"},
+                    new SelectListItem() { Text="Arizona", Value="AZ"},
+                    new SelectListItem() { Text="Arkansas", Value="AR"},
+                    new SelectListItem() { Text="California", Value="CA"},
+                    new SelectListItem() { Text="Colorado", Value="CO"},
+                    new SelectListItem() { Text="Connecticut", Value="CT"},
+                    new SelectListItem() { Text="District of Columbia", Value="DC"},
+                    new SelectListItem() { Text="Delaware", Value="DE"},
+                    new SelectListItem() { Text="Florida", Value="FL"},
+                    new SelectListItem() { Text="Georgia", Value="GA"},
+                    new SelectListItem() { Text="Hawaii", Value="HI"},
+                    new SelectListItem() { Text="Idaho", Value="ID"},
+                    new SelectListItem() { Text="Illinois", Value="IL"},
+                    new SelectListItem() { Text="Indiana", Value="IN"},
+                    new SelectListItem() { Text="Iowa", Value="IA"},
+                    new SelectListItem() { Text="Kansas", Value="KS"},
+                    new SelectListItem() { Text="Kentucky", Value="KY"},
+                    new SelectListItem() { Text="Louisiana", Value="LA"},
+                    new SelectListItem() { Text="Maine", Value="ME"},
+                    new SelectListItem() { Text="Maryland", Value="MD"},
+                    new SelectListItem() { Text="Massachusetts", Value="MA"},
+                    new SelectListItem() { Text="Michigan", Value="MI"},
+                    new SelectListItem() { Text="Minnesota", Value="MN"},
+                    new SelectListItem() { Text="Mississippi", Value="MS"},
+                    new SelectListItem() { Text="Missouri", Value="MO"},
+                    new SelectListItem() { Text="Montana", Value="MT"},
+                    new SelectListItem() { Text="Nebraska", Value="NE"},
+                    new SelectListItem() { Text="Nevada", Value="NV"},
+                    new SelectListItem() { Text="New Hampshire", Value="NH"},
+                    new SelectListItem() { Text="New Jersey", Value="NJ"},
+                    new SelectListItem() { Text="New Mexico", Value="NM"},
+                    new SelectListItem() { Text="New York", Value="NY"},
+                    new SelectListItem() { Text="North Carolina", Value="NC"},
+                    new SelectListItem() { Text="North Dakota", Value="ND"},
+                    new SelectListItem() { Text="Ohio", Value="OH"},
+                    new SelectListItem() { Text="Oklahoma", Value="OK"},
+                    new SelectListItem() { Text="Oregon", Value="OR"},
+                    new SelectListItem() { Text="Pennsylvania", Value="PA"},
+                    new SelectListItem() { Text="Rhode Island", Value="RI"},
+                    new SelectListItem() { Text="South Carolina", Value="SC"},
+                    new SelectListItem() { Text="South Dakota", Value="SD"},
+                    new SelectListItem() { Text="Tennessee", Value="TN"},
+                    new SelectListItem() { Text="Texas", Value="TX"},
+                    new SelectListItem() { Text="Utah", Value="UT"},
+                    new SelectListItem() { Text="Vermont", Value="VT"},
+                    new SelectListItem() { Text="Virginia", Value="VA"},
+                    new SelectListItem() { Text="Washington", Value="WA"},
+                    new SelectListItem() { Text="West Virginia", Value="WV"},
+                    new SelectListItem() { Text="Wisconsin", Value="WI"},
+                    new SelectListItem() { Text="Wyoming", Value="WY"}
+                    }, new { @class = "form-control", style = "width: 220px" })
+
+                    @Html.ValidationMessageFor(model => model.GuardianState, "", new { @class = "text-danger" })
+</div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianZip, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.EditorFor(model => model.GuardianZip, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.GuardianZip, new { htmlAttributes = new {@class = "form-control"}})
         @Html.ValidationMessageFor(model => model.GuardianZip, "", new { @class = "text-danger" })
-    </div>
+</div>
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.EditorFor(model => model.Relationship, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
+        @Html.DropDownListFor(model => model.Relationship,
+             new List<SelectListItem>{
+               new SelectListItem{ Value = "", Text = "-Select-" },
+               new SelectListItem{ Value = "Parent", Text = "Mother / Father" },
+               new SelectListItem{ Value = "Guardian", Text = "Legal Guardian"},
+               new SelectListItem{ Value = "Sibling", Text = "Sister / Brother"},
+               new SelectListItem{ Value = "Grandparent", Text = "Grandmother / Grandfather"},
+               new SelectListItem{ Value = "Teacher", Text = "Teacher / Instructor"},
+               new SelectListItem{ Value = "Family", Text = "Other - Family - relationship not listed"},
+               new SelectListItem{ Value = "Other", Text = "Other (please provide details in comments section"}
+           }, new { @class = "form-control", style = "width: 320px" })
+        @Html.ValidationMessageFor(model => model.Relationship, "Please select your relationship to the participant.", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
@@ -69,7 +136,8 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianCellPhone, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.EditorFor(model => model.GuardianCellPhone, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.DisplayFor(m => m.GuardianCellPhone)
+        @Html.EditorFor(model => model.GuardianCellPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "(123) 555-5555" } })
         @Html.ValidationMessageFor(model => model.GuardianCellPhone, "", new { @class = "text-danger" })
     </div>
 
@@ -80,9 +148,8 @@
             @Html.DropDownListFor(model => model.AttendingCode,
              new List<SelectListItem>{
                new SelectListItem{ Value = "", Text = "-Select-" },
-               new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
-               new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
-               new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+               new SelectListItem{ Value = "Sat-AM", Text = "Saturday - Day Only" },
+               new SelectListItem{ Value = "Overnight", Text = "Saturday - Overnight stay" }
            }, new { @class = "form-control", style = "width: 220px" })
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
 
@@ -105,8 +172,8 @@
 
 
         <!--Set default values for check box fields not displayed on form-->
-        @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
-        @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+    @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
+    @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
 
 
     <hr />

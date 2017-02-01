@@ -48,9 +48,8 @@
         @Html.DropDownListFor(model => model.AttendingCode,
              new List<SelectListItem>{
                new SelectListItem{ Value = "", Text = "-Select-" },
-               new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
-               new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
-               new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+               new SelectListItem{ Value = "Sat-AM", Text = "Saturday - Day Only" },
+               new SelectListItem{ Value = "Overnight", Text = "Saturday - Overnight stay" }
            }, new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
     </div>

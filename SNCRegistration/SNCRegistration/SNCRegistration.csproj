@@ -430,6 +430,9 @@
     <Content Include="App_Data\PDF\ParticipantHealthForm.pdf" />
     <Content Include="App_Data\PDF\ParticipantWelcomePacket.pdf" />
     <Content Include="App_Data\PDF\VolunteerInformation.pdf" />
+    <Content Include="ClassDiagram_Controllers.cd" />
+    <Content Include="ClassDiagram_Metadata.cd" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="ReportingDataSet\ReportingDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

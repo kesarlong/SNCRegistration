@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="SNCRegistration.ViewModels.ExternalLoginConfirmationViewModel" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ExternalLoginListViewModel" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.SendCodeViewModel" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.VerifyCodeViewModel" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAEAAAAAAAgAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ForgotViewModel" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.LoginViewModel" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAgAAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.RegisterViewModel" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAQAAAAAAIAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ResetPasswordViewModel" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAgAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ForgotPasswordViewModel" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ApplicationUser" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ApplicationDbContext" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.IndexViewModel">
+    <Position X="12.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAQAAAAAAAAAAAAAAQAAAEAEA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ManageLoginsViewModel" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.FactorViewModel" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.SetPasswordViewModel" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ChangePasswordViewModel" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.AddPhoneNumberViewModel" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.VerifyPhoneNumberViewModel" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ConfigureTwoFactorViewModel" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Guardian">
+    <Position X="18.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAQBACAQAAAAACAIBAAACAgDQAAAAAAKABCESAIAA=</HashCode>
+      <FileName>ViewModels\PartialClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Participant">
+    <Position X="12.75" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABAAIAAAIAAAAAAABACAgAAAgAAAALAAAAAKIAA=</HashCode>
+      <FileName>ViewModels\PartialClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.FamilyMember" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAEAIAAAAAACAACAgAAAAAAAAIAABAAAoAA=</HashCode>
+      <FileName>ViewModels\PartialClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.LeadContact" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAARAAJAAABQAAAEAAiBAIAAAIAAAAAAAAAgAgIAA=</HashCode>
+      <FileName>ViewModels\PartialClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Volunteer" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAgAAgAAABBAAAAAAQAAAABAAAAAAAAIAAAgAgIAA=</HashCode>
+      <FileName>ViewModels\PartialClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.SNCRegistrationEntities" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACCQAAAAoAAAAAAAAAAIEAAAQAAAAKAAAAQAAAE=</HashCode>
+      <FileName>ViewModels\SNCRegistration.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.AspNetRole" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AspNetRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.AspNetUser" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAACAAoEAAAAAAQAABAAAAQAAIAQQAABAAAQE=</HashCode>
+      <FileName>ViewModels\AspNetUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.AspNetUserClaim" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAAAAAAQAAAAAgAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ViewModels\AspNetUserClaim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.AspNetUserLogin" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAgAAAAAEAAAABAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AspNetUserLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Attendance" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Attendance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.User" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.ExpandedUserDTO" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAQAABAgAAAAACAQAAABAAAAA=</HashCode>
+      <FileName>ViewModels\UserRolesDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.UserRolesDTO" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>ViewModels\UserRolesDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.UserRoleDTO" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
+      <FileName>ViewModels\UserRolesDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.RoleDTO" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>ViewModels\UserRolesDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.UserAndRolesDTO" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\UserRolesDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Metadata.Guardian_Metadata" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQBACAQAAAAACAIBAAACAgCQAAAAAAIABCECAIAA=</HashCode>
+      <FileName>ViewModels\Metadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Metadata.Participant_Metadata" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABAAIAAAAAAAAAAABACAAAAAgAAAALAAAAAKAAA=</HashCode>
+      <FileName>ViewModels\Metadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Metadata.FamilyMember_Metadata" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAEAAAAAAAACAACAAAAAAAAAAIAABAAAoAA=</HashCode>
+      <FileName>ViewModels\Metadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Metadata.LeadContact_Metadata">
+    <Position X="15.5" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAARAAJAAABQAAAEAAiBAAAAAIAAAAAAAAAgAgIAA=</HashCode>
+      <FileName>ViewModels\Metadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SNCRegistration.ViewModels.Metadata.Volunteer_Metadata" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAgAAgAAABBAAAAAAQAAAABAAAAAAAAAAAAgAgIAA=</HashCode>
+      <FileName>ViewModels\Metadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
