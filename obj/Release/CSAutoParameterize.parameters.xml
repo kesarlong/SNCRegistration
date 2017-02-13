@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-SNCRegistration-20161101033222.mdf;Initial Catalog=aspnet-SNCRegistration-20161101033222;Integrated Security=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="c:\\users\\kesar\\documents\\visual\ studio\ 2015\\Projects\\SNCRegistration\\SNCRegistration\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
-  </parameter>
-  <parameter name="SNCRegistrationEntities-Web.config Connection String" description="SNCRegistrationEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.SNCRegistrationModel.csdl|res://*/Models.SNCRegistrationModel.ssdl|res://*/Models.SNCRegistrationModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=sncregistration.database.windows.net;initial catalog=SNCRegistration;persist security info=True;user id=theclosersinc;password=P@$$w0rd;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="c:\\users\\kesar\\documents\\visual\ studio\ 2015\\Projects\\SNCRegistration\\SNCRegistration\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SNCRegistrationEntities']/@connectionString" />
-  </parameter>
-</parameters>
