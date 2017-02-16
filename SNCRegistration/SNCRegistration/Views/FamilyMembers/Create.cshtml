@@ -11,7 +11,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     //to do: remove - testsing only
-    Session["gSession"] = 135;
+    //Session["gSession"] = 135;
 
     @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
 
