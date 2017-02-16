@@ -18,20 +18,20 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianFirstName, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianFirstName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianFirstName, "", new { @class = "text-danger" })
 
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianLastName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianLastName, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianLastName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianLastName, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianAddress, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianAddress, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianAddress, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianAddress, "", new { @class = "text-danger" })
     </div>
@@ -145,10 +145,10 @@
             @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-12" })
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.Tent, true, new { id = "Sat-AM" }) Saturday Only
+                @Html.RadioButtonFor(model => model.AttendingCode, "Sat-AM", new { id = "Sat-AM" }) Saturday Only
             </label>
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.Tent, false, new { id = "Overnight" }) Overnight
+                @Html.RadioButtonFor(model => model.AttendingCode, "Overnight", new { id = "Overnight" }) Overnight
             </label>
         </div>
     </div>
@@ -163,6 +163,7 @@
                 @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
             </label>
         </div>
+        @Html.ValidationMessageFor(model => model.Tent, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
