@@ -563,9 +563,9 @@ namespace SNCRegistration.ReportingDataSet {
                 this.columnParticipantLastName.AllowDBNull = false;
                 this.columnParticipantLastName.MaxLength = 50;
                 this.columnParticipantAge.AllowDBNull = false;
-                this.columnParticipantSchool.AllowDBNull = false;
+                //this.columnParticipantSchool.AllowDBNull = false;
                 this.columnParticipantSchool.MaxLength = 50;
-                this.columnParticipantTeacher.AllowDBNull = false;
+                //this.columnParticipantTeacher.AllowDBNull = false;
                 this.columnParticipantTeacher.MaxLength = 10;
                 this.columnClassroomScouting.AllowDBNull = false;
                 this.columnAttendingCode.AllowDBNull = false;

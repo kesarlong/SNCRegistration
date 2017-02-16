@@ -156,35 +156,49 @@
         </div>
     </div>
 
+    @*<div class="form-group">
+        <div class="btn-group" data-toggle="buttons">
+                   @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tent_True" }) Yes
+                @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
+                @Html.ValidationMessageFor(model => model.Tent, "", new { @class = "text-danger" })
+        </div>
+
+    </div>*@
+
     <div class="form-group">
-        @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tent_True" }) Yes
-        @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
-        @Html.ValidationMessageFor(model => model.Tent, "", new { @class = "text-danger" })
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label col-md-6" })
+            <label class="btn btn-default active">
+                @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tet_True" }) Yes
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
+            </label>
+        </div>
     </div>
 
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
-        @Html.TextArea("Comments", null, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
+            @Html.TextArea("Comments", null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+        </div>
 
 
         <!--Set default values for check box fields not displayed on form-->
-    @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
-    @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+        @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
+        @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
 
 
-    <hr />
+        <hr />
 
-    <div class="form-group pull-right">
-        <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
-    </div>
+        <div class="form-group pull-right">
+            <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
+        </div>
 
-}
+        }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 
-}
+        }
