@@ -37,13 +37,13 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianCity, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianCity, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianCity, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianCity, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianState, htmlAttributes: new { @class = "control-label col-md-12" })
+        @Html.LabelFor(model => model.GuardianState, htmlAttributes: new { @class = "control-label" })<br />
         @Html.DropDownListFor(model => model.GuardianState,
              new List<SelectListItem>
              {
@@ -104,14 +104,14 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianZip, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianZip, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianZip, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianZip, "", new { @class = "text-danger" })
     </div>
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label col-md-12" })
+        @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label" })<br />
         @Html.DropDownListFor(model => model.Relationship,
              new List<SelectListItem>{
                new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
@@ -127,14 +127,14 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianEmail, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianEmail, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianEmail, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianEmail, "", new { @class = "text-danger" })
 
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianCellPhone, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianCellPhone, htmlAttributes: new { @class = "control-label" })<br />
         @Html.DisplayFor(m => m.GuardianCellPhone)
         @Html.EditorFor(model => model.GuardianCellPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "(123) 555-5555" } })
         @Html.ValidationMessageFor(model => model.GuardianCellPhone, "", new { @class = "text-danger" })
@@ -142,7 +142,7 @@
 
     <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
-            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label col-md-12" })
+            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })<br />
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
             <label class="btn btn-default">
                 @Html.RadioButtonFor(model => model.AttendingCode, "Sat-AM", new { id = "Sat-AM" }) Saturday Only
@@ -155,7 +155,7 @@
 
     <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
-            @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label col-md-12" })
+            @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label" })<br />
             <label class="btn btn-default">
                 @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tent_True" }) Yes
             </label>
@@ -167,7 +167,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
+        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label" })<br />
         @Html.TextArea("Comments", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
     </div>
