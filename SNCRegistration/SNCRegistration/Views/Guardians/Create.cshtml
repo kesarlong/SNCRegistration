@@ -136,7 +136,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianCellPhone, htmlAttributes: new { @class = "control-label" })<br />
         @Html.DisplayFor(m => m.GuardianCellPhone)
-        @Html.EditorFor(model => model.GuardianCellPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "(123) 555-5555" } })
+        @Html.EditorFor(model => model.GuardianCellPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "1235555555" } })
         @Html.ValidationMessageFor(model => model.GuardianCellPhone, "", new { @class = "text-danger" })
     </div>
 
@@ -178,10 +178,12 @@
     @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
 
 
-    <hr />
 
+    <hr />
+    
         <div class="form-group pull-right">
             <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
+
         </div>
 
 }

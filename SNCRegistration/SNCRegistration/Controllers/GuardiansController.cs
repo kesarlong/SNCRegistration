@@ -8,6 +8,7 @@ using System.IO;
 using System.Net.Mime;
 using System.Data.Entity.Validation;
 
+
 namespace SNCRegistration.Controllers
 {
     public class GuardiansController : Controller
@@ -65,6 +66,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianState,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
         {
             if (ModelState.IsValid)
+                
             {
                 db.Guardians.Add(guardian);
 
@@ -73,7 +75,11 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
                     this.Session["gSession"] = guardian.GuardianID;
-                    return RedirectToAction("Create", "Participants",new { GuardianId = this.Session["gSession"]});
+                    RouteData.Values.Remove("id");
+                    return RedirectToAction("Create", "Participants", new { GuardianId = this.Session["gSession"] });
+                    //return View("Create", "Participants");
+
+
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -139,7 +145,7 @@ namespace SNCRegistration.Controllers
             {
                 db.Entry(guardian).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
             return View(guardian);
         }

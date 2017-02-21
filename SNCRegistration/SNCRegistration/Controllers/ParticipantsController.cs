@@ -56,7 +56,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        public ActionResult Create() 
+        public ActionResult Create(int GuardianID) 
         {
 
             return View();
@@ -84,14 +84,20 @@ namespace SNCRegistration.Controllers
 
                     if (Request["submit"].Equals("Add another participant"))
                         //add another participant for guardian
-                        { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+                        RouteData.Values.Remove("id");
+                    { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+                    //{ return RedirectToAction("Create", "Participants"); }
+
 
                     if (Request["submit"].Equals("Add a family member"))
-                    //add a family member
-                        {return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] });}
+                        //add a family member
+                        RouteData.Values.Remove("id");
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
+                    //{ return RedirectToAction("Create", "FamilyMembers"); }
 
                     if (Request["submit"].Equals("Complete registration"))
-                    //registration complete, no more people to add
+                        //registration complete, no more people to add
+                        RouteData.Values.Remove("id");
                     { return RedirectToAction("Registered"); }
                     
 
