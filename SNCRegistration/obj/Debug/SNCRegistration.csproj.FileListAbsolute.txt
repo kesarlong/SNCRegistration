@@ -1,0 +1,432 @@
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\csc.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\csc.exe.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\csc.rsp
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\csi.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\csi.rsp
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\System.AppContext.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\vbc.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\vbc.exe.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\vbc.rsp
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\VBCSCompiler.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x64\msvcr100.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x64\SqlServerSpatial110.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x86\msvcr100.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x86\SqlServerSpatial110.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\SNCRegistration.dll.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\SNCRegistration.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\SNCRegistration.pdb
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Antlr3.Runtime.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportSource.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.Shared.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\EntityFramework.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\EntityFramework.SqlServer.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Session.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Options.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.SqlServer.Types.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Newtonsoft.Json.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Owin.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\PagedList.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\PagedList.Mvc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\ReportViewerForMvc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Text.Encodings.Web.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Helpers.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Mvc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Optimization.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Razor.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Deployment.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Razor.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\WebGrease.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\stdole.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Antlr3.Runtime.pdb
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Cryptography.Internal.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Session.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Caching.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.FileProviders.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Options.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Newtonsoft.Json.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\PagedList.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\PagedList.Mvc.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Text.Encodings.Web.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Helpers.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Mvc.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Optimization.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.Razor.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Deployment.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Razor.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\EntityFramework.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\EntityFramework.SqlServer.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\csc.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\csc.exe.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\csc.rsp
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\csi.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\csi.rsp
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\System.AppContext.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\vbc.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\vbc.exe.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\vbc.rsp
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\VBCSCompiler.exe
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\SqlServerTypes\x64\msvcr100.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\SqlServerTypes\x64\SqlServerSpatial110.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\SqlServerTypes\x86\msvcr100.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\SqlServerTypes\x86\SqlServerSpatial110.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\SNCRegistration.dll.config
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\SNCRegistration.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\SNCRegistration.pdb
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Antlr3.Runtime.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportSource.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.Shared.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\EntityFramework.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\EntityFramework.SqlServer.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Session.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Options.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.SqlServer.Types.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Newtonsoft.Json.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Owin.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\PagedList.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\PagedList.Mvc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\ReportViewerForMvc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Text.Encodings.Web.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Helpers.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Mvc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Optimization.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Razor.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.WebPages.Deployment.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.WebPages.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.WebPages.Razor.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\WebGrease.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\stdole.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Antlr3.Runtime.pdb
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Cryptography.Internal.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNetCore.Session.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Caching.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.FileProviders.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Options.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Newtonsoft.Json.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\PagedList.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\PagedList.Mvc.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Text.Encodings.Web.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Helpers.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Mvc.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Optimization.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.Razor.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.WebPages.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.WebPages.Deployment.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\System.Web.WebPages.Razor.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\EntityFramework.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\EntityFramework.SqlServer.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\obj\Debug\SNCRegistration.dll
+C:\Users\kesar\Google Drive\SNCR\SNCRegistration\obj\Debug\SNCRegistration.pdb
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\csc.exe
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\csc.exe.config
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\csc.rsp
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\csi.exe
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\csi.rsp
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\System.AppContext.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\vbc.exe
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\vbc.exe.config
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\vbc.rsp
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\VBCSCompiler.exe
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x64\msvcr100.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x64\SqlServerSpatial110.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x86\msvcr100.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\SqlServerTypes\x86\SqlServerSpatial110.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\SNCRegistration.dll.config
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\SNCRegistration.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\SNCRegistration.pdb
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Antlr3.Runtime.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportSource.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.Shared.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\EntityFramework.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\EntityFramework.SqlServer.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Session.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Options.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.SqlServer.Types.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Newtonsoft.Json.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Owin.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\PagedList.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\PagedList.Mvc.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\ReportViewerForMvc.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Text.Encodings.Web.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Helpers.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Mvc.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Optimization.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Razor.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Deployment.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Razor.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\WebGrease.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\stdole.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Antlr3.Runtime.pdb
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Cryptography.Internal.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.DataProtection.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNetCore.Session.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Caching.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.FileProviders.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Options.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Newtonsoft.Json.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\PagedList.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\PagedList.Mvc.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Text.Encodings.Web.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Helpers.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Mvc.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Optimization.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.Razor.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Deployment.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\System.Web.WebPages.Razor.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\EntityFramework.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\EntityFramework.SqlServer.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
