@@ -39,6 +39,7 @@ namespace SNCRegistration.ViewModels
         public Nullable<bool> Tent { get; set; }
         public string AttendingCode { get; set; }
         public string Comments { get; set; }
+        public string GuardianGuid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMember> FamilyMembers { get; set; }

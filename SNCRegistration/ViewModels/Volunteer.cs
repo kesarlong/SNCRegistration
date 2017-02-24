@@ -19,12 +19,13 @@ namespace SNCRegistration.ViewModels
         public string VolunteerLastName { get; set; }
         public string VolunteerAge { get; set; }
         public Nullable<int> LeadContactID { get; set; }
-        public Nullable<bool> VolunteerShirtOrder { get; set; }
+        public bool VolunteerShirtOrder { get; set; }
         public string VolunteerShirtSize { get; set; }
         public string VolunteerAttendingCode { get; set; }
         public Nullable<bool> SaturdayDinner { get; set; }
         public string UnitChapterNumber { get; set; }
         public string Comments { get; set; }
+        public string LeaderGuid { get; set; }
     
         public virtual LeadContact LeadContact { get; set; }
     }

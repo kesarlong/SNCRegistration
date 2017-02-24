@@ -36,8 +36,9 @@ namespace SNCRegistration.ViewModels
         public Nullable<decimal> TotalFee { get; set; }
         public string Booth { get; set; }
         public string Comments { get; set; }
-        public Nullable<bool> LeadContactShirtOrder { get; set; }
+        public bool LeadContactShirtOrder { get; set; }
         public string LeadContactShirtSize { get; set; }
+        public string LeaderGuid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Volunteer> Volunteers { get; set; }

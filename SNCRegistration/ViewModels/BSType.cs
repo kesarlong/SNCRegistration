@@ -12,13 +12,9 @@ namespace SNCRegistration.ViewModels
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserClaim
+    public partial class BSType
     {
-        public int Id { get; set; }
-        public string UserId { get; set; }
-        public string ClaimType { get; set; }
-        public string ClaimValue { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
+        public int BSTypeID { get; set; }
+        public string BSTypeDescription { get; set; }
     }
 }
