@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SNCRegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SNCRegistration.dbo.Age' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Age">
+    <Key>
+      <PropertyRef Name="AgeID" />
+    </Key>
+    <Property Name="AgeID" Type="int" Nullable="false" />
+    <Property Name="AgeDescription" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AspNetUserClaims">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="ClaimType" Type="nvarchar(max)" />
-    <Property Name="ClaimValue" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="AspNetUserLogins">
-    <Key>
-      <PropertyRef Name="LoginProvider" />
-      <PropertyRef Name="ProviderKey" />
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUserRoles">
     <Key>
@@ -40,15 +40,8 @@
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
-    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
     <Property Name="PasswordHash" Type="nvarchar(max)" />
     <Property Name="SecurityStamp" Type="nvarchar(max)" />
-    <Property Name="PhoneNumber" Type="nvarchar(max)" />
-    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-    <Property Name="LockoutEndDateUtc" Type="datetime" />
-    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
   <EntityType Name="Attendance">
@@ -57,6 +50,17 @@
     </Key>
     <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Volunteer" Type="bit" />
+    <Property Name="Participant" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BSType">
+    <Key>
+      <PropertyRef Name="BSTypeID" />
+    </Key>
+    <Property Name="BSTypeID" Type="int" Nullable="false" />
+    <Property Name="BSTypeDescription" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="FamilyMembers">
     <Key>
@@ -71,6 +75,7 @@
     <Property Name="PhotoAck" Type="bit" />
     <Property Name="AttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Guardians">
     <Key>
@@ -94,6 +99,7 @@
     <Property Name="Tent" Type="bit" />
     <Property Name="AttendingCode" Type="nvarchar" MaxLength="50" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="LeadContacts">
     <Key>
@@ -115,8 +121,9 @@
     <Property Name="TotalFee" Type="numeric" Precision="18" Scale="0" />
     <Property Name="Booth" Type="nvarchar" MaxLength="50" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="LeadContactShirtOrder" Type="bit" />
+    <Property Name="LeadContactShirtOrder" Type="bit" Nullable="false" />
     <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" />
+    <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Participants">
     <Key>
@@ -127,7 +134,7 @@
     <Property Name="ParticipantLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ParticipantAge" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ParticipantSchool" Type="nvarchar" MaxLength="50" />
-    <Property Name="ParticipantTeacher" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParticipantTeacher" Type="nchar" MaxLength="50" />
     <Property Name="ClassroomScouting" Type="bit" Nullable="false" />
     <Property Name="Returning" Type="bit" />
     <Property Name="HealthForm" Type="bit" />
@@ -135,13 +142,24 @@
     <Property Name="AttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="GuardianID" Type="int" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Users">
+  <EntityType Name="Relationship">
     <Key>
-      <PropertyRef Name="UserID" />
+      <PropertyRef Name="RelationshipCode" />
     </Key>
-    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RelationshipCode" Type="int" Nullable="false" />
+    <Property Name="RelationshipDescription" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SNCRegistration.dbo.ShirtSize' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ShirtSize">
+    <Key>
+      <PropertyRef Name="ShirtSizeCode" />
+      <PropertyRef Name="ShirtSizeDescription" />
+    </Key>
+    <Property Name="ShirtSizeCode" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="ShirtSizeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Volunteers">
     <Key>
@@ -152,41 +170,14 @@
     <Property Name="VolunteerLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="VolunteerAge" Type="nvarchar" MaxLength="50" />
     <Property Name="LeadContactID" Type="int" />
-    <Property Name="VolunteerShirtOrder" Type="bit" />
+    <Property Name="VolunteerShirtOrder" Type="bit" Nullable="false" />
     <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" />
     <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" />
     <Property Name="SaturdayDinner" Type="bit" />
     <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+    <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUserClaims">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUserLogins">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -252,9 +243,8 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="SNCRegistrationModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
@@ -262,16 +252,26 @@
     <EntitySet Name="Guardians" EntityType="Self.Guardians" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeadContacts" EntityType="Self.LeadContacts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-    </AssociationSet>
+    <EntitySet Name="Age" EntityType="Self.Age" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Age].[AgeID] AS [AgeID], 
+    [Age].[AgeDescription] AS [AgeDescription]
+    FROM [dbo].[Age] AS [Age]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BSType" EntityType="Self.BSType" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BSType].[BSTypeID] AS [BSTypeID], 
+    [BSType].[BSTypeDescription] AS [BSTypeDescription]
+    FROM [dbo].[BSType] AS [BSType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ShirtSize].[ShirtSizeCode] AS [ShirtSizeCode], 
+    [ShirtSize].[ShirtSizeDescription] AS [ShirtSizeDescription]
+    FROM [dbo].[ShirtSize] AS [ShirtSize]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />

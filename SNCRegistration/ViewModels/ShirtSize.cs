@@ -12,11 +12,9 @@ namespace SNCRegistration.ViewModels
     using System;
     using System.Collections.Generic;
     
-    public partial class Attendance
+    public partial class ShirtSize
     {
-        public int AttendanceID { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> Volunteer { get; set; }
-        public Nullable<bool> Participant { get; set; }
+        public string ShirtSizeCode { get; set; }
+        public string ShirtSizeDescription { get; set; }
     }
 }

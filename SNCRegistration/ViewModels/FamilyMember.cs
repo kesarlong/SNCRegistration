@@ -23,6 +23,7 @@ namespace SNCRegistration.ViewModels
         public Nullable<bool> PhotoAck { get; set; }
         public string AttendingCode { get; set; }
         public string Comments { get; set; }
+        public string GuardianGuid { get; set; }
     
         public virtual Guardian Guardian { get; set; }
     }

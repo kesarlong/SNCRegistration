@@ -12,9 +12,11 @@ namespace SNCRegistration.ViewModels
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class C__MigrationHistory
     {
-        public int UserID { get; set; }
-        public string Description { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }
