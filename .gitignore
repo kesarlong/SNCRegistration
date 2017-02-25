@@ -5,3 +5,4 @@
 *.js
 
 *.suo
+*.cache
