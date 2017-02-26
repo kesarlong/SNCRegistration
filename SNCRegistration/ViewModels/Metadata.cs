@@ -75,7 +75,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         [Display(Name = "Attending")]
-        public string AttendingCode;
+        public int AttendingCode;
 
         [MaxLength(50)]
         //TO DO: this needs to be a larger field
@@ -103,7 +103,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         [Display(Name = "Age")]
-        public string ParticipantAge;
+        public int ParticipantAge;
 
         //School is optional input field
         [Display(Name = "School")]
@@ -125,7 +125,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         [Display(Name = "Attendance")]
-        public string AttendingCode;
+        public int AttendingCode;
 
         [Required]
         [Display(Name = "Returning")]

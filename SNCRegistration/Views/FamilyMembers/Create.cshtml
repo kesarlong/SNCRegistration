@@ -11,7 +11,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     //to do: remove - testsing only
-    //Session["gSession"] = 135;
+    //Session["gSession"] = 271;
 
     @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
 
@@ -27,32 +27,33 @@
         @Html.ValidationMessageFor(model => model.FamilyMemberLastName, "", new { @class = "text-danger" })
     </div>
 
+    //TO DO: NORMALIZE: use data from age table (Jira SP-304)
     <div class="form-group">
         @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })<br />
         @Html.DropDownListFor(model => model.FamilyMemberAge,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Age-" },
-                new SelectListItem{ Value = "Under 6", Text = "Under 6" },
-                new SelectListItem{ Value = "7-10", Text = "7-10" },
-                new SelectListItem{ Value = "11-13", Text = "11-13" },
-                new SelectListItem{ Value = "14-16", Text = "14-16" },
-                new SelectListItem{ Value = "17-21", Text = "17-18" },
-                new SelectListItem{ Value = "Over 21", Text = "Over 21" }
+                new SelectListItem{ Value = "1", Text = "Under 6" },
+                new SelectListItem{ Value = "2", Text = "7-10" },
+                new SelectListItem{ Value = "3", Text = "11-13" },
+                new SelectListItem{ Value = "4", Text = "14-16" },
+                new SelectListItem{ Value = "5", Text = "17-18" },
+                new SelectListItem{ Value = "6", Text = "Over 21" }
             }, new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
     </div>
 
-
+    //TO DO:NORMALIZE - use data from attendance table (Jira-306)
     <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
             @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
             <br />
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "Sat-AM", new { id = "Sat-AM" }) Saturday Only
+                @Html.RadioButtonFor(model => model.AttendingCode, "2", new { id = "Sat-AM" }) Saturday Only
             </label>
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "Overnight", new { id = "Overnight" }) Overnight
+                @Html.RadioButtonFor(model => model.AttendingCode, "3", new { id = "Overnight" }) Overnight
             </label>
         </div>
     </div>

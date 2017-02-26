@@ -1,5 +1,6 @@
 ﻿@model SNCRegistration.ViewModels.Guardian
 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutRegister.cshtml";
@@ -111,7 +112,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label" })<br />
-        @Html.DropDownListFor(model => model.Relationship,
+        @*@Html.DropDownListFor(model => model.Relationship,
              new List<SelectListItem>{
                new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
                new SelectListItem(){ Value = "Parent", Text = "Mother / Father" },
@@ -121,9 +122,24 @@
                new SelectListItem(){ Value = "Teacher", Text = "Teacher / Instructor"},
                new SelectListItem(){ Value = "Family", Text = "Other - Family - relationship not listed"},
                new SelectListItem(){ Value = "Other", Text = "Other (please provide details in comments section"}
-           }, new { @class = "form-control", style = "width: 320px" })
-       @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
-    </div>
+           }, new { @class = "form-control", style = "width: 320px" })*@
+
+       @* //TO DO: USE THE DATA SOURCE FOR ATTENDANCE (SP-316)*@
+        @Html.DropDownListFor(model => model.Relationship,
+          new List<SelectListItem>{
+            new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
+            new SelectListItem(){ Value = "1", Text = "Mother / Father" },
+            new SelectListItem(){ Value = "2", Text = "Legal Guardian"},
+            new SelectListItem(){ Value = "3", Text = "Sister / Brother"},
+            new SelectListItem(){ Value = "4", Text = "Grandmother / Grandfather"},
+            new SelectListItem(){ Value = "5", Text = "Teacher / Instructor"},
+            new SelectListItem(){ Value = "6", Text = "Other - Family - relationship not listed"},
+            new SelectListItem(){ Value = "7", Text = "Other (please provide details in comments section"}
+        }, new { @class = "form-control", style = "width: 320px" })
+
+
+        @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
+     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianEmail, htmlAttributes: new { @class = "control-label" })<br />
@@ -139,15 +155,16 @@
         @Html.ValidationMessageFor(model => model.GuardianCellPhone, "", new { @class = "text-danger" })
     </div>
 
+    //TO DO: Jira-306 - change to look up values from attendance table
     <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
             @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })<br />
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "Sat-AM", new { id = "Sat-AM" }) Saturday Only
+                @Html.RadioButtonFor(model => model.AttendingCode, "2", new { id = "Sat-AM" }) Saturday Only
             </label>
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "Overnight", new { id = "Overnight" }) Overnight
+                @Html.RadioButtonFor(model => model.AttendingCode, "3", new { id = "Overnight" }) Overnight
             </label>
         </div>
     </div>

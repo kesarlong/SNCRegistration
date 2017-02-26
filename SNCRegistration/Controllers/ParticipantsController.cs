@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -84,20 +82,15 @@ namespace SNCRegistration.Controllers
 
                     if (Request["submit"].Equals("Add another participant"))
                         //add another participant for guardian
-                        RouteData.Values.Remove("id");
                     { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
-                    //{ return RedirectToAction("Create", "Participants"); }
 
 
                     if (Request["submit"].Equals("Add a family member"))
                         //add a family member
-                        RouteData.Values.Remove("id");
                     { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
-                    //{ return RedirectToAction("Create", "FamilyMembers"); }
 
                     if (Request["submit"].Equals("Complete registration"))
                         //registration complete, no more people to add
-                        RouteData.Values.Remove("id");
                     { return RedirectToAction("Registered"); }
                     
 
