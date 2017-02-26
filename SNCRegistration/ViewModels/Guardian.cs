@@ -24,7 +24,7 @@ namespace SNCRegistration.ViewModels
         public int GuardianID { get; set; }
         public string GuardianFirstName { get; set; }
         public string GuardianLastName { get; set; }
-        public string Relationship { get; set; }
+        public int Relationship { get; set; }
         public string GuardianAddress { get; set; }
         public string GuardianCity { get; set; }
         public string GuardianState { get; set; }
@@ -37,12 +37,15 @@ namespace SNCRegistration.ViewModels
         public Nullable<bool> HealthForm { get; set; }
         public Nullable<bool> PhotoAck { get; set; }
         public Nullable<bool> Tent { get; set; }
-        public string AttendingCode { get; set; }
+        public int AttendingCode { get; set; }
         public string Comments { get; set; }
         public string GuardianGuid { get; set; }
     
+        public virtual Attendance Attendance { get; set; }
+        public virtual Attendance Attendance1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMember> FamilyMembers { get; set; }
+        public virtual Relationship Relationship1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Participant> Participants { get; set; }
     }

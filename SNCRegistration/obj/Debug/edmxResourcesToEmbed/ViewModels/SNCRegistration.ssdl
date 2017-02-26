@@ -10,8 +10,6 @@
     <Property Name="Model" Type="varbinary(max)" Nullable="false" />
     <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SNCRegistration.dbo.Age' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Age">
     <Key>
       <PropertyRef Name="AgeID" />
@@ -48,13 +46,11 @@ warning 6002: The table/view 'SNCRegistration.dbo.Age' does not have a primary k
     <Key>
       <PropertyRef Name="AttendanceID" />
     </Key>
-    <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="50" />
     <Property Name="Volunteer" Type="bit" />
     <Property Name="Participant" Type="bit" />
+    <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="BSType">
     <Key>
       <PropertyRef Name="BSTypeID" />
@@ -69,11 +65,11 @@ warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primar
     <Property Name="FamilyMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FamilyMemberFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FamilyMemberLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="FamilyMemberAge" Type="nvarchar" MaxLength="50" />
+    <Property Name="FamilyMemberAge" Type="int" Nullable="false" />
     <Property Name="GuardianID" Type="int" Nullable="false" />
     <Property Name="HealthForm" Type="bit" />
     <Property Name="PhotoAck" Type="bit" />
-    <Property Name="AttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AttendingCode" Type="int" Nullable="false" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
     <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -84,7 +80,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primar
     <Property Name="GuardianID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="GuardianFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="GuardianLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
+    <Property Name="Relationship" Type="int" Nullable="false" />
     <Property Name="GuardianAddress" Type="nvarchar" MaxLength="50" />
     <Property Name="GuardianCity" Type="nvarchar" MaxLength="50" />
     <Property Name="GuardianState" Type="nchar" MaxLength="2" />
@@ -97,7 +93,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primar
     <Property Name="HealthForm" Type="bit" />
     <Property Name="PhotoAck" Type="bit" />
     <Property Name="Tent" Type="bit" />
-    <Property Name="AttendingCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AttendingCode" Type="int" Nullable="false" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
     <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -106,7 +102,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primar
       <PropertyRef Name="LeadContactID" />
     </Key>
     <Property Name="LeadContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BSType" Type="nvarchar" MaxLength="50" />
+    <Property Name="BSType" Type="int" Nullable="false" />
     <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
     <Property Name="LeadContactFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="LeadContactLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -116,13 +112,13 @@ warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primar
     <Property Name="LeadContactZip" Type="nchar" MaxLength="10" />
     <Property Name="LeadContactCellPhone" Type="nchar" MaxLength="10" />
     <Property Name="LeadContactEmail" Type="nvarchar" MaxLength="50" />
-    <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="VolunteerAttendingCode" Type="int" Nullable="false" />
     <Property Name="SaturdayDinner" Type="bit" />
     <Property Name="TotalFee" Type="numeric" Precision="18" Scale="0" />
     <Property Name="Booth" Type="nvarchar" MaxLength="50" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
     <Property Name="LeadContactShirtOrder" Type="bit" Nullable="false" />
-    <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" />
+    <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Participants">
@@ -132,14 +128,14 @@ warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primar
     <Property Name="ParticipantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ParticipantFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ParticipantLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ParticipantAge" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParticipantAge" Type="int" Nullable="false" />
     <Property Name="ParticipantSchool" Type="nvarchar" MaxLength="50" />
     <Property Name="ParticipantTeacher" Type="nchar" MaxLength="50" />
     <Property Name="ClassroomScouting" Type="bit" Nullable="false" />
     <Property Name="Returning" Type="bit" />
     <Property Name="HealthForm" Type="bit" />
     <Property Name="PhotoAck" Type="bit" />
-    <Property Name="AttendingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AttendingCode" Type="int" Nullable="false" />
     <Property Name="GuardianID" Type="int" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
     <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
@@ -151,12 +147,9 @@ warning 6002: The table/view 'SNCRegistration.dbo.BSType' does not have a primar
     <Property Name="RelationshipCode" Type="int" Nullable="false" />
     <Property Name="RelationshipDescription" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SNCRegistration.dbo.ShirtSize' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ShirtSize">
     <Key>
       <PropertyRef Name="ShirtSizeCode" />
-      <PropertyRef Name="ShirtSizeDescription" />
     </Key>
     <Property Name="ShirtSizeCode" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="ShirtSizeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -168,16 +161,172 @@ warning 6002: The table/view 'SNCRegistration.dbo.ShirtSize' does not have a pri
     <Property Name="VolunteerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="VolunteerFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="VolunteerLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="VolunteerAge" Type="nvarchar" MaxLength="50" />
+    <Property Name="VolunteerAge" Type="int" Nullable="false" />
     <Property Name="LeadContactID" Type="int" />
     <Property Name="VolunteerShirtOrder" Type="bit" Nullable="false" />
-    <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" />
-    <Property Name="VolunteerAttendingCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="VolunteerAttendingCode" Type="int" Nullable="false" />
     <Property Name="SaturdayDinner" Type="bit" />
     <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
     <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK__FamilyMem__Atten__4D5F7D71">
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+    <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attendance">
+        <PropertyRef Name="AttendanceID" />
+      </Principal>
+      <Dependent Role="FamilyMembers">
+        <PropertyRef Name="AttendingCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FamilyMem__Famil__40F9A68C">
+    <End Role="Age" Type="Self.Age" Multiplicity="1" />
+    <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Age">
+        <PropertyRef Name="AgeID" />
+      </Principal>
+      <Dependent Role="FamilyMembers">
+        <PropertyRef Name="FamilyMemberAge" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Guardians__Atten__43D61337">
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+    <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attendance">
+        <PropertyRef Name="AttendanceID" />
+      </Principal>
+      <Dependent Role="Guardians">
+        <PropertyRef Name="AttendingCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Guardians__Atten__4E53A1AA">
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+    <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attendance">
+        <PropertyRef Name="AttendanceID" />
+      </Principal>
+      <Dependent Role="Guardians">
+        <PropertyRef Name="AttendingCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Guardians__Relat__4C6B5938">
+    <End Role="Relationship" Type="Self.Relationship" Multiplicity="1" />
+    <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relationship">
+        <PropertyRef Name="RelationshipCode" />
+      </Principal>
+      <Dependent Role="Guardians">
+        <PropertyRef Name="Relationship" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeadConta__BSTyp__42E1EEFE">
+    <End Role="BSType" Type="Self.BSType" Multiplicity="1" />
+    <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BSType">
+        <PropertyRef Name="BSTypeID" />
+      </Principal>
+      <Dependent Role="LeadContacts">
+        <PropertyRef Name="BSType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeadConta__LeadC__4A8310C6">
+    <End Role="ShirtSize" Type="Self.ShirtSize" Multiplicity="1" />
+    <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShirtSize">
+        <PropertyRef Name="ShirtSizeCode" />
+      </Principal>
+      <Dependent Role="LeadContacts">
+        <PropertyRef Name="LeadContactShirtSize" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LeadConta__Volun__503BEA1C">
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+    <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attendance">
+        <PropertyRef Name="AttendanceID" />
+      </Principal>
+      <Dependent Role="LeadContacts">
+        <PropertyRef Name="VolunteerAttendingCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Participa__Atten__4F47C5E3">
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+    <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attendance">
+        <PropertyRef Name="AttendanceID" />
+      </Principal>
+      <Dependent Role="Participants">
+        <PropertyRef Name="AttendingCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Participa__Parti__41EDCAC5">
+    <End Role="Age" Type="Self.Age" Multiplicity="1" />
+    <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Age">
+        <PropertyRef Name="AgeID" />
+      </Principal>
+      <Dependent Role="Participants">
+        <PropertyRef Name="ParticipantAge" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Volunteer__Volun__3E1D39E1">
+    <End Role="Age" Type="Self.Age" Multiplicity="1" />
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Age">
+        <PropertyRef Name="AgeID" />
+      </Principal>
+      <Dependent Role="Volunteers">
+        <PropertyRef Name="VolunteerAge" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Volunteer__Volun__4B7734FF">
+    <End Role="ShirtSize" Type="Self.ShirtSize" Multiplicity="1" />
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShirtSize">
+        <PropertyRef Name="ShirtSizeCode" />
+      </Principal>
+      <Dependent Role="Volunteers">
+        <PropertyRef Name="VolunteerShirtSize" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Volunteer__Volun__51300E55">
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attendance">
+        <PropertyRef Name="AttendanceID" />
+      </Principal>
+      <Dependent Role="Volunteers">
+        <PropertyRef Name="VolunteerAttendingCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -230,48 +379,73 @@ warning 6002: The table/view 'SNCRegistration.dbo.ShirtSize' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Volunteers">
-    <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="0..1" />
-    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="LeadContacts">
-        <PropertyRef Name="LeadContactID" />
-      </Principal>
-      <Dependent Role="Volunteers">
-        <PropertyRef Name="LeadContactID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="SNCRegistrationModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Age" EntityType="Self.Age" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BSType" EntityType="Self.BSType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMembers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Guardians" EntityType="Self.Guardians" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeadContacts" EntityType="Self.LeadContacts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Age" EntityType="Self.Age" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Age].[AgeID] AS [AgeID], 
-    [Age].[AgeDescription] AS [AgeDescription]
-    FROM [dbo].[Age] AS [Age]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="BSType" EntityType="Self.BSType" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [BSType].[BSTypeID] AS [BSTypeID], 
-    [BSType].[BSTypeDescription] AS [BSTypeDescription]
-    FROM [dbo].[BSType] AS [BSType]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ShirtSize].[ShirtSizeCode] AS [ShirtSizeCode], 
-    [ShirtSize].[ShirtSizeDescription] AS [ShirtSizeDescription]
-    FROM [dbo].[ShirtSize] AS [ShirtSize]</DefiningQuery>
-    </EntitySet>
+    <AssociationSet Name="FK__FamilyMem__Atten__4D5F7D71" Association="Self.FK__FamilyMem__Atten__4D5F7D71">
+      <End Role="Attendance" EntitySet="Attendance" />
+      <End Role="FamilyMembers" EntitySet="FamilyMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="Self.FK__FamilyMem__Famil__40F9A68C">
+      <End Role="Age" EntitySet="Age" />
+      <End Role="FamilyMembers" EntitySet="FamilyMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Guardians__Atten__43D61337" Association="Self.FK__Guardians__Atten__43D61337">
+      <End Role="Attendance" EntitySet="Attendance" />
+      <End Role="Guardians" EntitySet="Guardians" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Guardians__Atten__4E53A1AA" Association="Self.FK__Guardians__Atten__4E53A1AA">
+      <End Role="Attendance" EntitySet="Attendance" />
+      <End Role="Guardians" EntitySet="Guardians" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Guardians__Relat__4C6B5938" Association="Self.FK__Guardians__Relat__4C6B5938">
+      <End Role="Relationship" EntitySet="Relationship" />
+      <End Role="Guardians" EntitySet="Guardians" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeadConta__BSTyp__42E1EEFE" Association="Self.FK__LeadConta__BSTyp__42E1EEFE">
+      <End Role="BSType" EntitySet="BSType" />
+      <End Role="LeadContacts" EntitySet="LeadContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeadConta__LeadC__4A8310C6" Association="Self.FK__LeadConta__LeadC__4A8310C6">
+      <End Role="ShirtSize" EntitySet="ShirtSize" />
+      <End Role="LeadContacts" EntitySet="LeadContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LeadConta__Volun__503BEA1C" Association="Self.FK__LeadConta__Volun__503BEA1C">
+      <End Role="Attendance" EntitySet="Attendance" />
+      <End Role="LeadContacts" EntitySet="LeadContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Participa__Atten__4F47C5E3" Association="Self.FK__Participa__Atten__4F47C5E3">
+      <End Role="Attendance" EntitySet="Attendance" />
+      <End Role="Participants" EntitySet="Participants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Participa__Parti__41EDCAC5" Association="Self.FK__Participa__Parti__41EDCAC5">
+      <End Role="Age" EntitySet="Age" />
+      <End Role="Participants" EntitySet="Participants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Volun__3E1D39E1" Association="Self.FK__Volunteer__Volun__3E1D39E1">
+      <End Role="Age" EntitySet="Age" />
+      <End Role="Volunteers" EntitySet="Volunteers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Volun__4B7734FF" Association="Self.FK__Volunteer__Volun__4B7734FF">
+      <End Role="ShirtSize" EntitySet="ShirtSize" />
+      <End Role="Volunteers" EntitySet="Volunteers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Volun__51300E55" Association="Self.FK__Volunteer__Volun__51300E55">
+      <End Role="Attendance" EntitySet="Attendance" />
+      <End Role="Volunteers" EntitySet="Volunteers" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -287,10 +461,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.ShirtSize' does not have a pri
     <AssociationSet Name="FK_Participants" Association="Self.FK_Participants">
       <End Role="Guardians" EntitySet="Guardians" />
       <End Role="Participants" EntitySet="Participants" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Volunteers" Association="Self.FK_Volunteers">
-      <End Role="LeadContacts" EntitySet="LeadContacts" />
-      <End Role="Volunteers" EntitySet="Volunteers" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -14,14 +14,8 @@ namespace SNCRegistration.ViewModels
     
     public partial class LeadContact
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LeadContact()
-        {
-            this.Volunteers = new HashSet<Volunteer>();
-        }
-    
         public int LeadContactID { get; set; }
-        public string BSType { get; set; }
+        public int BSType { get; set; }
         public string UnitChapterNumber { get; set; }
         public string LeadContactFirstName { get; set; }
         public string LeadContactLastName { get; set; }
@@ -31,7 +25,7 @@ namespace SNCRegistration.ViewModels
         public string LeadContactZip { get; set; }
         public string LeadContactCellPhone { get; set; }
         public string LeadContactEmail { get; set; }
-        public string VolunteerAttendingCode { get; set; }
+        public int VolunteerAttendingCode { get; set; }
         public Nullable<bool> SaturdayDinner { get; set; }
         public Nullable<decimal> TotalFee { get; set; }
         public string Booth { get; set; }
@@ -40,7 +34,8 @@ namespace SNCRegistration.ViewModels
         public string LeadContactShirtSize { get; set; }
         public string LeaderGuid { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Volunteer> Volunteers { get; set; }
+        public virtual Attendance Attendance { get; set; }
+        public virtual BSType BSType1 { get; set; }
+        public virtual ShirtSize ShirtSize { get; set; }
     }
 }

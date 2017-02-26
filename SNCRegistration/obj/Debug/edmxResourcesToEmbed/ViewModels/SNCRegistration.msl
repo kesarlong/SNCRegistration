@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SNCRegistrationModelStoreContainer" CdmEntityContainer="SNCRegistrationEntities">
-    <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetRole">
-        <MappingFragment StoreEntitySet="AspNetRoles">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
@@ -20,13 +12,47 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ages">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.Age">
+        <MappingFragment StoreEntitySet="Age">
+          <ScalarProperty Name="AgeDescription" ColumnName="AgeDescription" />
+          <ScalarProperty Name="AgeID" ColumnName="AgeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Attendances">
       <EntityTypeMapping TypeName="SNCRegistrationModel.Attendance">
         <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
           <ScalarProperty Name="Participant" ColumnName="Participant" />
           <ScalarProperty Name="Volunteer" ColumnName="Volunteer" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BSTypes">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.BSType">
+        <MappingFragment StoreEntitySet="BSType">
+          <ScalarProperty Name="BSTypeDescription" ColumnName="BSTypeDescription" />
+          <ScalarProperty Name="BSTypeID" ColumnName="BSTypeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,6 +142,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Relationships">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.Relationship">
+        <MappingFragment StoreEntitySet="Relationship">
+          <ScalarProperty Name="RelationshipDescription" ColumnName="RelationshipDescription" />
+          <ScalarProperty Name="RelationshipCode" ColumnName="RelationshipCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShirtSizes">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.ShirtSize">
+        <MappingFragment StoreEntitySet="ShirtSize">
+          <ScalarProperty Name="ShirtSizeDescription" ColumnName="ShirtSizeDescription" />
+          <ScalarProperty Name="ShirtSizeCode" ColumnName="ShirtSizeCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Volunteers">
       <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
         <MappingFragment StoreEntitySet="Volunteers">
@@ -142,47 +184,5 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="SNCRegistrationModel.C__MigrationHistory">
-        <MappingFragment StoreEntitySet="__MigrationHistory">
-          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Relationships">
-      <EntityTypeMapping TypeName="SNCRegistrationModel.Relationship">
-        <MappingFragment StoreEntitySet="Relationship">
-          <ScalarProperty Name="RelationshipDescription" ColumnName="RelationshipDescription" />
-          <ScalarProperty Name="RelationshipCode" ColumnName="RelationshipCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Ages">
-      <EntityTypeMapping TypeName="SNCRegistrationModel.Age">
-        <MappingFragment StoreEntitySet="Age">
-          <ScalarProperty Name="AgeDescription" ColumnName="AgeDescription" />
-          <ScalarProperty Name="AgeID" ColumnName="AgeID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BSTypes">
-      <EntityTypeMapping TypeName="SNCRegistrationModel.BSType">
-        <MappingFragment StoreEntitySet="BSType">
-          <ScalarProperty Name="BSTypeDescription" ColumnName="BSTypeDescription" />
-          <ScalarProperty Name="BSTypeID" ColumnName="BSTypeID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ShirtSizes">
-      <EntityTypeMapping TypeName="SNCRegistrationModel.ShirtSize">
-        <MappingFragment StoreEntitySet="ShirtSize">
-          <ScalarProperty Name="ShirtSizeDescription" ColumnName="ShirtSizeDescription" />
-          <ScalarProperty Name="ShirtSizeCode" ColumnName="ShirtSizeCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
