@@ -53,16 +53,16 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-                    this.Session["gSession"] = familyMember.GuardianID;
+                    this.Session["gSession"] = familyMember.GuardianGuid;
                     //return RedirectToAction("Create", "FamilyMembers", new { GuardianID = this.Session["gSession"]});
 
                     if (Request["submit"].Equals("Add another participant"))
                     //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = Session["gSession"] }); }
 
                     if (Request["submit"].Equals("Add a family member"))
                     //add a family member
-                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = Session["gSession"] }); }
 
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add

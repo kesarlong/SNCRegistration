@@ -13,7 +13,7 @@
     //to do: remove - testsing only
     //Session["gSession"] = 271;
 
-    @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
+    @Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gSession"] })
 
     <div class="form-group">
         @Html.LabelFor(model => model.FamilyMemberFirstName, htmlAttributes: new { @class = "control-label" })<br />

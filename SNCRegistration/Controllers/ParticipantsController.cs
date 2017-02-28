@@ -8,6 +8,7 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -54,7 +55,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        public ActionResult Create(int GuardianID) 
+        public ActionResult Create() 
         {
 
             return View();
@@ -67,7 +68,7 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,Comments"),
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments"),
             ] Participant participant,string submit)
         {
             if (ModelState.IsValid)
@@ -78,11 +79,11 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
-                    this.Session["gSession"] = participant.GuardianID;
+                    this.Session["gSession"] = participant.GuardianGuid;
 
                     if (Request["submit"].Equals("Add another participant"))
                         //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = Session["gSession"] }); }
 
 
                     if (Request["submit"].Equals("Add a family member"))

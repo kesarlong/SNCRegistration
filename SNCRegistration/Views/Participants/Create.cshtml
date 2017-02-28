@@ -16,7 +16,8 @@
     //to do: remove - tessing only
     //Session["gSession"] = 135;
 
-    @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
+    @Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gSession"] })
+    
 
     <div class="form-group">
         @Html.LabelFor(model => model.ParticipantFirstName, htmlAttributes: new { @class = "control-label" })<br />
