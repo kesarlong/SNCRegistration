@@ -6,10 +6,12 @@
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
+
 {
     @Html.AntiForgeryToken()
-    
+
+
         <h4>Volunteer Information</h4>
         <hr />
 
@@ -77,9 +79,13 @@
         @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
     </div>
     <br />
-    <div class="form-group">
-        @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(model => model.VolunteerShirtSize,
+
+    @*<div style="@(Model.VolunteerShirtOrder ? "display:block" : "display:none")">Some links</div>*@
+
+  @*if (Model.VolunteerShirtOrder == true)
+    {     <div class="form-group">
+    @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
+    @Html.DropDownListFor(model => model.VolunteerShirtSize,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Size-" },
                  new SelectListItem{ Value = "YX", Text = "Youth - Extra Small" },
@@ -87,14 +93,20 @@
                 new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
                 new SelectListItem{ Value = "YL", Text = "Youth - Large" },
                 new SelectListItem{ Value = "YX", Text = "Youth - Extra Large" },
-                new SelectListItem{ Value = "YX", Text = "Adult - Extra Small" },
-                new SelectListItem{ Value = "YS", Text = "Adult - Small" },
-                new SelectListItem{ Value = "YM", Text = "Adult - Medium" },
-                new SelectListItem{ Value = "YL", Text = "Adult - Large" },
-                new SelectListItem{ Value = "YX", Text = "Adult - Extra Large" },
-            }, new { @class = "form-control", style = "width: 220px" })
-        @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
-    </div>
+                new SelectListItem{ Value = "XS", Text = "Adult - Extra Small" },
+                new SelectListItem{ Value = "S", Text = "Adult - Small" },
+                new SelectListItem{ Value = "M", Text = "Adult - Medium" },
+                new SelectListItem{ Value = "L", Text = "Adult - Large" },
+                new SelectListItem{ Value = "X", Text = "Adult - Extra Large" }
+                }, new { @class = "form-control", style = "width: 220px" })
+    @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
+</div>
+    }
+    else
+    {
+              @Html.HiddenFor(model => model.VolunteerShirtSize, new { @Value = false })
+    }*@
+    
 
     <br />
         <div class="form-group">
@@ -137,15 +149,17 @@
     <hr />
 
     <div class="form-group pull-right">
-        <input type="submit" value="Create" class="btn btn-primary" />
-
+        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
     </div>
-
+   <div class="form-group pull-right">
+        <input type="submit" name="submit" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" />
+    </div>
+    
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

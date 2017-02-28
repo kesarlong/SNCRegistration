@@ -36,7 +36,19 @@ namespace SNCRegistration.ViewModels
         public Nullable<decimal> TotalFee { get; set; }
         public string Booth { get; set; }
         public string Comments { get; set; }
-        public Nullable<bool> LeadContactShirtOrder { get; set; }
+        //public bool LeadContactShirtOrder { get; set; }
+        bool _LeadContactShirtOrder = true;
+        public bool LeadContactShirtOrder
+        {
+            get
+            {
+                return _LeadContactShirtOrder;
+            }
+            set
+            {
+                _LeadContactShirtOrder = value;
+            }
+        }
         public string LeadContactShirtSize { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
