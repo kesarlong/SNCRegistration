@@ -14,10 +14,10 @@
     </p>
 </div>
 
-@using (Html.BeginForm("Index", "Particpants", FormMethod.Get))
+@using (Html.BeginForm("Index", "Participants", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("Searchring", ViewBag.CurrentFilter as string)
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 
