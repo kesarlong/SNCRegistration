@@ -1,5 +1,6 @@
 ﻿@model SNCRegistration.ViewModels.Guardian
 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutRegister.cshtml";
@@ -18,37 +19,36 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianFirstName, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianFirstName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianFirstName, "", new { @class = "text-danger" })
 
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianLastName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianLastName, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianLastName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianLastName, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianAddress, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianAddress, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianAddress, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianAddress, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianCity, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianCity, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianCity, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianCity, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianState, htmlAttributes: new { @class = "control-label col-md-3" })
-        @*@Html.EditorFor(model => model.GuardianState, new { htmlAttributes = new { @class = "form-control" } })*@
+        @Html.LabelFor(model => model.GuardianState, htmlAttributes: new { @class = "control-label" })<br />
         @Html.DropDownListFor(model => model.GuardianState,
              new List<SelectListItem>
-            {
-                    new SelectListItem() {Text="Alabama", Value="AL"},
+             {
+                 new SelectListItem() {Text="Alabama", Value="AL"},
                     new SelectListItem() { Text="Alaska", Value="AK"},
                     new SelectListItem() { Text="Arizona", Value="AZ"},
                     new SelectListItem() { Text="Arkansas", Value="AR"},
@@ -57,7 +57,7 @@
                     new SelectListItem() { Text="Connecticut", Value="CT"},
                     new SelectListItem() { Text="District of Columbia", Value="DC"},
                     new SelectListItem() { Text="Delaware", Value="DE"},
-                    new SelectListItem() { Text="Florida", Value="FL"},
+                    new SelectListItem() { Text="Florida", Value="FL", Selected=true},
                     new SelectListItem() { Text="Georgia", Value="GA"},
                     new SelectListItem() { Text="Hawaii", Value="HI"},
                     new SelectListItem() { Text="Idaho", Value="ID"},
@@ -100,72 +100,90 @@
                     new SelectListItem() { Text="Wisconsin", Value="WI"},
                     new SelectListItem() { Text="Wyoming", Value="WY"}
                     }, new { @class = "form-control", style = "width: 220px" })
-
-                    @Html.ValidationMessageFor(model => model.GuardianState, "", new { @class = "text-danger" })
-</div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.GuardianZip, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.EditorFor(model => model.GuardianZip, new { htmlAttributes = new {@class = "form-control"}})
-        @Html.ValidationMessageFor(model => model.GuardianZip, "", new { @class = "text-danger" })
-</div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.DropDownListFor(model => model.Relationship,
-             new List<SelectListItem>{
-               new SelectListItem{ Value = "", Text = "-Select-" },
-               new SelectListItem{ Value = "Parent", Text = "Mother / Father" },
-               new SelectListItem{ Value = "Guardian", Text = "Legal Guardian"},
-               new SelectListItem{ Value = "Sibling", Text = "Sister / Brother"},
-               new SelectListItem{ Value = "Grandparent", Text = "Grandmother / Grandfather"},
-               new SelectListItem{ Value = "Teacher", Text = "Teacher / Instructor"},
-               new SelectListItem{ Value = "Family", Text = "Other - Family - relationship not listed"},
-               new SelectListItem{ Value = "Other", Text = "Other (please provide details in comments section"}
-           }, new { @class = "form-control", style = "width: 320px" })
-        @Html.ValidationMessageFor(model => model.Relationship, "Please select your relationship to the participant.", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.GuardianState, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianEmail, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianZip, htmlAttributes: new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.GuardianZip, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.GuardianZip, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label" })<br />
+        @*@Html.DropDownListFor(model => model.Relationship,
+             new List<SelectListItem>{
+               new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
+               new SelectListItem(){ Value = "Parent", Text = "Mother / Father" },
+               new SelectListItem(){ Value = "Guardian", Text = "Legal Guardian"},
+               new SelectListItem(){ Value = "Sibling", Text = "Sister / Brother"},
+               new SelectListItem(){ Value = "Grandparent", Text = "Grandmother / Grandfather"},
+               new SelectListItem(){ Value = "Teacher", Text = "Teacher / Instructor"},
+               new SelectListItem(){ Value = "Family", Text = "Other - Family - relationship not listed"},
+               new SelectListItem(){ Value = "Other", Text = "Other (please provide details in comments section"}
+           }, new { @class = "form-control", style = "width: 320px" })*@
+
+       @* //TO DO: USE THE DATA SOURCE FOR ATTENDANCE (SP-316)*@
+        @Html.DropDownListFor(model => model.Relationship,
+          new List<SelectListItem>{
+            new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
+            new SelectListItem(){ Value = "1", Text = "Mother / Father" },
+            new SelectListItem(){ Value = "2", Text = "Legal Guardian"},
+            new SelectListItem(){ Value = "3", Text = "Sister / Brother"},
+            new SelectListItem(){ Value = "4", Text = "Grandmother / Grandfather"},
+            new SelectListItem(){ Value = "5", Text = "Teacher / Instructor"},
+            new SelectListItem(){ Value = "6", Text = "Other - Family - relationship not listed"},
+            new SelectListItem(){ Value = "7", Text = "Other (please provide details in comments section"}
+        }, new { @class = "form-control", style = "width: 320px" })
+
+
+        @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
+     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GuardianEmail, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.GuardianEmail, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.GuardianEmail, "", new { @class = "text-danger" })
 
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GuardianCellPhone, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.GuardianCellPhone, htmlAttributes: new { @class = "control-label" })<br />
         @Html.DisplayFor(m => m.GuardianCellPhone)
-        @Html.EditorFor(model => model.GuardianCellPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "(123) 555-5555" } })
+        @Html.EditorFor(model => model.GuardianCellPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "1235555555" } })
         @Html.ValidationMessageFor(model => model.GuardianCellPhone, "", new { @class = "text-danger" })
     </div>
 
+    //TO DO: Jira-306 - change to look up values from attendance table
     <div class="form-group">
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownListFor(model => model.AttendingCode,
-             new List<SelectListItem>{
-               new SelectListItem{ Value = "", Text = "-Select-" },
-               new SelectListItem{ Value = "Sat-AM", Text = "Saturday - Day Only" },
-               new SelectListItem{ Value = "Overnight", Text = "Saturday - Overnight stay" }
-           }, new { @class = "form-control", style = "width: 220px" })
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })<br />
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
-
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.AttendingCode, "2", new { id = "Sat-AM" }) Saturday Only
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.AttendingCode, "3", new { id = "Overnight" }) Overnight
+            </label>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tent_True" }) Yes
-        @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label" })<br />
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tent_True" }) Yes
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
+            </label>
+        </div>
         @Html.ValidationMessageFor(model => model.Tent, "", new { @class = "text-danger" })
     </div>
 
-
     <div class="form-group">
-        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
+        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label" })<br />
         @Html.TextArea("Comments", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
     </div>
@@ -176,11 +194,13 @@
     @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
 
 
-    <hr />
 
-    <div class="form-group pull-right">
-        <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
-    </div>
+    <hr />
+    
+        <div class="form-group pull-right">
+            <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
+
+        </div>
 
 }
 

@@ -17,17 +17,20 @@ namespace SNCRegistration.ViewModels
         public int ParticipantID { get; set; }
         public string ParticipantFirstName { get; set; }
         public string ParticipantLastName { get; set; }
-        public string ParticipantAge { get; set; }
+        public int ParticipantAge { get; set; }
         public string ParticipantSchool { get; set; }
         public string ParticipantTeacher { get; set; }
         public bool ClassroomScouting { get; set; }
-        public bool Returning { get; set; }
-        public bool HealthForm { get; set; }
-        public bool PhotoAck { get; set; }
-        public string AttendingCode { get; set; }
-        public int GuardianID { get; set; }
+        public Nullable<bool> Returning { get; set; }
+        public Nullable<bool> HealthForm { get; set; }
+        public Nullable<bool> PhotoAck { get; set; }
+        public int AttendingCode { get; set; }
+        public Nullable<int> GuardianID { get; set; }
         public string Comments { get; set; }
+        public string GuardianGuid { get; set; }
     
+        public virtual Age Age { get; set; }
+        public virtual Attendance Attendance { get; set; }
         public virtual Guardian Guardian { get; set; }
     }
 }

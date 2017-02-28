@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DD352149-9E73-4275-ADA6-9CB56456DF75}</ProjectGuid>
+    <ProjectGuid>{F620449B-8544-444E-950B-1DFB0749449C}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -266,6 +266,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
@@ -290,19 +291,22 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Age.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AspNetRole.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AspNetUser.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AspNetUserClaim.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\AspNetUserLogin.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Attendance.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BSType.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FamilyMember.cs">
@@ -319,6 +323,12 @@
     <Compile Include="ViewModels\Metadata.cs" />
     <Compile Include="ViewModels\PartialClasses.cs" />
     <Compile Include="ViewModels\Participant.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Relationship.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ShirtSize.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SNCRegistration.Context.cs">
@@ -339,9 +349,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\UserRolesDTO.cs" />
-    <Compile Include="ViewModels\User.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Volunteer.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -562,6 +569,11 @@
     <Content Include="Views\Volunteers\Registered.cshtml" />
     <Content Include="Views\Participants\Registered.cshtml" />
     <Content Include="Views\FamilyMembers\Registered.cshtml" />
+    <Content Include="Views\Attendances\Create.cshtml" />
+    <Content Include="Views\Attendances\Delete.cshtml" />
+    <Content Include="Views\Attendances\Details.cshtml" />
+    <Content Include="Views\Attendances\Edit.cshtml" />
+    <Content Include="Views\Attendances\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />

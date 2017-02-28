@@ -13,73 +13,89 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    //to do: remove - testsing only
+    //to do: remove - tessing only
     //Session["gSession"] = 135;
 
     @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ParticipantFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.ParticipantFirstName, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.ParticipantFirstName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.ParticipantFirstName, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ParticipantLastName, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.ParticipantLastName, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.ParticipantLastName, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.ParticipantLastName, "", new { @class = "text-danger" })
     </div>
 
+    //TO DO: normalize data - Jira 316
     <div class="form-group">
         @Html.LabelFor(model => model.ParticipantAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.ParticipantAge,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Age-" },
-                new SelectListItem{ Value = "Under 6", Text = "Under 6" },
-                new SelectListItem{ Value = "7-10", Text = "7-10" },
-                new SelectListItem{ Value = "11-13", Text = "11-13" },
-                new SelectListItem{ Value = "14-16", Text = "14-16" },
-                new SelectListItem{ Value = "17-21", Text = "17-18" },
-                new SelectListItem{ Value = "Over 21", Text = "Over 21" }
+                new SelectListItem{ Value = "1", Text = "Under 6" },
+                new SelectListItem{ Value = "2", Text = "7-10" },
+                new SelectListItem{ Value = "3", Text = "11-13" },
+                new SelectListItem{ Value = "4", Text = "14-16" },
+                new SelectListItem{ Value = "5", Text = "17-18" },
+                new SelectListItem{ Value = "6", Text = "Over 21" }
             }, new { @class = "form-control", style = "width: 220px" })
-        @Html.ValidationMessageFor(model => model.ParticipantLastName, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.ParticipantAge, "", new { @class = "text-danger" })
     </div>
 
-
+    //DO TO: update to use data from Attendance table (Jira SP-306)
     <div class="form-group">
-        @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(model => model.AttendingCode,
-             new List<SelectListItem>{
-               new SelectListItem{ Value = "", Text = "-Select-" },
-               new SelectListItem{ Value = "Sat-AM", Text = "Saturday - Day Only" },
-               new SelectListItem{ Value = "Overnight", Text = "Saturday - Overnight stay" }
-           }, new { @class = "form-control", style = "width: 220px" })
-        @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
+            <br />
+            @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.AttendingCode, "2", new { id = "Sat-AM" }) Saturday Only
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.AttendingCode, "3", new { id = "Overnight" }) Overnight
+            </label>
+        </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ParticipantSchool, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.ParticipantSchool, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.ParticipantSchool, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.ParticipantSchool, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ParticipantTeacher, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => model.ParticipantTeacher, htmlAttributes: new { @class = "control-label" })<br />
         @Html.EditorFor(model => model.ParticipantTeacher, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.ParticipantTeacher, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ClassroomScouting, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.RadioButtonFor(model => model.ClassroomScouting, true, new { id = "radio_ClassroomScouting_True" }) Yes
-        @Html.RadioButtonFor(model => model.ClassroomScouting, false, new { id = "radio_ClassroomScouting_False" }) No
+        <div class="btn-group" data-toggle="buttons">
+            @Html.Label("Participant in classroom scouting?")<br />
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.ClassroomScouting, true, new { id = "radio_ClassroomScouting_True" }) Yes
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.ClassroomScouting, false, new { id = "radio_ClassroomScouting_False" }) No
+            </label>
+        </div>
         @Html.ValidationMessageFor(model => model.ClassroomScouting, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Returning, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.RadioButtonFor(model => model.Returning, true, new { id = "radio_returning_true" }) Yes
-        @Html.RadioButtonFor(model => model.Returning, false, new { id = "radio_returning_false" }) No
+        <div class="btn-group" data-toggle="buttons">
+            @Html.Label("Is this your first time at camp?")<br />
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Returning, true, new { id = "radio_returning_true" }) Yes
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Returning, false, new { id = "radio_returning_false" }) No
+            </label>
+        </div>
         @Html.ValidationMessageFor(model => model.Returning, "", new { @class = "text-danger" })
     </div>
 
@@ -90,19 +106,23 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-12" })
+        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label" })<br />
         @Html.TextArea("Comments", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
     </div>
 
     <hr />
 
+    //Buttons to direct next form action
+    //add another participant
     <div class="form-group pull-right">
         <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
     </div>
+    //add a family member (non-participant) attendig
     <div class="form-group pull-right">
         <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
     </div>
+    //complete registration
     <div class="form-group pull-right">
         <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
     </div>

@@ -17,13 +17,16 @@ namespace SNCRegistration.ViewModels
         public int FamilyMemberID { get; set; }
         public string FamilyMemberFirstName { get; set; }
         public string FamilyMemberLastName { get; set; }
-        public string FamilyMemberAge { get; set; }
+        public int FamilyMemberAge { get; set; }
         public int GuardianID { get; set; }
         public Nullable<bool> HealthForm { get; set; }
         public Nullable<bool> PhotoAck { get; set; }
-        public string AttendingCode { get; set; }
+        public int AttendingCode { get; set; }
         public string Comments { get; set; }
+        public string GuardianGuid { get; set; }
     
+        public virtual Age Age { get; set; }
+        public virtual Attendance Attendance { get; set; }
         public virtual Guardian Guardian { get; set; }
     }
 }

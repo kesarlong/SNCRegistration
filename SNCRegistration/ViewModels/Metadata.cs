@@ -40,7 +40,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage ="Please enter phone number as numbers only.")]
         [Display(Name = "Cell Phone")]
-        [DisplayFormat(DataFormatString ="{0;##########}")]
+        //[DisplayFormat(DataFormatString ="{0;##########}")]
+        //TO DO: FORMAT ON SCREEN FOR DATA INPUT -- MENTOR INPUT BEING REQUESTED 
+            [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = true)]
         public string GuardianCellPhone;
 
 
@@ -73,7 +75,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         [Display(Name = "Attending")]
-        public string AttendingCode;
+        public int AttendingCode;
 
         [MaxLength(50)]
         //TO DO: this needs to be a larger field
@@ -101,10 +103,9 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         [Display(Name = "Age")]
-        public string ParticipantAge;
+        public int ParticipantAge;
 
-        //TO DO: make field not required
-        [Required]
+        //School is optional input field
         [Display(Name = "School")]
         public string ParticipantSchool;
 
@@ -124,7 +125,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         [Display(Name = "Attendance")]
-        public string AttendingCode;
+        public int AttendingCode;
 
         [Required]
         [Display(Name = "Returning")]

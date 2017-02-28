@@ -14,7 +14,33 @@ namespace SNCRegistration.ViewModels
     
     public partial class Attendance
     {
-        public int AttendanceID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Attendance()
+        {
+            this.FamilyMembers = new HashSet<FamilyMember>();
+            this.Guardians = new HashSet<Guardian>();
+            this.Guardians1 = new HashSet<Guardian>();
+            this.LeadContacts = new HashSet<LeadContact>();
+            this.Participants = new HashSet<Participant>();
+            this.Volunteers = new HashSet<Volunteer>();
+        }
+    
         public string Description { get; set; }
+        public Nullable<bool> Volunteer { get; set; }
+        public Nullable<bool> Participant { get; set; }
+        public int AttendanceID { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FamilyMember> FamilyMembers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Guardian> Guardians { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Guardian> Guardians1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeadContact> LeadContacts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Participant> Participants { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Volunteer> Volunteers { get; set; }
     }
 }
