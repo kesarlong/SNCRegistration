@@ -1,4 +1,6 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.Participant>
+﻿@*@model IEnumerable<SNCRegistration.ViewModels.Participant>*@
+@model PagedList.IPagedList<SNCRegistration.ViewModels.Participant>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Participants";
@@ -12,13 +14,30 @@
     </p>
 </div>
 
+@using (Html.BeginForm("Index", "Particpants", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("Searchring", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+
+}
+
+
+
 <table class="table table-condensed table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ParticipantFirstName)
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
+    </tr>
+    
+    @*<tr>
+        <th>
+           @Html.DisplayNameFor(model => model.ParticipantLastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ParticipantLastName)
+            @Html.DisplayNameFor(model => model.ParticipantFirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ParticipantAge)
@@ -53,15 +72,15 @@
         <th>Edit</th>
         <th>Details</th>
         <th>Delete</th>
-    </tr>
+    </tr>*@
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+            @Html.DisplayFor(modelItem => item.ParticipantLastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ParticipantLastName)
+            @Html.DisplayFor(modelItem => item.ParticipantFirstName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantAge)
@@ -100,4 +119,7 @@
 }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
