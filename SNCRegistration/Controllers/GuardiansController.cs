@@ -68,21 +68,30 @@ namespace SNCRegistration.Controllers
             if (ModelState.IsValid)
                 
             {
+
                 db.Guardians.Add(guardian);
 
                 var myGuid = Guid.NewGuid().ToString();
-                guardian.GuardianGuid= myGuid;
+                guardian.GuardianGuid = myGuid;
+
+
 
                 try
                 {
+                  
                     db.SaveChanges();
                     this.Session["gSession"] = guardian.GuardianGuid;
-                    this.Session["myID"] = guardian.GuardianID;
+
+                    //pass the guardianID to child form as FK                    
+                    TempData["myPK"] = guardian.GuardianID;
+                    TempData.Keep();
 
                     //RouteData.Values.Remove("id");
 
                     return RedirectToAction("Create", "Participants", new { GuardianGuid = this.Session["gSession"] });
-                    //return View("Create", "Participants");
+
+
+                    return View("Create", "Participants");
 
 
                 }
@@ -99,9 +108,7 @@ namespace SNCRegistration.Controllers
 
                 
             }
-
-           
-
+            
             return View(guardian);
         }
 

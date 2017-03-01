@@ -73,6 +73,12 @@ namespace SNCRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(TempData["myPK"]!=null)
+                {
+                    participant.GuardianID = (int)TempData["myPK"];
+                }
+
+
                 db.Participants.Add(participant);
 
                 try
@@ -81,14 +87,15 @@ namespace SNCRegistration.Controllers
 
                     this.Session["gSession"] = participant.GuardianGuid;
 
+
                     if (Request["submit"].Equals("Add another participant"))
                         //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid }); }
 
 
                     if (Request["submit"].Equals("Add a family member"))
                         //add a family member
-                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid =participant.GuardianGuid }); }
 
                     if (Request["submit"].Equals("Complete registration"))
                         //registration complete, no more people to add

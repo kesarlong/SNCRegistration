@@ -43,32 +43,35 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,FamilyMemberAge")] FamilyMember familyMember)
+        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,FamilyMemberAge,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,GuardianGuid")] FamilyMember familyMember)
         {
             if (ModelState.IsValid)
             {
-                //familyMember.GuardianID = (int)Session["gSession"];
                 db.FamilyMembers.Add(familyMember);
 
                 try
                 {
+                    if (TempData["myPK"] != null)
+                    {
+                        familyMember.GuardianID = (int)TempData["myPK"];
+                    }
+
                     db.SaveChanges();
+
                     this.Session["gSession"] = familyMember.GuardianGuid;
-                    //return RedirectToAction("Create", "FamilyMembers", new { GuardianID = this.Session["gSession"]});
+                    
 
                     if (Request["submit"].Equals("Add another participant"))
                     //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = this.Session["gSession"] }); }
 
                     if (Request["submit"].Equals("Add a family member"))
                     //add a family member
-                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = this.Session["gSession"] }); }
 
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
-                    {
-                        return Redirect("Registered");
-                    }
+                    {return Redirect("Registered");}
                 }
                 catch (DbEntityValidationException ex)
                 {
