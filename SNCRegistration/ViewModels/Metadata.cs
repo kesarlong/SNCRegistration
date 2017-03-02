@@ -117,11 +117,16 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Classroom Scouting")]
         public bool ClassroomScouting;
 
+        [UIHint("Boolean")]
         [Display(Name = "Health Form")]
         public bool? HealthForm;
 
+
+        [UIHint("Boolean")]
         [Display(Name = "Photo Acknowledgment")]
         public bool? PhotoAck;
+        
+
 
         [Required]
         [Display(Name = "Attendance")]
@@ -290,4 +295,5 @@ namespace SNCRegistration.ViewModels.Metadata
 
 
     }
+
     }

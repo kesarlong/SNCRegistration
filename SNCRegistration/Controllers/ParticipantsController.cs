@@ -8,6 +8,7 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
+using PagedList;
 
 namespace SNCRegistration.Controllers
 {
@@ -17,23 +18,60 @@ namespace SNCRegistration.Controllers
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Participants
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            try
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
             {
-                return View(db.Participants.ToList());
+                page = 1;
             }
-            catch (DbEntityValidationException ex)
+            else
             {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                    }
-                }
+                searchString = currentFilter;
             }
-            return View(db.Participants.ToList());
+
+            ViewBag.CurrentFilter = searchString;
+
+            var participants = from p in db.Participants
+                               select p;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                participants = participants.Where(p => p.ParticipantLastName.Contains(searchString) || p.ParticipantFirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    participants = participants.OrderByDescending(p => p.ParticipantLastName);
+                    break;
+                default:
+                    participants = participants.OrderBy(p => p.ParticipantLastName);
+                    break;
+            }
+
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(participants.ToPagedList(pageNumber, pageSize));
+
+            //try
+            //{
+            //    return View(db.Participants.ToList());
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in entityValidationErrors.ValidationErrors)
+            //        {
+            //            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+            //        }
+            //    }
+            //}
+            //return View(db.Participants.ToList());
         }
 
 
@@ -116,6 +154,7 @@ namespace SNCRegistration.Controllers
             return View(participant);
         }
 
+
         // GET: Participants/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -134,18 +173,49 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
+        public ActionResult EditPost(int? id) 
         {
-            if (ModelState.IsValid)
+            if (id==null)
             {
-                db.Entry(participant).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(participant);
+            var participantToUpdate = db.Participants.Find(id);
+
+            if(TryUpdateModel(participantToUpdate, "",
+                new string[] { "ParticipantFirstName","ParticipantLastName","ParticipantAge","ParticipantSchool","ParticipantTeacher","ClassroomScouting","HealthForm","PhotoAck","AttendingCode","GuardianID","Comments"}))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /*dex*/)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(participantToUpdate);
         }
+
+        // Default post edit
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(participant).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(participant);
+        //}
+
+
 
         // GET: Participants/Delete/5
         public ActionResult Delete(int? id)
@@ -202,6 +272,7 @@ namespace SNCRegistration.Controllers
         {
             return View();
         }
+
 
 
     }
