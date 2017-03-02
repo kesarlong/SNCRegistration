@@ -8,7 +8,7 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
-using PagedList;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -18,60 +18,23 @@ namespace SNCRegistration.Controllers
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Participants
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index()
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-
-            if (searchString != null)
+            try
             {
-                page = 1;
+                return View(db.Participants.ToList());
             }
-            else
+            catch (DbEntityValidationException ex)
             {
-                searchString = currentFilter;
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
             }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var participants = from p in db.Participants
-                               select p;
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                participants = participants.Where(p => p.ParticipantLastName.Contains(searchString) || p.ParticipantFirstName.Contains(searchString));
-            }
-
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    participants = participants.OrderByDescending(p => p.ParticipantLastName);
-                    break;
-                default:
-                    participants = participants.OrderBy(p => p.ParticipantLastName);
-                    break;
-            }
-
-
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(participants.ToPagedList(pageNumber, pageSize));
-
-            //try
-            //{
-            //    return View(db.Participants.ToList());
-            //}
-            //catch (DbEntityValidationException ex)
-            //{
-            //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-            //    {
-            //        foreach (var validationError in entityValidationErrors.ValidationErrors)
-            //        {
-            //            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-            //        }
-            //    }
-            //}
-            //return View(db.Participants.ToList());
+            return View(db.Participants.ToList());
         }
 
 
@@ -92,7 +55,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        public ActionResult Create(int GuardianID) 
+        public ActionResult Create() 
         {
 
             return View();
@@ -105,27 +68,34 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,Comments"),
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments"),
             ] Participant participant,string submit)
         {
             if (ModelState.IsValid)
             {
+                if(TempData["myPK"]!=null)
+                {
+                    participant.GuardianID = (int)TempData["myPK"];
+                }
+
+
                 db.Participants.Add(participant);
 
                 try
                 {
                     db.SaveChanges();
 
-                    this.Session["gSession"] = participant.GuardianID;
+                    this.Session["gSession"] = participant.GuardianGuid;
+
 
                     if (Request["submit"].Equals("Add another participant"))
                         //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid }); }
 
 
                     if (Request["submit"].Equals("Add a family member"))
                         //add a family member
-                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid =participant.GuardianGuid }); }
 
                     if (Request["submit"].Equals("Complete registration"))
                         //registration complete, no more people to add
@@ -154,7 +124,6 @@ namespace SNCRegistration.Controllers
             return View(participant);
         }
 
-
         // GET: Participants/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -173,49 +142,18 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id) 
+        public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
         {
-            if (id==null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.Entry(participant).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            var participantToUpdate = db.Participants.Find(id);
-
-            if(TryUpdateModel(participantToUpdate, "",
-                new string[] { "ParticipantFirstName","ParticipantLastName","ParticipantAge","ParticipantSchool","ParticipantTeacher","ClassroomScouting","HealthForm","PhotoAck","AttendingCode","GuardianID","Comments"}))
-            {
-                try
-                {
-                    db.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-                catch (DataException /*dex*/)
-                {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                }
-            }
-            return View(participantToUpdate);
+            return View(participant);
         }
-
-        // Default post edit
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(participant).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(participant);
-        //}
-
-
 
         // GET: Participants/Delete/5
         public ActionResult Delete(int? id)
@@ -272,7 +210,6 @@ namespace SNCRegistration.Controllers
         {
             return View();
         }
-
 
 
     }

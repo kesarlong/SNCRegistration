@@ -13,7 +13,7 @@
     //to do: remove - testsing only
     //Session["gSession"] = 271;
 
-    @Html.HiddenFor(model => model.GuardianID, new { @Value = (int)Session["gSession"] })
+    @Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gSession"] })
 
     <div class="form-group">
         @Html.LabelFor(model => model.FamilyMemberFirstName, htmlAttributes: new { @class = "control-label" })<br />
@@ -27,9 +27,9 @@
         @Html.ValidationMessageFor(model => model.FamilyMemberLastName, "", new { @class = "text-danger" })
     </div>
 
-    //TO DO: NORMALIZE: use data from age table (Jira SP-304)
+    //TO DO: normalize data - Jira 316
     <div class="form-group">
-        @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })<br />
+        @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.FamilyMemberAge,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Age-" },
@@ -43,7 +43,7 @@
         @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
     </div>
 
-    //TO DO:NORMALIZE - use data from attendance table (Jira-306)
+    //DO TO: update to use data from Attendance table (Jira SP-306)
     <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
             @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
@@ -70,20 +70,21 @@
 
     <hr />
 
-
+    //Buttons to direct next form action
+    //add another participant
     <div class="form-group pull-right">
         <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
     </div>
+    //add a family member (non-participant) attendig
     <div class="form-group pull-right">
         <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
     </div>
+    //complete registration
     <div class="form-group pull-right">
         <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
     </div>
+
 }
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
