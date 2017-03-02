@@ -52,16 +52,14 @@ namespace SNCRegistration.Controllers
             if (ModelState.IsValid)
             {
                 db.LeadContacts.Add(leadContact);
-                var myGuid = Guid.NewGuid().ToString();
-                leadContact.LeaderGuid = myGuid;
 
                 try
                 {
                     db.SaveChanges();
-                    this.Session["lSession"] = leadContact.LeaderGuid;
+                    this.Session["lSession"] = leadContact.LeadContactID;
                     TempData["myPK"] = leadContact.LeadContactID;
                     TempData.Keep();
-                    return RedirectToAction("Create", "Volunteers", new { LeaderGuid = this.Session["lSession"] });
+                    return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
                 }
                 catch (DbEntityValidationException ex)
                 {
