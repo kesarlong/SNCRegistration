@@ -6,3 +6,5 @@
 *.vs
 *.suo
 *.cache
+
+.vs/config/applicationhost.config
