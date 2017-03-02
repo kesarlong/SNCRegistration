@@ -8,10 +8,7 @@
 }
 
 <div class="panel-body">
-    <h2>Participants</h2>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    <h2>Participant List</h2>
 </div>
 
 @using (Html.BeginForm("Index", "Participants", FormMethod.Get))
@@ -30,9 +27,48 @@
         <th>
             @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            School
+        </th>
+        <th>
+            Details
+        </th>
     </tr>
     
-    @*<tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantAge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantSchool)
+        </td>
+
+        @*<td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>*@
+        <td>@Html.ActionLink("Details", "Details", new { id=item.ParticipantID })</td>
+        @*<td>@Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })</td>*@
+    </tr>
+}
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+@*<tr>
         <th>
            @Html.DisplayNameFor(model => model.ParticipantLastName)
         </th>
@@ -73,8 +109,10 @@
         <th>Details</th>
         <th>Delete</th>
     </tr>*@
-
-@foreach (var item in Model) {
+@*
+original string    
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantLastName)
@@ -112,14 +150,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.Comments)
         </td>
-        <td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>
-        <td>@Html.ActionLink("Details", "Details", new { id=item.ParticipantID })</td>
-        <td>@Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })</td>
+        <td>@Html.ActionLink("Edit", "Edit", new { id = item.ParticipantID })</td>
+        <td>@Html.ActionLink("Details", "Details", new { id = item.ParticipantID })</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = item.ParticipantID })</td>
     </tr>
-}
-
-</table>
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+}*@

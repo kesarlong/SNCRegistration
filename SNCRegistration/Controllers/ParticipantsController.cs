@@ -154,6 +154,7 @@ namespace SNCRegistration.Controllers
             return View(participant);
         }
 
+
         // GET: Participants/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -172,18 +173,49 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
+        public ActionResult EditPost(int? id) 
         {
-            if (ModelState.IsValid)
+            if (id==null)
             {
-                db.Entry(participant).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(participant);
+            var participantToUpdate = db.Participants.Find(id);
+
+            if(TryUpdateModel(participantToUpdate, "",
+                new string[] { "ParticipantFirstName","ParticipantLastName","ParticipantAge","ParticipantSchool","ParticipantTeacher","ClassroomScouting","HealthForm","PhotoAck","AttendingCode","GuardianID","Comments"}))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /*dex*/)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(participantToUpdate);
         }
+
+        // Default post edit
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(participant).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(participant);
+        //}
+
+
 
         // GET: Participants/Delete/5
         public ActionResult Delete(int? id)
@@ -240,6 +272,7 @@ namespace SNCRegistration.Controllers
         {
             return View();
         }
+
 
 
     }

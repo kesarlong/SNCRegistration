@@ -427,7 +427,6 @@ C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.S
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\roslyn\csc.exe
