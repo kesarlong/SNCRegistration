@@ -62,10 +62,15 @@ namespace SNCRegistration.Controllers
 
                 db.Volunteers.Add(volunteer);
 
+                if (TempData["myPK"] != null)
+                {
+                    volunteer.LeadContactID = (int)TempData["myPK"];
+                }
+
                 try
                 {
                     db.SaveChanges();
-                    this.Session["lSession"] = volunteer.LeadContactID;
+                    this.Session["lSession"] = volunteer.LeaderGuid;
                         if (Request["submit"].Equals("Add an additional volunteer"))
                     { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
 
