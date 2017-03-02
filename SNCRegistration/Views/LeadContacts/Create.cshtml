@@ -65,14 +65,65 @@
                 @Html.ValidationMessageFor(model => model.LeadContactCity, "", new { @class = "text-danger" })
             </div>
         </div>
-        <br />
-        @Html.LabelFor(model => model.LeadContactState, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="row">
-
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.LeadContactState, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LeadContactState, "", new { @class = "text-danger" })
-            </div>
+        <br />     
+        <div class="form-group">
+            @Html.LabelFor(model => model.LeadContactState, htmlAttributes: new { @class = "control-label" })<br />
+            @Html.DropDownListFor(model => model.LeadContactState,
+             new List<SelectListItem>
+             {
+                 new SelectListItem() {Text="Alabama", Value="AL"},
+                    new SelectListItem() { Text="Alaska", Value="AK"},
+                    new SelectListItem() { Text="Arizona", Value="AZ"},
+                    new SelectListItem() { Text="Arkansas", Value="AR"},
+                    new SelectListItem() { Text="California", Value="CA"},
+                    new SelectListItem() { Text="Colorado", Value="CO"},
+                    new SelectListItem() { Text="Connecticut", Value="CT"},
+                    new SelectListItem() { Text="District of Columbia", Value="DC"},
+                    new SelectListItem() { Text="Delaware", Value="DE"},
+                    new SelectListItem() { Text="Florida", Value="FL", Selected=true},
+                    new SelectListItem() { Text="Georgia", Value="GA"},
+                    new SelectListItem() { Text="Hawaii", Value="HI"},
+                    new SelectListItem() { Text="Idaho", Value="ID"},
+                    new SelectListItem() { Text="Illinois", Value="IL"},
+                    new SelectListItem() { Text="Indiana", Value="IN"},
+                    new SelectListItem() { Text="Iowa", Value="IA"},
+                    new SelectListItem() { Text="Kansas", Value="KS"},
+                    new SelectListItem() { Text="Kentucky", Value="KY"},
+                    new SelectListItem() { Text="Louisiana", Value="LA"},
+                    new SelectListItem() { Text="Maine", Value="ME"},
+                    new SelectListItem() { Text="Maryland", Value="MD"},
+                    new SelectListItem() { Text="Massachusetts", Value="MA"},
+                    new SelectListItem() { Text="Michigan", Value="MI"},
+                    new SelectListItem() { Text="Minnesota", Value="MN"},
+                    new SelectListItem() { Text="Mississippi", Value="MS"},
+                    new SelectListItem() { Text="Missouri", Value="MO"},
+                    new SelectListItem() { Text="Montana", Value="MT"},
+                    new SelectListItem() { Text="Nebraska", Value="NE"},
+                    new SelectListItem() { Text="Nevada", Value="NV"},
+                    new SelectListItem() { Text="New Hampshire", Value="NH"},
+                    new SelectListItem() { Text="New Jersey", Value="NJ"},
+                    new SelectListItem() { Text="New Mexico", Value="NM"},
+                    new SelectListItem() { Text="New York", Value="NY"},
+                    new SelectListItem() { Text="North Carolina", Value="NC"},
+                    new SelectListItem() { Text="North Dakota", Value="ND"},
+                    new SelectListItem() { Text="Ohio", Value="OH"},
+                    new SelectListItem() { Text="Oklahoma", Value="OK"},
+                    new SelectListItem() { Text="Oregon", Value="OR"},
+                    new SelectListItem() { Text="Pennsylvania", Value="PA"},
+                    new SelectListItem() { Text="Rhode Island", Value="RI"},
+                    new SelectListItem() { Text="South Carolina", Value="SC"},
+                    new SelectListItem() { Text="South Dakota", Value="SD"},
+                    new SelectListItem() { Text="Tennessee", Value="TN"},
+                    new SelectListItem() { Text="Texas", Value="TX"},
+                    new SelectListItem() { Text="Utah", Value="UT"},
+                    new SelectListItem() { Text="Vermont", Value="VT"},
+                    new SelectListItem() { Text="Virginia", Value="VA"},
+                    new SelectListItem() { Text="Washington", Value="WA"},
+                    new SelectListItem() { Text="West Virginia", Value="WV"},
+                    new SelectListItem() { Text="Wisconsin", Value="WI"},
+                    new SelectListItem() { Text="Wyoming", Value="WY"}
+                    }, new { @class = "form-control", style = "width: 220px" })
+            @Html.ValidationMessageFor(model => model.LeadContactState, "", new { @class = "text-danger" })
         </div>
         <br />
     @Html.LabelFor(model => model.LeadContactZip, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -102,15 +153,19 @@
                 </div>
             </div>
             <br />
-        <div class="row">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.LeadContactShirtOrder, htmlAttributes: new { @class = "control-label col-md-3" })
-                @Html.RadioButtonFor(model => model.LeadContactShirtOrder, true, new { id = "radio_LeadContactShirtOrder_True switch" }) Yes
-                @Html.RadioButtonFor(model => model.LeadContactShirtOrder, false, new { id = "radio_LeadContactShirtOrder_False switch" }) No
+                <div class="btn-group" data-toggle="buttons">
+                    @Html.LabelFor(model => model.LeadContactShirtOrder, htmlAttributes: new { @class = "control-label" })<br />
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.LeadContactShirtOrder, true, new { id = "shirt_Order_True" }) Yes
+                    </label>
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.LeadContactShirtOrder, false, new { id = "shirt_Order_False" }) No
+                    </label>
+                </div>
                 @Html.ValidationMessageFor(model => model.LeadContactShirtOrder, "", new { @class = "text-danger" })
             </div>
-        </div>
         <br />
 
         <div id="ShirtSize">
@@ -118,17 +173,17 @@
                 @Html.LabelFor(model => model.LeadContactShirtSize, htmlAttributes: new { @class = "control-label" })
                 @Html.DropDownListFor(model => model.LeadContactShirtSize,
             new List<SelectListItem>{
-                new SelectListItem{ Value = "", Text = "-Select Size-" },
-                 new SelectListItem{ Value = "YX", Text = "Youth - Extra Small" },
+                new SelectListItem{ Value = "00", Text = "-Select Size-" },
+                 new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
                 new SelectListItem{ Value = "YS", Text = "Youth - Small" },
                 new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
                 new SelectListItem{ Value = "YL", Text = "Youth - Large" },
-                new SelectListItem{ Value = "YX", Text = "Youth - Extra Large" },
-                new SelectListItem{ Value = "YX", Text = "Adult - Extra Small" },
-                new SelectListItem{ Value = "YS", Text = "Adult - Small" },
-                new SelectListItem{ Value = "YM", Text = "Adult - Medium" },
-                new SelectListItem{ Value = "YL", Text = "Adult - Large" },
-                new SelectListItem{ Value = "YX", Text = "Adult - Extra Large" },
+                new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
+                new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
+                new SelectListItem{ Value = "AS", Text = "Adult - Small" },
+                new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
+                new SelectListItem{ Value = "AL", Text = "Adult - Large" },
+                new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" },
             }, new { @class = "form-control", style = "width: 200px" })
                 @Html.ValidationMessageFor(model => model.LeadContactShirtSize, "", new { @class = "text-danger" })
             </div>
@@ -139,9 +194,9 @@
         @Html.DropDownListFor(model => model.BSType,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Type-" },
-                new SelectListItem{ Value = "TroopCrew", Text = "Troop/Crew" },
-                new SelectListItem{ Value = "OAChapter", Text = "OA Chapter" },
-                new SelectListItem{ Value = "Individual", Text = "Individual" }
+                new SelectListItem{ Value = "1", Text = "Troop/Crew" },
+                new SelectListItem{ Value = "2", Text = "OA Chapter" },
+                new SelectListItem{ Value = "3", Text = "Individual" }
             }, new { @class = "form-control", style = "width: 200px" })
         @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
     </div>
@@ -160,22 +215,25 @@
         @Html.DropDownListFor(model => model.VolunteerAttendingCode,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select-" },
-                new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
-                new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
-                new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+                new SelectListItem{ Value = "1", Text = "Friday Evening Only" },
+                new SelectListItem{ Value = "2", Text = "Saturday Only" },
+                new SelectListItem{ Value = "4", Text = "Friday through Sunday" }
             }, new { @class = "form-control", style = "width: 200px" })
         @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
     </div>
     <br />
-    <div class="row">
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label col-md-3" })
-            @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "radio_LeadContactShirtOrder_True" }) Yes
-            @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "radio_LeadContactShirtOrder_False" }) No
+         <div class="form-group">
+            <div class="btn-group" data-toggle="buttons">
+                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
+                </label>
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False" }) No
+                </label>
+            </div>
             @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
         </div>
-    </div>
     <br />
     @Html.LabelFor(model => model.Booth, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
@@ -194,10 +252,12 @@
             @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
         </div>
     </div>
+    @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0})
     <div>
         <!--set default values for fields not set in initial form-->
         @Html.HiddenFor(model => model.TotalFee, new { @Value = 0 })
         @*@Html.HiddenFor(model => model.LeadContactID, new { @Value = (int)Session["lSession"] })*@
+        @*@Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0})*@
     </div>
     <hr />
     <div class="form-group pull-right">
