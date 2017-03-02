@@ -47,17 +47,21 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactCellPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize")] LeadContact leadContact)
+        public ActionResult Create([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactCellPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize, LeaderGuid")] LeadContact leadContact)
         {
             if (ModelState.IsValid)
             {
                 db.LeadContacts.Add(leadContact);
+                var myGuid = Guid.NewGuid().ToString();
+                leadContact.LeaderGuid = myGuid;
 
                 try
                 {
                     db.SaveChanges();
-                    this.Session["lSession"] = leadContact.LeadContactID;
-                    return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
+                    this.Session["lSession"] = leadContact.LeaderGuid;
+                    TempData["myPK"] = leadContact.LeadContactID;
+                    TempData.Keep();
+                    return RedirectToAction("Create", "Volunteers", new { LeaderGuid = this.Session["lSession"] });
                 }
                 catch (DbEntityValidationException ex)
                 {

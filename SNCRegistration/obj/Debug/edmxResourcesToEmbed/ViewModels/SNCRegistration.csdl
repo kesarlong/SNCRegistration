@@ -177,7 +177,7 @@
     <Property Name="PhotoAck" Type="Boolean" />
     <Property Name="AttendingCode" Type="Int32" Nullable="false" />
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C" FromRole="FamilyMember" ToRole="Age" />
     <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__FamilyMem__Atten__4D5F7D71" FromRole="FamilyMember" ToRole="Attendance" />
     <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="FamilyMember" ToRole="Guardian" />
@@ -204,7 +204,7 @@
     <Property Name="Tent" Type="Boolean" />
     <Property Name="AttendingCode" Type="Int32" Nullable="false" />
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__Guardians__Atten__43D61337" FromRole="Guardian" ToRole="Attendance" />
     <NavigationProperty Name="Attendance1" Relationship="SNCRegistrationModel.FK__Guardians__Atten__4E53A1AA" FromRole="Guardian" ToRole="Attendance" />
     <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="Guardian" ToRole="FamilyMember" />
@@ -233,7 +233,7 @@
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LeadContactShirtOrder" Type="Boolean" Nullable="false" />
     <Property Name="LeadContactShirtSize" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="LeaderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LeaderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__LeadConta__Volun__503BEA1C" FromRole="LeadContact" ToRole="Attendance" />
     <NavigationProperty Name="BSType1" Relationship="SNCRegistrationModel.FK__LeadConta__BSTyp__42E1EEFE" FromRole="LeadContact" ToRole="BSType" />
     <NavigationProperty Name="ShirtSize" Relationship="SNCRegistrationModel.FK__LeadConta__LeadC__4A8310C6" FromRole="LeadContact" ToRole="ShirtSize" />
@@ -255,7 +255,7 @@
     <Property Name="AttendingCode" Type="Int32" Nullable="false" />
     <Property Name="GuardianID" Type="Int32" />
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Participa__Parti__41EDCAC5" FromRole="Participant" ToRole="Age" />
     <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__Participa__Atten__4F47C5E3" FromRole="Participant" ToRole="Attendance" />
     <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Participant" ToRole="Guardian" />
@@ -292,7 +292,7 @@
     <Property Name="SaturdayDinner" Type="Boolean" />
     <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="LeaderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LeaderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__3E1D39E1" FromRole="Volunteer" ToRole="Age" />
     <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__51300E55" FromRole="Volunteer" ToRole="Attendance" />
     <NavigationProperty Name="ShirtSize" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__4B7734FF" FromRole="Volunteer" ToRole="ShirtSize" />
