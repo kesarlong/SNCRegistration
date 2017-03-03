@@ -6,11 +6,4 @@
 *.vs
 *.suo
 *.cache
-
-.vs/config/applicationhost.config
-.vs/config/applicationhost.config
-SNCRegistration/obj/Debug/SNCRegistration.csproj.FileListAbsolute.txt
-.vs/config/applicationhost.config
-SNCRegistration/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-.vs/config/applicationhost.config
-SNCRegistration/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.dll
