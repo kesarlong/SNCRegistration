@@ -113,7 +113,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label" })<br />
 
-       @* //TO DO: USE THE DATA SOURCE FOR ATTENDANCE (SP-316)*@
+        @* //TO DO: USE THE DATA SOURCE FOR ATTENDANCE (SP-316)*@
         @Html.DropDownListFor(model => model.Relationship,
           new List<SelectListItem>{
             new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
@@ -128,7 +128,7 @@
 
 
         @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
-     </div>
+    </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianEmail, htmlAttributes: new { @class = "control-label" })<br />
@@ -147,14 +147,22 @@
     //TO DO: Jira-306 - change to look up values from attendance table
     <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
-            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })<br />
-            @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "2", new { id = "Sat-AM" }) Saturday Only
-            </label>
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "3", new { id = "Overnight" }) Overnight
-            </label>
+            @*to do: remove*@
+            @*@Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })<br />
+                @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.AttendingCode, "2", new { id = "Sat-AM" }) Saturday Only
+                </label>
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.AttendingCode, "3", new { id = "Overnight" }) Overnight
+                </label>*@
+
+            @Html.DropDownListFor(model => model.AttendingCode,
+           new List<SelectListItem>
+           {
+               new SelectListItem
+           }
+           )
         </div>
     </div>
 
@@ -185,14 +193,14 @@
 
 
     <hr />
-    
-        <div class="form-group pull-left">
-            <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
-        </div>
 
-        <div class="form-group pull-right">
-            <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Cancel"/>
-        </div>
+    <div class="form-group pull-left">
+        <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
+    </div>
+
+    <div class="form-group pull-right">
+        <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Cancel" />
+    </div>
 
 }
 
