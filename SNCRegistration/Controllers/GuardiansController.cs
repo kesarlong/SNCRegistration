@@ -9,6 +9,8 @@ using System.Net.Mime;
 using System.Data.Entity.Validation;
 using System;
 
+
+
 namespace SNCRegistration.Controllers
 {
     public class GuardiansController : Controller
@@ -73,19 +75,31 @@ namespace SNCRegistration.Controllers
 
                 db.Guardians.Add(guardian);
 
+                //create GUID for record ID
                 var myGuid = Guid.NewGuid().ToString();
                 guardian.GuardianGuid = myGuid;
+             
+                //store event year -- to do fix not working
+                if (TempData["myYear"] != null)
+                {
+                    guardian.EventYear = (int)TempData["myYear"];
+                }
 
-
+                //to do: fix - static value needs to be dynamic
+                guardian.EventYear = 2017;
 
                 try
                 {
                   
                     db.SaveChanges();
 
+
                     //pass the guardianID to child form as FK                    
                     TempData["myPK"] = guardian.GuardianID;
                     TempData.Keep();
+
+
+
 
                     return RedirectToAction("Create", "Participants", new { GuardianGuid = guardian.GuardianGuid});
 
@@ -183,6 +197,6 @@ namespace SNCRegistration.Controllers
             return RedirectToAction("Index");
         }
 
-
+        
     }
 }

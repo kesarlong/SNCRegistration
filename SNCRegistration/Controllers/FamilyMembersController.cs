@@ -47,6 +47,10 @@ namespace SNCRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                //to do: fix - static value needs to be dynamic
+                familyMember.EventYear = 2017;
+
                 db.FamilyMembers.Add(familyMember);
 
                 try
