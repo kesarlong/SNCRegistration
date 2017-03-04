@@ -1,0 +1,35 @@
+﻿@model SNCRegistration.ViewModels.Participant
+
+@{
+    ViewBag.Title = "Redirect";
+    Layout = "~/Views/Shared/_LayoutRegister.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <h4>Your entry has been cleared.  Please select an option to continue.</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    //Buttons to direct next form action
+
+    //complete registration
+    <div class="form-group pull-left">
+        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+    </div>
+
+
+    //add another participant
+    <div class="form-group pull-left">
+        <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
+    </div>
+
+    //add a family member (non-participant) attendig
+    <div class="form-group pull-left">
+        <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
+    </div>
+
+
+}

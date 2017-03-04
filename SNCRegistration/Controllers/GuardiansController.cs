@@ -57,6 +57,8 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
+        
+
 
         // POST: Guardians/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -80,19 +82,12 @@ namespace SNCRegistration.Controllers
                 {
                   
                     db.SaveChanges();
-                    this.Session["gSession"] = guardian.GuardianGuid;
 
                     //pass the guardianID to child form as FK                    
                     TempData["myPK"] = guardian.GuardianID;
                     TempData.Keep();
 
-                    //RouteData.Values.Remove("id");
-
-                    return RedirectToAction("Create", "Participants", new { GuardianGuid = this.Session["gSession"] });
-
-
-                    return View("Create", "Participants");
-
+                    return RedirectToAction("Create", "Participants", new { GuardianGuid = guardian.GuardianGuid});
 
                 }
                 catch (DbEntityValidationException ex)
@@ -187,8 +182,6 @@ namespace SNCRegistration.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-       
 
 
     }

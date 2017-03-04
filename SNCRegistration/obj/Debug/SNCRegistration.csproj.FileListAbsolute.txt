@@ -570,7 +570,6 @@ C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsof
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
