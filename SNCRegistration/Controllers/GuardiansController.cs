@@ -7,7 +7,7 @@ using SNCRegistration.ViewModels;
 using System.IO;
 using System.Net.Mime;
 using System.Data.Entity.Validation;
-
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -57,28 +57,37 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
+        
+
 
         // POST: Guardians/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianState,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
+        public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianState,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship,GuardianGuid")] Guardian guardian)
         {
             if (ModelState.IsValid)
                 
             {
+
                 db.Guardians.Add(guardian);
+
+                var myGuid = Guid.NewGuid().ToString();
+                guardian.GuardianGuid = myGuid;
+
 
 
                 try
                 {
+                  
                     db.SaveChanges();
-                    this.Session["gSession"] = guardian.GuardianID;
-                    RouteData.Values.Remove("id");
-                    return RedirectToAction("Create", "Participants", new { GuardianId = this.Session["gSession"] });
-                    //return View("Create", "Participants");
 
+                    //pass the guardianID to child form as FK                    
+                    TempData["myPK"] = guardian.GuardianID;
+                    TempData.Keep();
+
+                    return RedirectToAction("Create", "Participants", new { GuardianGuid = guardian.GuardianGuid});
 
                 }
                 catch (DbEntityValidationException ex)
@@ -94,9 +103,7 @@ namespace SNCRegistration.Controllers
 
                 
             }
-
-           
-
+            
             return View(guardian);
         }
 
@@ -175,8 +182,6 @@ namespace SNCRegistration.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-       
 
 
     }
