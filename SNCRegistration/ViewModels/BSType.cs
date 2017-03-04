@@ -14,16 +14,7 @@ namespace SNCRegistration.ViewModels
     
     public partial class BSType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BSType()
-        {
-            this.LeadContacts = new HashSet<LeadContact>();
-        }
-    
         public int BSTypeID { get; set; }
         public string BSTypeDescription { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LeadContact> LeadContacts { get; set; }
     }
 }

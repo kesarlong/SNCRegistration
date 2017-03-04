@@ -309,6 +309,9 @@
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Event.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\FamilyMember.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>

@@ -24,9 +24,11 @@ namespace SNCRegistration.ViewModels
         public int AttendingCode { get; set; }
         public string Comments { get; set; }
         public string GuardianGuid { get; set; }
+        public Nullable<bool> CheckedIn { get; set; }
+        public int EventYear { get; set; }
     
         public virtual Age Age { get; set; }
-        public virtual Attendance Attendance { get; set; }
+        public virtual Event Event { get; set; }
         public virtual Guardian Guardian { get; set; }
     }
 }

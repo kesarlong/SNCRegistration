@@ -26,9 +26,10 @@ namespace SNCRegistration.ViewModels
         public string UnitChapterNumber { get; set; }
         public string Comments { get; set; }
         public string LeaderGuid { get; set; }
+        public Nullable<bool> CheckedIn { get; set; }
+        public int EventYear { get; set; }
     
         public virtual Age Age { get; set; }
-        public virtual Attendance Attendance { get; set; }
-        public virtual ShirtSize ShirtSize { get; set; }
+        public virtual Event Event { get; set; }
     }
 }
