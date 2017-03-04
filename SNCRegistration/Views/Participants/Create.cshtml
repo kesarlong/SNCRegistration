@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_LayoutRegister.cshtml";
 }
 
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -13,11 +11,9 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    //to do: remove - tessing only
-    //Session["gSession"] = 135;
 
-    @Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gSession"] })
-    
+    @*@Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gSession"] })*@
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.ParticipantFirstName, htmlAttributes: new { @class = "control-label" })<br />
@@ -115,20 +111,29 @@
     <hr />
 
     //Buttons to direct next form action
-    //add another participant
-    <div class="form-group pull-right">
-        <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
-    </div>
-    //add a family member (non-participant) attendig
-    <div class="form-group pull-right">
-        <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
-    </div>
+
     //complete registration
-    <div class="form-group pull-right">
+    <div class="form-group pull-left">
         <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
     </div>
-}
 
+
+    //add another participant
+    <div class="form-group pull-left">
+        <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
+    </div>
+
+    //add a family member (non-participant) attendig
+    <div class="form-group pull-left">
+        <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
+    </div>
+
+
+
+    <div class="form-group pull-right">
+        <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");"/>
+    </div>
+}
 
 @section Scripts
         {
