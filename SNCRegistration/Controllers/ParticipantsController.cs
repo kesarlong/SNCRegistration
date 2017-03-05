@@ -92,6 +92,9 @@ namespace SNCRegistration.Controllers
                 }
 
 
+                //to do: fix - static value needs to be dynamic
+                participant.EventYear = 2017;
+
                 db.Participants.Add(participant);
 
 

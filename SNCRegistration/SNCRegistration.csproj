@@ -268,6 +268,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -307,6 +308,9 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\C__MigrationHistory.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Event.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FamilyMember.cs">
@@ -577,6 +581,11 @@
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Participants\Redirect.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\Delete.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />

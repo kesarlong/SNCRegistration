@@ -63,6 +63,14 @@
           <Property Name="BSTypeID" Type="int" Nullable="false" />
           <Property Name="BSTypeDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventYear" />
+          </Key>
+          <Property Name="EventYear" Type="int" Nullable="false" />
+          <Property Name="Enrollment" Type="bit" Nullable="false" />
+          <Property Name="Reporting" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="FamilyMembers">
           <Key>
             <PropertyRef Name="FamilyMemberID" />
@@ -77,6 +85,8 @@
           <Property Name="AttendingCode" Type="int" Nullable="false" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
           <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckedIn" Type="bit" />
+          <Property Name="EventYear" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Guardians">
           <Key>
@@ -101,6 +111,8 @@
           <Property Name="AttendingCode" Type="int" Nullable="false" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
           <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckedIn" Type="bit" />
+          <Property Name="EventYear" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LeadContacts">
           <Key>
@@ -125,6 +137,9 @@
           <Property Name="LeadContactShirtOrder" Type="bit" Nullable="false" />
           <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckedIn" Type="bit" />
+          <Property Name="EventYear" Type="int" Nullable="false" />
+          <Property Name="Marketing" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Participants">
           <Key>
@@ -144,6 +159,8 @@
           <Property Name="GuardianID" Type="int" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
           <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckedIn" Type="bit" />
+          <Property Name="EventYear" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Relationship">
           <Key>
@@ -175,16 +192,18 @@
           <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
           <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckedIn" Type="bit" />
+          <Property Name="EventYear" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__FamilyMem__Atten__4D5F7D71">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+        <Association Name="FK__FamilyMem__Event__55009F39">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
           <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="FamilyMembers">
-              <PropertyRef Name="AttendingCode" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -200,87 +219,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Guardians__Atten__43D61337">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+        <Association Name="FK__Guardians__Event__55F4C372">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
           <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="Guardians">
-              <PropertyRef Name="AttendingCode" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Guardians__Atten__4E53A1AA">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
-          <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
-            </Principal>
-            <Dependent Role="Guardians">
-              <PropertyRef Name="AttendingCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Guardians__Relat__4C6B5938">
-          <End Role="Relationship" Type="Self.Relationship" Multiplicity="1" />
-          <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Relationship">
-              <PropertyRef Name="RelationshipCode" />
-            </Principal>
-            <Dependent Role="Guardians">
-              <PropertyRef Name="Relationship" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LeadConta__BSTyp__42E1EEFE">
-          <End Role="BSType" Type="Self.BSType" Multiplicity="1" />
+        <Association Name="FK__LeadConta__Event__58D1301D">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
           <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BSType">
-              <PropertyRef Name="BSTypeID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="LeadContacts">
-              <PropertyRef Name="BSType" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LeadConta__LeadC__4A8310C6">
-          <End Role="ShirtSize" Type="Self.ShirtSize" Multiplicity="1" />
-          <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShirtSize">
-              <PropertyRef Name="ShirtSizeCode" />
-            </Principal>
-            <Dependent Role="LeadContacts">
-              <PropertyRef Name="LeadContactShirtSize" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LeadConta__Volun__503BEA1C">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
-          <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
-            </Principal>
-            <Dependent Role="LeadContacts">
-              <PropertyRef Name="VolunteerAttendingCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Participa__Atten__4F47C5E3">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+        <Association Name="FK__Participa__Event__56E8E7AB">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
           <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="Participants">
-              <PropertyRef Name="AttendingCode" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -296,6 +267,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Volunteer__Event__57DD0BE4">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
+            </Principal>
+            <Dependent Role="Volunteers">
+              <PropertyRef Name="EventYear" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Volunteer__Volun__3E1D39E1">
           <End Role="Age" Type="Self.Age" Multiplicity="1" />
           <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
@@ -305,30 +288,6 @@
             </Principal>
             <Dependent Role="Volunteers">
               <PropertyRef Name="VolunteerAge" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Volunteer__Volun__4B7734FF">
-          <End Role="ShirtSize" Type="Self.ShirtSize" Multiplicity="1" />
-          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShirtSize">
-              <PropertyRef Name="ShirtSizeCode" />
-            </Principal>
-            <Dependent Role="Volunteers">
-              <PropertyRef Name="VolunteerShirtSize" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Volunteer__Volun__51300E55">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
-          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
-            </Principal>
-            <Dependent Role="Volunteers">
-              <PropertyRef Name="VolunteerAttendingCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -392,6 +351,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BSType" EntityType="Self.BSType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guardians" EntityType="Self.Guardians" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadContacts" EntityType="Self.LeadContacts" Schema="dbo" store:Type="Tables" />
@@ -399,56 +359,36 @@
           <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__FamilyMem__Atten__4D5F7D71" Association="Self.FK__FamilyMem__Atten__4D5F7D71">
-            <End Role="Attendance" EntitySet="Attendance" />
+          <AssociationSet Name="FK__FamilyMem__Event__55009F39" Association="Self.FK__FamilyMem__Event__55009F39">
+            <End Role="Event" EntitySet="Event" />
             <End Role="FamilyMembers" EntitySet="FamilyMembers" />
           </AssociationSet>
           <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="Self.FK__FamilyMem__Famil__40F9A68C">
             <End Role="Age" EntitySet="Age" />
             <End Role="FamilyMembers" EntitySet="FamilyMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Atten__43D61337" Association="Self.FK__Guardians__Atten__43D61337">
-            <End Role="Attendance" EntitySet="Attendance" />
+          <AssociationSet Name="FK__Guardians__Event__55F4C372" Association="Self.FK__Guardians__Event__55F4C372">
+            <End Role="Event" EntitySet="Event" />
             <End Role="Guardians" EntitySet="Guardians" />
           </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Atten__4E53A1AA" Association="Self.FK__Guardians__Atten__4E53A1AA">
-            <End Role="Attendance" EntitySet="Attendance" />
-            <End Role="Guardians" EntitySet="Guardians" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Relat__4C6B5938" Association="Self.FK__Guardians__Relat__4C6B5938">
-            <End Role="Relationship" EntitySet="Relationship" />
-            <End Role="Guardians" EntitySet="Guardians" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__BSTyp__42E1EEFE" Association="Self.FK__LeadConta__BSTyp__42E1EEFE">
-            <End Role="BSType" EntitySet="BSType" />
+          <AssociationSet Name="FK__LeadConta__Event__58D1301D" Association="Self.FK__LeadConta__Event__58D1301D">
+            <End Role="Event" EntitySet="Event" />
             <End Role="LeadContacts" EntitySet="LeadContacts" />
           </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__LeadC__4A8310C6" Association="Self.FK__LeadConta__LeadC__4A8310C6">
-            <End Role="ShirtSize" EntitySet="ShirtSize" />
-            <End Role="LeadContacts" EntitySet="LeadContacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__Volun__503BEA1C" Association="Self.FK__LeadConta__Volun__503BEA1C">
-            <End Role="Attendance" EntitySet="Attendance" />
-            <End Role="LeadContacts" EntitySet="LeadContacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Participa__Atten__4F47C5E3" Association="Self.FK__Participa__Atten__4F47C5E3">
-            <End Role="Attendance" EntitySet="Attendance" />
+          <AssociationSet Name="FK__Participa__Event__56E8E7AB" Association="Self.FK__Participa__Event__56E8E7AB">
+            <End Role="Event" EntitySet="Event" />
             <End Role="Participants" EntitySet="Participants" />
           </AssociationSet>
           <AssociationSet Name="FK__Participa__Parti__41EDCAC5" Association="Self.FK__Participa__Parti__41EDCAC5">
             <End Role="Age" EntitySet="Age" />
             <End Role="Participants" EntitySet="Participants" />
           </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__Event__57DD0BE4" Association="Self.FK__Volunteer__Event__57DD0BE4">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Volunteers" EntitySet="Volunteers" />
+          </AssociationSet>
           <AssociationSet Name="FK__Volunteer__Volun__3E1D39E1" Association="Self.FK__Volunteer__Volun__3E1D39E1">
             <End Role="Age" EntitySet="Age" />
-            <End Role="Volunteers" EntitySet="Volunteers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Volun__4B7734FF" Association="Self.FK__Volunteer__Volun__4B7734FF">
-            <End Role="ShirtSize" EntitySet="ShirtSize" />
-            <End Role="Volunteers" EntitySet="Volunteers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Volun__51300E55" Association="Self.FK__Volunteer__Volun__51300E55">
-            <End Role="Attendance" EntitySet="Attendance" />
             <End Role="Volunteers" EntitySet="Volunteers" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
@@ -502,6 +442,7 @@
           <EntitySet Name="AspNetRoles" EntityType="SNCRegistrationModel.AspNetRole" />
           <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
           <EntitySet Name="BSTypes" EntityType="SNCRegistrationModel.BSType" />
+          <EntitySet Name="Events" EntityType="SNCRegistrationModel.Event" />
           <EntitySet Name="FamilyMembers" EntityType="SNCRegistrationModel.FamilyMember" />
           <EntitySet Name="Guardians" EntityType="SNCRegistrationModel.Guardian" />
           <EntitySet Name="LeadContacts" EntityType="SNCRegistrationModel.LeadContact" />
@@ -521,53 +462,33 @@
             <End Role="Age" EntitySet="Ages" />
             <End Role="Volunteer" EntitySet="Volunteers" />
           </AssociationSet>
-          <AssociationSet Name="FK__FamilyMem__Atten__4D5F7D71" Association="SNCRegistrationModel.FK__FamilyMem__Atten__4D5F7D71">
-            <End Role="Attendance" EntitySet="Attendances" />
+          <AssociationSet Name="FK__FamilyMem__Event__55009F39" Association="SNCRegistrationModel.FK__FamilyMem__Event__55009F39">
+            <End Role="Event" EntitySet="Events" />
             <End Role="FamilyMember" EntitySet="FamilyMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Atten__43D61337" Association="SNCRegistrationModel.FK__Guardians__Atten__43D61337">
-            <End Role="Attendance" EntitySet="Attendances" />
+          <AssociationSet Name="FK__Guardians__Event__55F4C372" Association="SNCRegistrationModel.FK__Guardians__Event__55F4C372">
+            <End Role="Event" EntitySet="Events" />
             <End Role="Guardian" EntitySet="Guardians" />
           </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Atten__4E53A1AA" Association="SNCRegistrationModel.FK__Guardians__Atten__4E53A1AA">
-            <End Role="Attendance" EntitySet="Attendances" />
-            <End Role="Guardian" EntitySet="Guardians" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__Volun__503BEA1C" Association="SNCRegistrationModel.FK__LeadConta__Volun__503BEA1C">
-            <End Role="Attendance" EntitySet="Attendances" />
+          <AssociationSet Name="FK__LeadConta__Event__58D1301D" Association="SNCRegistrationModel.FK__LeadConta__Event__58D1301D">
+            <End Role="Event" EntitySet="Events" />
             <End Role="LeadContact" EntitySet="LeadContacts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Participa__Atten__4F47C5E3" Association="SNCRegistrationModel.FK__Participa__Atten__4F47C5E3">
-            <End Role="Attendance" EntitySet="Attendances" />
+          <AssociationSet Name="FK__Participa__Event__56E8E7AB" Association="SNCRegistrationModel.FK__Participa__Event__56E8E7AB">
+            <End Role="Event" EntitySet="Events" />
             <End Role="Participant" EntitySet="Participants" />
           </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Volun__51300E55" Association="SNCRegistrationModel.FK__Volunteer__Volun__51300E55">
-            <End Role="Attendance" EntitySet="Attendances" />
+          <AssociationSet Name="FK__Volunteer__Event__57DD0BE4" Association="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4">
+            <End Role="Event" EntitySet="Events" />
             <End Role="Volunteer" EntitySet="Volunteers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__BSTyp__42E1EEFE" Association="SNCRegistrationModel.FK__LeadConta__BSTyp__42E1EEFE">
-            <End Role="BSType" EntitySet="BSTypes" />
-            <End Role="LeadContact" EntitySet="LeadContacts" />
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMembers" Association="SNCRegistrationModel.FK_FamilyMembers">
             <End Role="Guardian" EntitySet="Guardians" />
             <End Role="FamilyMember" EntitySet="FamilyMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Relat__4C6B5938" Association="SNCRegistrationModel.FK__Guardians__Relat__4C6B5938">
-            <End Role="Relationship" EntitySet="Relationships" />
-            <End Role="Guardian" EntitySet="Guardians" />
-          </AssociationSet>
           <AssociationSet Name="FK_Participants" Association="SNCRegistrationModel.FK_Participants">
             <End Role="Guardian" EntitySet="Guardians" />
             <End Role="Participant" EntitySet="Participants" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__LeadC__4A8310C6" Association="SNCRegistrationModel.FK__LeadConta__LeadC__4A8310C6">
-            <End Role="ShirtSize" EntitySet="ShirtSizes" />
-            <End Role="LeadContact" EntitySet="LeadContacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Volun__4B7734FF" Association="SNCRegistrationModel.FK__Volunteer__Volun__4B7734FF">
-            <End Role="ShirtSize" EntitySet="ShirtSizes" />
-            <End Role="Volunteer" EntitySet="Volunteers" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="SNCRegistrationModel.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
@@ -621,12 +542,6 @@
           <Property Name="Volunteer" Type="Boolean" />
           <Property Name="Participant" Type="Boolean" />
           <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK__FamilyMem__Atten__4D5F7D71" FromRole="Attendance" ToRole="FamilyMember" />
-          <NavigationProperty Name="Guardians" Relationship="SNCRegistrationModel.FK__Guardians__Atten__43D61337" FromRole="Attendance" ToRole="Guardian" />
-          <NavigationProperty Name="Guardians1" Relationship="SNCRegistrationModel.FK__Guardians__Atten__4E53A1AA" FromRole="Attendance" ToRole="Guardian" />
-          <NavigationProperty Name="LeadContacts" Relationship="SNCRegistrationModel.FK__LeadConta__Volun__503BEA1C" FromRole="Attendance" ToRole="LeadContact" />
-          <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK__Participa__Atten__4F47C5E3" FromRole="Attendance" ToRole="Participant" />
-          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__51300E55" FromRole="Attendance" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="BSType">
           <Key>
@@ -634,7 +549,19 @@
           </Key>
           <Property Name="BSTypeID" Type="Int32" Nullable="false" />
           <Property Name="BSTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LeadContacts" Relationship="SNCRegistrationModel.FK__LeadConta__BSTyp__42E1EEFE" FromRole="BSType" ToRole="LeadContact" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventYear" />
+          </Key>
+          <Property Name="EventYear" Type="Int32" Nullable="false" />
+          <Property Name="Enrollment" Type="Boolean" Nullable="false" />
+          <Property Name="Reporting" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK__FamilyMem__Event__55009F39" FromRole="Event" ToRole="FamilyMember" />
+          <NavigationProperty Name="Guardians" Relationship="SNCRegistrationModel.FK__Guardians__Event__55F4C372" FromRole="Event" ToRole="Guardian" />
+          <NavigationProperty Name="LeadContacts" Relationship="SNCRegistrationModel.FK__LeadConta__Event__58D1301D" FromRole="Event" ToRole="LeadContact" />
+          <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK__Participa__Event__56E8E7AB" FromRole="Event" ToRole="Participant" />
+          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4" FromRole="Event" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="FamilyMember">
           <Key>
@@ -649,9 +576,11 @@
           <Property Name="PhotoAck" Type="Boolean" />
           <Property Name="AttendingCode" Type="Int32" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GuardianGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedIn" Type="Boolean" />
+          <Property Name="EventYear" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C" FromRole="FamilyMember" ToRole="Age" />
-          <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__FamilyMem__Atten__4D5F7D71" FromRole="FamilyMember" ToRole="Attendance" />
+          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__FamilyMem__Event__55009F39" FromRole="FamilyMember" ToRole="Event" />
           <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="FamilyMember" ToRole="Guardian" />
         </EntityType>
         <EntityType Name="Guardian">
@@ -676,11 +605,11 @@
           <Property Name="Tent" Type="Boolean" />
           <Property Name="AttendingCode" Type="Int32" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__Guardians__Atten__43D61337" FromRole="Guardian" ToRole="Attendance" />
-          <NavigationProperty Name="Attendance1" Relationship="SNCRegistrationModel.FK__Guardians__Atten__4E53A1AA" FromRole="Guardian" ToRole="Attendance" />
+          <Property Name="GuardianGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedIn" Type="Boolean" />
+          <Property Name="EventYear" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Guardians__Event__55F4C372" FromRole="Guardian" ToRole="Event" />
           <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="Guardian" ToRole="FamilyMember" />
-          <NavigationProperty Name="Relationship1" Relationship="SNCRegistrationModel.FK__Guardians__Relat__4C6B5938" FromRole="Guardian" ToRole="Relationship" />
           <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Guardian" ToRole="Participant" />
         </EntityType>
         <EntityType Name="LeadContact">
@@ -705,10 +634,11 @@
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LeadContactShirtOrder" Type="Boolean" Nullable="false" />
           <Property Name="LeadContactShirtSize" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="LeaderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__LeadConta__Volun__503BEA1C" FromRole="LeadContact" ToRole="Attendance" />
-          <NavigationProperty Name="BSType1" Relationship="SNCRegistrationModel.FK__LeadConta__BSTyp__42E1EEFE" FromRole="LeadContact" ToRole="BSType" />
-          <NavigationProperty Name="ShirtSize" Relationship="SNCRegistrationModel.FK__LeadConta__LeadC__4A8310C6" FromRole="LeadContact" ToRole="ShirtSize" />
+          <Property Name="LeaderGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedIn" Type="Boolean" />
+          <Property Name="EventYear" Type="Int32" Nullable="false" />
+          <Property Name="Marketing" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__LeadConta__Event__58D1301D" FromRole="LeadContact" ToRole="Event" />
         </EntityType>
         <EntityType Name="Participant">
           <Key>
@@ -727,9 +657,11 @@
           <Property Name="AttendingCode" Type="Int32" Nullable="false" />
           <Property Name="GuardianID" Type="Int32" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GuardianGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GuardianGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedIn" Type="Boolean" />
+          <Property Name="EventYear" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Participa__Parti__41EDCAC5" FromRole="Participant" ToRole="Age" />
-          <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__Participa__Atten__4F47C5E3" FromRole="Participant" ToRole="Attendance" />
+          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Participa__Event__56E8E7AB" FromRole="Participant" ToRole="Event" />
           <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Participant" ToRole="Guardian" />
         </EntityType>
         <EntityType Name="Relationship">
@@ -738,7 +670,6 @@
           </Key>
           <Property Name="RelationshipCode" Type="Int32" Nullable="false" />
           <Property Name="RelationshipDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Guardians" Relationship="SNCRegistrationModel.FK__Guardians__Relat__4C6B5938" FromRole="Relationship" ToRole="Guardian" />
         </EntityType>
         <EntityType Name="ShirtSize">
           <Key>
@@ -746,8 +677,6 @@
           </Key>
           <Property Name="ShirtSizeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="ShirtSizeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LeadContacts" Relationship="SNCRegistrationModel.FK__LeadConta__LeadC__4A8310C6" FromRole="ShirtSize" ToRole="LeadContact" />
-          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__4B7734FF" FromRole="ShirtSize" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="Volunteer">
           <Key>
@@ -764,10 +693,11 @@
           <Property Name="SaturdayDinner" Type="Boolean" />
           <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LeaderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LeaderGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedIn" Type="Boolean" />
+          <Property Name="EventYear" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__3E1D39E1" FromRole="Volunteer" ToRole="Age" />
-          <NavigationProperty Name="Attendance" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__51300E55" FromRole="Volunteer" ToRole="Attendance" />
-          <NavigationProperty Name="ShirtSize" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__4B7734FF" FromRole="Volunteer" ToRole="ShirtSize" />
+          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4" FromRole="Volunteer" ToRole="Event" />
         </EntityType>
         <Association Name="FK__FamilyMem__Famil__40F9A68C">
           <End Type="SNCRegistrationModel.Age" Role="Age" Multiplicity="1" />
@@ -805,87 +735,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FamilyMem__Atten__4D5F7D71">
-          <End Type="SNCRegistrationModel.Attendance" Role="Attendance" Multiplicity="1" />
+        <Association Name="FK__FamilyMem__Event__55009F39">
+          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
           <End Type="SNCRegistrationModel.FamilyMember" Role="FamilyMember" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="FamilyMember">
-              <PropertyRef Name="AttendingCode" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Guardians__Atten__43D61337">
-          <End Type="SNCRegistrationModel.Attendance" Role="Attendance" Multiplicity="1" />
+        <Association Name="FK__Guardians__Event__55F4C372">
+          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
           <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="Guardian">
-              <PropertyRef Name="AttendingCode" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Guardians__Atten__4E53A1AA">
-          <End Type="SNCRegistrationModel.Attendance" Role="Attendance" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
-            </Principal>
-            <Dependent Role="Guardian">
-              <PropertyRef Name="AttendingCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LeadConta__Volun__503BEA1C">
-          <End Type="SNCRegistrationModel.Attendance" Role="Attendance" Multiplicity="1" />
+        <Association Name="FK__LeadConta__Event__58D1301D">
+          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
           <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="LeadContact">
-              <PropertyRef Name="VolunteerAttendingCode" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Participa__Atten__4F47C5E3">
-          <End Type="SNCRegistrationModel.Attendance" Role="Attendance" Multiplicity="1" />
+        <Association Name="FK__Participa__Event__56E8E7AB">
+          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
           <End Type="SNCRegistrationModel.Participant" Role="Participant" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="Participant">
-              <PropertyRef Name="AttendingCode" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Volunteer__Volun__51300E55">
-          <End Type="SNCRegistrationModel.Attendance" Role="Attendance" Multiplicity="1" />
+        <Association Name="FK__Volunteer__Event__57DD0BE4">
+          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
           <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="AttendanceID" />
+            <Principal Role="Event">
+              <PropertyRef Name="EventYear" />
             </Principal>
             <Dependent Role="Volunteer">
-              <PropertyRef Name="VolunteerAttendingCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LeadConta__BSTyp__42E1EEFE">
-          <End Type="SNCRegistrationModel.BSType" Role="BSType" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BSType">
-              <PropertyRef Name="BSTypeID" />
-            </Principal>
-            <Dependent Role="LeadContact">
-              <PropertyRef Name="BSType" />
+              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -901,18 +807,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Guardians__Relat__4C6B5938">
-          <End Type="SNCRegistrationModel.Relationship" Role="Relationship" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Relationship">
-              <PropertyRef Name="RelationshipCode" />
-            </Principal>
-            <Dependent Role="Guardian">
-              <PropertyRef Name="Relationship" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Participants">
           <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="0..1" />
           <End Type="SNCRegistrationModel.Participant" Role="Participant" Multiplicity="*" />
@@ -922,30 +816,6 @@
             </Principal>
             <Dependent Role="Participant">
               <PropertyRef Name="GuardianID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LeadConta__LeadC__4A8310C6">
-          <End Type="SNCRegistrationModel.ShirtSize" Role="ShirtSize" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShirtSize">
-              <PropertyRef Name="ShirtSizeCode" />
-            </Principal>
-            <Dependent Role="LeadContact">
-              <PropertyRef Name="LeadContactShirtSize" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Volunteer__Volun__4B7734FF">
-          <End Type="SNCRegistrationModel.ShirtSize" Role="ShirtSize" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShirtSize">
-              <PropertyRef Name="ShirtSizeCode" />
-            </Principal>
-            <Dependent Role="Volunteer">
-              <PropertyRef Name="VolunteerShirtSize" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1039,9 +909,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="Reporting" ColumnName="Reporting" />
+                <ScalarProperty Name="Enrollment" ColumnName="Enrollment" />
+                <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="FamilyMembers">
             <EntityTypeMapping TypeName="SNCRegistrationModel.FamilyMember">
               <MappingFragment StoreEntitySet="FamilyMembers">
+                <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+                <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="GuardianGuid" ColumnName="GuardianGuid" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
@@ -1058,6 +939,8 @@
           <EntitySetMapping Name="Guardians">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Guardian">
               <MappingFragment StoreEntitySet="Guardians">
+                <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+                <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="GuardianGuid" ColumnName="GuardianGuid" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
@@ -1083,6 +966,9 @@
           <EntitySetMapping Name="LeadContacts">
             <EntityTypeMapping TypeName="SNCRegistrationModel.LeadContact">
               <MappingFragment StoreEntitySet="LeadContacts">
+                <ScalarProperty Name="Marketing" ColumnName="Marketing" />
+                <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+                <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="LeaderGuid" ColumnName="LeaderGuid" />
                 <ScalarProperty Name="LeadContactShirtSize" ColumnName="LeadContactShirtSize" />
                 <ScalarProperty Name="LeadContactShirtOrder" ColumnName="LeadContactShirtOrder" />
@@ -1108,6 +994,8 @@
           <EntitySetMapping Name="Participants">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Participant">
               <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+                <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="GuardianGuid" ColumnName="GuardianGuid" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
@@ -1144,6 +1032,8 @@
           <EntitySetMapping Name="Volunteers">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteers">
+                <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+                <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="LeaderGuid" ColumnName="LeaderGuid" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />

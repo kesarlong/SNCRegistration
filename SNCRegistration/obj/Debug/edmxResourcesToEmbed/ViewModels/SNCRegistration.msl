@@ -56,9 +56,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="Reporting" ColumnName="Reporting" />
+          <ScalarProperty Name="Enrollment" ColumnName="Enrollment" />
+          <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="FamilyMembers">
       <EntityTypeMapping TypeName="SNCRegistrationModel.FamilyMember">
         <MappingFragment StoreEntitySet="FamilyMembers">
+          <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+          <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
           <ScalarProperty Name="GuardianGuid" ColumnName="GuardianGuid" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
           <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
@@ -75,6 +86,8 @@
     <EntitySetMapping Name="Guardians">
       <EntityTypeMapping TypeName="SNCRegistrationModel.Guardian">
         <MappingFragment StoreEntitySet="Guardians">
+          <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+          <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
           <ScalarProperty Name="GuardianGuid" ColumnName="GuardianGuid" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
           <ScalarProperty Name="AttendingCode" ColumnName="AttendingCode" />
@@ -100,6 +113,9 @@
     <EntitySetMapping Name="LeadContacts">
       <EntityTypeMapping TypeName="SNCRegistrationModel.LeadContact">
         <MappingFragment StoreEntitySet="LeadContacts">
+          <ScalarProperty Name="Marketing" ColumnName="Marketing" />
+          <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+          <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
           <ScalarProperty Name="LeaderGuid" ColumnName="LeaderGuid" />
           <ScalarProperty Name="LeadContactShirtSize" ColumnName="LeadContactShirtSize" />
           <ScalarProperty Name="LeadContactShirtOrder" ColumnName="LeadContactShirtOrder" />
@@ -125,6 +141,8 @@
     <EntitySetMapping Name="Participants">
       <EntityTypeMapping TypeName="SNCRegistrationModel.Participant">
         <MappingFragment StoreEntitySet="Participants">
+          <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+          <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
           <ScalarProperty Name="GuardianGuid" ColumnName="GuardianGuid" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
           <ScalarProperty Name="GuardianID" ColumnName="GuardianID" />
@@ -161,6 +179,8 @@
     <EntitySetMapping Name="Volunteers">
       <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
         <MappingFragment StoreEntitySet="Volunteers">
+          <ScalarProperty Name="EventYear" ColumnName="EventYear" />
+          <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
           <ScalarProperty Name="LeaderGuid" ColumnName="LeaderGuid" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
           <ScalarProperty Name="UnitChapterNumber" ColumnName="UnitChapterNumber" />
