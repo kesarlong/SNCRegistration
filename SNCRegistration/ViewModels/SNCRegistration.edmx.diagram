@@ -9,7 +9,7 @@
         <!--<EntityTypeShape EntityType="SNCRegistrationModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="9.75" />-->
         <EntityTypeShape EntityType="SNCRegistrationModel.Admin" Width="1.5" PointX="2.75" PointY="10.75" />
         <AssociationConnector Association="SNCRegistrationModel.AspNetUserRoles1" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.C__MigrationHistory" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="SNCRegistrationModel.Age" Width="1.5" PointX="0.75" PointY="15" />
         <EntityTypeShape EntityType="SNCRegistrationModel.AspNetRole" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="SNCRegistrationModel.Attendance" Width="1.5" PointX="0.75" PointY="10.625" />
