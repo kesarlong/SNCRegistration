@@ -96,6 +96,7 @@ namespace SNCRegistration.Controllers
                     TempData["myPK"] = guardian.GuardianID;
                     TempData.Keep();
 
+                    return RedirectToAction("Create", "Participants", new { GuardianGuid = guardian.GuardianGuid });
 
                 }
                 catch (DbEntityValidationException ex)
