@@ -9,6 +9,7 @@ using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
 using System;
+using PagedList;
 
 namespace SNCRegistration.Controllers
 {
@@ -18,23 +19,60 @@ namespace SNCRegistration.Controllers
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Participants
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            try
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
             {
-                return View(db.Participants.ToList());
+                page = 1;
             }
-            catch (DbEntityValidationException ex)
+            else
             {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                    }
-                }
+                searchString = currentFilter;
             }
-            return View(db.Participants.ToList());
+
+            ViewBag.CurrentFilter = searchString;
+
+            var participants = from s in db.Participants
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                participants = participants.Where(s => s.ParticipantLastName.Contains(searchString) || s.ParticipantFirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    participants = participants.OrderByDescending(s => s.ParticipantLastName);
+                    break;
+                default:
+                    participants = participants.OrderBy(s => s.ParticipantLastName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(participants.ToPagedList(pageNumber, pageSize));
+
+            //Original. public ActionResult Index()
+            //try
+            //{
+            //    return View(db.Participants.ToList());
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in entityValidationErrors.ValidationErrors)
+            //        {
+            //            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+            //        }
+            //    }
+            //}
+            //return View(db.Participants.ToList());
         }
 
 
