@@ -12,6 +12,7 @@ using System;
 
 
 namespace SNCRegistration.Controllers
+
 {
     public class GuardiansController : Controller
     {
@@ -59,7 +60,10 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
-        
+        public ActionResult GetYear()
+        {
+            return View("ActiveRegistrationYear");
+        }
 
 
         // POST: Guardians/Create
@@ -78,30 +82,20 @@ namespace SNCRegistration.Controllers
                 //create GUID for record ID
                 var myGuid = Guid.NewGuid().ToString();
                 guardian.GuardianGuid = myGuid;
-             
-                //store event year -- to do fix not working
-                if (TempData["myYear"] != null)
-                {
-                    guardian.EventYear = (int)TempData["myYear"];
-                }
 
-                //to do: fix - static value needs to be dynamic
-                guardian.EventYear = 2017;
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                guardian.EventYear = int.Parse(thisYear);
+
 
                 try
-                {
-                  
+                {  
                     db.SaveChanges();
-
 
                     //pass the guardianID to child form as FK                    
                     TempData["myPK"] = guardian.GuardianID;
                     TempData.Keep();
 
-
-
-
-                    return RedirectToAction("Create", "Participants", new { GuardianGuid = guardian.GuardianGuid});
 
                 }
                 catch (DbEntityValidationException ex)

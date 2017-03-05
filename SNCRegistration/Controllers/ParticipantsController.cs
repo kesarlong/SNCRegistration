@@ -8,6 +8,7 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -92,8 +93,10 @@ namespace SNCRegistration.Controllers
                 }
 
 
-                //to do: fix - static value needs to be dynamic
-                participant.EventYear = 2017;
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                participant.EventYear = int.Parse(thisYear);
+
 
                 db.Participants.Add(participant);
 

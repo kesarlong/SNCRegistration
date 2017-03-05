@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -59,6 +60,11 @@ namespace SNCRegistration.Controllers
                     {
                         familyMember.GuardianID = (int)TempData["myPK"];
                     }
+
+                    //store year of event
+                    var thisYear = DateTime.Now.Year.ToString();
+                    familyMember.EventYear = int.Parse(thisYear);
+
 
                     db.SaveChanges();
                     
