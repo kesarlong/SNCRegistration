@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -119,13 +120,42 @@ namespace SNCRegistration.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ViewResult ActiveRegistrationYear()
+        [HttpPost]
+            public ActionResult ActiveRegistrationYear()
         {
-            var regYear = from Event in db.Events where Event.Enrollment == true select Event.EventYear;
-            TempData["enrollYear"] = regYear;
+            //to do: delete old attempts after working
+            //var eventYear = from Event in db.Events where Event.Enrollment == true select Event.EventYear;
+
+
+            //int myYear = Int32.Parse(eventYear);
+
+            //TempData["myYear"] = eventYear;
+
+
+            TempData["myYear"] = "2017";
             TempData.Keep();
-            return View();
+            //return View();
+            //return Content(TempData["myYear"].ToString());
+            //return PartialView(TempData["myYear"]);
+
+            //Event @event = db.Events.Where(Event=>Event.Enrollment = True);
+            //if (@event == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(@event);
+
+            bool x = true;
+            return View(db.Events.ToList().Where(e => e.Enrollment == x));
+            //return Content(db.Events.Where(e => e.Enrollment == x));
+
+            //int y = 2017;
+            //return View(db.Events.ToList().Where(e => e.EventYear==y));
+        }
+
+        private ActionResult Content(IQueryable<Event> queryable)
+        {
+            throw new NotImplementedException();
         }
 
         public ViewResult ActiveReportingYear()
