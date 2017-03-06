@@ -120,16 +120,14 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Classroom Scouting")]
         public bool ClassroomScouting;
 
-        [UIHint("Boolean")]
         [Display(Name = "Health Form")]
         public bool? HealthForm;
 
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
 
-        [UIHint("Boolean")]
         [Display(Name = "Photo Acknowledgment")]
         public bool? PhotoAck;
-        
-
 
         [Required]
         [Display(Name = "Attendance")]
