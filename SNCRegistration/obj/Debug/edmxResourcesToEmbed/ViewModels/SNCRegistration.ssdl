@@ -58,6 +58,14 @@
     <Property Name="BSTypeID" Type="int" Nullable="false" />
     <Property Name="BSTypeDescription" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventYear" />
+    </Key>
+    <Property Name="EventYear" Type="int" Nullable="false" />
+    <Property Name="Enrollment" Type="bit" Nullable="false" />
+    <Property Name="Reporting" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="FamilyMembers">
     <Key>
       <PropertyRef Name="FamilyMemberID" />
@@ -71,7 +79,9 @@
     <Property Name="PhotoAck" Type="bit" />
     <Property Name="AttendingCode" Type="int" Nullable="false" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckedIn" Type="bit" />
+    <Property Name="EventYear" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Guardians">
     <Key>
@@ -95,7 +105,9 @@
     <Property Name="Tent" Type="bit" />
     <Property Name="AttendingCode" Type="int" Nullable="false" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckedIn" Type="bit" />
+    <Property Name="EventYear" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="LeadContacts">
     <Key>
@@ -119,7 +131,10 @@
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
     <Property Name="LeadContactShirtOrder" Type="bit" Nullable="false" />
     <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" Nullable="false" />
-    <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckedIn" Type="bit" />
+    <Property Name="EventYear" Type="int" Nullable="false" />
+    <Property Name="Marketing" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Participants">
     <Key>
@@ -138,7 +153,9 @@
     <Property Name="AttendingCode" Type="int" Nullable="false" />
     <Property Name="GuardianID" Type="int" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="GuardianGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckedIn" Type="bit" />
+    <Property Name="EventYear" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Relationship">
     <Key>
@@ -169,17 +186,19 @@
     <Property Name="SaturdayDinner" Type="bit" />
     <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckedIn" Type="bit" />
+    <Property Name="EventYear" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__FamilyMem__Atten__4D5F7D71">
-    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+  <Association Name="FK__FamilyMem__Event__55009F39">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
     <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Attendance">
-        <PropertyRef Name="AttendanceID" />
+      <Principal Role="Event">
+        <PropertyRef Name="EventYear" />
       </Principal>
       <Dependent Role="FamilyMembers">
-        <PropertyRef Name="AttendingCode" />
+        <PropertyRef Name="EventYear" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -195,87 +214,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Guardians__Atten__43D61337">
-    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+  <Association Name="FK__Guardians__Event__55F4C372">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
     <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Attendance">
-        <PropertyRef Name="AttendanceID" />
+      <Principal Role="Event">
+        <PropertyRef Name="EventYear" />
       </Principal>
       <Dependent Role="Guardians">
-        <PropertyRef Name="AttendingCode" />
+        <PropertyRef Name="EventYear" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Guardians__Atten__4E53A1AA">
-    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
-    <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Attendance">
-        <PropertyRef Name="AttendanceID" />
-      </Principal>
-      <Dependent Role="Guardians">
-        <PropertyRef Name="AttendingCode" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Guardians__Relat__4C6B5938">
-    <End Role="Relationship" Type="Self.Relationship" Multiplicity="1" />
-    <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Relationship">
-        <PropertyRef Name="RelationshipCode" />
-      </Principal>
-      <Dependent Role="Guardians">
-        <PropertyRef Name="Relationship" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__LeadConta__BSTyp__42E1EEFE">
-    <End Role="BSType" Type="Self.BSType" Multiplicity="1" />
+  <Association Name="FK__LeadConta__Event__58D1301D">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
     <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="BSType">
-        <PropertyRef Name="BSTypeID" />
+      <Principal Role="Event">
+        <PropertyRef Name="EventYear" />
       </Principal>
       <Dependent Role="LeadContacts">
-        <PropertyRef Name="BSType" />
+        <PropertyRef Name="EventYear" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LeadConta__LeadC__4A8310C6">
-    <End Role="ShirtSize" Type="Self.ShirtSize" Multiplicity="1" />
-    <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShirtSize">
-        <PropertyRef Name="ShirtSizeCode" />
-      </Principal>
-      <Dependent Role="LeadContacts">
-        <PropertyRef Name="LeadContactShirtSize" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__LeadConta__Volun__503BEA1C">
-    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
-    <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Attendance">
-        <PropertyRef Name="AttendanceID" />
-      </Principal>
-      <Dependent Role="LeadContacts">
-        <PropertyRef Name="VolunteerAttendingCode" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Participa__Atten__4F47C5E3">
-    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+  <Association Name="FK__Participa__Event__56E8E7AB">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
     <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Attendance">
-        <PropertyRef Name="AttendanceID" />
+      <Principal Role="Event">
+        <PropertyRef Name="EventYear" />
       </Principal>
       <Dependent Role="Participants">
-        <PropertyRef Name="AttendingCode" />
+        <PropertyRef Name="EventYear" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -291,6 +262,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Volunteer__Event__57DD0BE4">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventYear" />
+      </Principal>
+      <Dependent Role="Volunteers">
+        <PropertyRef Name="EventYear" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Volunteer__Volun__3E1D39E1">
     <End Role="Age" Type="Self.Age" Multiplicity="1" />
     <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
@@ -300,30 +283,6 @@
       </Principal>
       <Dependent Role="Volunteers">
         <PropertyRef Name="VolunteerAge" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Volunteer__Volun__4B7734FF">
-    <End Role="ShirtSize" Type="Self.ShirtSize" Multiplicity="1" />
-    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShirtSize">
-        <PropertyRef Name="ShirtSizeCode" />
-      </Principal>
-      <Dependent Role="Volunteers">
-        <PropertyRef Name="VolunteerShirtSize" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Volunteer__Volun__51300E55">
-    <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
-    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Attendance">
-        <PropertyRef Name="AttendanceID" />
-      </Principal>
-      <Dependent Role="Volunteers">
-        <PropertyRef Name="VolunteerAttendingCode" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -387,6 +346,7 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BSType" EntityType="Self.BSType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMembers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Guardians" EntityType="Self.Guardians" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeadContacts" EntityType="Self.LeadContacts" Schema="dbo" store:Type="Tables" />
@@ -394,56 +354,36 @@
     <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__FamilyMem__Atten__4D5F7D71" Association="Self.FK__FamilyMem__Atten__4D5F7D71">
-      <End Role="Attendance" EntitySet="Attendance" />
+    <AssociationSet Name="FK__FamilyMem__Event__55009F39" Association="Self.FK__FamilyMem__Event__55009F39">
+      <End Role="Event" EntitySet="Event" />
       <End Role="FamilyMembers" EntitySet="FamilyMembers" />
     </AssociationSet>
     <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="Self.FK__FamilyMem__Famil__40F9A68C">
       <End Role="Age" EntitySet="Age" />
       <End Role="FamilyMembers" EntitySet="FamilyMembers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Guardians__Atten__43D61337" Association="Self.FK__Guardians__Atten__43D61337">
-      <End Role="Attendance" EntitySet="Attendance" />
+    <AssociationSet Name="FK__Guardians__Event__55F4C372" Association="Self.FK__Guardians__Event__55F4C372">
+      <End Role="Event" EntitySet="Event" />
       <End Role="Guardians" EntitySet="Guardians" />
     </AssociationSet>
-    <AssociationSet Name="FK__Guardians__Atten__4E53A1AA" Association="Self.FK__Guardians__Atten__4E53A1AA">
-      <End Role="Attendance" EntitySet="Attendance" />
-      <End Role="Guardians" EntitySet="Guardians" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Guardians__Relat__4C6B5938" Association="Self.FK__Guardians__Relat__4C6B5938">
-      <End Role="Relationship" EntitySet="Relationship" />
-      <End Role="Guardians" EntitySet="Guardians" />
-    </AssociationSet>
-    <AssociationSet Name="FK__LeadConta__BSTyp__42E1EEFE" Association="Self.FK__LeadConta__BSTyp__42E1EEFE">
-      <End Role="BSType" EntitySet="BSType" />
+    <AssociationSet Name="FK__LeadConta__Event__58D1301D" Association="Self.FK__LeadConta__Event__58D1301D">
+      <End Role="Event" EntitySet="Event" />
       <End Role="LeadContacts" EntitySet="LeadContacts" />
     </AssociationSet>
-    <AssociationSet Name="FK__LeadConta__LeadC__4A8310C6" Association="Self.FK__LeadConta__LeadC__4A8310C6">
-      <End Role="ShirtSize" EntitySet="ShirtSize" />
-      <End Role="LeadContacts" EntitySet="LeadContacts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__LeadConta__Volun__503BEA1C" Association="Self.FK__LeadConta__Volun__503BEA1C">
-      <End Role="Attendance" EntitySet="Attendance" />
-      <End Role="LeadContacts" EntitySet="LeadContacts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Participa__Atten__4F47C5E3" Association="Self.FK__Participa__Atten__4F47C5E3">
-      <End Role="Attendance" EntitySet="Attendance" />
+    <AssociationSet Name="FK__Participa__Event__56E8E7AB" Association="Self.FK__Participa__Event__56E8E7AB">
+      <End Role="Event" EntitySet="Event" />
       <End Role="Participants" EntitySet="Participants" />
     </AssociationSet>
     <AssociationSet Name="FK__Participa__Parti__41EDCAC5" Association="Self.FK__Participa__Parti__41EDCAC5">
       <End Role="Age" EntitySet="Age" />
       <End Role="Participants" EntitySet="Participants" />
     </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Event__57DD0BE4" Association="Self.FK__Volunteer__Event__57DD0BE4">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Volunteers" EntitySet="Volunteers" />
+    </AssociationSet>
     <AssociationSet Name="FK__Volunteer__Volun__3E1D39E1" Association="Self.FK__Volunteer__Volun__3E1D39E1">
       <End Role="Age" EntitySet="Age" />
-      <End Role="Volunteers" EntitySet="Volunteers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Volunteer__Volun__4B7734FF" Association="Self.FK__Volunteer__Volun__4B7734FF">
-      <End Role="ShirtSize" EntitySet="ShirtSize" />
-      <End Role="Volunteers" EntitySet="Volunteers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Volunteer__Volun__51300E55" Association="Self.FK__Volunteer__Volun__51300E55">
-      <End Role="Attendance" EntitySet="Attendance" />
       <End Role="Volunteers" EntitySet="Volunteers" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">

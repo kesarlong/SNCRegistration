@@ -14,19 +14,7 @@ namespace SNCRegistration.ViewModels
     
     public partial class ShirtSize
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ShirtSize()
-        {
-            this.LeadContacts = new HashSet<LeadContact>();
-            this.Volunteers = new HashSet<Volunteer>();
-        }
-    
         public string ShirtSizeCode { get; set; }
         public string ShirtSizeDescription { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LeadContact> LeadContacts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Volunteer> Volunteers { get; set; }
     }
 }

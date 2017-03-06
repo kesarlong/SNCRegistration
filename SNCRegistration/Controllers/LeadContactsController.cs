@@ -47,7 +47,7 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactCellPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize")] LeadContact leadContact)
+        public ActionResult Create([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactCellPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize, LeaderGuid")] LeadContact leadContact)
         {
             if (ModelState.IsValid)
             {
@@ -57,6 +57,8 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
                     this.Session["lSession"] = leadContact.LeadContactID;
+                    TempData["myPK"] = leadContact.LeadContactID;
+                    TempData.Keep();
                     return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
                 }
                 catch (DbEntityValidationException ex)

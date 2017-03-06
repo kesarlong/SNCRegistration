@@ -54,19 +54,26 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments")] Volunteer volunteer)
+        public ActionResult Create([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid")] Volunteer volunteer)
         {
 
             if (ModelState.IsValid)
             {
-                //var lID = this.Session["lSession"] = volunteer.LeadContactID;
-                volunteer.LeadContactID = (int)this.Session["lSession"];
-                db.Volunteers.Add(volunteer);
 
+                db.Volunteers.Add(volunteer);
 
                 try
                 {
                     db.SaveChanges();
+                    this.Session["lSession"] = volunteer.LeadContactID;
+                        if (Request["submit"].Equals("Add an additional volunteer"))
+                    { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
+
+                    if (Request["submit"].Equals("Complete registration"))
+                    //registration complete, no more people to add
+                    {
+                        return Redirect("Registered");
+                    }
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -84,12 +91,10 @@ namespace SNCRegistration.Controllers
                     // Throw a new DbEntityValidationException with the improved exception message.
                     throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
                 }
-                
-                return RedirectToAction("Registered");
-            }
+                //Session["lSession"] = volunteer.LeadContactID;
 
-            //ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
-            //ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
+                //return RedirectToAction("Registered");
+            }
             return View(volunteer);
         }
 

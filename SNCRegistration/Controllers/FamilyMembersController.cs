@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -43,32 +44,42 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,FamilyMemberAge")] FamilyMember familyMember)
+        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,FamilyMemberAge,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,GuardianGuid")] FamilyMember familyMember)
         {
             if (ModelState.IsValid)
             {
-                //familyMember.GuardianID = (int)Session["gSession"];
+
+                //to do: fix - static value needs to be dynamic
+                familyMember.EventYear = 2017;
+
                 db.FamilyMembers.Add(familyMember);
 
                 try
                 {
-                    db.SaveChanges();
-                    this.Session["gSession"] = familyMember.GuardianID;
-                    //return RedirectToAction("Create", "FamilyMembers", new { GuardianID = this.Session["gSession"]});
-
-                    if (Request["submit"].Equals("Add another participant"))
-                    //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
-
-                    if (Request["submit"].Equals("Add a family member"))
-                    //add a family member
-                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
-
-                    if (Request["submit"].Equals("Complete registration"))
-                    //registration complete, no more people to add
+                    if (TempData["myPK"] != null)
                     {
-                        return Redirect("Registered");
+                        familyMember.GuardianID = (int)TempData["myPK"];
                     }
+
+                    //store year of event
+                    var thisYear = DateTime.Now.Year.ToString();
+                    familyMember.EventYear = int.Parse(thisYear);
+
+
+                    db.SaveChanges();
+                    
+                    //add another participant for guardian                   
+                    if (Request["submit"].Equals("Add another participant"))
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = familyMember.GuardianGuid }); }
+
+                    //add a family member
+                    if (Request["submit"].Equals("Add a family member"))
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = familyMember.GuardianGuid}); }
+
+                    //registration complete, no more people to add
+                    if (Request["submit"].Equals("Complete registration"))
+                    { return Redirect("Registered");}
+
                 }
                 catch (DbEntityValidationException ex)
                 {

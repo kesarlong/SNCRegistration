@@ -31,6 +31,7 @@ namespace SNCRegistration.ViewModels
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<BSType> BSTypes { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<FamilyMember> FamilyMembers { get; set; }
         public virtual DbSet<Guardian> Guardians { get; set; }
         public virtual DbSet<LeadContact> LeadContacts { get; set; }

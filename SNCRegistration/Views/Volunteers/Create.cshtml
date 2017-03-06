@@ -6,10 +6,12 @@
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
+
 {
     @Html.AntiForgeryToken()
-    
+
+
         <h4>Volunteer Information</h4>
         <hr />
 
@@ -49,12 +51,12 @@
         @Html.DropDownListFor(model => model.VolunteerAge,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select Age-" },
-                new SelectListItem{ Value = "Under 6", Text = "Under 6" },
-                new SelectListItem{ Value = "7-10", Text = "7-10" },
-                new SelectListItem{ Value = "11-13", Text = "11-13" },
-                new SelectListItem{ Value = "14-16", Text = "14-16" },
-                new SelectListItem{ Value = "17-21", Text = "17-18" },
-                new SelectListItem{ Value = "Over 21", Text = "Over 21" }
+                new SelectListItem{ Value = "1", Text = "Under 6" },
+                new SelectListItem{ Value = "2", Text = "7-10" },
+                new SelectListItem{ Value = "3", Text = "11-13" },
+                new SelectListItem{ Value = "4", Text = "14-17" },
+                new SelectListItem{ Value = "5", Text = "18-20" },
+                new SelectListItem{ Value = "6", Text = "Over 21" }
             }, new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.VolunteerAge, "", new { @class = "text-danger" })
     </div>
@@ -71,30 +73,47 @@
 -->
     <br />
     <div class="form-group">
-        @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { id = "radio_VolunteerShirtOrder_True" }) Yes
-        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { id = "radio_VolunteerShirtOrder_False" }) No
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label" })<br />
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { id = "shirt_Order_True" }) Yes
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { id = "shirt_Order_False" }) No
+            </label>
+        </div>
         @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
     </div>
     <br />
-    <div class="form-group">
-        @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(model => model.VolunteerShirtSize,
+
+    @*<div style="@(Model.VolunteerShirtOrder ? "display:block" : "display:none")">Some links</div>*@
+
+    //if (Model.VolunteerShirtOrder == true)
+    //{
+         <div class="form-group">
+    @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
+    @Html.DropDownListFor(model => model.VolunteerShirtSize,
             new List<SelectListItem>{
-                new SelectListItem{ Value = "", Text = "-Select Size-" },
-                 new SelectListItem{ Value = "YX", Text = "Youth - Extra Small" },
+                new SelectListItem{ Value = "00", Text = "-Select Size-" },
+                 new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
                 new SelectListItem{ Value = "YS", Text = "Youth - Small" },
                 new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
                 new SelectListItem{ Value = "YL", Text = "Youth - Large" },
-                new SelectListItem{ Value = "YX", Text = "Youth - Extra Large" },
-                new SelectListItem{ Value = "YX", Text = "Adult - Extra Small" },
-                new SelectListItem{ Value = "YS", Text = "Adult - Small" },
-                new SelectListItem{ Value = "YM", Text = "Adult - Medium" },
-                new SelectListItem{ Value = "YL", Text = "Adult - Large" },
-                new SelectListItem{ Value = "YX", Text = "Adult - Extra Large" },
-            }, new { @class = "form-control", style = "width: 220px" })
-        @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
-    </div>
+                new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
+                new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
+                new SelectListItem{ Value = "AS", Text = "Adult - Small" },
+                new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
+                new SelectListItem{ Value = "AL", Text = "Adult - Large" },
+                new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" }
+                }, new { @class = "form-control", style = "width: 220px" })
+    @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
+</div>
+    @*}
+    else
+    {
+              @Html.HiddenFor(model => model.VolunteerShirtSize, new { @Value = false })
+    }*@
+    
 
     <br />
         <div class="form-group">
@@ -102,19 +121,25 @@
             @Html.DropDownListFor(model => model.VolunteerAttendingCode,
             new List<SelectListItem>{
                 new SelectListItem{ Value = "", Text = "-Select-" },
-                new SelectListItem{ Value = "FriPM", Text = "Friday Evening Only" },
-                new SelectListItem{ Value = "SatOnly", Text = "Saturday Only" },
-                new SelectListItem{ Value = "FriThruSun", Text = "Friday through Sunday" }
+                new SelectListItem{ Value = "1", Text = "Friday Evening Only" },
+                new SelectListItem{ Value = "2", Text = "Saturday Only" },
+                new SelectListItem{ Value = "4", Text = "Friday through Sunday" }
             }, new { @class = "form-control", style = "width: 220px" })
             @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
         </div>
         <br />
-    <div class="form-group">
-        @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label col-md-3" })
-        @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "radio_SaturdayDinner_True" }) Yes
-        @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "radio_SaturdayDinner_False" }) No
-        @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            <div class="btn-group" data-toggle="buttons">
+                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
+                </label>
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False" }) No
+                </label>
+            </div>
+            @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
+        </div>
     <br />
     @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
@@ -137,15 +162,31 @@
     <hr />
 
     <div class="form-group pull-right">
-        <input type="submit" value="Create" class="btn btn-primary" />
-
+        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+    </div>
+   <div class="form-group pull-right">
+        <input type="submit" name="submit" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" />
     </div>
 
+    <!-- <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LeaderGuid, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DisplayFor(model => model.LeaderGuid, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LeaderGuid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+
+    @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0 })
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -12,41 +12,31 @@ namespace SNCRegistration.ViewModels
     using System;
     using System.Collections.Generic;
     
-    public partial class Guardian
+    public partial class Event
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Guardian()
+        public Event()
         {
             this.FamilyMembers = new HashSet<FamilyMember>();
+            this.Guardians = new HashSet<Guardian>();
+            this.LeadContacts = new HashSet<LeadContact>();
             this.Participants = new HashSet<Participant>();
+            this.Volunteers = new HashSet<Volunteer>();
         }
     
-        public int GuardianID { get; set; }
-        public string GuardianFirstName { get; set; }
-        public string GuardianLastName { get; set; }
-        public int Relationship { get; set; }
-        public string GuardianAddress { get; set; }
-        public string GuardianCity { get; set; }
-        public string GuardianState { get; set; }
-        public string GuardianZip { get; set; }
-        public string GuardianCellPhone { get; set; }
-        public string GuardianEmail { get; set; }
-        public Nullable<System.DateTime> PacketSentDate { get; set; }
-        public Nullable<System.DateTime> ReceiptDate { get; set; }
-        public Nullable<System.DateTime> ConfirmationSentDate { get; set; }
-        public Nullable<bool> HealthForm { get; set; }
-        public Nullable<bool> PhotoAck { get; set; }
-        public Nullable<bool> Tent { get; set; }
-        public int AttendingCode { get; set; }
-        public string Comments { get; set; }
-        public string GuardianGuid { get; set; }
-        public Nullable<bool> CheckedIn { get; set; }
         public int EventYear { get; set; }
+        public bool Enrollment { get; set; }
+        public bool Reporting { get; set; }
     
-        public virtual Event Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMember> FamilyMembers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Guardian> Guardians { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeadContact> LeadContacts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Participant> Participants { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Volunteer> Volunteers { get; set; }
     }
 }

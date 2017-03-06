@@ -8,6 +8,7 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -54,45 +55,71 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        public ActionResult Create(int GuardianID) 
+        public ActionResult Create() 
         {
 
             return View();
         }
 
-        
+        //public ActionResult Cancel([Bind(Include = "GuardianGuid"),]Participant participant)
+        //{
+                
+        //        return RedirectToAction("Edit", "Guardians", new { GuardianGuid = participant.GuardianGuid });
+
+        //}
 
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,Comments"),
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments"),
             ] Participant participant,string submit)
         {
-            if (ModelState.IsValid)
+            //clear form and return to Guardian form
+            //if (Request["submit"].Equals("Cancel"))
+            //{
+            //    ModelState.Clear();
+            //    return RedirectToAction("Edit", "Guardians", new { GuardianGuid = participant.GuardianGuid });
+            //    //return Cancel(participant);
+
+            //}
+
+             if (ModelState.IsValid)
             {
+                if (TempData["myPK"] != null)
+                {
+                    participant.GuardianID = (int)TempData["myPK"];
+                }
+
+
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                participant.EventYear = int.Parse(thisYear);
+
+
                 db.Participants.Add(participant);
+
 
                 try
                 {
                     db.SaveChanges();
 
-                    this.Session["gSession"] = participant.GuardianID;
-
                     if (Request["submit"].Equals("Add another participant"))
-                        //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianId = Session["gSession"] }); }
+                    //add another participant for guardian
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid }); }
 
 
                     if (Request["submit"].Equals("Add a family member"))
-                        //add a family member
-                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianId = Session["gSession"] }); }
+                    //add a family member
+                    { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = participant.GuardianGuid }); }
 
                     if (Request["submit"].Equals("Complete registration"))
-                        //registration complete, no more people to add
+                    //registration complete, no more people to add
                     { return RedirectToAction("Registered"); }
-                    
+
+
+
 
                 }
                 catch (DbEntityValidationException ex)
@@ -111,10 +138,11 @@ namespace SNCRegistration.Controllers
                     // Throw a new DbEntityValidationException with the improved exception message.
                     throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
                 }
-            }
 
-            return View(participant);
-        }
+            }
+                return View(participant);
+                    }
+
 
         // GET: Participants/Edit/5
         public ActionResult Edit(int? id)
@@ -203,6 +231,10 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
+        public ActionResult Redirect()
+        {
+            return View();
+        }
 
     }
 }

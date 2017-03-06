@@ -85,6 +85,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Required]
         [Display(Name = "Relationship to Participant")]
         public string Relationship;
+
+        [Required]
+        public string EventYear;
     }
 
     public class Participant_Metadata
@@ -117,11 +120,16 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Classroom Scouting")]
         public bool ClassroomScouting;
 
+        [UIHint("Boolean")]
         [Display(Name = "Health Form")]
         public bool? HealthForm;
 
+
+        [UIHint("Boolean")]
         [Display(Name = "Photo Acknowledgment")]
         public bool? PhotoAck;
+        
+
 
         [Required]
         [Display(Name = "Attendance")]
@@ -131,7 +139,11 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Returning")]
         public bool? Returning;
 
-       
+
+        [Required]
+        public string EventYear;
+
+
     }
 
     public class FamilyMember_Metadata
@@ -166,8 +178,10 @@ namespace SNCRegistration.ViewModels.Metadata
         [Required]
         [Display(Name="Age")]
         public int FamilyMemberAge;
-
         
+        [Required]
+        public string EventYear;
+
     }
 
     public class LeadContact_Metadata
@@ -244,6 +258,10 @@ namespace SNCRegistration.ViewModels.Metadata
 
         public Decimal TotalFee ;
 
+
+        [Required]
+        public string EventYear;
+
     }
         public class Volunteer_Metadata
         {
@@ -289,5 +307,8 @@ namespace SNCRegistration.ViewModels.Metadata
         public Nullable<int> LeadContactID ;
 
 
+        [Required]
+        public string EventYear;
     }
+
     }
