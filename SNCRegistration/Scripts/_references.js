@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="../packages/jquery.3.1.1/tools/jquery-3.1.1.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery.js" />
 /// <reference path="jquery.validate.min.js" />
