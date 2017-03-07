@@ -28,6 +28,7 @@
     <EntitySet Name="C__MigrationHistory" EntityType="SNCRegistrationModel.C__MigrationHistory" />
     <EntitySet Name="Ages" EntityType="SNCRegistrationModel.Age" />
     <EntitySet Name="AspNetRoles" EntityType="SNCRegistrationModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="SNCRegistrationModel.AspNetUserClaim" />
     <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
     <EntitySet Name="BSTypes" EntityType="SNCRegistrationModel.BSType" />
     <EntitySet Name="Events" EntityType="SNCRegistrationModel.Event" />
@@ -37,6 +38,7 @@
     <EntitySet Name="Participants" EntityType="SNCRegistrationModel.Participant" />
     <EntitySet Name="Relationships" EntityType="SNCRegistrationModel.Relationship" />
     <EntitySet Name="ShirtSizes" EntityType="SNCRegistrationModel.ShirtSize" />
+    <EntitySet Name="Tables" EntityType="SNCRegistrationModel.Table" />
     <EntitySet Name="Volunteers" EntityType="SNCRegistrationModel.Volunteer" />
     <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C">
       <End Role="Age" EntitySet="Ages" />
@@ -92,6 +94,13 @@
     <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetRoles" Relationship="SNCRegistrationModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
   </EntityType>
   <EntityType Name="C__MigrationHistory">
@@ -121,6 +130,15 @@
     <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUsers" Relationship="SNCRegistrationModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Attendance">
     <Key>
@@ -265,6 +283,14 @@
     </Key>
     <Property Name="ShirtSizeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="ShirtSizeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Volunteer">
     <Key>
