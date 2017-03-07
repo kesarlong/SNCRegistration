@@ -12,7 +12,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     @*<div class="form-horizontal">*@
         <h4>Participant</h4>
         <hr />
@@ -181,7 +181,7 @@
             <div class="form-group pull-right">
                 <input type="button" value="Cancel/Back to Participant Details" class="btn btn-danger" onclick="history.back();"  />
             </div>
-
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
