@@ -9,6 +9,7 @@ using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
 using System;
+using PagedList;
 
 namespace SNCRegistration.Controllers
 {
@@ -18,23 +19,60 @@ namespace SNCRegistration.Controllers
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Participants
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            try
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
             {
-                return View(db.Participants.ToList());
+                page = 1;
             }
-            catch (DbEntityValidationException ex)
+            else
             {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                    }
-                }
+                searchString = currentFilter;
             }
-            return View(db.Participants.ToList());
+
+            ViewBag.CurrentFilter = searchString;
+
+            var participants = from s in db.Participants
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                participants = participants.Where(s => s.ParticipantLastName.Contains(searchString) || s.ParticipantFirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    participants = participants.OrderByDescending(s => s.ParticipantLastName);
+                    break;
+                default:
+                    participants = participants.OrderBy(s => s.ParticipantLastName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(participants.ToPagedList(pageNumber, pageSize));
+
+            //Original. public ActionResult Index()
+            //try
+            //{
+            //    return View(db.Participants.ToList());
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in entityValidationErrors.ValidationErrors)
+            //        {
+            //            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+            //        }
+            //    }
+            //}
+            //return View(db.Participants.ToList());
         }
 
 
@@ -73,7 +111,7 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments"),
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
             ] Participant participant,string submit)
         {
             //clear form and return to Guardian form
@@ -162,17 +200,34 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(participant).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var participant = db.Participants.Find(id);
+
+            if (TryUpdateModel(participant, "",
+               new string[] { "ParticipantFirstName","ParticipantLastName","ParticipantAge","ParticipantSchool","ParticipantTeacher","ClassroomScouting","HealthForm","PhotoAck","AttendingCode","Returning","Comments","CheckedIn","EventYear"}))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
             }
             return View(participant);
+
+
         }
 
         // GET: Participants/Delete/5

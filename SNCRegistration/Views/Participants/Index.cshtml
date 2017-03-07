@@ -37,6 +37,9 @@
             School
         </th>
         <th>
+            Checked In?
+        </th>
+        <th>
             Details
         </th>
     </tr>
@@ -54,6 +57,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantSchool)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckedIn)
         </td>
 
         @*<td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>*@
