@@ -68,7 +68,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Login(string returnUrl)
             {
             // Create the Admin account using setting in Web.Config (if needed)
-            CreateAdminIfNeeded();
+            //CreateAdminIfNeeded();
 
             ViewBag.ReturnUrl = returnUrl;
             return View();
