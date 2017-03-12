@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Web.Mvc;
+
 
 namespace SNCRegistration.ViewModels.Metadata
 {
@@ -14,6 +12,7 @@ namespace SNCRegistration.ViewModels.Metadata
           public int GuardianID;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "First Name")]
         public string GuardianFirstName;
 
@@ -21,9 +20,11 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Last Name")]
         public string GuardianLastName;
 
+        [MaxLength(50)]
         [Display(Name = "Street Address")]
         public string GuardianAddress;
 
+        [MaxLength(50)]
         [Display(Name ="City")]
         public string GuardianCity;
 
@@ -33,16 +34,12 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [MaxLength(10)]
         [Display(Name = "Zip")]
-        //TO DO: review field type (should be string as it is not used numerically) - Erika review (SP-245 created 11/21/16)
         public int GuardianZip;
 
+        [Phone]
         [MaxLength(10)]
-        [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage ="Please enter phone number as numbers only.")]
+        [MinLength(10)]
         [Display(Name = "Cell Phone")]
-        //[DisplayFormat(DataFormatString ="{0;##########}")]
-        //TO DO: FORMAT ON SCREEN FOR DATA INPUT -- MENTOR INPUT BEING REQUESTED 
-            [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = true)]
         public string GuardianCellPhone;
 
 
@@ -78,6 +75,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public int AttendingCode;
 
         [MaxLength(50)]
+        
         //TO DO: this needs to be a larger field
         [Display(Name = "Comments")]
         public string Comments;
@@ -96,11 +94,13 @@ namespace SNCRegistration.ViewModels.Metadata
         public int ParticipantID;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "First Name")]
         public string ParticipantFirstName;
 
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "Last Name")]
         public string ParticipantLastName;
 
@@ -109,6 +109,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public int ParticipantAge;
 
         //School is optional input field
+        [MaxLength(50)]
         [Display(Name = "School")]
         public string ParticipantSchool;
 
@@ -150,10 +151,12 @@ namespace SNCRegistration.ViewModels.Metadata
         public int FamilyMemberID;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name="First Name")]
         public string FamilyMemberFirstName;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name="Last Name")]
         public string FamilyMemberLastName;
 
