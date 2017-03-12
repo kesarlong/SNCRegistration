@@ -24,23 +24,26 @@
 
 <table class="table table-condensed table-striped">
     <tr>
-        <th>
+        <th align="center">
             @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
-        <th>
+        <th align="center">
             First Name
         </th>
-        <th>
+        <th align="center">
             Age
         </th>
-        <th>
+        <th align="center">
             School
         </th>
-        <th>
+        <th align="center">
             Checked In?
         </th>
-        <th>
+        <th >
             Details
+        </th>
+        <th >
+
         </th>
     </tr>
     
@@ -64,6 +67,7 @@
 
         @*<td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>*@
         <td>@Html.ActionLink("Details", "Details", new { id=item.ParticipantID })</td>
+        <td align="center">@Html.ActionLink("Check In", "CheckIn", new { id = item.ParticipantID }, new { @class = "btn btn-info" })</td>
         @*<td>@Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })</td>*@
     </tr>
 }

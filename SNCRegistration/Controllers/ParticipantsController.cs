@@ -19,6 +19,7 @@ namespace SNCRegistration.Controllers
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Participants
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -78,6 +79,7 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Details/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -93,6 +95,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Create() 
         {
 
@@ -183,7 +186,61 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Edit/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Participant participant = db.Participants.Find(id);
+            if (participant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(participant);
+
+
+        }
+
+        // POST: Participants/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var participant = db.Participants.Find(id);
+
+            if (TryUpdateModel(participant, "",
+               new string[] { "ParticipantFirstName","ParticipantLastName","ParticipantAge","ParticipantSchool","ParticipantTeacher","ClassroomScouting","HealthForm","PhotoAck","AttendingCode","Returning","Comments","CheckedIn","EventYear"}))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(participant);
+
+
+        }
+
+        // GET: Participants/Edit/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        public ActionResult CheckIn(int? id)
         {
             if (id == null)
             {
@@ -200,9 +257,11 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult CheckInPost(int? id)
         {
             if (id == null)
             {
@@ -211,7 +270,7 @@ namespace SNCRegistration.Controllers
             var participant = db.Participants.Find(id);
 
             if (TryUpdateModel(participant, "",
-               new string[] { "ParticipantFirstName","ParticipantLastName","ParticipantAge","ParticipantSchool","ParticipantTeacher","ClassroomScouting","HealthForm","PhotoAck","AttendingCode","Returning","Comments","CheckedIn","EventYear"}))
+               new string[] { "ParticipantFirstName", "ParticipantLastName", "ParticipantAge", "ParticipantSchool", "ParticipantTeacher", "ClassroomScouting", "HealthForm", "PhotoAck", "AttendingCode", "Returning", "Comments", "CheckedIn", "EventYear" }))
             {
                 try
                 {

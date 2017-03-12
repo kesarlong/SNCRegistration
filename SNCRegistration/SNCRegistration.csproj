@@ -3407,6 +3407,7 @@
     <Content Include="Views\BoothCount\Index.cshtml" />
     <Content Include="Views\ParticipantsReport\Index.cshtml" />
     <Content Include="Views\VolunteersReport\Index.cshtml" />
+    <Content Include="Views\Participants\CheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
