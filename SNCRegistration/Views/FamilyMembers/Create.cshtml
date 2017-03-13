@@ -62,6 +62,7 @@
     <!--Set default values for check box fields not displayed on form-->
     @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
     @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+    @Html.HiddenFor(model=> model.CheckedIn, new { @value = false})
 
     <hr />
 

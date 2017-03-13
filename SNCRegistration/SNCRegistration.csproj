@@ -310,6 +310,9 @@
     <Compile Include="ViewModels\AspNetUserClaim.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AspNetUserLogin.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Attendance.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
