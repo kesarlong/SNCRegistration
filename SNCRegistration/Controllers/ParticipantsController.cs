@@ -58,7 +58,8 @@ namespace SNCRegistration.Controllers
             int pageNumber = (page ?? 1);
             return View(participants.ToPagedList(pageNumber, pageSize));
 
-            //Original. public ActionResult Index()
+            //Original. Delete comments if no problems. 
+            //public ActionResult Index() 
             //try
             //{
             //    return View(db.Participants.ToList());

@@ -1,4 +1,5 @@
-﻿using SNCRegistration.ViewModels;
+﻿using PagedList;
+using SNCRegistration.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,10 +17,54 @@ namespace SNCRegistration.Controllers
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Volunteers
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            
-            return View(db.Volunteers.ToList());
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var volunteers = from s in db.Volunteers
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                volunteers = volunteers.Where(s => s.VolunteerLastName.Contains(searchString) || s.VolunteerFirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    volunteers = volunteers.OrderByDescending(s => s.VolunteerLastName);
+                    break;
+                default:
+                    volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(volunteers.ToPagedList(pageNumber, pageSize));
+
+
+
+
+            //Original Class before changes. Delete if no problems. -Einar
+            //public ActionResult Index()
+            //{
+
+            //    return View(db.Volunteers.ToList());
+            //}
         }
 
         // GET: Volunteers/Details/5
