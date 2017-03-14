@@ -95,7 +95,6 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Create() 
         {
 
@@ -345,9 +344,16 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
-        public ActionResult Redirect()
-        {
+        //public ActionResult Redirect()
+        public ActionResult Redirect([Bind(Include = "GuardianID,GuardianGuid"),
+            ] Participant participant, string submit)
+        { 
+                if (TempData["myPK"] != null)
+                {
+                    participant.GuardianID = (int)TempData["myPK"];
+                }
             return View();
+
         }
 
     }

@@ -17,19 +17,22 @@
 
     //complete registration
     <div class="form-group pull-left">
-        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+        <input type="button" name="Complete" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered")'"/> 
     </div>
 
 
     //add another participant
     <div class="form-group pull-left">
-        <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
+        <input type="button" name="addParticipant" id="addParticipant" value="Add another participant" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
     </div>
 
     //add a family member (non-participant) attendig
     <div class="form-group pull-left">
-        <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
+        <input type="button" name="AddFamily" id="AddFamily" value="Add a family member" class="btn btn-primary" onclick="location.href='@Url.Action("Create","FamilyMembers")'" />
     </div>
 
-
+    @section Scripts
+    { 
+        @Scripts.Render("~/bundles/jqueryval")
+        }
 }
