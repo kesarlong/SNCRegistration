@@ -592,8 +592,6 @@
     <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.csdl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.msl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.ssdl" />
-    <Content Include=".vs\config\applicationhost.config" />
-    <Content Include=".vs\SNCRegistration\v14\.suo" />
     <None Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1.js" />
     <Content Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1.min.js" />
