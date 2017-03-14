@@ -14,6 +14,8 @@
 
 *.suo
 
+vs/
+
 *.user
 
 *.sln.docstates
@@ -259,3 +261,6 @@ $RECYCLE.BIN/
 *.dll
 
 *.pdb
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config

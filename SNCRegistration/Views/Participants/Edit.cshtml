@@ -179,7 +179,7 @@
             </div>
 
             <div class="form-group pull-right">
-                <input type="button" value="Cancel/Back to Participant Details" class="btn btn-danger" onclick="history.back();"  />
+                @Html.ActionLink("Back to Participant Details", "Details", new { id = Model.ParticipantID }, new { @class ="btn btn-info"}) 
             </div>
 }
 
