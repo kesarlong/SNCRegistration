@@ -13,7 +13,7 @@
 # User-specific files
 
 *.suo
-
+/vs
 *.user
 
 *.sln.docstates
@@ -259,5 +259,6 @@ $RECYCLE.BIN/
 *.dll
 
 *.pdb
-SNCRegistration/SNCRegistration.csproj
-SNCRegistration/SNCRegistration.csproj
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config
