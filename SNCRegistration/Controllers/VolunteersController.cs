@@ -1,5 +1,4 @@
-﻿using PagedList;
-using SNCRegistration.ViewModels;
+﻿using SNCRegistration.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace SNCRegistration.Controllers
 {
@@ -160,23 +160,109 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
+
+        // Original Edit Code, Delete this if nothing broken
         // POST: Volunteers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments")] Volunteer volunteer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(volunteer).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
+        //    ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
+        //    return View(volunteer);
+        //}
+
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments")] Volunteer volunteer)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(volunteer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
-            ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
+            var volunteer = db.Volunteers.Find(id);
+
+            if (TryUpdateModel(volunteer, "",
+               new string[] { "VolunteerID", "VolunteerFirstName", "VolunteerLastName", "VolunteerAge", "LeadContactID", "VolunteerShirtOrder", "VolunteerShirtSize", "VolunteerAttendingCode", "SaturdayDinner", "UnitChapterNumber", "CheckedIn", "Comments" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(volunteer);
+
+
+        }
+
+
+        // GET: Participants/Edit/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        public ActionResult CheckIn(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Volunteer volunteer = db.Volunteers.Find(id);
+            
+            if (volunteer == null)
+            {
+                return HttpNotFound();
+            }
             return View(volunteer);
         }
+
+        // POST: Participants/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("CheckIn")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckInPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var volunteer = db.Volunteers.Find(id);
+
+            if (TryUpdateModel(volunteer, "",
+               new string[] { "VolunteerID", "VolunteerFirstName","VolunteerLastName","VolunteerAge","LeadContactID","VolunteerShirtOrder","VolunteerShirtSize","VolunteerAttendingCode","SaturdayDinner","UnitChapterNumber","CheckedIn", "Comments" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(volunteer);
+
+
+        }
+
 
         // GET: Volunteers/Delete/5
         public ActionResult Delete(int? id)

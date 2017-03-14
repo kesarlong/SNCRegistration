@@ -635,6 +635,6 @@ C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\CrystalDecisions
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\Microsoft.ReportViewer.WebForms.DLL
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\bin\stdole.dll
+C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
-C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache

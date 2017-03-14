@@ -30,20 +30,12 @@
             First Name
         </th>
         <th align="center">
-            Age
-        </th>
-        <th align="center">
-            School
+            Unit Chapter Number
         </th>
         <th align="center">
             Checked In?
-        </th>
-        <th>
-            Details
-        </th>
-        <th>
-
-        </th>
+        <th> </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -62,9 +54,9 @@
                 @Html.DisplayFor(modelItem => item.CheckedIn)
             </td>
 
+            <td>@Html.ActionLink("Details", "Details", new { id = item.VolunteerID }, new { @class = "btn btn-info" }) | @Html.ActionLink("Check In", "CheckIn", new { id = item.VolunteerID }, new { @class = "btn btn-success" })</td>
 
-            <td>@Html.ActionLink("Details", "Details", new { id = item.VolunteerID })</td>
-            <td align="center">@Html.ActionLink("Check In", "CheckIn", new { id = item.VolunteerID }, new { @class = "btn btn-info" })</td>
+
 
         </tr>
     }

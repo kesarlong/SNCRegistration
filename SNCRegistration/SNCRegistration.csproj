@@ -3408,6 +3408,7 @@
     <Content Include="Views\ParticipantsReport\Index.cshtml" />
     <Content Include="Views\VolunteersReport\Index.cshtml" />
     <Content Include="Views\Participants\CheckIn.cshtml" />
+    <Content Include="Views\Volunteers\CheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
