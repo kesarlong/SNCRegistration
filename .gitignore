@@ -4,6 +4,8 @@
 
 # http://stackoverflow.com/questions/2143956/gitignore-for-visual-studio-projects-and-solutions
 
+
+# Jstelmach - added bin/ and obj/ (3/13/17)
 ################################################################################
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -13,6 +15,12 @@
 # User-specific files
 
 *.suo
+
+vs/
+
+bin/
+
+obj/
 
 *.user
 
@@ -259,3 +267,6 @@ $RECYCLE.BIN/
 *.dll
 
 *.pdb
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config
