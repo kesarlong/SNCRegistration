@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Edit Volunteer</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    @*<div class="form-horizontal">*@
         <h4>Volunteer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -20,99 +20,146 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.VolunteerFirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VolunteerFirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VolunteerFirstName, "", new { @class = "text-danger" })
-            </div>
+            @Html.EditorFor(model => model.VolunteerFirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.VolunteerFirstName, "", new { @class = "text-danger" })
+
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.VolunteerLastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VolunteerLastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VolunteerLastName, "", new { @class = "text-danger" })
-            </div>
+            @Html.EditorFor(model => model.VolunteerLastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.VolunteerLastName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
                 @Html.EditorFor(model => model.VolunteerAge, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.VolunteerAge, "", new { @class = "text-danger" })
-            </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.LeadContactID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
                 @Html.EditorFor(model => model.LeadContactID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LeadContactID, "", new { @class = "text-danger" })
-            </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.VolunteerShirtOrder)
-                    @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
-                </div>
+           
+            <div class="btn-group" data-toggle="buttons">
+                @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label" })  <br />
+                @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
+                @if (Model.VolunteerShirtOrder == true)
+                {
+                    <label class="btn btn-default active">
+                        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, "True", new { name = "VolunteerShirtOrder" }) Yes
+                    </label>
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, "False", new { name = "VolunteerShirtOrder" }) No
+                    </label>
+                }
+                else
+                {
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, "True", new { name = "VolunteerShirtOrder" }) Yes
+                    </label>
+                    <label class="btn btn-default active">
+                        @Html.RadioButtonFor(model => model.VolunteerShirtOrder, "False", new { name = "VolunteerShirtOrder" }) No
+                    </label>
+
+                }
             </div>
+
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
                 @Html.EditorFor(model => model.VolunteerShirtSize, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
-            </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
                 @Html.EditorFor(model => model.VolunteerAttendingCode, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="btn-group" data-toggle="buttons">
+                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })  <br />
+                @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
+                @if (Model.SaturdayDinner == true)
+                {
+                    <label class="btn btn-default active">
+                        @Html.RadioButtonFor(model => model.SaturdayDinner, "True", new { name = "SaturdayDinner" }) Yes
+                    </label>
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.SaturdayDinner, "False", new { name = "SaturdayDinner" }) No
+                    </label>
+                }
+                else
+                {
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.SaturdayDinner, "True", new { name = "SaturdayDinner" }) Yes
+                    </label>
+                    <label class="btn btn-default active">
+                        @Html.RadioButtonFor(model => model.SaturdayDinner, "False", new { name = "SaturdayDinner" }) No
+                    </label>
+
+                }
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.SaturdayDinner)
-                    @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
-                </div>
+            <div class="btn-group" data-toggle="buttons">
+                @Html.LabelFor(model => model.CheckedIn, htmlAttributes: new { @class = "control-label" })  <br />
+                @Html.ValidationMessageFor(model => model.CheckedIn, "", new { @class = "text-danger" })
+                @if (Model.CheckedIn == true)
+                {
+                    <label class="btn btn-default active">
+                        @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                    </label>
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                    </label>
+                }
+                else
+                {
+                    <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                    </label>
+                    <label class="btn btn-default active">
+                        @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                    </label>
+
+                }
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
                 @Html.EditorFor(model => model.UnitChapterNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
-            </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
                 @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-            </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <hr />
+
+        <div class="form-group pull-left">
+            <input type="submit" value="Save" class="btn btn-primary" />
         </div>
-    </div>
+
+            <div class="form-group pull-right">
+                @Html.ActionLink("Back to Volunteer Details", "Details", new { id = Model.VolunteerID }, new { @class = "btn btn-info" })
+            </div>
+
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
