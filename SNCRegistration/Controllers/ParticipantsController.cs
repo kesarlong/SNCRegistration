@@ -95,7 +95,6 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Create() 
         {
 
