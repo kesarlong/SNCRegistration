@@ -259,3 +259,5 @@ $RECYCLE.BIN/
 *.dll
 
 *.pdb
+SNCRegistration/SNCRegistration.csproj
+SNCRegistration/SNCRegistration.csproj
