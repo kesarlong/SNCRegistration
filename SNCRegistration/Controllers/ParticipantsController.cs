@@ -117,14 +117,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
             ] Participant participant,string submit)
         {
-            //clear form and return to Guardian form
-            //if (Request["submit"].Equals("Cancel"))
-            //{
-            //    ModelState.Clear();
-            //    return RedirectToAction("Edit", "Guardians", new { GuardianGuid = participant.GuardianGuid });
-            //    //return Cancel(participant);
 
-            //}
 
              if (ModelState.IsValid)
             {
@@ -348,12 +341,21 @@ namespace SNCRegistration.Controllers
         //public ActionResult Redirect()
         public ActionResult Redirect([Bind(Include = "GuardianID,GuardianGuid"),
             ] Participant participant, string submit)
-        { 
+        {
+            if (ModelState.IsValid)
+            {
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
                 }
-            return View();
+
+
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                participant.EventYear = int.Parse(thisYear);
+
+            }
+                return View();
 
         }
 
