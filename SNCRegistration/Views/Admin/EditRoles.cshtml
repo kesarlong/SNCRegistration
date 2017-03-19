@@ -14,7 +14,7 @@
        "EditUser",
        new { UserName = Model.UserName },
        new { @class = "btn btn-default" })
-        <input type="submit" value="Add Role" class="btn btn-default" />
+        <input type="submit" value="Add Role" class="btn btn-success" />
         @Html.DropDownList("AddRole")
     </div>
     <br />
@@ -41,7 +41,8 @@
                        new { UserName = item.UserName, RoleName = item.RoleName },
                         new {
                             onclick =
-                        "return confirm('Are you sure you wish to delete this role?');"
+                        "return confirm('Are you sure you wish to delete this role?');",
+                            @class = "btn btn-danger"
                         })
                     }
                 </td>

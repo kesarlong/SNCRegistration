@@ -40,8 +40,9 @@ namespace SNCRegistration.ViewModels
         public int AttendingCode { get; set; }
         public string Comments { get; set; }
         public string GuardianGuid { get; set; }
-        public Nullable<bool> CheckedIn { get; set; }
+        public bool CheckedIn { get; set; }
         public int EventYear { get; set; }
+        public Nullable<int> NumberInTent { get; set; }
     
         public virtual Event Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

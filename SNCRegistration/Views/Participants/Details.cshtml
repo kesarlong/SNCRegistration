@@ -1,94 +1,110 @@
-﻿@model SNCRegistration.ViewModels.Participant
+﻿@model SNCRegistration.ViewModels.GuardianParticipantFamily
+
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Participant Details";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Volunteer Details</h2>
+
+@using (Html.BeginForm("Participants", "Details", FormMethod.Post))
+{
+    @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
+    @Html.DisplayFor(model => model.participant.ParticipantFirstName)
+}
+
+
 
 <div>
-    <h4>Participant</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantFirstName)
+            @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
+        
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantFirstName)
+            @Html.DisplayFor(model => model.participant.ParticipantFirstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantLastName)
+            @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantLastName)
+            @Html.DisplayFor(model => model.participant.ParticipantLastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantAge)
+            @Html.DisplayNameFor(model => model.participant.ParticipantAge)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantAge)
+            @Html.DisplayFor(model => model.participant.ParticipantAge)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantSchool)
+            @Html.DisplayNameFor(model => model.participant.ParticipantSchool)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantSchool)
+            @Html.DisplayFor(model => model.participant.ParticipantSchool)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantTeacher)
+            @Html.DisplayNameFor(model => model.participant.ParticipantTeacher)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantTeacher)
+            @Html.DisplayFor(model => model.participant.ParticipantTeacher)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ClassroomScouting)
+            @Html.DisplayNameFor(model => model.participant.ClassroomScouting)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ClassroomScouting)
+            @Html.DisplayFor(model => model.participant.ClassroomScouting)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HealthForm)
+            @Html.DisplayNameFor(model => model.participant.HealthForm)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HealthForm)
+            @Html.DisplayFor(model => model.participant.HealthForm)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhotoAck)
+            @Html.DisplayNameFor(model => model.participant.PhotoAck)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhotoAck)
+            @Html.DisplayFor(model => model.participant.PhotoAck)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AttendingCode)
+            @Html.DisplayNameFor(model => model.participant.AttendingCode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AttendingCode)
+            @Html.DisplayFor(model => model.participant.AttendingCode)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Comments)
+            @Html.DisplayNameFor(model => model.participant.Comments)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Comments)
+            @Html.DisplayFor(model => model.participant.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.participant.CheckedIn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.participant.CheckedIn)
         </dd>
 
     </dl>
@@ -96,9 +112,9 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ParticipantID }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.ParticipantID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-danger" }) |
+    @Html.ActionLink("Back to List", "Index", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-info" })
 </p>
 
 

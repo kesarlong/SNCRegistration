@@ -33,7 +33,7 @@ namespace SNCRegistration.ViewModels
         public bool LeadContactShirtOrder { get; set; }
         public string LeadContactShirtSize { get; set; }
         public string LeaderGuid { get; set; }
-        public Nullable<bool> CheckedIn { get; set; }
+        public bool CheckedIn { get; set; }
         public int EventYear { get; set; }
         public bool Marketing { get; set; }
     

@@ -8,6 +8,8 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using System.Net.Mime;
 using System.IO;
+using System;
+using PagedList;
 
 namespace SNCRegistration.Controllers
 {
@@ -16,31 +18,73 @@ namespace SNCRegistration.Controllers
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        // GET: Participants
-        public ActionResult Index()
+        // GET: Participants. For the Index
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            try
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
             {
-                return View(db.Participants.ToList());
+                page = 1;
             }
-            catch (DbEntityValidationException ex)
+            else
             {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                    }
-                }
+                searchString = currentFilter;
             }
-            return View(db.Participants.ToList());
+
+            ViewBag.CurrentFilter = searchString;
+
+            var participants = from s in db.Participants
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                participants = participants.Where(s => s.ParticipantLastName.Contains(searchString) || s.ParticipantFirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    participants = participants.OrderByDescending(s => s.ParticipantLastName);
+                    break;
+                default:
+                    participants = participants.OrderBy(s => s.ParticipantLastName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(participants.ToPagedList(pageNumber, pageSize));
+
+            //Original. Delete comments if no problems. 
+            //public ActionResult Index() 
+            //try
+            //{
+            //    return View(db.Participants.ToList());
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in entityValidationErrors.ValidationErrors)
+            //        {
+            //            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+            //        }
+            //    }
+            //}
+            //return View(db.Participants.ToList());
         }
 
 
 
         // GET: Participants/Details/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
+
+            // Original delete if nothing is broken
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -51,6 +95,8 @@ namespace SNCRegistration.Controllers
                 return HttpNotFound();
             }
             return View(participant);
+
+
         }
 
         // GET: Participants/Create
@@ -72,17 +118,10 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments"),
+        public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
             ] Participant participant,string submit)
         {
-            //clear form and return to Guardian form
-            //if (Request["submit"].Equals("Cancel"))
-            //{
-            //    ModelState.Clear();
-            //    return RedirectToAction("Edit", "Guardians", new { GuardianGuid = participant.GuardianGuid });
-            //    //return Cancel(participant);
 
-            //}
 
              if (ModelState.IsValid)
             {
@@ -92,8 +131,10 @@ namespace SNCRegistration.Controllers
                 }
 
 
-                //to do: fix - static value needs to be dynamic
-                participant.EventYear = 2017;
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                participant.EventYear = int.Parse(thisYear);
+
 
                 db.Participants.Add(participant);
 
@@ -142,7 +183,60 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Edit/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Participant participant = db.Participants.Find(id);
+            if (participant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(participant);
+
+
+        }
+
+        // POST: Participants/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var participant = db.Participants.Find(id);
+
+            if (TryUpdateModel(participant, "",
+               new string[] { "ParticipantFirstName","ParticipantLastName","ParticipantAge","ParticipantSchool","ParticipantTeacher","ClassroomScouting","HealthForm","PhotoAck","AttendingCode","Returning","Comments","CheckedIn","EventYear"}))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(participant);
+
+
+        }
+
+        // GET: Participants/CheckIn/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        public ActionResult CheckIn(int? id)
         {
             if (id == null)
             {
@@ -156,20 +250,39 @@ namespace SNCRegistration.Controllers
             return View(participant);
         }
 
-        // POST: Participants/Edit/5
+        // POST: Participants/CheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,GuardianID,Comments")] Participant participant)
+        public ActionResult CheckInPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(participant).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var participant = db.Participants.Find(id);
+
+            if (TryUpdateModel(participant, "",
+               new string[] { "ParticipantFirstName", "ParticipantLastName", "ParticipantAge", "ParticipantSchool", "ParticipantTeacher", "ClassroomScouting", "HealthForm", "PhotoAck", "AttendingCode", "Returning", "Comments", "CheckedIn", "EventYear" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
             }
             return View(participant);
+
+
         }
 
         // GET: Participants/Delete/5
@@ -228,9 +341,25 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
-        public ActionResult Redirect()
+        //public ActionResult Redirect()
+        public ActionResult Redirect([Bind(Include = "GuardianID,GuardianGuid"),
+            ] Participant participant, string submit)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (TempData["myPK"] != null)
+                {
+                    participant.GuardianID = (int)TempData["myPK"];
+                }
+
+
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                participant.EventYear = int.Parse(thisYear);
+
+            }
+                return View();
+
         }
 
     }

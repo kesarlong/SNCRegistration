@@ -4,6 +4,13 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
           <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
@@ -34,6 +41,16 @@
       <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -86,6 +103,7 @@
     <EntitySetMapping Name="Guardians">
       <EntityTypeMapping TypeName="SNCRegistrationModel.Guardian">
         <MappingFragment StoreEntitySet="Guardians">
+          <ScalarProperty Name="NumberInTent" ColumnName="NumberInTent" />
           <ScalarProperty Name="EventYear" ColumnName="EventYear" />
           <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
           <ScalarProperty Name="GuardianGuid" ColumnName="GuardianGuid" />
@@ -176,6 +194,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Tables">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.Table">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Volunteers">
       <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
         <MappingFragment StoreEntitySet="Volunteers">
@@ -193,6 +220,15 @@
           <ScalarProperty Name="VolunteerLastName" ColumnName="VolunteerLastName" />
           <ScalarProperty Name="VolunteerFirstName" ColumnName="VolunteerFirstName" />
           <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

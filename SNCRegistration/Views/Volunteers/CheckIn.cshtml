@@ -1,0 +1,130 @@
+﻿@model SNCRegistration.ViewModels.Volunteer
+
+@{
+    ViewBag.Title = "Check In Volunteer";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Check In Volunteer</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Volunteer</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.VolunteerID)
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.VolunteerFirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VolunteerFirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.VolunteerLastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VolunteerLastName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.VolunteerAge)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VolunteerAge)
+            </dd>
+            @*<dt>
+                @Html.DisplayNameFor(model => model.LeadContactID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LeadContactID)
+            </dd>*@
+            <dt>
+                @Html.DisplayNameFor(model => model.VolunteerShirtOrder)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VolunteerShirtOrder)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.VolunteerShirtSize)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VolunteerShirtSize)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VolunteerAttendingCode)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SaturdayDinner)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SaturdayDinner)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitChapterNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UnitChapterNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.CheckedIn, htmlAttributes: new { @class = "control-label" })  <br />
+                @Html.ValidationMessageFor(model => model.CheckedIn, "", new { @class = "text-danger" })
+            </dt>
+
+            <dd>
+                <div class="btn-group" data-toggle="buttons">
+
+                    @if (Model.CheckedIn == true)
+                {
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                        </label>
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                        </label>
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+
+                    }
+                </div>
+            </dd>
+
+            </dl>
+
+</div>
+
+
+<p>
+    <input type="submit" value="Save" class="btn btn-primary" /> |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+</p>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

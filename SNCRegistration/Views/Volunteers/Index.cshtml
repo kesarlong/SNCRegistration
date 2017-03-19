@@ -1,13 +1,78 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.Volunteer>
+﻿@*@model IEnumerable<SNCRegistration.ViewModels.Volunteer>*@ @*<Original, delete if nothing wrong*@
+@model  PagedList.IPagedList<SNCRegistration.ViewModels.Volunteer>
+@using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Volunteers";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Index</h2>
+<div class="panel-body">
+    <h2>Volunteer List</h2>
+</div>
 
-<p>
+
+@using (Html.BeginForm("Index", "Volunteers", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+
+}
+
+<table class="table table-condensed table-striped">
+    <tr>
+        <th align="center">
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th align="center">
+            First Name
+        </th>
+        <th align="center">
+            Unit Chapter Number
+        </th>
+        <th align="center">
+            Checked In?
+        <th> </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitChapterNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedIn)
+            </td>
+
+            <td>@Html.ActionLink("Details", "Details", new { id = item.VolunteerID }, new { @class = "btn btn-info" }) | @Html.ActionLink("Check In", "CheckIn", new { id = item.VolunteerID }, new { @class = "btn btn-success" })</td>
+
+
+
+        </tr>
+    }
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+
+
+@*Code below is original index. Delete if nothing wrong.*@
+@*<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -86,4 +151,7 @@
     </tr>
 }
 
-</table>
+
+</table>*@
+@*<td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>*@
+@*<td>@Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })</td>*@

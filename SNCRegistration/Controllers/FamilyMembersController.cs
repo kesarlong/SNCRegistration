@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
+using System;
 
 namespace SNCRegistration.Controllers
 {
@@ -48,17 +49,22 @@ namespace SNCRegistration.Controllers
             if (ModelState.IsValid)
             {
 
-                //to do: fix - static value needs to be dynamic
-                familyMember.EventYear = 2017;
+                if (TempData["myPK"] != null)
+                    {
+                        familyMember.GuardianID = (int)TempData["myPK"];
+                    }               
+
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                familyMember.EventYear = int.Parse(thisYear);
 
                 db.FamilyMembers.Add(familyMember);
 
                 try
                 {
-                    if (TempData["myPK"] != null)
-                    {
-                        familyMember.GuardianID = (int)TempData["myPK"];
-                    }
+
+
+
 
                     db.SaveChanges();
                     

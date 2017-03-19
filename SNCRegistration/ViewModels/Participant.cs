@@ -28,7 +28,7 @@ namespace SNCRegistration.ViewModels
         public Nullable<int> GuardianID { get; set; }
         public string Comments { get; set; }
         public string GuardianGuid { get; set; }
-        public Nullable<bool> CheckedIn { get; set; }
+        public bool CheckedIn { get; set; }
         public int EventYear { get; set; }
     
         public virtual Age Age { get; set; }
