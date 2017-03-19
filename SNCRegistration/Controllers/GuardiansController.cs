@@ -8,8 +8,8 @@ using System.IO;
 using System.Net.Mime;
 using System.Data.Entity.Validation;
 using System;
-
-
+using PagedList;
+using System.Data;
 
 namespace SNCRegistration.Controllers
 
@@ -20,38 +20,96 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Guardians
-        public ActionResult Index()
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            try
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
             {
-                return View(db.Guardians.ToList());
+                page = 1;
             }
-            catch (DbEntityValidationException ex)
+            else
             {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                    }
-                }
+                searchString = currentFilter;
             }
-            return View(db.Guardians.ToList());
+
+            ViewBag.CurrentFilter = searchString;
+
+            var guardians = from s in db.Guardians
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                guardians = guardians.Where(s => s.GuardianLastName.Contains(searchString) || s.GuardianFirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    guardians = guardians.OrderByDescending(s => s.GuardianLastName);
+                    break;
+                default:
+                    guardians = guardians.OrderBy(s => s.GuardianLastName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(guardians.ToPagedList(pageNumber, pageSize));
+
+
+            // Original Index code. Delete if nothing broken.
+            //try
+            //{
+            //    return View(db.Guardians.ToList());
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in entityValidationErrors.ValidationErrors)
+            //        {
+            //            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+            //        }
+            //    }
+            //}
+            //return View(db.Guardians.ToList());
         }
 
         // GET: Guardians/Details/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Guardian guardian = db.Guardians.Find(id);
+            //if (guardian == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(guardian);
+
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Guardian guardian = db.Guardians.Find(id);
-            if (guardian == null)
-            {
-                return HttpNotFound();
-            }
-            return View(guardian);
+
+            var model = new GuardianParticipantFamily();
+
+            model.guardian = db.Guardians.Find(id);
+            model.participants = db.Participants.Where(i => i.GuardianID == id);
+            model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == id);
+
+            return View(model);
+
+
         }
 
         // GET: Guardians/Create
@@ -117,6 +175,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Guardians/Edit/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -149,21 +208,110 @@ namespace SNCRegistration.Controllers
             return File(path, MediaTypeNames.Application.Pdf);
         }
 
+        // Original Edit, delete these comments if nothing is broken
+        // POST: Guardians/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(guardian).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        //return RedirectToAction("Index");
+        //    }
+        //    return View(guardian);
+        //}
+
+
+
 
         // POST: Guardians/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(guardian).State = EntityState.Modified;
-                db.SaveChanges();
-                //return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var guardian = db.Guardians.Find(id);
+
+            if (TryUpdateModel(guardian, "",
+               new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName","GuardianAddress","GuardianCity","GuardianZip","GuardianCellPhone","GuardianEmail","PacketSentDate","ReceiptDate","ConfirmationSentDate","HealthForm","PhotoAck","Tent","AttendingCode","CheckedIn", "Comments","Relationship" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
             }
             return View(guardian);
+
+
+        }
+
+
+        // GET: Guardians/CheckIn/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        public ActionResult CheckIn(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Guardian guardian = db.Guardians.Find(id);
+            if ( guardian== null)
+            {
+                return HttpNotFound();
+            }
+            return View(guardian);
+        }
+
+        // POST: Guardians/CheckIn/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("CheckIn")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckInPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var guardian = db.Guardians.Find(id);
+
+            if (TryUpdateModel(guardian, "",
+               new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName", "GuardianAddress", "GuardianCity", "GuardianZip", "GuardianCellPhone", "GuardianEmail", "PacketSentDate", "ReceiptDate", "ConfirmationSentDate", "HealthForm", "PhotoAck", "Tent", "AttendingCode", "CheckedIn", "Comments", "Relationship" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(guardian);
+
+
         }
 
         // GET: Guardians/Delete/5
@@ -189,6 +337,7 @@ namespace SNCRegistration.Controllers
             Guardian guardian = db.Guardians.Find(id);
             db.Guardians.Remove(guardian);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

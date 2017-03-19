@@ -336,6 +336,7 @@
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GuardianParticipantFamily.cs" />
     <Compile Include="ViewModels\IdentityModels.cs" />
     <Compile Include="ViewModels\LeadContact.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -2359,7 +2360,9 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="bin\SNCRegistration.dll.config" />
+    <Content Include="bin\SNCRegistration.dll.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages\Antlr.3.5.0.2\Antlr.3.5.0.2.nupkg" />
     <Content Include="packages\bootstrap.3.3.7\bootstrap.3.3.7.nupkg" />
     <Content Include="packages\bootstrap.3.3.7\content\Content\bootstrap-theme.css.map" />
@@ -3288,7 +3291,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

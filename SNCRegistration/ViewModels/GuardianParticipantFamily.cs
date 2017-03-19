@@ -1,21 +1,21 @@
-﻿using SNCRegistration.ViewModels.Metadata;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
+using System.Linq;
+using System.Web;
 
 namespace SNCRegistration.ViewModels
 {
     public class GuardianParticipantFamily
     {
-        public Guardian Guardians { get; set; }
-        public Participant Participants { get; set; }
-        public FamilyMember FamilyMembers { get; set; }
 
-        //public IEnumerable<Guardian> Guardians { get; set; }
-        //public IEnumerable<Participant> Participant { get; set; }
+        public Guardian guardian { get; set; }
+        public Participant participant { get; set; }
+        public FamilyMember familymember { get; set; }
 
-        //public IEnumerable<FamilyMember> FamilyMember { get; set; }
+
+        public IEnumerable<Participant> participants { get; set; }
+        public IEnumerable<FamilyMember> familymembers { get; set; }
+
+
     }
 }

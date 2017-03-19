@@ -81,11 +81,15 @@ namespace SNCRegistration.ViewModels.Metadata
         public string Comments;
 
         [Required]
-        [Display(Name = "Relationship to Participant")]
+        [Display(Name = "Relationship")]
         public string Relationship;
 
         [Required]
         public string EventYear;
+
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
+
     }
 
     public class Participant_Metadata
@@ -182,6 +186,9 @@ namespace SNCRegistration.ViewModels.Metadata
         
         [Required]
         public string EventYear;
+
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
 
     }
 

@@ -18,7 +18,7 @@ namespace SNCRegistration.Controllers
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        // GET: Participants
+        // GET: Participants. For the Index
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
@@ -83,6 +83,8 @@ namespace SNCRegistration.Controllers
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
+
+            // Original delete if nothing is broken
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,6 +95,8 @@ namespace SNCRegistration.Controllers
                 return HttpNotFound();
             }
             return View(participant);
+
+
         }
 
         // GET: Participants/Create
@@ -206,7 +210,6 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
@@ -238,7 +241,7 @@ namespace SNCRegistration.Controllers
 
         }
 
-        // GET: Participants/Edit/5
+        // GET: Participants/CheckIn/5
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
@@ -254,7 +257,7 @@ namespace SNCRegistration.Controllers
             return View(participant);
         }
 
-        // POST: Participants/Edit/5
+        // POST: Participants/CheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
