@@ -3419,12 +3419,13 @@
     <Content Include="Views\VolunteersReport\Index.cshtml" />
     <Content Include="Views\Participants\CheckIn.cshtml" />
     <Content Include="Views\Volunteers\CheckIn.cshtml" />
+    <Content Include="Views\Guardians\CheckIn.cshtml" />
+    <Content Include="Views\FamilyMembers\CheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
-    <Folder Include="Views\CustomAuthorize\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -95,11 +95,11 @@
         </dt>
 
         <dd>
-            @if (Model.guardian.AttendingCode == 1)
+            @if (Model.guardian.AttendingCode == 2)
             {
                 <p>Saturday Only</p>
             }
-            else
+            else if (Model.guardian.AttendingCode == 3)
             {
                 <p>Overnight</p>
             }
@@ -161,9 +161,12 @@
     </dl>
 
     <p align="right">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-info" }) |
-        @Html.ActionLink("Delete", "Delete", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-danger" }) |
-        @Html.ActionLink("Back to List", "Index", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-info" })
+        <div align ="right" style="margin-right:20px;">
+            @Html.ActionLink("Check In", "CheckIn", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-danger" }) |
+            @Html.ActionLink("Back to List", "Index", new {}, new { @class = "btn btn-info" })
+        </div>
     </p>
 
     <hr />
@@ -229,7 +232,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>
-                <td>
+                <td align="center">
                     @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" }) |
                     @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
                 </td>

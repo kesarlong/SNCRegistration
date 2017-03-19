@@ -1,4 +1,4 @@
-﻿@model SNCRegistration.ViewModels.GuardianParticipantFamily
+﻿@model SNCRegistration.ViewModels.Participant
 
 
 @{
@@ -6,105 +6,108 @@
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Volunteer Details</h2>
+<h2>Participant Details</h2>
 
 @using (Html.BeginForm("Participants", "Details", FormMethod.Post))
 {
-    @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
-    @Html.DisplayFor(model => model.participant.ParticipantFirstName)
 }
-
-
 
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
+            @Html.DisplayNameFor(model => model.ParticipantFirstName)
         
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.ParticipantFirstName)
+            @Html.DisplayFor(model => model.ParticipantFirstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
+            @Html.DisplayNameFor(model => model.ParticipantLastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.ParticipantLastName)
+            @Html.DisplayFor(model => model.ParticipantLastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.ParticipantAge)
+            @Html.DisplayNameFor(model => model.ParticipantAge)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.ParticipantAge)
+            @Html.DisplayFor(model => model.ParticipantAge)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.ParticipantSchool)
+            @Html.DisplayNameFor(model => model.ParticipantSchool)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.ParticipantSchool)
+            @Html.DisplayFor(model => model.ParticipantSchool)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.ParticipantTeacher)
+            @Html.DisplayNameFor(model => model.ParticipantTeacher)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.ParticipantTeacher)
+            @Html.DisplayFor(model => model.ParticipantTeacher)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.ClassroomScouting)
+            @Html.DisplayNameFor(model => model.ClassroomScouting)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.ClassroomScouting)
+            @Html.DisplayFor(model => model.ClassroomScouting)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.HealthForm)
+            @Html.DisplayNameFor(model => model.HealthForm)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.HealthForm)
+            @Html.DisplayFor(model => model.HealthForm)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.PhotoAck)
+            @Html.DisplayNameFor(model => model.PhotoAck)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.PhotoAck)
+            @Html.DisplayFor(model => model.PhotoAck)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.AttendingCode)
+            @Html.DisplayNameFor(model => model.AttendingCode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.AttendingCode)
+            @if (Model.AttendingCode == 2)
+            {
+                <p>Saturday Only</p>
+            }
+            else if (Model.AttendingCode== 3)
+            {
+                <p>Overnight</p>
+            }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.Comments)
+            @Html.DisplayNameFor(model => model.Comments)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.Comments)
+            @Html.DisplayFor(model => model.Comments)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.participant.CheckedIn)
+            @Html.DisplayNameFor(model => model.CheckedIn)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.participant.CheckedIn)
+            @Html.DisplayFor(model => model.CheckedIn)
         </dd>
 
     </dl>
@@ -112,9 +115,9 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-info" }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-danger" }) |
-    @Html.ActionLink("Back to List", "Index", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ParticipantID }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ParticipantID }, new { @class = "btn btn-danger" }) |
+    @Html.ActionLink("Back to Guardian", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
 </p>
 
 
