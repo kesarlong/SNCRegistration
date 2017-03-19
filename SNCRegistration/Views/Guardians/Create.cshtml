@@ -1,4 +1,25 @@
-﻿@model SNCRegistration.ViewModels.Guardian
+﻿<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+    //require number of people in tent if selected that tent is required
+    $(document).ready(function () {
+        $("#dvCount").hide();
+
+        $("#needTent").change(function () {
+            var status = ($('input[name=Tent]:checked').val());
+            if ($('input[name=Tent]:checked').val() == 'True') {
+                $("#dvCount").show();
+            }
+            else {
+                $("#dvCount").hide();
+            }
+        });
+    });
+
+</script>
+
+
+
+@model SNCRegistration.ViewModels.Guardian
 
 
 @{
@@ -113,7 +134,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label" })<br />
 
-       @* //TO DO: USE THE DATA SOURCE FOR ATTENDANCE (SP-316)*@
+        @* //TO DO: USE THE DATA SOURCE FOR ATTENDANCE (SP-316)*@
         @Html.DropDownListFor(model => model.Relationship,
           new List<SelectListItem>{
             new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
@@ -128,7 +149,7 @@
 
 
         @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
-     </div>
+    </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.GuardianEmail, htmlAttributes: new { @class = "control-label" })<br />
@@ -157,16 +178,26 @@
     </div>
 
     <div class="form-group">
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group" data-toggle="buttons" id="needTent">
             @Html.LabelFor(model => model.Tent, htmlAttributes: new { @class = "control-label" })<br />
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.Tent, true, new { id = "radio_Tent_True" }) Yes
+            <label id="chkYes" class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Tent, true, new { @id = "chkYes", @name = "reqTent" }) Yes
             </label>
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.Tent, false, new { id = "radio_Tent_False" }) No
+            <label id="chkNo" class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Tent, false, new { @id = "chkNo", @name = "reqTent" }) No
             </label>
         </div>
         @Html.ValidationMessageFor(model => model.Tent, "", new { @class = "text-danger" })
+    </div>
+
+     //if a tent is required, what size (number of people)
+    <div class="form-group" id="dvCount">
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberInTent, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.NumberInTent, Enumerable.Range(2, 10).Select(i =>
+                new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control", style = "width:220px" })
+            @Html.ValidationMessageFor(model => model.NumberInTent, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <div class="form-group">
@@ -179,18 +210,18 @@
         <!--Set default values for check box fields not displayed on form-->
     @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
     @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
-    @Html.HiddenFor(model => model.CheckedIn, new { @Value = false})
+    @Html.HiddenFor(model => model.CheckedIn, new { @Value = false })
 
 
     <hr />
-    
-        <div class="form-group pull-left">
-            <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
-        </div>
 
-        <div class="form-group pull-right">
-            <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Cancel"/>
-        </div>
+    <div class="form-group pull-left">
+        <input type="submit" value="Create" class="btn btn-primary" onsubmit="Submitted" />
+    </div>
+
+    <div class="form-group pull-right">
+        <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Cancel" />
+    </div>
 
 }
 

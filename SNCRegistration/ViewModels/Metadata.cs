@@ -317,6 +317,9 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         public string EventYear;
+
+        [Display(Name = "Number of people in tent")]
+        public int NumberInTent;
     }
 
     }
