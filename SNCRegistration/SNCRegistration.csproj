@@ -341,6 +341,7 @@
     <Compile Include="ViewModels\LeadContact.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LeadContactVolunteer.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Metadata.cs" />
     <Compile Include="ViewModels\PartialClasses.cs" />
@@ -3421,6 +3422,7 @@
     <Content Include="Views\Volunteers\CheckIn.cshtml" />
     <Content Include="Views\Guardians\CheckIn.cshtml" />
     <Content Include="Views\FamilyMembers\CheckIn.cshtml" />
+    <Content Include="Views\LeadContacts\CheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />

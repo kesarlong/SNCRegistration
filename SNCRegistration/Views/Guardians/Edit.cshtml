@@ -167,7 +167,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Relationship)
                 @Html.DropDownListFor(model => model.Relationship,
                   new List<SelectListItem>{
                     new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
