@@ -1,0 +1,203 @@
+﻿@model SNCRegistration.ViewModels.Guardian
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Check In Guardian</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.GuardianID)
+
+        <dl class="dl-horizontal">
+            <dt>
+                <p>Guardian Name</p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GuardianFirstName) @Html.DisplayFor(model => model.GuardianLastName)
+            </dd>
+
+            <dt>
+                <p>Guardian Address</p>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GuardianAddress) <br />
+                @Html.DisplayFor(model => model.GuardianCity), @Html.DisplayFor(model => model.GuardianZip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GuardianCellPhone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GuardianCellPhone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GuardianEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GuardianEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PacketSentDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PacketSentDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ReceiptDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ReceiptDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfirmationSentDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfirmationSentDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HealthForm)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HealthForm)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhotoAck)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhotoAck)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Tent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tent)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AttendingCode)
+            </dt>
+
+            <dd>
+                @if (Model.AttendingCode == 1)
+                {
+                    <p>Saturday Only</p>
+                }
+                else
+                {
+                    <p>Overnight</p>
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Relationship)
+            </dt>
+
+            <dd>
+                @if (Model.Relationship == 1)
+                {
+                    <p>Mother / Father</p>
+                }
+                else if (Model.Relationship == 2)
+                {
+                    <p>Legal Guardian</p>
+                }
+                else if (Model.Relationship == 3)
+                {
+                    <p>Sister / Brother</p>
+                }
+                else if (Model.Relationship == 4)
+                {
+                    <p>Grandmother / Grandfather</p>
+                }
+                else if (Model.Relationship == 5)
+                {
+                    <p>Teacher / Instructor</p>
+                }
+                else if (Model.Relationship == 6)
+                {
+                    <p>Other - Family - relationship not listed</p>
+                }
+                else if (Model.Relationship == 7)
+                {
+                    <p>Other - See Comments</p>
+                }
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CheckedIn)
+            </dt>
+
+            <dd>
+                <div class="btn-group" data-toggle="buttons">
+
+                    @if (Model.CheckedIn == true)
+                    {
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                        </label>
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                        </label>
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+
+                    }
+                </div>
+
+            </dd>
+
+        </dl>
+
+        </div>
+        <p align="right">
+            <div align="right" style="margin-right:20px;">
+                <input type="submit" value="Save" class="btn btn-primary" /> |
+                @Html.ActionLink("Edit", "Edit", new { id = Model.GuardianID }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+            </div>
+        </p>
+
+}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

@@ -1,0 +1,175 @@
+﻿@model SNCRegistration.ViewModels.LeadContact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Check In Lead Contact</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.LeadContactID)
+
+        <dl class="dl-horizontal">
+            <dt>
+                <p>Lead Contact Name </p>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LeadContactFirstName) @Html.DisplayFor(model => model.LeadContactLastName)
+            </dd>
+
+            <dt>
+                <p>Lead Contact Address </p>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LeadContactAddress) <br />
+                @Html.DisplayFor(model => model.LeadContactCity), @Html.DisplayFor(model => model.LeadContactState) @Html.DisplayFor(model => model.LeadContactZip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LeadContactCellPhone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LeadContactCellPhone)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LeadContactEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LeadContactEmail)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitChapterNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitChapterNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
+            </dt>
+
+            <dd>
+                @if (Model.VolunteerAttendingCode == 1)
+                {
+                    <p>Friday Evening Only</p>
+                }
+                else if (Model.VolunteerAttendingCode == 2)
+                {
+                    <p>Saturday Only</p>
+                }
+                else if (Model.VolunteerAttendingCode == 4)
+                {
+                    <p>Friday through Sunday</p>
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SaturdayDinner)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SaturdayDinner)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalFee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TotalFee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Booth)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Booth)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LeadContactShirtOrder)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LeadContactShirtOrder)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LeadContactShirtSize)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LeadContactShirtSize)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CheckedIn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CheckedIn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CheckedIn)
+            </dt>
+
+            <dd>
+                <div class="btn-group" data-toggle="buttons">
+
+                    @if (Model.CheckedIn == true)
+                    {
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                        </label>
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                        </label>
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+
+                    }
+                </div>
+
+            </dd>
+
+        </dl>
+
+    </div>
+        <p align="right">
+            <div align="right" style="margin-right:20px;">
+                <input type="submit" value="Save" class="btn btn-primary" /> |
+                @Html.ActionLink("Edit", "Edit", new { id = Model.LeadContactID }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+            </div>
+        </p>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

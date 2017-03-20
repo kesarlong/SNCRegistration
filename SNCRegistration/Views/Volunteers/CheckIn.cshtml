@@ -118,7 +118,7 @@
 <p>
     <input type="submit" value="Save" class="btn btn-primary" /> |
     @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) |
-    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back Lead Contact", "Details", "LeadContacts", new { id = Model.LeadContactID }, new { @class = "btn btn-info" })
 </p>
 
 }

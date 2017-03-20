@@ -222,7 +222,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string LeadContactZip ;
 
 
-        [Display(Name = "Cell Phone")]
+        [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string LeadContactCellPhone ;
 
@@ -244,7 +244,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string BSType ;
 
         [Required]
-        [Display(Name = "Troop/Chapter/Unit Number")]
+        [Display(Name = "Troop/Chapter/Unit #")]
         public string UnitChapterNumber ;
         
         [Required]
@@ -269,6 +269,9 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         public string EventYear;
+
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
 
     }
         public class Volunteer_Metadata
@@ -318,6 +321,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Required]
         public string EventYear;
 
+        //Messing things up with LeadContact/Details
         //[Display(Name = "Number of people in tent")]
         //public int NumberInTent;
     }

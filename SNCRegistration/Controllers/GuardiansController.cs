@@ -107,6 +107,11 @@ namespace SNCRegistration.Controllers
             model.participants = db.Participants.Where(i => i.GuardianID == id);
             model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == id);
 
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
             return View(model);
 
 
@@ -175,7 +180,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Guardians/Edit/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -231,7 +236,7 @@ namespace SNCRegistration.Controllers
         // POST: Guardians/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
@@ -267,16 +272,18 @@ namespace SNCRegistration.Controllers
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Guardian guardian = db.Guardians.Find(id);
-            if ( guardian== null)
+            if (guardian == null)
             {
                 return HttpNotFound();
             }
             return View(guardian);
+
         }
 
         // POST: Guardians/CheckIn/5
@@ -292,10 +299,11 @@ namespace SNCRegistration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var guardian = db.Guardians.Find(id);
+           var guardian = db.Guardians.Find(id);
+
 
             if (TryUpdateModel(guardian, "",
-               new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName", "GuardianAddress", "GuardianCity", "GuardianZip", "GuardianCellPhone", "GuardianEmail", "PacketSentDate", "ReceiptDate", "ConfirmationSentDate", "HealthForm", "PhotoAck", "Tent", "AttendingCode", "CheckedIn", "Comments", "Relationship" }))
+               new string[] { "CheckedIn" }))
             {
                 try
                 {
@@ -314,7 +322,9 @@ namespace SNCRegistration.Controllers
 
         }
 
+
         // GET: Guardians/Delete/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -330,6 +340,7 @@ namespace SNCRegistration.Controllers
         }
 
         // POST: Guardians/Delete/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
