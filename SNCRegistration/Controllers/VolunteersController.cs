@@ -106,6 +106,8 @@ namespace SNCRegistration.Controllers
             {
 
                 db.Volunteers.Add(volunteer);
+                var thisYear = DateTime.Now.Year.ToString();
+                volunteer.EventYear = int.Parse(thisYear);
 
                 try
                 {

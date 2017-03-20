@@ -53,6 +53,9 @@ namespace SNCRegistration.Controllers
             {
                 db.LeadContacts.Add(leadContact);
 
+                var thisYear = DateTime.Now.Year.ToString();
+                leadContact.EventYear = int.Parse(thisYear);
+
                 try
                 {
                     db.SaveChanges();
@@ -149,6 +152,11 @@ namespace SNCRegistration.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult GetYear()
+        {
+            return View("ActiveRegistrationYear");
         }
     }
 }
