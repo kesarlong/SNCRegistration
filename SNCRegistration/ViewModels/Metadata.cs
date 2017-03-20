@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Web.Mvc;
+
 
 namespace SNCRegistration.ViewModels.Metadata
 {
@@ -14,6 +12,7 @@ namespace SNCRegistration.ViewModels.Metadata
           public int GuardianID;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "First Name")]
         public string GuardianFirstName;
 
@@ -21,9 +20,11 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Last Name")]
         public string GuardianLastName;
 
+        [MaxLength(50)]
         [Display(Name = "Street Address")]
         public string GuardianAddress;
 
+        [MaxLength(50)]
         [Display(Name ="City")]
         public string GuardianCity;
 
@@ -33,16 +34,12 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [MaxLength(10)]
         [Display(Name = "Zip")]
-        //TO DO: review field type (should be string as it is not used numerically) - Erika review (SP-245 created 11/21/16)
         public int GuardianZip;
 
+        [Phone]
         [MaxLength(10)]
-        [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage ="Please enter phone number as numbers only.")]
+        [MinLength(10)]
         [Display(Name = "Cell Phone")]
-        //[DisplayFormat(DataFormatString ="{0;##########}")]
-        //TO DO: FORMAT ON SCREEN FOR DATA INPUT -- MENTOR INPUT BEING REQUESTED 
-            [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = true)]
         public string GuardianCellPhone;
 
 
@@ -78,16 +75,21 @@ namespace SNCRegistration.ViewModels.Metadata
         public int AttendingCode;
 
         [MaxLength(50)]
+        
         //TO DO: this needs to be a larger field
         [Display(Name = "Comments")]
         public string Comments;
 
         [Required]
-        [Display(Name = "Relationship to Participant")]
+        [Display(Name = "Relationship")]
         public string Relationship;
 
         [Required]
         public string EventYear;
+
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
+
     }
 
     public class Participant_Metadata
@@ -96,11 +98,13 @@ namespace SNCRegistration.ViewModels.Metadata
         public int ParticipantID;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "First Name")]
         public string ParticipantFirstName;
 
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "Last Name")]
         public string ParticipantLastName;
 
@@ -109,6 +113,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public int ParticipantAge;
 
         //School is optional input field
+        [MaxLength(50)]
         [Display(Name = "School")]
         public string ParticipantSchool;
 
@@ -120,16 +125,14 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Classroom Scouting")]
         public bool ClassroomScouting;
 
-        [UIHint("Boolean")]
         [Display(Name = "Health Form")]
         public bool? HealthForm;
 
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
 
-        [UIHint("Boolean")]
         [Display(Name = "Photo Acknowledgment")]
         public bool? PhotoAck;
-        
-
 
         [Required]
         [Display(Name = "Attendance")]
@@ -152,10 +155,12 @@ namespace SNCRegistration.ViewModels.Metadata
         public int FamilyMemberID;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name="First Name")]
         public string FamilyMemberFirstName;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name="Last Name")]
         public string FamilyMemberLastName;
 
@@ -181,6 +186,9 @@ namespace SNCRegistration.ViewModels.Metadata
         
         [Required]
         public string EventYear;
+
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
 
     }
 
@@ -214,7 +222,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string LeadContactZip ;
 
 
-        [Display(Name = "Cell Phone")]
+        [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string LeadContactCellPhone ;
 
@@ -236,7 +244,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string BSType ;
 
         [Required]
-        [Display(Name = "Troop/Chapter/Unit Number")]
+        [Display(Name = "Troop/Chapter/Unit #")]
         public string UnitChapterNumber ;
         
         [Required]
@@ -261,6 +269,9 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         public string EventYear;
+
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
 
     }
         public class Volunteer_Metadata
@@ -309,6 +320,10 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         public string EventYear;
+
+        //Messing things up with LeadContact/Details
+        //[Display(Name = "Number of people in tent")]
+        //public int NumberInTent;
     }
 
     }

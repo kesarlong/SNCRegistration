@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
+using System;
+using System.Data;
 
 namespace SNCRegistration.Controllers
 {
@@ -12,12 +14,14 @@ namespace SNCRegistration.Controllers
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: FamilyMembers
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Index()
         {
             return View(db.FamilyMembers.ToList());
         }
 
         // GET: FamilyMembers/Details/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -48,17 +52,22 @@ namespace SNCRegistration.Controllers
             if (ModelState.IsValid)
             {
 
-                //to do: fix - static value needs to be dynamic
-                familyMember.EventYear = 2017;
+                if (TempData["myPK"] != null)
+                    {
+                        familyMember.GuardianID = (int)TempData["myPK"];
+                    }               
+
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                familyMember.EventYear = int.Parse(thisYear);
 
                 db.FamilyMembers.Add(familyMember);
 
                 try
                 {
-                    if (TempData["myPK"] != null)
-                    {
-                        familyMember.GuardianID = (int)TempData["myPK"];
-                    }
+
+
+
 
                     db.SaveChanges();
                     
@@ -97,6 +106,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: FamilyMembers/Edit/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,18 +124,107 @@ namespace SNCRegistration.Controllers
         // POST: FamilyMembers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments")] FamilyMember familyMember)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(familyMember).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(familyMember);
+
+            var familymember = db.FamilyMembers.Find(id);
+
+            if (TryUpdateModel(familymember, "",
+               new string[] { "FamilyMemberFirstName", "FamilyMemberLastName", "HealthForm", "PhotoAck", "AttendingCode","CheckedIn", "Comments" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Details", "Guardians", new { id = familymember.GuardianID });
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(familymember);
         }
+
+        //Original Edit, delete if nothing broken
+        //public ActionResult Edit([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments")] FamilyMember familyMember)
+        //{
+
+            //    var familymember = db.FamilyMembers.Find(id);
+
+            //    if (ModelState.IsValid)
+            //    {
+            //        db.Entry(familyMember).State = EntityState.Modified;
+            //        db.SaveChanges();
+            //        return RedirectToAction("Details", "Guardians", new { id = familymember.GuardianID });
+            //    }
+            //    return View(familyMember);
+            //}
+
+
+
+            // GET: Guardians/CheckIn/5
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        public ActionResult CheckIn(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FamilyMember familymember = db.FamilyMembers.Find(id);
+            if (familymember == null)
+            {
+                return HttpNotFound();
+            }
+            return View(familymember);
+
+        }
+
+        // POST: Guardians/CheckIn/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [HttpPost, ActionName("CheckIn")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckInPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var familymember = db.FamilyMembers.Find(id);
+
+
+            if (TryUpdateModel(familymember, "",
+               new string[] { "CheckedIn" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Details", "Guardians", new { id = familymember.GuardianID });
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(familymember);
+
+
+        }
+
 
         // GET: FamilyMembers/Delete/5
         public ActionResult Delete(int? id)

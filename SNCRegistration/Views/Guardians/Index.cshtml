@@ -1,22 +1,85 @@
 ﻿@model IEnumerable<SNCRegistration.ViewModels.Guardian>
+@using PagedList.Mvc;
+
 
 @{
     ViewBag.Title = "Guardian";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Guardians</h2>
+<div class="panel-body">
+    <h2>Guardians List</h2>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+@using (Html.BeginForm("Index", "Guardians", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+
+}
+
+
+<table class="table table-condensed table-striped">
     <tr>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.GuardianFirstName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.HealthForm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoAck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckedIn)
+        </th>        
+
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HealthForm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoAck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckedIn)
+        </td>
+
+        <td>@Html.ActionLink("Details", "Details", new { id = item.GuardianID }, new { @class = "btn btn-info" })</td>
+        <td align="center"></td>
+    </tr>
+}
+
+</table>
+
+
+@*
+    Original Tables for Index. Delete if nothing broken.
+
+    <table class="table">
+    <tr>
+        <th>
             @Html.DisplayNameFor(model => model.GuardianLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuardianFirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.GuardianAddress)
@@ -59,64 +122,62 @@
         </th>
         <th>@Html.DisplayNameFor(model => model.Relationship)</th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuardianFirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuardianLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuardianAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuardianCity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuardianZip)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuardianCellPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GuardianEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PacketSentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReceiptDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ConfirmationSentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HealthForm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhotoAck)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AttendingCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comments)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.Relationship)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GuardianID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GuardianID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GuardianID })
-        </td>
-    </tr>
-}
-
-</table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuardianFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuardianLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuardianAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuardianCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuardianZip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuardianCellPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuardianEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PacketSentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmationSentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HealthForm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhotoAck)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttendingCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Relationship)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.GuardianID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.GuardianID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.GuardianID })
+            </td>
+        </tr>
+    }
+</table>*@

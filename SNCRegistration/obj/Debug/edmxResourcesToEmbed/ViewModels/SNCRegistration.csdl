@@ -28,6 +28,7 @@
     <EntitySet Name="C__MigrationHistory" EntityType="SNCRegistrationModel.C__MigrationHistory" />
     <EntitySet Name="Ages" EntityType="SNCRegistrationModel.Age" />
     <EntitySet Name="AspNetRoles" EntityType="SNCRegistrationModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="SNCRegistrationModel.AspNetUserClaim" />
     <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
     <EntitySet Name="BSTypes" EntityType="SNCRegistrationModel.BSType" />
     <EntitySet Name="Events" EntityType="SNCRegistrationModel.Event" />
@@ -37,7 +38,9 @@
     <EntitySet Name="Participants" EntityType="SNCRegistrationModel.Participant" />
     <EntitySet Name="Relationships" EntityType="SNCRegistrationModel.Relationship" />
     <EntitySet Name="ShirtSizes" EntityType="SNCRegistrationModel.ShirtSize" />
+    <EntitySet Name="Tables" EntityType="SNCRegistrationModel.Table" />
     <EntitySet Name="Volunteers" EntityType="SNCRegistrationModel.Volunteer" />
+    <EntitySet Name="AspNetUserLogins" EntityType="SNCRegistrationModel.AspNetUserLogin" />
     <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C">
       <End Role="Age" EntitySet="Ages" />
       <End Role="FamilyMember" EntitySet="FamilyMembers" />
@@ -92,6 +95,13 @@
     <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetRoles" Relationship="SNCRegistrationModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
   </EntityType>
   <EntityType Name="C__MigrationHistory">
@@ -121,6 +131,15 @@
     <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUsers" Relationship="SNCRegistrationModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Attendance">
     <Key>
@@ -163,9 +182,9 @@
     <Property Name="HealthForm" Type="Boolean" />
     <Property Name="PhotoAck" Type="Boolean" />
     <Property Name="AttendingCode" Type="Int32" Nullable="false" />
-    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="GuardianGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CheckedIn" Type="Boolean" />
+    <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
     <Property Name="EventYear" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C" FromRole="FamilyMember" ToRole="Age" />
     <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__FamilyMem__Event__55009F39" FromRole="FamilyMember" ToRole="Event" />
@@ -184,7 +203,7 @@
     <Property Name="GuardianState" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
     <Property Name="GuardianZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="GuardianCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="GuardianEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GuardianEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="PacketSentDate" Type="DateTime" Precision="0" />
     <Property Name="ReceiptDate" Type="DateTime" Precision="0" />
     <Property Name="ConfirmationSentDate" Type="DateTime" Precision="0" />
@@ -192,10 +211,11 @@
     <Property Name="PhotoAck" Type="Boolean" />
     <Property Name="Tent" Type="Boolean" />
     <Property Name="AttendingCode" Type="Int32" Nullable="false" />
-    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="GuardianGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CheckedIn" Type="Boolean" />
+    <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
     <Property Name="EventYear" Type="Int32" Nullable="false" />
+    <Property Name="NumberInTent" Type="Int32" />
     <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Guardians__Event__55F4C372" FromRole="Guardian" ToRole="Event" />
     <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="Guardian" ToRole="FamilyMember" />
     <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Guardian" ToRole="Participant" />
@@ -214,16 +234,16 @@
     <Property Name="LeadContactState" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="LeadContactZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="LeadContactCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="LeadContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LeadContactEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="VolunteerAttendingCode" Type="Int32" Nullable="false" />
     <Property Name="SaturdayDinner" Type="Boolean" />
     <Property Name="TotalFee" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Booth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="LeadContactShirtOrder" Type="Boolean" Nullable="false" />
     <Property Name="LeadContactShirtSize" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="LeaderGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CheckedIn" Type="Boolean" />
+    <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
     <Property Name="EventYear" Type="Int32" Nullable="false" />
     <Property Name="Marketing" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__LeadConta__Event__58D1301D" FromRole="LeadContact" ToRole="Event" />
@@ -244,9 +264,9 @@
     <Property Name="PhotoAck" Type="Boolean" />
     <Property Name="AttendingCode" Type="Int32" Nullable="false" />
     <Property Name="GuardianID" Type="Int32" />
-    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="GuardianGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CheckedIn" Type="Boolean" />
+    <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
     <Property Name="EventYear" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Participa__Parti__41EDCAC5" FromRole="Participant" ToRole="Age" />
     <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Participa__Event__56E8E7AB" FromRole="Participant" ToRole="Event" />
@@ -266,6 +286,14 @@
     <Property Name="ShirtSizeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="ShirtSizeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Volunteer">
     <Key>
       <PropertyRef Name="VolunteerID" />
@@ -280,12 +308,22 @@
     <Property Name="VolunteerAttendingCode" Type="Int32" Nullable="false" />
     <Property Name="SaturdayDinner" Type="Boolean" />
     <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="LeaderGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CheckedIn" Type="Boolean" />
+    <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
     <Property Name="EventYear" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__3E1D39E1" FromRole="Volunteer" ToRole="Age" />
     <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4" FromRole="Volunteer" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK__FamilyMem__Famil__40F9A68C">
     <End Type="SNCRegistrationModel.Age" Role="Age" Multiplicity="1" />

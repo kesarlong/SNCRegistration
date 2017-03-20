@@ -24,21 +24,23 @@
 
 <table class="table table-condensed table-striped">
     <tr>
-        <th>
+        <th align="center">
             @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
-        <th>
+        <th align="center">
             First Name
         </th>
-        <th>
+        <th align="center">
             Age
         </th>
-        <th>
+        <th align="center">
             School
         </th>
-        <th>
-            Details
+        <th align="center">
+            Checked In?
         </th>
+        <th> </th>
+        <th></th>
     </tr>
     
 @foreach (var item in Model) {
@@ -55,10 +57,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantSchool)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckedIn)
+        </td>
 
-        @*<td>@Html.ActionLink("Edit", "Edit", new { id=item.ParticipantID })</td>*@
-        <td>@Html.ActionLink("Details", "Details", new { id=item.ParticipantID })</td>
-        @*<td>@Html.ActionLink("Delete", "Delete", new { id=item.ParticipantID })</td>*@
+
+        <td>@Html.ActionLink("Details", "Details", new { id=item.ParticipantID }, new { @class = "btn btn-info" }) | @Html.ActionLink("Check In", "CheckIn", new { id = item.ParticipantID }, new { @class = "btn btn-success" })</td>
+        <td align="center"></td>
+        
     </tr>
 }
 
@@ -68,6 +74,8 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
+
+@*Code below is original index. Delete if nothing wrong.*@
 @*<tr>
         <th>
            @Html.DisplayNameFor(model => model.ParticipantLastName)
@@ -153,5 +161,6 @@ original string
         <td>@Html.ActionLink("Edit", "Edit", new { id = item.ParticipantID })</td>
         <td>@Html.ActionLink("Details", "Details", new { id = item.ParticipantID })</td>
         <td>@Html.ActionLink("Delete", "Delete", new { id = item.ParticipantID })</td>
+
     </tr>
 }*@

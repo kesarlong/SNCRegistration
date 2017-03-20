@@ -29,6 +29,7 @@ namespace SNCRegistration.ViewModels
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Age> Ages { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<BSType> BSTypes { get; set; }
         public virtual DbSet<Event> Events { get; set; }
@@ -38,6 +39,8 @@ namespace SNCRegistration.ViewModels
         public virtual DbSet<Participant> Participants { get; set; }
         public virtual DbSet<Relationship> Relationships { get; set; }
         public virtual DbSet<ShirtSize> ShirtSizes { get; set; }
+        public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<Volunteer> Volunteers { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
     }
 }

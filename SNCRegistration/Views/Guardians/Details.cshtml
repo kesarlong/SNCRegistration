@@ -1,147 +1,246 @@
-﻿@model SNCRegistration.ViewModels.Guardian
+﻿@model SNCRegistration.ViewModels.GuardianParticipantFamily
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Guardian Details";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Guardian Details</h2>
 
 <div>
-    <h4>Guardian</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.GuardianFirstName)
+            <p>Guardian Name</p>
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.GuardianFirstName)
+            @Html.DisplayFor(model => model.guardian.GuardianFirstName) @Html.DisplayFor(model => model.guardian.GuardianLastName)  
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GuardianLastName)
+            <p>Guardian Address</p>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GuardianLastName)
+            @Html.DisplayFor(model => model.guardian.GuardianAddress) <br />    
+            @Html.DisplayFor(model => model.guardian.GuardianCity), @Html.DisplayFor(model => model.guardian.GuardianZip)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GuardianAddress)
+            @Html.DisplayNameFor(model => model.guardian.GuardianCellPhone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GuardianAddress)
+            @Html.DisplayFor(model => model.guardian.GuardianCellPhone)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GuardianCity)
+            @Html.DisplayNameFor(model => model.guardian.GuardianEmail)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GuardianCity)
+            @Html.DisplayFor(model => model.guardian.GuardianEmail)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GuardianZip)
+            @Html.DisplayNameFor(model => model.guardian.PacketSentDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GuardianZip)
+            @Html.DisplayFor(model => model.guardian.PacketSentDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GuardianCellPhone)
+            @Html.DisplayNameFor(model => model.guardian.ReceiptDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GuardianCellPhone)
+            @Html.DisplayFor(model => model.guardian.ReceiptDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GuardianEmail)
+            @Html.DisplayNameFor(model => model.guardian.ConfirmationSentDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GuardianEmail)
+            @Html.DisplayFor(model => model.guardian.ConfirmationSentDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PacketSentDate)
+            @Html.DisplayNameFor(model => model.guardian.HealthForm)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PacketSentDate)
+            @Html.DisplayFor(model => model.guardian.HealthForm)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReceiptDate)
+            @Html.DisplayNameFor(model => model.guardian.PhotoAck)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReceiptDate)
+            @Html.DisplayFor(model => model.guardian.PhotoAck)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ConfirmationSentDate)
+            @Html.DisplayNameFor(model => model.guardian.Tent)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ConfirmationSentDate)
+            @Html.DisplayFor(model => model.guardian.Tent)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HealthForm)
+            @Html.DisplayNameFor(model => model.guardian.AttendingCode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HealthForm)
+            @if (Model.guardian.AttendingCode == 2)
+            {
+                <p>Saturday Only</p>
+            }
+            else if (Model.guardian.AttendingCode == 3)
+            {
+                <p>Overnight</p>
+            }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhotoAck)
+            @Html.DisplayNameFor(model => model.guardian.Relationship)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhotoAck)
+            @if (Model.guardian.Relationship == 1)
+            {
+                <p>Mother / Father</p>
+            }
+            else if (Model.guardian.Relationship == 2)
+            {
+                <p>Legal Guardian</p>
+            }
+            else if (Model.guardian.Relationship == 3)
+            {
+                <p>Sister / Brother</p>
+            }
+            else if (Model.guardian.Relationship == 4)
+            {
+                <p>Grandmother / Grandfather</p>
+            }
+            else if (Model.guardian.Relationship == 5)
+            {
+                <p>Teacher / Instructor</p>
+            }
+            else if (Model.guardian.Relationship == 6)
+            {
+                <p>Other - Family - relationship not listed</p>
+            }
+            else if (Model.guardian.Relationship == 7)
+            {
+                <p>Other - See Comments</p>
+            }
+
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tent)
+            @Html.DisplayNameFor(model => model.guardian.Comments)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tent)
+            @Html.DisplayFor(model => model.guardian.Comments)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.AttendingCode)
+            @Html.DisplayNameFor(model => model.guardian.CheckedIn)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AttendingCode)
+            @Html.DisplayFor(model => model.guardian.CheckedIn)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Comments)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Comments)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Relationship)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Relationship)
-        </dd>
 
     </dl>
+
+    <p align="right">
+        <div align ="right" style="margin-right:20px;">
+            @Html.ActionLink("Check In", "CheckIn", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-danger" }) |
+            @Html.ActionLink("Back to List", "Index", new {}, new { @class = "btn btn-info" })
+        </div>
+    </p>
+
+    <hr />
+    <h3>Participant Attendees</h3>
+        <table class="table"> 
+            <tr >
+                <th>
+                    @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.participant.CheckedIn)
+                </th>
+            
+                <th></th>
+            </tr>
+            @foreach (var item in Model.participants)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParticipantLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CheckedIn)
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" }) 
+                    </td>
+                </tr>
+            }
+
+            </table>
+    <hr />
+    <h3>Family Attendees</h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.FamilyMemberFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.FamilyMemberLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.CheckedIn)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.familymembers)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyMemberFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyMemberLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckedIn)
+                </td>
+                <td align="center">
+                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+           
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.GuardianID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

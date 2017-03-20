@@ -85,6 +85,13 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CheckedIn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CheckedIn)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Comments)
         </dt>
 
@@ -92,7 +99,8 @@
             @Html.DisplayFor(model => model.Comments)
         </dd>
 
-        <dt>
+       
+        @*<dt>
             @Html.DisplayNameFor(model => model.Volunteers1.VolunteerFirstName)
         </dt>
 
@@ -106,7 +114,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.Volunteer1.VolunteerFirstName)
-        </dd>
+        </dd>*@
 
     </dl>
 
@@ -114,8 +122,14 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <div class="form-group pull-left">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+
+            <div class="form-group pull-right">
+                @Html.ActionLink("Back Lead Contact", "Details", "LeadContacts", new { id = Model.LeadContactID }, new { @class = "btn btn-info" })
+
+            </div>
         </div>
     }
 </div>

@@ -40,18 +40,17 @@
     </div>
 
     //DO TO: update to use data from Attendance table (Jira SP-306)
+
+    //TO DO: Jira-306 - change to look up values from attendance table
     <div class="form-group">
-        <div class="btn-group" data-toggle="buttons">
-            @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
-            <br />
-            @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "2", new { id = "Sat-AM" }) Saturday Only
-            </label>
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.AttendingCode, "3", new { id = "Overnight" }) Overnight
-            </label>
-        </div>
+        @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.AttendingCode,
+            new List<SelectListItem>{
+                new SelectListItem{ Value = "", Text = "-Select-" },
+                new SelectListItem{ Value = "2", Text = "Saturday Only" },
+                new SelectListItem{ Value = "3", Text = "Overnight" }
+            }, new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
@@ -63,21 +62,32 @@
     <!--Set default values for check box fields not displayed on form-->
     @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
     @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+    @Html.HiddenFor(model=> model.CheckedIn, new { @value = false})
 
     <hr />
 
     //Buttons to direct next form action
+
+    //complete registration
+    <div class="form-group pull-left">
+        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+    </div>
+
+
     //add another participant
-    <div class="form-group pull-right">
+    <div class="form-group pull-left">
         <input type="submit" name="submit" id="addParticipant" value="Add another participant" class="btn btn-primary" />
     </div>
+
     //add a family member (non-participant) attendig
-    <div class="form-group pull-right">
+    <div class="form-group pull-left">
         <input type="submit" name="submit" id="AddFamily" value="Add a family member" class="btn btn-primary" />
     </div>
-    //complete registration
+
+
+
     <div class="form-group pull-right">
-        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+        <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");" />
     </div>
 
 }

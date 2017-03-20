@@ -1,14 +1,13 @@
 ﻿@model SNCRegistration.ViewModels.Volunteer
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Volunteer Details";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Volunteer Details</h2>
 
 <div>
-    <h4>Volunteer</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -35,13 +34,13 @@
             @Html.DisplayFor(model => model.VolunteerAge)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.LeadContactID)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.LeadContactID)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.VolunteerShirtOrder)
@@ -84,6 +83,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CheckedIn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CheckedIn)
+        </dd>
+
+
+        <dt>
             @Html.DisplayNameFor(model => model.Comments)
         </dt>
 
@@ -91,7 +98,7 @@
             @Html.DisplayFor(model => model.Comments)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Volunteers1.VolunteerFirstName)
         </dt>
 
@@ -105,11 +112,12 @@
 
         <dd>
             @Html.DisplayFor(model => model.Volunteer1.VolunteerFirstName)
-        </dd>
+        </dd>*@
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.VolunteerID }, new { @class = "btn btn-danger" }) |
+    @Html.ActionLink("Back Lead Contact", "Details", "LeadContacts", new { id = Model.LeadContactID }, new { @class = "btn btn-info" })
 </p>
