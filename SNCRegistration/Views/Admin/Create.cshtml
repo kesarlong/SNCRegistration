@@ -54,6 +54,20 @@
         </div>
 
         <div class="form-group">
+            <div class="control-label col-md-2"><p>Role Definitions</p></div>
+            <div class="col-md-10">
+                <ul>
+                    <li>System Admin: Full Access to all features.</li>
+                    <li>Full Admin: Full Access to all features.</li>
+                    <li>Volunteer Admin: Access to only Volunteer and Participant Check-In and Details view.</li>
+                    <li>Unassigned User: Default when user is created. Access to no features.</li>
+                </ul>
+
+            </div>
+             
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
                 @Html.ActionLink("Back to List",
