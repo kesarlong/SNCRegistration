@@ -199,7 +199,7 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -252,7 +252,7 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {

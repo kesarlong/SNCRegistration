@@ -183,7 +183,7 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Edit/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -203,7 +203,7 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
@@ -221,7 +221,7 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -266,13 +266,13 @@ namespace SNCRegistration.Controllers
             var participant = db.Participants.Find(id);
 
             if (TryUpdateModel(participant, "",
-               new string[] { "ParticipantFirstName", "ParticipantLastName", "ParticipantAge", "ParticipantSchool", "ParticipantTeacher", "ClassroomScouting", "HealthForm", "PhotoAck", "AttendingCode", "Returning", "Comments", "CheckedIn", "EventYear" }))
+               new string[] {"CheckedIn"}))
             {
                 try
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details","Guardians", new { id = participant.GuardianID });
                 }
                 catch (DataException /* dex */)
                 {
