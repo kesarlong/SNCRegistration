@@ -270,3 +270,5 @@ $RECYCLE.BIN/
 .vs/config/applicationhost.config
 .vs/config/applicationhost.config
 .vs/config/applicationhost.config
+SNCRegistration/obj/Debug/SNCRegistration.pdb
+SNCRegistration/obj/Debug/SNCRegistration.dll
