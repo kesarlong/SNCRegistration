@@ -352,6 +352,8 @@ namespace SNCRegistration.Controllers
                     if (Request["submit"].Equals("Add a family member"))
                     { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = familyMember.GuardianGuid }); }
 
+                    if (Request["submit"].Equals("Cancel"))
+                    { return RedirectToAction("Redirect", "Participants", new { GuardianGuid = familyMember.GuardianGuid }); }
 
                     //registration complete, no more people to add
                     if (Request["submit"].Equals("Complete registration"))

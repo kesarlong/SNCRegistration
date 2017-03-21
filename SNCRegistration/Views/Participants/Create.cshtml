@@ -112,7 +112,8 @@
 
 
     <div class="form-group pull-right">
-        <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");" />
+        <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger"onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");"/>
+        @*<input type="submit" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" />*@  
     </div>
 }
 

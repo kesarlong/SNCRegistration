@@ -148,6 +148,9 @@ namespace SNCRegistration.Controllers
                     //add a family member
                     { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = participant.GuardianGuid }); }
 
+                    if(Request["submit"].Equals("Cancel"))
+                    { return RedirectToAction("Redirect", new { GuardianGuid = participant.GuardianGuid }); }
+
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
@@ -156,10 +159,7 @@ namespace SNCRegistration.Controllers
                         Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!");
                         return Redirect("Registered");
                     }
-
-
-
-
+        
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -358,12 +358,16 @@ namespace SNCRegistration.Controllers
                 TempData["myPK"] = participant.GuardianID;
                 TempData.Keep();
 
+                
+
 
                 //store year of event
                 var thisYear = DateTime.Now.Year.ToString();
                 participant.EventYear = int.Parse(thisYear);
 
             }
+
+
                 return View();
 
         }
