@@ -104,6 +104,10 @@ namespace SNCRegistration.Controllers
         // GET: LeadContacts/Create
         public ActionResult Create()
         {
+            ViewBag.ShirtSizes = new SelectList (db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances, "AttendanceID", "Description");
+            ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
+
             return View();
         }
 
@@ -125,6 +129,7 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
                     this.Session["lSession"] = leadContact.LeadContactID;
+                    this.Session["leaderEmail"] = leadContact.LeadContactEmail;
                     TempData["myPK"] = leadContact.LeadContactID;
                     TempData.Keep();
                     return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
