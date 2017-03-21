@@ -11,7 +11,7 @@ using PagedList;
 
 namespace SNCRegistration.Controllers
     {
-    public class ParticipantsReportController : Controller
+    public class AldenRoadReportController : Controller
         {
      
         // GET: Reporting
@@ -19,31 +19,31 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE ParticipantSchool LIKE '%Alden%';";
             DataTable dt = new DataTable();
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
-           
             da.Fill(dt);
             con.Close();
-            IList<ParticipantsReportModel> model = new List<ParticipantsReportModel>();
+            IList<AldenRoadReportModel> model = new List<AldenRoadReportModel>();
             for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                model.Add(new ParticipantsReportModel()
+                model.Add(new AldenRoadReportModel()
                     {
                     ParticipantID = Convert.ToInt32(dt.Rows[i]["ParticipantID"]),
                     ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
                     ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
+                    ParticipantSchool = dt.Rows[i]["ParticipantSChool"].ToString()
                     });
                 }
             return View(model);
             }
 
-        public ActionResult ParticipantsReport()
+        public ActionResult AldenRoadReport()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE ParticipantSchool LIKE '%Alden%';";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";
             con.Open();
@@ -61,7 +61,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= AldenRoadReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -72,7 +72,7 @@ namespace SNCRegistration.Controllers
                     }
                 }
 
-            return RedirectToAction("Index", "ParticipantsReport");
+            return RedirectToAction("Index", "AldenRoadReport");
             }
 
         private void releaseObject(object obj)

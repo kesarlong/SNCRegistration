@@ -6,44 +6,44 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using PagedList;
 
 namespace SNCRegistration.Controllers
+{
+    public class CompletedRegistrationController : Controller
     {
-    public class ParticipantsReportController : Controller
-        {
-     
-        // GET: Reporting
+        // GET: CompletedRegistration
         public ActionResult Index()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT ParticipantFirstName, ParticipantLastName, HealthForm, PhotoAck FROM Participants WHERE HealthFOrm = 1 AND PhotoAck = 1 UNION SELECT GuardianFirstName, GuardianLastName, HealthFOrm, PhotoAck FROM Guardians WHERE HealthForm = 1 AND PhotoAck = 1 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1;";
             DataTable dt = new DataTable();
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
-           
             da.Fill(dt);
             con.Close();
-            IList<ParticipantsReportModel> model = new List<ParticipantsReportModel>();
+            IList<CompletedRegistrationModel> model = new List<CompletedRegistrationModel>();
             for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                model.Add(new ParticipantsReportModel()
+                model.Add(new CompletedRegistrationModel()
                     {
-                    ParticipantID = Convert.ToInt32(dt.Rows[i]["ParticipantID"]),
                     ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
                     ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
+                    HealthForm = dt.Rows[i]["HealthForm"].ToString(),
+                    PhotoAck = dt.Rows[i]["PhotoAck"].ToString()
                     });
                 }
             return View(model);
             }
 
-        public ActionResult ParticipantsReport()
+        public ActionResult CompletedRegistration()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT ParticipantFirstName, ParticipantLastName, HealthForm, PhotoAck FROM Participants WHERE HealthFOrm = 1 AND PhotoAck = 1 UNION SELECT GuardianFirstName, GuardianLastName, HealthFOrm, PhotoAck FROM Guardians WHERE HealthForm = 1 AND PhotoAck = 1 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1;";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";
             con.Open();
@@ -61,7 +61,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= CompletedRegistrationReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -72,7 +72,7 @@ namespace SNCRegistration.Controllers
                     }
                 }
 
-            return RedirectToAction("Index", "ParticipantsReport");
+            return RedirectToAction("Index", "CompletedRegistration");
             }
 
         private void releaseObject(object obj)
