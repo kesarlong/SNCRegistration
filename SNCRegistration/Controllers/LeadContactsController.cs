@@ -105,7 +105,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Create()
         {
             ViewBag.ShirtSizes = new SelectList (db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
-            ViewBag.Attendance = new SelectList(db.Attendances, "AttendanceID", "Description");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
 
             return View();
@@ -250,16 +250,17 @@ namespace SNCRegistration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var leadContact = db.LeadContacts.Find(id);
+            var leadcontact = db.LeadContacts.Find(id);
 
-            if (TryUpdateModel(leadContact, "",
+
+            if (TryUpdateModel(leadcontact, "",
                new string[] { "CheckedIn" }))
             {
                 try
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Details", "LeadContacts", new { id = leadContact.LeadContactID });
+                    return RedirectToAction("Details", "LeadContacts", new { id = leadcontact.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -267,7 +268,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
-            return View(leadContact);
+            return View(leadcontact);
 
 
         }

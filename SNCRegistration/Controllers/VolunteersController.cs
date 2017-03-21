@@ -90,7 +90,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Create()
         {
             ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
-            ViewBag.Attendance = new SelectList(db.Attendances, "AttendanceID", "Description");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             return View();
         }
@@ -217,7 +217,7 @@ namespace SNCRegistration.Controllers
         }
 
 
-        // GET: Participants/Edit/5
+        // GET: Volunteer/Checkin/5
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
@@ -234,7 +234,7 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
-        // POST: Participants/Edit/5
+        // POST: VolunteerCheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
@@ -249,8 +249,9 @@ namespace SNCRegistration.Controllers
             }
             var volunteer = db.Volunteers.Find(id);
 
+
             if (TryUpdateModel(volunteer, "",
-               new string[] { "VolunteerID", "VolunteerFirstName","VolunteerLastName","VolunteerAge","LeadContactID","VolunteerShirtOrder","VolunteerShirtSize","VolunteerAttendingCode","SaturdayDinner","UnitChapterNumber","CheckedIn", "Comments" }))
+               new string[] { "CheckedIn" }))
             {
                 try
                 {

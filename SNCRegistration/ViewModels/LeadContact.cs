@@ -20,17 +20,14 @@ namespace SNCRegistration.ViewModels
         public int BSType { get; set; }
         [Required]
         [MinLength(1)]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Must be numeric")]
         public string UnitChapterNumber { get; set; }
 
         [Required]
         [MinLength(2)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string LeadContactFirstName { get; set; }
 
         [Required]
         [MinLength(2)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string LeadContactLastName { get; set; }
 
         [Required]
@@ -39,7 +36,6 @@ namespace SNCRegistration.ViewModels
 
         [Required]
         [MinLength(2)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string LeadContactCity { get; set; }
 
         public string LeadContactState { get; set; }
@@ -47,13 +43,11 @@ namespace SNCRegistration.ViewModels
         [Required]
         [MaxLength(5)]
         [MinLength(5)]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Zip must be numeric")]
         public string LeadContactZip { get; set; }
 
         [Required]
         [MaxLength(10)]
         [MinLength(10)]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Phone must be numeric")]
         public string LeadContactCellPhone { get; set; }
 
         [Required]
@@ -70,7 +64,7 @@ namespace SNCRegistration.ViewModels
         public string LeaderGuid { get; set; }
         public bool CheckedIn { get; set; }
         public int EventYear { get; set; }
-        public bool Marketing { get; set; }    
+        public bool Marketing { get; set; }
         public virtual Event Event { get; set; }
     }
 }

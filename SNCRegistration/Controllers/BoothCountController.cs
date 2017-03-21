@@ -13,6 +13,7 @@ namespace SNCRegistration.Controllers
     public class BoothCountController : Controller
     {
         // GET: BoothCount
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Index()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
@@ -34,6 +35,7 @@ namespace SNCRegistration.Controllers
             return View(model);
             }
 
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult BoothCount()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;

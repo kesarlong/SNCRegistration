@@ -19,12 +19,10 @@ namespace SNCRegistration.ViewModels
 
         [Required]
         [MinLength(2)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string VolunteerFirstName { get; set; }
 
         [Required]
         [MinLength(2)]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string VolunteerLastName { get; set; }
 
         public int VolunteerAge { get; set; }
@@ -36,14 +34,13 @@ namespace SNCRegistration.ViewModels
 
         [Required]
         [MinLength(1)]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Must be numeric")]
         public string UnitChapterNumber { get; set; }
 
         public string Comments { get; set; }
         public string LeaderGuid { get; set; }
         public bool CheckedIn { get; set; }
         public int EventYear { get; set; }
-    
+
         public virtual Age Age { get; set; }
         public virtual Event Event { get; set; }
     }
