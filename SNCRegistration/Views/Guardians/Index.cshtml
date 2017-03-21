@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.Guardian>
+﻿@*@model IEnumerable<SNCRegistration.ViewModels.Guardian>*@
+@model PagedList.IPagedList<SNCRegistration.ViewModels.Guardian>
 @using PagedList.Mvc;
 
 
@@ -27,16 +28,16 @@
             @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GuardianFirstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HealthForm)
+            Health Form?
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhotoAck)
+            Photo Acknowledgement
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CheckedIn)
+            Checked In?
         </th>        
 
         <th>
@@ -69,6 +70,10 @@
 
 </table>
 
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 @*
     Original Tables for Index. Delete if nothing broken.
