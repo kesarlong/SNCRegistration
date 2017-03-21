@@ -69,7 +69,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.VolunteerAge,
-        ViewBag.Age as SelectList
+        ViewBag.Age as SelectList, "- Select option - "
             //new List<SelectListItem>{
             //    new SelectListItem{ Value = "", Text = "-Select Age-" },
             //    new SelectListItem{ Value = "1", Text = "Under 6" },
@@ -111,18 +111,18 @@
     @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
     @Html.DropDownListFor(model => model.VolunteerShirtSize,
      ViewBag.ShirtSizes as SelectList
-            //new List<SelectListItem>{
-            //    new SelectListItem{ Value = "00", Text = "-Select Size-" },
-            //     new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
-            //    new SelectListItem{ Value = "YS", Text = "Youth - Small" },
-            //    new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
-            //    new SelectListItem{ Value = "YL", Text = "Youth - Large" },
-            //    new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
-            //    new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
-            //    new SelectListItem{ Value = "AS", Text = "Adult - Small" },
-            //    new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
-            //    new SelectListItem{ Value = "AL", Text = "Adult - Large" },
-            //    new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" }
+    //new List<SelectListItem>{
+    //    new SelectListItem{ Value = "00", Text = "-Select Size-" },
+    //     new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
+    //    new SelectListItem{ Value = "YS", Text = "Youth - Small" },
+    //    new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
+    //    new SelectListItem{ Value = "YL", Text = "Youth - Large" },
+    //    new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
+    //    new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
+    //    new SelectListItem{ Value = "AS", Text = "Adult - Small" },
+    //    new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
+    //    new SelectListItem{ Value = "AL", Text = "Adult - Large" },
+    //    new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" }
     , new { @class = "form-control", style = "width: 220px" })
     @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
 </div>
@@ -132,7 +132,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
             @Html.DropDownListFor(model => model.VolunteerAttendingCode,
-            ViewBag.Attendance as SelectList
+            ViewBag.Attendance as SelectList, "- Select option - "
             //new List<SelectListItem>{
             //    new SelectListItem{ Value = "", Text = "-Select-" },
             //    new SelectListItem{ Value = "1", Text = "Friday Evening Only" },

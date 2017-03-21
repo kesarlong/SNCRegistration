@@ -90,7 +90,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Create()
         {
             ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
-            ViewBag.Attendance = new SelectList(db.Attendances, "AttendanceID", "Description");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             return View();
         }

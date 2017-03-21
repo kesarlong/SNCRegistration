@@ -228,12 +228,12 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
                         @Html.DropDownListFor(model => model.BSType,
-                        ViewBag.BSType as SelectList
-            //new List<SelectListItem>{
-            //    new SelectListItem{ Value = "", Text = "-Select Type-" },
-            //    new SelectListItem{ Value = "1", Text = "Troop/Crew" },
-            //    new SelectListItem{ Value = "2", Text = "OA Chapter" },
-            //    new SelectListItem{ Value = "3", Text = "Individual" }
+                        ViewBag.BSType as SelectList, "- Select option - "
+                        //new List<SelectListItem>{
+                        //    new SelectListItem{ Value = "", Text = "-Select Type-" },
+                        //    new SelectListItem{ Value = "1", Text = "Troop/Crew" },
+                        //    new SelectListItem{ Value = "2", Text = "OA Chapter" },
+                        //    new SelectListItem{ Value = "3", Text = "Individual" }
                         , new { @class = "form-control", style = "width: 200px" })
                         @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
                     </div>
@@ -249,12 +249,12 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
                         @Html.DropDownListFor(model => model.VolunteerAttendingCode,
-                        ViewBag.Attendance as SelectList
-                   //new List<SelectListItem>{
-                   //    new SelectListItem{ Value = "", Text = "-Select-" },
-                   //    new SelectListItem{ Value = "1", Text = "Friday Evening Only" },
-                   //    new SelectListItem{ Value = "2", Text = "Saturday Only" },
-                   //    new SelectListItem{ Value = "4", Text = "Friday through Sunday" }
+                        ViewBag.Attendance as SelectList, "- Select option - "
+                                    //new List<SelectListItem>{
+                                    //    new SelectListItem{ Value = "", Text = "-Select-" },
+                                    //    new SelectListItem{ Value = "1", Text = "Friday Evening Only" },
+                                    //    new SelectListItem{ Value = "2", Text = "Saturday Only" },
+                                    //    new SelectListItem{ Value = "4", Text = "Friday through Sunday" }
                                     , new { @class = "form-control", style = "width: 200px" })
                         @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
                     </div>
