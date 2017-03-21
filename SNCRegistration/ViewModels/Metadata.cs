@@ -321,6 +321,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Required]
         public string EventYear;
 
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
+
         //Messing things up with LeadContact/Details
         //[Display(Name = "Number of people in tent")]
         //public int NumberInTent;

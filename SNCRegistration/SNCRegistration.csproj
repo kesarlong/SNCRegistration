@@ -320,6 +320,7 @@
     <Compile Include="ViewModels\Age.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AldenRoadReportModel.cs" />
     <Compile Include="ViewModels\AspNetRole.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -339,15 +340,18 @@
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CompletedRegistrationModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Event.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FamilyFriendsReport.cs" />
     <Compile Include="ViewModels\FamilyMember.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FirstTimeAttendeeModel.cs" />
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -364,9 +368,12 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ParticipantsReportModel.cs" />
+    <Compile Include="ViewModels\PendingRegistrationsReport.cs" />
+    <Compile Include="ViewModels\PeopleCheckedInCountModel.cs" />
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\RepeatAttendeeModel.cs" />
     <Compile Include="ViewModels\ShirtSize.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -390,12 +397,18 @@
     <Compile Include="ViewModels\Table.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\TeeShirtOrdersModel.cs" />
     <Compile Include="ViewModels\UserRolesDTO.cs" />
     <Compile Include="ViewModels\Volunteer.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\VolunteersController.cs" />
+    <Compile Include="ViewModels\VolunteersFridayOnlyModel.cs" />
+    <Compile Include="ViewModels\VolunteersFridayThruSaturdayModel.cs" />
+    <Compile Include="ViewModels\VolunteersOvernightModel.cs" />
     <Compile Include="ViewModels\VolunteersReportModel.cs" />
+    <Compile Include="ViewModels\VolunteersSaturdayOnlyModel.cs" />
+    <Compile Include="ViewModels\WristBandCountModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />

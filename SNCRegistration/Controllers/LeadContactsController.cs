@@ -250,16 +250,17 @@ namespace SNCRegistration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var leadContact = db.LeadContacts.Find(id);
+            var leadcontact = db.LeadContacts.Find(id);
 
-            if (TryUpdateModel(leadContact, "",
+
+            if (TryUpdateModel(leadcontact, "",
                new string[] { "CheckedIn" }))
             {
                 try
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Details", "LeadContacts", new { id = leadContact.LeadContactID });
+                    return RedirectToAction("Details", "LeadContacts", new { id = leadcontact.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -267,7 +268,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
-            return View(leadContact);
+            return View(leadcontact);
 
 
         }
