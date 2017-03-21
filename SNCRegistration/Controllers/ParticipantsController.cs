@@ -102,7 +102,8 @@ namespace SNCRegistration.Controllers
         // GET: Participants/Create
         public ActionResult Create() 
         {
-
+            ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
             return View();
         }
 

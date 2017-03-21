@@ -27,15 +27,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.FamilyMemberAge,
-            new List<SelectListItem>{
-                new SelectListItem{ Value = "", Text = "-Select Age-" },
-                new SelectListItem{ Value = "1", Text = "Under 6" },
-                new SelectListItem{ Value = "2", Text = "7-10" },
-                new SelectListItem{ Value = "3", Text = "11-13" },
-                new SelectListItem{ Value = "4", Text = "14-16" },
-                new SelectListItem{ Value = "5", Text = "17-18" },
-                new SelectListItem{ Value = "6", Text = "Over 21" }
-            }, new { @class = "form-control", style = "width: 220px" })
+            ViewBag.Age as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
     </div>
 
@@ -45,11 +37,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.AttendingCode,
-            new List<SelectListItem>{
-                new SelectListItem{ Value = "", Text = "-Select-" },
-                new SelectListItem{ Value = "2", Text = "Saturday Only" },
-                new SelectListItem{ Value = "3", Text = "Overnight" }
-            }, new { @class = "form-control", style = "width: 220px" })
+         ViewBag.Attendance as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
     </div>
 

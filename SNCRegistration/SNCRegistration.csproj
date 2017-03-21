@@ -282,18 +282,32 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AldenRoadReportController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BoothCountController.cs" />
+    <Compile Include="Controllers\CompletedRegistrationController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\FamilyFriendsReportController.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
+    <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
+    <Compile Include="Controllers\PendingRegistrationReportController.cs" />
+    <Compile Include="Controllers\PeopleCheckedInCountController.cs" />
+    <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
+    <Compile Include="Controllers\TeeShirtOrderReportController.cs" />
+    <Compile Include="Controllers\VolunteersFridayOnlyController.cs" />
+    <Compile Include="Controllers\VolunteersFridayThruSaturdayController.cs" />
+    <Compile Include="Controllers\VolunteersOvernightController.cs" />
     <Compile Include="Controllers\VolunteersReportController.cs" />
+    <Compile Include="Controllers\VolunteersSaturdayOnlyController.cs" />
+    <Compile Include="Controllers\WristBandCountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,6 +320,7 @@
     <Compile Include="ViewModels\Age.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AldenRoadReportModel.cs" />
     <Compile Include="ViewModels\AspNetRole.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -325,15 +340,18 @@
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CompletedRegistrationModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Event.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FamilyFriendsReport.cs" />
     <Compile Include="ViewModels\FamilyMember.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FirstTimeAttendeeModel.cs" />
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -350,9 +368,12 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ParticipantsReportModel.cs" />
+    <Compile Include="ViewModels\PendingRegistrationsReport.cs" />
+    <Compile Include="ViewModels\PeopleCheckedInCountModel.cs" />
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\RepeatAttendeeModel.cs" />
     <Compile Include="ViewModels\ShirtSize.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -376,12 +397,18 @@
     <Compile Include="ViewModels\Table.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\TeeShirtOrdersModel.cs" />
     <Compile Include="ViewModels\UserRolesDTO.cs" />
     <Compile Include="ViewModels\Volunteer.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\VolunteersController.cs" />
+    <Compile Include="ViewModels\VolunteersFridayOnlyModel.cs" />
+    <Compile Include="ViewModels\VolunteersFridayThruSaturdayModel.cs" />
+    <Compile Include="ViewModels\VolunteersOvernightModel.cs" />
     <Compile Include="ViewModels\VolunteersReportModel.cs" />
+    <Compile Include="ViewModels\VolunteersSaturdayOnlyModel.cs" />
+    <Compile Include="ViewModels\WristBandCountModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -3424,6 +3451,19 @@
     <Content Include="Views\Guardians\CheckIn.cshtml" />
     <Content Include="Views\FamilyMembers\CheckIn.cshtml" />
     <Content Include="Views\LeadContacts\CheckIn.cshtml" />
+    <Content Include="Views\AldenRoadReport\Index.cshtml" />
+    <Content Include="Views\CompletedRegistration\Index.cshtml" />
+    <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
+    <Content Include="Views\FirstTimeAttendeeReport\Index.cshtml" />
+    <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
+    <Content Include="Views\PeopleCheckedInCount\Index.cshtml" />
+    <Content Include="Views\RepeatAttendeeReport\Index.cshtml" />
+    <Content Include="Views\TeeShirtOrdersReport\Index.cshtml" />
+    <Content Include="Views\VolunteersFridayOnly\Index.cshtml" />
+    <Content Include="Views\VolunteersFridayThruSaturday\Index.cshtml" />
+    <Content Include="Views\VolunteersOvernight\Index.cshtml" />
+    <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
+    <Content Include="Views\WristBandCount\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
