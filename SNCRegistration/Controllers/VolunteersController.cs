@@ -106,6 +106,8 @@ namespace SNCRegistration.Controllers
             {
 
                 db.Volunteers.Add(volunteer);
+                var thisYear = DateTime.Now.Year.ToString();
+                volunteer.EventYear = int.Parse(thisYear);
 
                 try
                 {
@@ -197,7 +199,7 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -250,7 +252,7 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {

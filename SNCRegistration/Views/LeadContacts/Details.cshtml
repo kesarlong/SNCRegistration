@@ -1,155 +1,187 @@
-﻿@model SNCRegistration.ViewModels.LeadContact
+﻿@model SNCRegistration.ViewModels.LeadContactVolunteer
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Lead Contact Details";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Lead Contact Details</h2>
 
 <div>
-    <h4>LeadContact</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.BSType)
+            <p>Lead Contact Name </p> 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.leadContact.LeadContactFirstName) @Html.DisplayFor(model => model.leadContact.LeadContactLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.leadContact.BSType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BSType)
+            @if (Model.leadContact.BSType == 1)
+            {
+                <p>Troop/Crew</p>
+            }
+            else if (Model.leadContact.BSType == 2)
+            {
+                <p>OA Chapter</p>
+            }
+            else if (Model.leadContact.BSType == 3)
+            {
+                <p>Individual</p>
+            }
+        </dd>
+        <dt>
+            <p>Lead Contact Address </p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leadContact.LeadContactAddress) <br />
+            @Html.DisplayFor(model => model.leadContact.LeadContactCity), @Html.DisplayFor(model => model.leadContact.LeadContactState) @Html.DisplayFor(model => model.leadContact.LeadContactZip)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+            @Html.DisplayNameFor(model => model.leadContact.LeadContactCellPhone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UnitChapterNumber)
+            @Html.DisplayFor(model => model.leadContact.LeadContactCellPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.leadContact.LeadContactEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leadContact.LeadContactEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.leadContact.UnitChapterNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leadContact.UnitChapterNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.leadContact.VolunteerAttendingCode)
+        </dt>
+
+        <dd>
+            @if (Model.leadContact.VolunteerAttendingCode == 1)
+            {
+                <p>Friday Evening Only</p>
+            }
+            else if (Model.leadContact.VolunteerAttendingCode == 2)
+            {
+                <p>Saturday Only</p>
+            }
+            else if (Model.leadContact.VolunteerAttendingCode == 4)
+            {
+                <p>Friday through Sunday</p>
+            }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactFirstName)
+            @Html.DisplayNameFor(model => model.leadContact.SaturdayDinner)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LeadContactFirstName)
+            @Html.DisplayFor(model => model.leadContact.SaturdayDinner)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactLastName)
+            @Html.DisplayNameFor(model => model.leadContact.TotalFee)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LeadContactLastName)
+            @Html.DisplayFor(model => model.leadContact.TotalFee)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactAddress)
+            @Html.DisplayNameFor(model => model.leadContact.Booth)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LeadContactAddress)
+            @Html.DisplayFor(model => model.leadContact.Booth)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactCity)
+            @Html.DisplayNameFor(model => model.leadContact.Comments)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LeadContactCity)
+            @Html.DisplayFor(model => model.leadContact.Comments)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactState)
+            @Html.DisplayNameFor(model => model.leadContact.LeadContactShirtOrder)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LeadContactState)
+            @Html.DisplayFor(model => model.leadContact.LeadContactShirtOrder)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactZip)
+            @Html.DisplayNameFor(model => model.leadContact.LeadContactShirtSize)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LeadContactZip)
+            @Html.DisplayFor(model => model.leadContact.LeadContactShirtSize)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactPhone)
+            @Html.DisplayNameFor(model => model.leadContact.CheckedIn)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.LeadContactPhone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LeadContactEmail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LeadContactEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VolunteerAttendingCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SaturdayDinner)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SaturdayDinner)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalFee)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalFee)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Booth)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Booth)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Comments)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Comments)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LeadContactShirtOrder)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LeadContactShirtOrder)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LeadContactShirtSize)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LeadContactShirtSize)
+            @Html.DisplayFor(model => model.leadContact.CheckedIn)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.LeadContactID }) |
-    @Html.ActionLink("Back to List", "Index")
+
+<p align="right">
+    <div align="right" style="margin-right:20px;">
+        @Html.ActionLink("Check In", "CheckIn", new { id = Model.leadContact.LeadContactID }, new { @class = "btn btn-success" }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.leadContact.LeadContactID }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.leadContact.LeadContactID }, new { @class = "btn btn-danger" }) |
+        @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+    </div>
 </p>
+
+
+<hr />
+<h3>Volunteer Attendees</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.volunteer.VolunteerFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.volunteer.VolunteerLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.volunteer.CheckedIn)
+        </th>
+
+        <th></th>
+    </tr>
+    @foreach (var item in Model.volunteers)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedIn)
+            </td>
+            <td align="center">
+                @Html.ActionLink("Details", "Details", "Volunteers", new { id = item.VolunteerID }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Check In", "CheckIn", "Volunteers", new { id = item.VolunteerID }, new { @class = "btn btn-success" })
+            </td>
+        </tr>
+    }
+
+</table>

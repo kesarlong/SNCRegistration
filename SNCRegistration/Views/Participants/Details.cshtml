@@ -1,17 +1,23 @@
 ﻿@model SNCRegistration.ViewModels.Participant
 
+
 @{
     ViewBag.Title = "Participant Details";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Volunteer Details</h2>
+<h2>Participant Details</h2>
+
+@using (Html.BeginForm("Participants", "Details", FormMethod.Post))
+{
+}
 
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ParticipantFirstName)
+        
         </dt>
 
         <dd>
@@ -79,7 +85,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AttendingCode)
+            @if (Model.AttendingCode == 2)
+            {
+                <p>Saturday Only</p>
+            }
+            else if (Model.AttendingCode== 3)
+            {
+                <p>Overnight</p>
+            }
         </dd>
 
         <dt>
@@ -104,7 +117,7 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ParticipantID }, new { @class = "btn btn-info" }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.ParticipantID }, new { @class = "btn btn-danger" }) |
-    @Html.ActionLink("Back to List", "Index", new { id = Model.ParticipantID }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back to Guardian", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
 </p>
 
 

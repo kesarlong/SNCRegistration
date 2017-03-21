@@ -1,4 +1,24 @@
-﻿@model SNCRegistration.ViewModels.Volunteer
+﻿<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+    //require number of people in tent if selected that tent is required
+    $(document).ready(function () {
+        $("#ShirtSize").hide();
+
+        $("#ShirtOrder").change(function () {
+            var status = ($('input[name=VolunteerShirtOrder]:checked').val());
+            if ($('input[name=VolunteerShirtOrder]:checked').val() == 'True') {
+                $("#ShirtSize").show();
+            }
+            else {
+                $("#ShirtSize").hide();
+            }
+        });
+    });
+
+</script>
+
+
+@model SNCRegistration.ViewModels.Volunteer
 
 @{
     ViewBag.Title = "Create";
@@ -73,24 +93,20 @@
 -->
     <br />
     <div class="form-group">
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group" data-toggle="buttons" id="ShirtOrder">
             @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label" })<br />
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { id = "shirt_Order_True" }) Yes
+                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { @id = "chkYes", @name = "reqShirt"}) Yes
             </label>
             <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { id = "shirt_Order_False" }) No
+                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { @id = "chkNo", @name = "reqShirt" }) No
             </label>
         </div>
         @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
     </div>
     <br />
 
-    @*<div style="@(Model.VolunteerShirtOrder ? "display:block" : "display:none")">Some links</div>*@
-
-    //if (Model.VolunteerShirtOrder == true)
-    //{
-         <div class="form-group">
+         <div class="form-group" id="ShirtSize">
     @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
     @Html.DropDownListFor(model => model.VolunteerShirtSize,
             new List<SelectListItem>{
@@ -108,12 +124,7 @@
                 }, new { @class = "form-control", style = "width: 220px" })
     @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
 </div>
-    @*}
-    else
-    {
-              @Html.HiddenFor(model => model.VolunteerShirtSize, new { @Value = false })
-    }*@
-    
+  
 
     <br />
         <div class="form-group">
@@ -161,6 +172,10 @@
 
     <hr />
 
+    <div class="form-group pull-left">
+        <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Dispose" />
+    </div>
+
     <div class="form-group pull-right">
         <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
     </div>
@@ -182,6 +197,7 @@
     -->
 
     @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0 })
+    @Html.HiddenFor(model => model.EventYear, new { @Value = 0 })
 }
 
 @*<div>

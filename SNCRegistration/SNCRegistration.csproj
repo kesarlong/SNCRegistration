@@ -284,36 +284,22 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BoothCountController.cs" />
-    <Compile Include="Controllers\CompletedRegistrationController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
-    <Compile Include="Controllers\FamilyFriendsReportController.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
-    <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
-    <Compile Include="Controllers\AldenRoadReportController.cs" />
-    <Compile Include="Controllers\WristBandCountController.cs" />
-    <Compile Include="Controllers\TeeShirtOrderReportController.cs" />
-    <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
-    <Compile Include="Controllers\PendingRegistrationReportController.cs" />
-    <Compile Include="Controllers\PeopleCheckedInCountController.cs" />
-    <Compile Include="Controllers\VolunteersFridayOnlyController.cs" />
     <Compile Include="Controllers\VolunteersReportController.cs" />
-    <Compile Include="Controllers\VolunteersOvernightController.cs" />
-    <Compile Include="Controllers\VolunteersFridayThruSaturdayController.cs" />
-    <Compile Include="Controllers\VolunteersSaturdayOnlyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="img\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="img\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="img\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="packages\Microsoft.SqlServer.Types.11.0.2\content\SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Age.cs">
@@ -334,34 +320,28 @@
     <Compile Include="ViewModels\Attendance.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\FirstTimeAttendeeModel.cs" />
-    <Compile Include="ViewModels\AldenRoadReportModel.cs" />
-    <Compile Include="ViewModels\WristBandCountModel.cs" />
-    <Compile Include="ViewModels\TeeShirtOrdersModel.cs" />
-    <Compile Include="ViewModels\RepeatAttendeeModel.cs" />
-    <Compile Include="ViewModels\VolunteersFridayOnlyModel.cs" />
     <Compile Include="ViewModels\BoothCountModel.cs" />
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CompletedRegistrationModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Event.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\FamilyFriendsReport.cs" />
     <Compile Include="ViewModels\FamilyMember.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GuardianParticipantFamily.cs" />
     <Compile Include="ViewModels\IdentityModels.cs" />
     <Compile Include="ViewModels\LeadContact.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LeadContactVolunteer.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Metadata.cs" />
     <Compile Include="ViewModels\PartialClasses.cs" />
@@ -369,8 +349,6 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ParticipantsReportModel.cs" />
-    <Compile Include="ViewModels\PendingRegistrationsReport.cs" />
-    <Compile Include="ViewModels\PeopleCheckedInCountModel.cs" />
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -402,10 +380,7 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\VolunteersController.cs" />
-    <Compile Include="ViewModels\VolunteersFridayThruSaturdayModel.cs" />
     <Compile Include="ViewModels\VolunteersReportModel.cs" />
-    <Compile Include="ViewModels\VolunteersOvernightModel.cs" />
-    <Compile Include="ViewModels\VolunteersSaturdayOnlyModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -590,13 +565,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="img\obj\Debug\SNCRegistration.csproj.FileListAbsolute.txt" />
-    <Content Include="img\obj\Debug\SNCRegistration.dll" />
-    <Content Include="img\obj\Debug\SNCRegistration.pdb" />
-    <Content Include="img\obj\Debug\TempPE\Reporting.ParticipantsList.cs.dll" />
-    <Content Include="img\obj\Debug\TempPE\ReportingDataSet.ReportingDataSet.Designer.cs.dll" />
-    <Content Include="img\obj\Debug\TempPE\ViewModels.SNCRegistration.cs.dll" />
-    <Content Include="img\obj\Debug\TempPE\ViewModels.SNCRegistration.Designer.cs.dll" />
+    <Content Include="obj\Debug\SNCRegistration.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\SNCRegistration.dll" />
+    <Content Include="obj\Debug\SNCRegistration.pdb" />
+    <Content Include="obj\Debug\TempPE\Reporting.ParticipantsList.cs.dll" />
+    <Content Include="obj\Debug\TempPE\ReportingDataSet.ReportingDataSet.Designer.cs.dll" />
+    <Content Include="obj\Debug\TempPE\ViewModels.SNCRegistration.cs.dll" />
+    <Content Include="obj\Debug\TempPE\ViewModels.SNCRegistration.Designer.cs.dll" />
     <Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll" />
     <Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.pdb" />
     <Content Include="packages\bootstrap.3.3.7\content\Content\bootstrap-theme.css" />
@@ -618,11 +593,11 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
-    <Content Include="img\obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <Content Include="img\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="img\obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.csdl" />
-    <Content Include="img\obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.msl" />
-    <Content Include="img\obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.ssdl" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.ssdl" />
     <None Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1.js" />
     <Content Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1.min.js" />
@@ -2386,7 +2361,9 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="bin\SNCRegistration.dll.config" />
+    <Content Include="bin\SNCRegistration.dll.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages\Antlr.3.5.0.2\Antlr.3.5.0.2.nupkg" />
     <Content Include="packages\bootstrap.3.3.7\bootstrap.3.3.7.nupkg" />
     <Content Include="packages\bootstrap.3.3.7\content\Content\bootstrap-theme.css.map" />
@@ -3315,7 +3292,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -3388,6 +3367,7 @@
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\EditRoles.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
+    <Content Include="Views\Reporting\Index.cshtml" />
     <Content Include="Views\Volunteers\Registered.cshtml" />
     <Content Include="Views\Participants\Registered.cshtml" />
     <Content Include="Views\FamilyMembers\Registered.cshtml" />
@@ -3440,26 +3420,15 @@
     <Content Include="Views\VolunteersReport\Index.cshtml" />
     <Content Include="Views\Participants\CheckIn.cshtml" />
     <Content Include="Views\Volunteers\CheckIn.cshtml" />
-    <Content Include="Views\PeopleCheckedInCount\Index.cshtml" />
-    <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
-    <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
-    <Content Include="Views\CompletedRegistration\Index.cshtml" />
-    <Content Include="Views\VolunteersFridayOnly\Index.cshtml" />
-    <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
-    <Content Include="Views\VolunteersOvernight\Index.cshtml" />
-    <Content Include="Views\VolunteersFridayThruSaturday\Index.cshtml" />
-    <Content Include="Views\RepeatAttendeeReport\Index.cshtml" />
-    <Content Include="Views\FirstTimeAttendeeReport\Index.cshtml" />
-    <Content Include="Views\AldenRoadReport\Index.cshtml" />
-    <Content Include="Views\TeeShirtOrdersReport\Index.cshtml" />
-    <Content Include="Views\WristBandCount\Index.cshtml" />
+    <Content Include="Views\Guardians\CheckIn.cshtml" />
+    <Content Include="Views\FamilyMembers\CheckIn.cshtml" />
+    <Content Include="Views\LeadContacts\CheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
-    <Folder Include="Views\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
