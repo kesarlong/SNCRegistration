@@ -162,6 +162,8 @@ namespace SNCRegistration.Controllers
 					TempData["myPK"] = guardian.GuardianID;
 					TempData.Keep();
 
+					this.Session["pEmail"] = guardian.GuardianEmail;
+
 					return RedirectToAction("Create", "Participants", new { GuardianGuid = guardian.GuardianGuid });
 
 				}

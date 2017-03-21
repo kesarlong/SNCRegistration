@@ -67,10 +67,6 @@ namespace SNCRegistration.Controllers
 
                 try
                 {
-
-
-
-
                     db.SaveChanges();
                     
                     //add another participant for guardian                   
@@ -83,7 +79,12 @@ namespace SNCRegistration.Controllers
 
                     //registration complete, no more people to add
                     if (Request["submit"].Equals("Complete registration"))
-                    { return Redirect("Registered");}
+                    {
+                        var email = Session["pEmail"] as string;
+                        //to do: remove password
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!");
+                        return Redirect("Registered");
+                    }
 
                 }
                 catch (DbEntityValidationException ex)
