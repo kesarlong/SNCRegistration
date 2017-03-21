@@ -23,17 +23,15 @@
         @Html.ValidationMessageFor(model => model.FamilyMemberLastName, "", new { @class = "text-danger" })
     </div>
 
-    //TO DO: normalize data - Jira 316
+    
     <div class="form-group">
-        @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(model => model.FamilyMemberAge,
-            ViewBag.Age as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
-        @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label" })
+        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.AttendingCode,
+         ViewBag.Attendance as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
     </div>
 
-    //DO TO: update to use data from Attendance table (Jira SP-306)
-
-    //TO DO: Jira-306 - change to look up values from attendance table
     <div class="form-group">
         @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.AttendingCode,

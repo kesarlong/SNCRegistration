@@ -39,7 +39,7 @@ namespace SNCRegistration.Controllers
         // GET: FamilyMembers/Create
         public ActionResult Create()
         {
-            ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.FamilyMemberAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
             return View();
         }
@@ -49,10 +49,11 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,FamilyMemberAge,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,GuardianGuid")] FamilyMember familyMember)
+        public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,FamilyMemberAge,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,GuardianGuid,CheckedIn,EventYear")] FamilyMember familyMember)
         {
             if (ModelState.IsValid)
             {
+                db.FamilyMembers.Add(familyMember);
 
                 if (TempData["myPK"] != null)
                     {
@@ -63,7 +64,6 @@ namespace SNCRegistration.Controllers
                 var thisYear = DateTime.Now.Year.ToString();
                 familyMember.EventYear = int.Parse(thisYear);
 
-                db.FamilyMembers.Add(familyMember);
 
                 try
                 {
