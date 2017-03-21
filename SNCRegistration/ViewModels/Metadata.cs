@@ -168,7 +168,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Health Form")]
         public Nullable<bool> HealthForm;
 
-        [Display(Name="Photo Ack")]
+        [Display(Name= "Photo Acknowledgment")]
         public Nullable<bool> PhotoAck;
 
         [Required]

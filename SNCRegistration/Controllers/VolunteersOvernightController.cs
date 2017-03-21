@@ -7,45 +7,43 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Web.Mvc;
-using PagedList;
 
 namespace SNCRegistration.Controllers
+{
+    public class VolunteersOvernightController : Controller
     {
-    public class ParticipantsReportController : Controller
-        {
-     
-        // GET: Reporting
+        // GET: VolunteersOvernight
         public ActionResult Index()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT *  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3;";
             DataTable dt = new DataTable();
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
-           
             da.Fill(dt);
             con.Close();
-            IList<ParticipantsReportModel> model = new List<ParticipantsReportModel>();
+            IList<VolunteersOvernightModel> model = new List<VolunteersOvernightModel>();
             for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                model.Add(new ParticipantsReportModel()
+                model.Add(new VolunteersOvernightModel()
                     {
-                    ParticipantID = Convert.ToInt32(dt.Rows[i]["ParticipantID"]),
-                    ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
-                    ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
+
+                    VolunteerFirstName = dt.Rows[i]["VolunteerFirstName"].ToString(),
+                    VolunteerLastName = dt.Rows[i]["VolunteerLastName"].ToString(),
+                    Description = dt.Rows[i]["Description"].ToString(),
                     });
                 }
             return View(model);
             }
 
-        public ActionResult ParticipantsReport()
+        public ActionResult VolunteersOvernight()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT *  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3;";
             DataTable dt = new DataTable();
-            dt.TableName = "Participants";
+            dt.TableName = "Volunteers";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.Fill(dt);
@@ -61,7 +59,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= VolunteersOvernightReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -72,7 +70,7 @@ namespace SNCRegistration.Controllers
                     }
                 }
 
-            return RedirectToAction("Index", "ParticipantsReport");
+            return RedirectToAction("Index", "VolunteersOvernight");
             }
 
         private void releaseObject(object obj)

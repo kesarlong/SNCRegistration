@@ -6,44 +6,43 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using PagedList;
 
 namespace SNCRegistration.Controllers
+{
+    public class PeopleCheckedInCountController : Controller
     {
-    public class ParticipantsReportController : Controller
-        {
-     
-        // GET: Reporting
+        // GET: PeopleCheckedInCount
         public ActionResult Index()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = 1 UNION SELECT GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = 1 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 UNION SELECT LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = 1 UNION SELECT VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = 1; ";
             DataTable dt = new DataTable();
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
-           
             da.Fill(dt);
             con.Close();
-            IList<ParticipantsReportModel> model = new List<ParticipantsReportModel>();
+            IList<PeopleCheckedInCountModel> model = new List<PeopleCheckedInCountModel>();
             for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                model.Add(new ParticipantsReportModel()
+                model.Add(new PeopleCheckedInCountModel()
                     {
-                    ParticipantID = Convert.ToInt32(dt.Rows[i]["ParticipantID"]),
                     ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
                     ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
+                    CheckedIn = dt.Rows[i]["CheckedIn"].ToString(),
                     });
                 }
             return View(model);
             }
 
-        public ActionResult ParticipantsReport()
+        public ActionResult PeopleCheckedInCount()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = 1 UNION SELECT GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = 1 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 UNION SELECT LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = 1 UNION SELECT VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = 1; ";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";
             con.Open();
@@ -61,7 +60,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= PeopleCheckedInCountReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -72,7 +71,7 @@ namespace SNCRegistration.Controllers
                     }
                 }
 
-            return RedirectToAction("Index", "ParticipantsReport");
+            return RedirectToAction("Index", "PeopleCheckedInCount");
             }
 
         private void releaseObject(object obj)

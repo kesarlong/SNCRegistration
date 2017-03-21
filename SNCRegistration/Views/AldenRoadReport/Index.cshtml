@@ -1,13 +1,15 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.ParticipantsReportModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.AldenRoadReportModel>
 
 @{
-    ViewBag.Title = "Participants Report";
+    ViewBag.Title = "Alden Road Report";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-@using (Html.BeginForm("ParticipantsReport", "ParticipantsReport", FormMethod.Post))
+@using (Html.BeginForm("AldenRoadReport", "AldenRoadReport", FormMethod.Post))
     {
-        <h2>Participants Report</h2>
+
+
+        <h2>Alden Road Report</h2>
         <div class="row">
             <div class="col-sm-3">
                 <h4>Total: @Model.Count()</h4>
@@ -17,15 +19,16 @@
 
             </div>
         </div>
-
             <table class="table table-striped">
-        
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.ParticipantFirstName)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.ParticipantLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ParticipantSchool)
                     </th>
                 </tr>
                 @foreach (var item in Model)
@@ -38,7 +41,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ParticipantLastName)
                         </td>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParticipantSchool)
+                        </td>
                     </tr>
                     }
 
