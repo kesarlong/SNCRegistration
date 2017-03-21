@@ -528,4 +528,3 @@ C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\bin\System.Net.Http.
 C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\bin\Microsoft.ReportViewer.WebForms.dll
 C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
 C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
-C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
