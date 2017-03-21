@@ -107,20 +107,14 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
-        //public ActionResult Cancel([Bind(Include = "GuardianGuid"),]Participant participant)
-        //{
-                
-        //        return RedirectToAction("Edit", "Guardians", new { GuardianGuid = participant.GuardianGuid });
-
-        //}
-
+    
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
-            ] Participant participant,string submit)
+            ] Participant participant)
         {
 
 
@@ -129,6 +123,7 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    TempData.Keep();
                 }
 
 
@@ -356,7 +351,12 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    
                 }
+
+                //pass the guardianID to child form as FK                    
+                TempData["myPK"] = participant.GuardianID;
+                TempData.Keep();
 
 
                 //store year of event
