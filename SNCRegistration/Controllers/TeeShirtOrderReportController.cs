@@ -6,46 +6,46 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using PagedList;
 
 namespace SNCRegistration.Controllers
+{
+    public class TeeShirtOrdersReportController : Controller
     {
-    public class ParticipantsReportController : Controller
-        {
-     
-        // GET: Reporting
+        // GET: TeeShirtOrdersReportController
         public ActionResult Index()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT LeadContactFirstName, LeadContactLastName, LeadContactShirtOrder, LeadContactShirtSize FROM LeadContacts WHERE LeadContactShirtOrder = 1 UNION SELECT VolunteerFirstName, VolunteerLastName, VolunteerShirtOrder, VolunteerShirtSize FROM Volunteers WHERE VolunteerShirtOrder = 1;";
             DataTable dt = new DataTable();
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
-           
             da.Fill(dt);
             con.Close();
-            IList<ParticipantsReportModel> model = new List<ParticipantsReportModel>();
+            IList<TeeShirtOrdersModel> model = new List<TeeShirtOrdersModel>();
             for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                model.Add(new ParticipantsReportModel()
+                model.Add(new TeeShirtOrdersModel()
                     {
-                    ParticipantID = Convert.ToInt32(dt.Rows[i]["ParticipantID"]),
-                    ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
-                    ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
+                    LeadContactFirstName = dt.Rows[i]["LeadContactFirstName"].ToString(),
+                    LeadContactLastName = dt.Rows[i]["LeadContactLastName"].ToString(),
+                    LeadContactShirtOrder = dt.Rows[i]["LeadContactShirtOrder"].ToString(),
+                    LeadContactShirtSize = dt.Rows[i]["LeadContactShirtSize"].ToString()
                     });
                 }
             return View(model);
             }
 
-        public ActionResult ParticipantsReport()
+        public ActionResult TeeShirtOrdersReport()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT LeadContactFirstName, LeadContactLastName, LeadContactShirtOrder, LeadContactShirtSize FROM LeadContacts WHERE LeadContactShirtOrder = 1 UNION SELECT VolunteerFirstName, VolunteerLastName, VolunteerShirtOrder, VolunteerShirtSize FROM Volunteers WHERE VolunteerShirtOrder = 1;";
             DataTable dt = new DataTable();
-            dt.TableName = "Participants";
+            dt.TableName = "LeadContacts";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.Fill(dt);
@@ -61,7 +61,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= TeeShirtOrdersReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -72,7 +72,7 @@ namespace SNCRegistration.Controllers
                     }
                 }
 
-            return RedirectToAction("Index", "ParticipantsReport");
+            return RedirectToAction("Index", "TeeShirtOrdersReport");
             }
 
         private void releaseObject(object obj)

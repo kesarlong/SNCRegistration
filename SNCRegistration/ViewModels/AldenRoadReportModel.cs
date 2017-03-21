@@ -7,17 +7,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SNCRegistration.ViewModels
     {
-    public class ParticipantsReportModel
+    public class AldenRoadReportModel
         {
-
         public int ParticipantID { get; set; }
         [Display(Name = "First Name")]
         public string ParticipantFirstName { get; set; }
         [Display(Name = "Last Name")]
         public string ParticipantLastName { get; set; }
-
-        [Display(Name = "Event Year")]
-        public int EventYear { get; set; }
-
+        [Display(Name = "School")]
+        public string ParticipantSchool { get; set; }
         }
     }
