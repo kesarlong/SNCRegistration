@@ -282,18 +282,32 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AldenRoadReportController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BoothCountController.cs" />
+    <Compile Include="Controllers\CompletedRegistrationController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\FamilyFriendsReportController.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
+    <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
+    <Compile Include="Controllers\PendingRegistrationReportController.cs" />
+    <Compile Include="Controllers\PeopleCheckedInCountController.cs" />
+    <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
+    <Compile Include="Controllers\TeeShirtOrderReportController.cs" />
+    <Compile Include="Controllers\VolunteersFridayOnlyController.cs" />
+    <Compile Include="Controllers\VolunteersFridayThruSaturdayController.cs" />
+    <Compile Include="Controllers\VolunteersOvernightController.cs" />
     <Compile Include="Controllers\VolunteersReportController.cs" />
+    <Compile Include="Controllers\VolunteersSaturdayOnlyController.cs" />
+    <Compile Include="Controllers\WristBandCountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3424,6 +3438,10 @@
     <Content Include="Views\Guardians\CheckIn.cshtml" />
     <Content Include="Views\FamilyMembers\CheckIn.cshtml" />
     <Content Include="Views\LeadContacts\CheckIn.cshtml" />
+    <Content Include="Views\AldenRoadReport\Index.cshtml" />
+    <Content Include="Views\CompletedRegistration\Index.cshtml" />
+    <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
+    <Content Include="Views\FirstTimeAttendeeReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
