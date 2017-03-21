@@ -6,46 +6,45 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using PagedList;
 
 namespace SNCRegistration.Controllers
+{
+    public class FamilyFriendsReportController : Controller
     {
-    public class ParticipantsReportController : Controller
-        {
-     
-        // GET: Reporting
+        // GET: FamilyFriendsReport
         public ActionResult Index()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT * FROM FamilyMembers";
             DataTable dt = new DataTable();
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
-           
             da.Fill(dt);
             con.Close();
-            IList<ParticipantsReportModel> model = new List<ParticipantsReportModel>();
+            IList<ViewModels.FamilyFriendsReport> model = new List<ViewModels.FamilyFriendsReport>();
             for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                model.Add(new ParticipantsReportModel()
+                model.Add(new ViewModels.FamilyFriendsReport()
                     {
-                    ParticipantID = Convert.ToInt32(dt.Rows[i]["ParticipantID"]),
-                    ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
-                    ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
+                    FamilyMemberID = Convert.ToInt32(dt.Rows[i]["FamilyMemberID"]),
+                    FamilyMemberFirstName = dt.Rows[i]["FamilyMemberFirstName"].ToString(),
+                    FamilyMemberLastName = dt.Rows[i]["FamilyMemberLastName"].ToString(),
                     });
                 }
             return View(model);
             }
 
-        public ActionResult ParticipantsReport()
+        public ActionResult FamilyFriendsReport()
             {
             string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = 2017";
+            string query = "SELECT * FROM FamilyMembers";
             DataTable dt = new DataTable();
-            dt.TableName = "Participants";
+            dt.TableName = "FamilyMembers";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.Fill(dt);
@@ -61,7 +60,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= FamilyMemberReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -72,7 +71,7 @@ namespace SNCRegistration.Controllers
                     }
                 }
 
-            return RedirectToAction("Index", "ParticipantsReport");
+            return RedirectToAction("Index", "FamilyFriendsReport");
             }
 
         private void releaseObject(object obj)

@@ -180,6 +180,12 @@
                     @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.participant.HealthForm)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.participant.PhotoAck)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.participant.CheckedIn)
                 </th>
             
@@ -194,6 +200,12 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ParticipantLastName)
                     </td>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.HealthForm)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.PhotoAck)
+                    </th>
                     <td>
                         @Html.DisplayFor(modelItem => item.CheckedIn)
                     </td>
@@ -216,6 +228,12 @@
                 @Html.DisplayNameFor(model => model.familymember.FamilyMemberLastName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.familymember.HealthForm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.PhotoAck)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.familymember.CheckedIn)
             </th>
             <th></th>
@@ -229,6 +247,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FamilyMemberLastName)
                 </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.HealthForm)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.PhotoAck)
+                </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>

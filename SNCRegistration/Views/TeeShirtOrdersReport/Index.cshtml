@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.TeeShirtOrdersModel>
+
+@{
+    ViewBag.Title = "T-Shirt Orders Report";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+@using (Html.BeginForm("TeeShirtOrdersReport", "TeeShirtOrdersReport", FormMethod.Post))
+    {
+
+
+    <h2>T-Shirt Orders Report</h2>
+        <div class="row">
+            <div class="col-sm-3">
+                <h4>Total: @Model.Count()</h4>
+            </div>
+            <div class="col-sm-offset-10">
+                <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+
+            </div>
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeadContactFirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeadContactLastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeadContactShirtOrder)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeadContactShirtSize)
+                </th>
+            </tr>
+            @foreach (var item in Model)
+                    {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeadContactFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeadContactLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeadContactShirtOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeadContactShirtSize)
+                    </td>
+                </tr>
+                }
+
+        </table>
+    }
