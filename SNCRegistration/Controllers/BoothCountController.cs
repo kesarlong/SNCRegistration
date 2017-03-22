@@ -12,6 +12,7 @@ namespace SNCRegistration.Controllers
 {
     public class BoothCountController : Controller
     {
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         // GET: BoothCount
         public ActionResult Index()
             {

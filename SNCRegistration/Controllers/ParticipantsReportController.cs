@@ -13,7 +13,9 @@ namespace SNCRegistration.Controllers
     {
     public class ParticipantsReportController : Controller
         {
-     
+
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         // GET: Reporting
         public ActionResult Index()
             {
