@@ -330,7 +330,6 @@ C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\CrystalD
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\bin\stdole.dll
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
 C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
-C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
 D:\Users\Erika\Source\Repos\SNCRegistration\SNCRegistration\bin\roslyn\csc.exe
 D:\Users\Erika\Source\Repos\SNCRegistration\SNCRegistration\bin\roslyn\csc.exe.config
 D:\Users\Erika\Source\Repos\SNCRegistration\SNCRegistration\bin\roslyn\csc.rsp

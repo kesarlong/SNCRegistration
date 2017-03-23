@@ -133,21 +133,8 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label" })<br />
-
-        @* //TO DO: USE THE DATA SOURCE FOR ATTENDANCE (SP-316)*@
         @Html.DropDownListFor(model => model.Relationship,
-          new List<SelectListItem>{
-            new SelectListItem(){ Text="---Select---", Value = "", Selected=true },
-            new SelectListItem(){ Value = "1", Text = "Mother / Father" },
-            new SelectListItem(){ Value = "2", Text = "Legal Guardian"},
-            new SelectListItem(){ Value = "3", Text = "Sister / Brother"},
-            new SelectListItem(){ Value = "4", Text = "Grandmother / Grandfather"},
-            new SelectListItem(){ Value = "5", Text = "Teacher / Instructor"},
-            new SelectListItem(){ Value = "6", Text = "Other - Family - relationship not listed"},
-            new SelectListItem(){ Value = "7", Text = "Other (please provide details in comments section"}
-        }, new { @class = "form-control", style = "width: 320px" })
-
-
+        ViewBag.Relationship as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
     </div>
 
@@ -165,15 +152,10 @@
         @Html.ValidationMessageFor(model => model.GuardianCellPhone, "", new { @class = "text-danger" })
     </div>
 
-    //TO DO: Jira-306 - change to look up values from attendance table
     <div class="form-group">
         @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.AttendingCode,
-            new List<SelectListItem>{
-                new SelectListItem{ Value = "", Text = "-Select-" },
-                new SelectListItem{ Value = "2", Text = "Saturday Only" },
-                new SelectListItem{ Value = "3", Text = "Overnight" }
-            }, new { @class = "form-control", style = "width: 220px" })
+        ViewBag.Attendance as SelectList , "-Select option-", new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
     </div>
 

@@ -55,14 +55,14 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label" })<br />
-            @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
     </div>
 
     <!--Set default values for check box fields not displayed on form-->
     @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
     @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
-    @Html.HiddenFor(model=> model.CheckedIn, new { @value = false})
+    @Html.HiddenFor(model => model.CheckedIn, new { @value = false })
 
     <hr />
 
@@ -87,7 +87,9 @@
 
 
     <div class="form-group pull-right">
-        <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");" />
+        <input type="submit" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");" />
+        @*<input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants",new { GuardianGuid = Model.GuardianGuid));" />*@
+
     </div>
 
 }
@@ -95,3 +97,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+

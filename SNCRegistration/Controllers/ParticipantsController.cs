@@ -102,24 +102,19 @@ namespace SNCRegistration.Controllers
         // GET: Participants/Create
         public ActionResult Create() 
         {
-
+            ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
             return View();
         }
 
-        //public ActionResult Cancel([Bind(Include = "GuardianGuid"),]Participant participant)
-        //{
-                
-        //        return RedirectToAction("Edit", "Guardians", new { GuardianGuid = participant.GuardianGuid });
-
-        //}
-
+    
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
-            ] Participant participant,string submit)
+            ] Participant participant)
         {
 
 
@@ -128,6 +123,7 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    TempData.Keep();
                 }
 
 
@@ -152,13 +148,18 @@ namespace SNCRegistration.Controllers
                     //add a family member
                     { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = participant.GuardianGuid }); }
 
+                    if(Request["submit"].Equals("Cancel"))
+                    { return RedirectToAction("Redirect", new { GuardianGuid = participant.GuardianGuid }); }
+
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
-                    { return RedirectToAction("Registered"); }
-
-
-
-
+                    {
+                        var email = Session["pEmail"] as string;
+                        //to do: remove password
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!");
+                        return Redirect("Registered");
+                    }
+        
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -350,7 +351,14 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    
                 }
+
+                //pass the guardianID to child form as FK                    
+                TempData["myPK"] = participant.GuardianID;
+                TempData.Keep();
+
+                
 
 
                 //store year of event
@@ -358,6 +366,8 @@ namespace SNCRegistration.Controllers
                 participant.EventYear = int.Parse(thisYear);
 
             }
+
+
                 return View();
 
         }

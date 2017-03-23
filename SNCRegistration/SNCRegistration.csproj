@@ -3455,6 +3455,15 @@
     <Content Include="Views\CompletedRegistration\Index.cshtml" />
     <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\FirstTimeAttendeeReport\Index.cshtml" />
+    <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
+    <Content Include="Views\PeopleCheckedInCount\Index.cshtml" />
+    <Content Include="Views\RepeatAttendeeReport\Index.cshtml" />
+    <Content Include="Views\TeeShirtOrdersReport\Index.cshtml" />
+    <Content Include="Views\VolunteersFridayOnly\Index.cshtml" />
+    <Content Include="Views\VolunteersFridayThruSaturday\Index.cshtml" />
+    <Content Include="Views\VolunteersOvernight\Index.cshtml" />
+    <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
+    <Content Include="Views\WristBandCount\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
