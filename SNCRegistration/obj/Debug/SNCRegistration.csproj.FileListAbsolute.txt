@@ -484,3 +484,4 @@ C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistr
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
 C:\Users\Einar\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
 D:\Users\Erika\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache

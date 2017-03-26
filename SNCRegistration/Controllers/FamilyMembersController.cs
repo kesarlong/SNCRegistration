@@ -311,7 +311,8 @@ namespace SNCRegistration.Controllers
         // GET: FamilyMembers/Create
         public ActionResult Create()
         {
-
+            ViewBag.FamilyMemberAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
             return View();
         }
 
