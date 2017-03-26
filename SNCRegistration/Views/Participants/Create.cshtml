@@ -11,6 +11,8 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    //added back for cancel feature
+    @Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gSession"] })
 
     <div class="form-group">
         @Html.LabelFor(model => model.ParticipantFirstName, htmlAttributes: new { @class = "control-label" })<br />

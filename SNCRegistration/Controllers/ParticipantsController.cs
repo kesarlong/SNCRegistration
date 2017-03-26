@@ -114,7 +114,7 @@ namespace SNCRegistration.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
-            ] Participant participant)
+            ] Participant participant, string submit)
         {
 
 
@@ -139,9 +139,11 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
+                    this.Session["gSession"] = participant.GuardianGuid;
+
                     if (Request["submit"].Equals("Add another participant"))
                     //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid }); }
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid}); }
 
 
                     if (Request["submit"].Equals("Add a family member"))
