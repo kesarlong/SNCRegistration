@@ -158,13 +158,16 @@ namespace SNCRegistration.Controllers
 				{  
 					db.SaveChanges();
 
+					//added back for cancel feature
+					this.Session["gSession"] = guardian.GuardianGuid;
+
 					//pass the guardianID to child form as FK                    
 					TempData["myPK"] = guardian.GuardianID;
 					TempData.Keep();
 
 					this.Session["pEmail"] = guardian.GuardianEmail;
 
-					return RedirectToAction("Create", "Participants", new { GuardianGuid = guardian.GuardianGuid });
+					return RedirectToAction("Create", "Participants", new { GuardianGuid = this.Session["gSession"] });
 
 				}
 				catch (DbEntityValidationException ex)
