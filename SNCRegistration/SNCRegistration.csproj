@@ -340,6 +340,9 @@
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ChapterTroopUnit.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CompletedRegistrationModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -626,6 +629,7 @@
     <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.csdl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.msl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.ssdl" />
+    <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
     <None Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1.js" />
     <Content Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1.min.js" />
@@ -3464,6 +3468,7 @@
     <Content Include="Views\VolunteersOvernight\Index.cshtml" />
     <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
     <Content Include="Views\WristBandCount\Index.cshtml" />
+    <Content Include="Views\LeadContacts\Registered.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />

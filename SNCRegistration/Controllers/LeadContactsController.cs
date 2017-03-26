@@ -132,7 +132,17 @@ namespace SNCRegistration.Controllers
                     this.Session["leaderEmail"] = leadContact.LeadContactEmail;
                     TempData["myPK"] = leadContact.LeadContactID;
                     TempData.Keep();
-                    return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
+                    if (Request["submit"].Equals("Add a volunteer"))
+                    {
+                        return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
+                    }
+                    if (Request["submit"].Equals("Complete registration"))
+                    //registration complete, no more people to add
+                    {
+                        var email = Session["leaderEmail"] as string;
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is $10.00");
+                        return Redirect("Registered");
+                    }
                 }
                 catch (DbEntityValidationException ex)
                 {
