@@ -106,6 +106,7 @@ namespace SNCRegistration.Controllers
 			model.guardian = db.Guardians.Find(id);
 			model.participants = db.Participants.Where(i => i.GuardianID == id);
 			model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == id);
+            
 
 			if (model == null)
 			{
@@ -262,8 +263,10 @@ namespace SNCRegistration.Controllers
 				{
 					db.SaveChanges();
 
-					return RedirectToAction("Details", "Guardians", new { id = guardian.GuardianID });
-				}
+                    TempData["notice"] = "Edits Saved.";
+
+                    //return RedirectToAction("Details", "Guardians", new { id = guardian.GuardianID });
+                }
 				catch (DataException /* dex */)
 				{
 					//Log the error (uncomment dex variable name and add a line here to write a log.
@@ -317,8 +320,8 @@ namespace SNCRegistration.Controllers
 				{
 					db.SaveChanges();
 
-					return RedirectToAction("Details", "Guardians", new { id = guardian.GuardianID });
-				}
+                    TempData["notice"] = "Check In Status Saved!";
+                }
 				catch (DataException /* dex */)
 				{
 					//Log the error (uncomment dex variable name and add a line here to write a log.

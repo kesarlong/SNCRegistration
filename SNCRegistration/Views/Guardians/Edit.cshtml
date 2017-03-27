@@ -6,6 +6,10 @@
 }
 
 <h2>Edit Guardian</h2>
+<div>
+                @if (TempData["notice"] != null)
+                {<p style="color:green;">@TempData["notice"]</p> }
+        </div>
 
 
 @using (Html.BeginForm())
@@ -196,7 +200,8 @@
             <div class="form-group pull-right" style="margin-right:20px;">
                 @Html.ActionLink("Back to Guardian Details", "Details", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
             </div>
-    
+            
+
 }
 
 @section Scripts {
