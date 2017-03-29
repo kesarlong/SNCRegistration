@@ -240,7 +240,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string LeadContactEmail;
 
         [Required]
-        [Display(Name = "T-Shirt Order")]
+        [Display(Name = "Do you want to order an event t-shirt?")]
         public bool LeadContactShirtOrder;
 
 
@@ -248,7 +248,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string LeadContactShirtSize;
 
         [Required]
-        [Display(Name = "Troop/Chapter/Unit")]
+        [Display(Name = "Group Type")]
         public string BSType;
 
         [Required]
@@ -258,11 +258,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public string UnitChapterNumber;
 
         [Required]
-        [Display(Name = "Attending")]
+        [Display(Name = " Days Attending")]
         public string VolunteerAttendingCode;
 
         [Required]
-        [Display(Name = "Saturday Dinner?")]
+        [Display(Name = "Are you joining us for Saturday dinner?")]
         public bool SaturdayDinner;
 
 
@@ -312,11 +312,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public string VolunteerShirtSize;
 
         [Required]
-        [Display(Name = "Attending")]
+        [Display(Name = "Days Attending")]
         public string VolunteerAttendingCode;
 
         [Required]
-        [Display(Name = "Saturday Dinner?")]
+        [Display(Name = "Are you joining us for Saturday dinner?")]
         public Nullable<bool> SaturdayDinner;
 
         [Required]
