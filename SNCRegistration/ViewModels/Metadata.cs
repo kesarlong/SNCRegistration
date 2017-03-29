@@ -59,11 +59,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public Nullable<System.DateTime> ReceiptDate;
 
 
-        [Display(Name = "Health Form Received")]
+        [Display(Name = "Health Form")]
         public Nullable<bool> HealthForm;
 
 
-        [Display(Name = "Photo Ack Received")]
+        [Display(Name = "Photo Acknowledgment")]
         public Nullable<bool> PhotoAck;
 
         [Required]

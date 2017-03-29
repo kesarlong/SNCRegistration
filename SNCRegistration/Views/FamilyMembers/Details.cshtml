@@ -67,8 +67,11 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyMemberID }, new { @class = "btn btn-info" }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.FamilyMemberID }, new { @class = "btn btn-danger" }) |
-    @Html.ActionLink("Back to Guardian", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
+
+<p align="right">
+    <div align="right" style="margin-right:20px;">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyMemberID }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.FamilyMemberID }, new { @class = "btn btn-danger" }) |
+        @Html.ActionLink("Back to Guardian", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
+</div>
 </p>

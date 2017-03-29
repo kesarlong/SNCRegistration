@@ -1,5 +1,4 @@
-﻿@model SNCRegistration.ViewModels.Participant
-
+﻿@model SNCRegistration.ViewModels.GuardianParticipantFamily
 
 @{
     ViewBag.Title = "Participant Details";
@@ -16,110 +15,266 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantFirstName)
-        
+            @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
+
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantFirstName)
+            @Html.DisplayFor(model => model.participant.ParticipantFirstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantLastName)
+            @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantLastName)
+            @Html.DisplayFor(model => model.participant.ParticipantLastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantAge)
+            @Html.DisplayNameFor(model => model.participant.ParticipantAge)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantAge)
+            @Html.DisplayFor(model => model.participant.ParticipantAge)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantSchool)
+            @Html.DisplayNameFor(model => model.participant.ParticipantSchool)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantSchool)
+            @Html.DisplayFor(model => model.participant.ParticipantSchool)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ParticipantTeacher)
+            @Html.DisplayNameFor(model => model.participant.ParticipantTeacher)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParticipantTeacher)
+            @Html.DisplayFor(model => model.participant.ParticipantTeacher)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ClassroomScouting)
+            @Html.DisplayNameFor(model => model.participant.ClassroomScouting)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ClassroomScouting)
+            @Html.DisplayFor(model => model.participant.ClassroomScouting)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HealthForm)
+            @Html.DisplayNameFor(model => model.participant.HealthForm)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HealthForm)
+            @Html.DisplayFor(model => model.participant.HealthForm)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhotoAck)
+            @Html.DisplayNameFor(model => model.participant.PhotoAck)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhotoAck)
+            @Html.DisplayFor(model => model.participant.PhotoAck)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AttendingCode)
+            @Html.DisplayNameFor(model => model.participant.AttendingCode)
         </dt>
 
         <dd>
-            @if (Model.AttendingCode == 2)
+            @if (Model.participant.AttendingCode == 2)
             {
                 <p>Saturday Only</p>
             }
-            else if (Model.AttendingCode== 3)
+            else if (Model.participant.AttendingCode == 3)
             {
                 <p>Overnight</p>
             }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Comments)
+            @Html.DisplayNameFor(model => model.participant.Comments)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Comments)
+            @Html.DisplayFor(model => model.participant.Comments)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CheckedIn)
+            @Html.DisplayNameFor(model => model.participant.CheckedIn)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CheckedIn)
+            @Html.DisplayFor(model => model.participant.CheckedIn)
         </dd>
 
     </dl>
 
+    <p align="right">
+        <div align="right" style="margin-right:20px;">
+            @Html.ActionLink("Check In", "CheckIn", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-danger" }) |
+            @Html.ActionLink("Back to List", "Index", "Participants", new { }, new { @class = "btn btn-info" })
+        </div>
+    </p>
+
+    <hr />
+    <h3>Related Guardian</h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.guardian.GuardianFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guardian.GuardianLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guardian.HealthForm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guardian.PhotoAck)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guardian.CheckedIn)
+            </th>
+
+            <th></th>
+        </tr>
+        @foreach (var item in Model.guardians)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuardianFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuardianLastName)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.HealthForm)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.PhotoAck)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckedIn)
+                </td>
+                <td align="center">
+                    @Html.ActionLink("Details", "Details", "Guardians", new { id = item.GuardianID }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Check In", "CheckIn", "Guardians", new { id = item.GuardianID }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
+    <hr />
+    <h3>Related Participants</h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.HealthForm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.PhotoAck)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.CheckedIn)
+            </th>
+
+            <th></th>
+        </tr>
+        @foreach (var item in Model.relatedparticipants)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantLastName)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.HealthForm)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.PhotoAck)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckedIn)
+                </td>
+                <td align="center">
+                    @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    
+
+    <hr />
+    <h3>Related Family Members</h3>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.FamilyMemberFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.FamilyMemberLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.HealthForm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.PhotoAck)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.familymember.CheckedIn)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.familymembers)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyMemberFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyMemberLastName)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.HealthForm)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.PhotoAck)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckedIn)
+                </td>
+                <td align="center">
+                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
 </div>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ParticipantID }, new { @class = "btn btn-info" }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.ParticipantID }, new { @class = "btn btn-danger" }) |
-    @Html.ActionLink("Back to Guardian", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
-</p>
-
 
 @*
     original list, saved

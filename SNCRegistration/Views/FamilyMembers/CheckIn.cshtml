@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Check In Participant</h2>
+<h2>Check In Family Member</h2>
 
 
 @using (Html.BeginForm())
@@ -13,7 +13,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Participant</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.FamilyMemberID)
@@ -90,11 +89,19 @@
 
     </div>
 
-    <p>
-        <input type="submit" value="Save" class="btn btn-primary" /> |
-        @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyMemberID }, new { @class = "btn btn-info" }) |
-        @Html.ActionLink("Back to Guardian", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
-    </p>
+    <p align="right">
+        <div align="right" style="margin-right:20px;">
+            <input type="submit" value="Save" class="btn btn-primary" /> |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.FamilyMemberID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Back to Guardian Details", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
+
+        </div>
+
+        @if (TempData["notice"] != null)
+                {
+    <p style="color:green;">@TempData["notice"]</p> }
+
+     </p>
 }
 
 
