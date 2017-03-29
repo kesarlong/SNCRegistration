@@ -20,9 +20,10 @@ namespace SNCRegistration.Controllers
 
         // GET: Participants. For the Index
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
             if (searchString != null)
@@ -36,8 +37,12 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Participants select y.EventYear).Distinct();
+
             var participants = from s in db.Participants
-                           select s;
+                               where s.EventYear == searchYear
+                               select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {

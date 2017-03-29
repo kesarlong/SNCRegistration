@@ -21,10 +21,11 @@ namespace SNCRegistration.Controllers
 
 		// GET: Guardians
 		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-		public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+		public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
 		{
 
 			ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
 			ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
 			if (searchString != null)
@@ -35,18 +36,25 @@ namespace SNCRegistration.Controllers
 			{
 				searchString = currentFilter;
 			}
+            
 
 			ViewBag.CurrentFilter = searchString;
 
-			var guardians = from s in db.Guardians
-							   select s;
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Guardians select y.EventYear).Distinct();
+
+
+            var guardians = from s in db.Guardians
+                            where s.EventYear == searchYear
+                            select s;
 
 			if (!String.IsNullOrEmpty(searchString))
 			{
 				guardians = guardians.Where(s => s.GuardianLastName.Contains(searchString) || s.GuardianFirstName.Contains(searchString));
 			}
 
-			switch (sortOrder)
+
+            switch (sortOrder)
 			{
 				case "name_desc":
 					guardians = guardians.OrderByDescending(s => s.GuardianLastName);

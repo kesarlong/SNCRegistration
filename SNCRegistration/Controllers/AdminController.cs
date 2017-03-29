@@ -13,20 +13,23 @@ using PagedList;
 
 namespace SNCRegistration.Controllers
     {
+
+    [CustomAuthorize(Roles = "SystemAdmin")]
     public class AdminController : Controller
         {
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin, UnassignedUser")]
+        //Default page after log in. Welcome message with indication to select menu options on the left bar.
         public ActionResult Index()
             {
             return View();
             }
 
+        //Manage users list. Only SystemAdmins can use.
 
-        // GET: /ManageUsers/
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult ManageUsers(string searchStringUserNameOrEmail, string currentFilter, int? page)
             {
             try
@@ -98,10 +101,10 @@ namespace SNCRegistration.Controllers
                 }
             }
 
-        // Users Part
 
+        // User Creation. Only System Admins can use
         // GET: /Admin/ManageUsers/Edit/Create 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+
         public ActionResult Create()
             {
             ExpandedUserDTO objExpandedUserDTO = new ExpandedUserDTO();
@@ -111,8 +114,10 @@ namespace SNCRegistration.Controllers
             return View(objExpandedUserDTO);
             }
 
+        // User Creation. Only System Admins can use
+        // GET: /Admin/ManageUsers/Edit/Create 
         // PUT: /Admin/ManageUsers/Create
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ExpandedUserDTO paramExpandedUserDTO)
@@ -129,10 +134,9 @@ namespace SNCRegistration.Controllers
                 var Password = paramExpandedUserDTO.Password.Trim();
 
                 if (Email == "")
-                    {
+                {
                     throw new Exception("No Email");
-                    }
-
+                }
                 if (UserName == "")
                     {
                     throw new Exception("No User Name");
@@ -165,21 +169,21 @@ namespace SNCRegistration.Controllers
                     {
                     ViewBag.Roles = GetAllRolesAsSelectList();
                     ModelState.AddModelError(string.Empty,
-                        "Error: Failed to create the user. Password must be at least 6 characters, contain one upper case, one lower case, and one numerical digit.");
+                        "Error: Failed to create the user. See below for details.");
                     return View(paramExpandedUserDTO);
                     }
                 }
-            catch (Exception ex)
+            catch
                 {
                 ViewBag.Roles = GetAllRolesAsSelectList();
-                ModelState.AddModelError(string.Empty, "Error: " + ex);
+                ModelState.AddModelError(string.Empty, "Error: Failed to create the user. See below for details.");
                 return View("Create");
                 }
             }
 
-
+        //User Edit. Only System Admins can edit other users.
         // GET: /Admin/ManageUsers/Edit/User 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+
         public ActionResult EditUser(string UserName)
             {
             if (UserName == null)
@@ -194,8 +198,10 @@ namespace SNCRegistration.Controllers
             return View(objExpandedUserDTO);
             }
 
+
+        //User Edit. Only System Admins can edit other users.
         // PUT: /Admin/ManageUsers/EditUser
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditUser(ExpandedUserDTO paramExpandedUserDTO)
@@ -223,8 +229,10 @@ namespace SNCRegistration.Controllers
                 }
             }
 
+
+        //User Delete. Only System Admins can delete users.
         // DELETE: /Admin/ManageUsers/DeleteUser
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+
         public ActionResult DeleteUser(string UserName)
             {
             try
@@ -262,8 +270,10 @@ namespace SNCRegistration.Controllers
                 }
             }
 
+
+        //User edit roles. Only System Admins can edit user roles.
         // GET: /Admin/ManageUsers/EditRoles/TestUser 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+
         public ActionResult EditRoles(string UserName)
             {
             if (UserName == null)
@@ -289,7 +299,6 @@ namespace SNCRegistration.Controllers
 
 
         // PUT: /Admin/ManageUsers/EditRoles/TestUser 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditRoles(UserAndRolesDTO paramUserAndRolesDTO)
@@ -328,7 +337,6 @@ namespace SNCRegistration.Controllers
             }
 
         // DELETE: /Admin/ManageUsers/DeleteRole?UserName="TestUser&RoleName=SystemAdmin
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult DeleteRole(string UserName, string RoleName)
             {
             try
@@ -381,7 +389,6 @@ namespace SNCRegistration.Controllers
         // Roles 
 
         // GET: /Admin/ViewAllRoles
-        [CustomAuthorize(Roles = "SystemAdmin")]
         public ActionResult ViewAllRoles()
             {
             var roleManager =
@@ -401,7 +408,6 @@ namespace SNCRegistration.Controllers
             }
 
         // GET: /Admin/ManageUsers/AddRole
-        [CustomAuthorize(Roles = "SystemAdmin")]
         public ActionResult AddRole()
             {
             RoleDTO objRoleDTO = new RoleDTO();
@@ -410,7 +416,6 @@ namespace SNCRegistration.Controllers
             }
 
         // PUT: /Admin/AddRole
-        [CustomAuthorize(Roles = "SystemAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddRole(RoleDTO paramRoleDTO)
@@ -451,7 +456,6 @@ namespace SNCRegistration.Controllers
 
 
         // DELETE: /Admin/ManageUsers/DeleteUserRole?RoleName=TestRole
-        [CustomAuthorize(Roles = "SystemAdmin")]
         public ActionResult DeleteUserRole(string RoleName)
             {
             try
