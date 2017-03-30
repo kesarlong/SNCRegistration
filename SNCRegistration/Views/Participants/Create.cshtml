@@ -28,8 +28,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.ParticipantAge, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(model => model.ParticipantAge,
-            ViewBag.ParticipantAge as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
+        @Html.DropDownListFor(model => model.ParticipantAge, ViewBag.ParticipantAge as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.ParticipantAge, "", new { @class = "text-danger" })
     </div>
 
@@ -87,7 +86,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label" })<br />
-        @Html.TextArea("Comments", null, new { @class = "form-control" })
+        @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
     </div>
 
