@@ -13,13 +13,12 @@ using PagedList;
 
 namespace SNCRegistration.Controllers
 {
-
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
     public class ParticipantsController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Participants. For the Index
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -85,7 +84,6 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Details/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
 
@@ -127,6 +125,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
+        [OverrideAuthorization]
         public ActionResult Create() 
         {
             ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
@@ -134,10 +133,11 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
-    
+
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
@@ -222,6 +222,7 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Edit/5
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
@@ -249,6 +250,7 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
@@ -284,7 +286,6 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/CheckIn/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
             if (id == null)
@@ -302,8 +303,6 @@ namespace SNCRegistration.Controllers
         // POST: Participants/CheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
         public ActionResult CheckInPost(int? id)
@@ -347,6 +346,8 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -362,6 +363,8 @@ namespace SNCRegistration.Controllers
         }
 
         // POST: Participants/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -397,6 +400,8 @@ namespace SNCRegistration.Controllers
             base.Dispose(disposing);
         }
 
+
+        [OverrideAuthorization]
         public ActionResult Registered()
         {
             return View();

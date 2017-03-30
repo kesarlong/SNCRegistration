@@ -8,6 +8,7 @@ using System.Data;
 
 namespace SNCRegistration.Controllers
 {
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
     public class FamilyMembersController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
@@ -34,6 +35,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: FamilyMembers/Create
+        [OverrideAuthorization]
         public ActionResult Create()
         {
 
@@ -45,6 +47,7 @@ namespace SNCRegistration.Controllers
         // POST: FamilyMembers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,FamilyMemberAge,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,GuardianGuid")] FamilyMember familyMember)
@@ -123,6 +126,8 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: FamilyMembers/Edit/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -158,6 +163,7 @@ namespace SNCRegistration.Controllers
         // POST: FamilyMembers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
@@ -193,6 +199,8 @@ namespace SNCRegistration.Controllers
 
 
         // GET: FamilyMembers/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -208,6 +216,8 @@ namespace SNCRegistration.Controllers
         }
 
         // POST: FamilyMembers/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -227,6 +237,7 @@ namespace SNCRegistration.Controllers
             base.Dispose(disposing);
         }
 
+        [OverrideAuthorization]
         public ActionResult Registered()
         {
             return View();
@@ -258,7 +269,6 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: FamilyMembers/CheckIn/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
 
@@ -278,8 +288,6 @@ namespace SNCRegistration.Controllers
         // POST: FamilyMembers/CheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
         public ActionResult CheckInPost(int? id)

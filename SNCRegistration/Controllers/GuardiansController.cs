@@ -14,13 +14,14 @@ using System.Data;
 namespace SNCRegistration.Controllers
 
 {
-	public class GuardiansController : Controller
+
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+    public class GuardiansController : Controller
 	{
 		private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
 
 		// GET: Guardians
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
 		public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
 		{
 
@@ -88,20 +89,8 @@ namespace SNCRegistration.Controllers
 		}
 
 		// GET: Guardians/Details/5
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
 		public ActionResult Details(int? id)
 		{
-			//if (id == null)
-			//{
-			//    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			//}
-			//Guardian guardian = db.Guardians.Find(id);
-			//if (guardian == null)
-			//{
-			//    return HttpNotFound();
-			//}
-			//return View(guardian);
-
 
 
 			if (id == null)
@@ -126,8 +115,10 @@ namespace SNCRegistration.Controllers
 
 		}
 
-		// GET: Guardians/Create
-		public ActionResult Create()
+
+        // GET: Guardians/Create
+        [OverrideAuthorization]
+        public ActionResult Create()
 
 		{
 			ViewBag.Relationship = new SelectList(db.Relationships, "RelationshipCode", "RelationshipDescription");
@@ -141,10 +132,11 @@ namespace SNCRegistration.Controllers
 		}
 
 
-		// POST: Guardians/Create
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
+        // POST: Guardians/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianState,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship,GuardianGuid,NumberInTent,CheckedIn")] Guardian guardian)
 		{
@@ -196,8 +188,9 @@ namespace SNCRegistration.Controllers
 			return View(guardian);
 		}
 
-		// GET: Guardians/Edit/5
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+        // GET: Guardians/Edit/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
 		public ActionResult Edit(int? id)
 		{
 			if (id == null)
@@ -205,7 +198,10 @@ namespace SNCRegistration.Controllers
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
 			Guardian guardian = db.Guardians.Find(id);
-			if (guardian == null)
+
+            SetRelationshipAttendingViewBag(guardian.Relationship, guardian.AttendingCode);
+
+            if (guardian == null)
 			{
 				return HttpNotFound();
 			}
@@ -230,31 +226,32 @@ namespace SNCRegistration.Controllers
 			return File(path, MediaTypeNames.Application.Pdf);
 		}
 
-		// Original Edit, delete these comments if nothing is broken
-		// POST: Guardians/Edit/5
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public ActionResult Edit([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
-		//{
-		//    if (ModelState.IsValid)
-		//    {
-		//        db.Entry(guardian).State = EntityState.Modified;
-		//        db.SaveChanges();
-		//        //return RedirectToAction("Index");
-		//    }
-		//    return View(guardian);
-		//}
+        // Original Edit, delete these comments if nothing is broken
+        // POST: Guardians/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(guardian).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        //return RedirectToAction("Index");
+        //    }
+        //    return View(guardian);
+        //}
 
 
 
 
-		// POST: Guardians/Edit/5
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
-		[HttpPost, ActionName("Edit")]
+        // POST: Guardians/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+        [HttpPost, ActionName("Edit")]
 		[ValidateAntiForgeryToken]
 		public ActionResult EditPost(int? id)
 		{
@@ -281,14 +278,15 @@ namespace SNCRegistration.Controllers
 					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
 				}
 			}
-			return View(guardian);
+
+            SetRelationshipAttendingViewBag(guardian.Relationship, guardian.AttendingCode);
+            return View(guardian);
 
 
 		}
 
 
 		// GET: Guardians/CheckIn/5
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
 		public ActionResult CheckIn(int? id)
 		{
 
@@ -308,8 +306,6 @@ namespace SNCRegistration.Controllers
 		// POST: Guardians/CheckIn/5
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
 		[HttpPost, ActionName("CheckIn")]
 		[ValidateAntiForgeryToken]
 		public ActionResult CheckInPost(int? id)
@@ -342,9 +338,10 @@ namespace SNCRegistration.Controllers
 		}
 
 
-		// GET: Guardians/Delete/5
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
-		public ActionResult Delete(int? id)
+        // GET: Guardians/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+        public ActionResult Delete(int? id)
 		{
 			if (id == null)
 			{
@@ -358,9 +355,10 @@ namespace SNCRegistration.Controllers
 			return View(guardian);
 		}
 
-		// POST: Guardians/Delete/5
-		[CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
-		[HttpPost, ActionName("Delete")]
+        // POST: Guardians/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+        [HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)
 		{
@@ -371,6 +369,25 @@ namespace SNCRegistration.Controllers
 			return RedirectToAction("Index");
 		}
 
-		
-	}
+
+        private void SetRelationshipAttendingViewBag(int? relationship = null, int? attendance = null)
+        {
+
+            if (relationship == null)
+            {
+                ViewBag.relationshipID = new SelectList(db.Relationships, "RelationshipCode", "RelationshipDescription");
+            }
+            else
+                ViewBag.relationshipID = new SelectList(db.Relationships.ToArray(), "RelationshipCode", "RelationshipDescription", relationship);
+
+            if (attendance == null)
+            {
+                ViewBag.AttendanceID = new SelectList(db.Attendances, "AttendanceID", "Description");
+            }
+            else
+                ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", attendance);
+            
+        }
+
+    }
 }
