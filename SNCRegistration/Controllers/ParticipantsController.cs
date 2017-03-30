@@ -114,7 +114,6 @@ namespace SNCRegistration.Controllers
             model.guardians = db.Guardians.Where(i => i.GuardianID == model.participant.GuardianID);
             model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == model.participant.GuardianID);
 
-            ViewBag.Age = db.Ages.SelectMany(model.participant.ParticipantAge, "AgeDescription");
 
    //             string.Equals(db.Ages, "AgeID", "AgeDescription");
 
