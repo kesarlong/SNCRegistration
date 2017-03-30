@@ -485,3 +485,4 @@ C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\bin\Microsoft.Report
 C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache
 C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.dll
 C:\Users\Allen\Source\Repos\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.pdb
+C:\Users\jstelmach\Documents\GitHub\SNCRegistration\SNCRegistration\obj\Debug\SNCRegistration.csprojResolveAssemblyReference.cache

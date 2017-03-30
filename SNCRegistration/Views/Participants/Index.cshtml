@@ -14,7 +14,8 @@
 @using (Html.BeginForm("Index", "Participants", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) &nbsp;&nbsp;  | &nbsp;&nbsp;
+        Event year: @Html.DropDownList("searchYear", new SelectList(ViewBag.AllYears, ViewBag.CurrentYear))
         <input type="submit" value="Search" />
     </p>
 
@@ -24,17 +25,21 @@
 
 <table class="table table-condensed table-striped">
     <tr>
+        <th>
+            Year Enrolled
+        </th>
         <th align="center">
             @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th align="center">
             First Name
         </th>
-        <th align="center">
-            Age
+
+        <th>
+            Health Form?
         </th>
-        <th align="center">
-            School
+        <th>
+            Photo Acknowledgement
         </th>
         <th align="center">
             Checked In?
@@ -45,19 +50,22 @@
     
 @foreach (var item in Model) {
     <tr>
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.EventYear)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantLastName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantFirstName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ParticipantAge)
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.HealthForm)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ParticipantSchool)
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.PhotoAck)
         </td>
-        <td>
+        <td align="center">
             @Html.DisplayFor(modelItem => item.CheckedIn)
         </td>
 
@@ -72,7 +80,7 @@
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort }))
 
 
 @*Code below is original index. Delete if nothing wrong.*@

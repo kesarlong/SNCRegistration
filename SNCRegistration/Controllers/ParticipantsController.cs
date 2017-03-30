@@ -20,9 +20,10 @@ namespace SNCRegistration.Controllers
 
         // GET: Participants. For the Index
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
             if (searchString != null)
@@ -36,8 +37,12 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Participants select y.EventYear).Distinct();
+
             var participants = from s in db.Participants
-                           select s;
+                               where s.EventYear == searchYear
+                               select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -186,21 +191,30 @@ namespace SNCRegistration.Controllers
         
                 }
                 catch (DbEntityValidationException ex)
+                //{
+                //    //retrieve the error message as a list of strings
+                //    var errorMessages = ex.EntityValidationErrors
+                //        .SelectMany(x => x.ValidationErrors)
+                //        .Select(x => x.ErrorMessage);
+
+                //    //Join the list to a single string
+                //    var fullErrorMessage = string.Join(" ,", errorMessages);
+
+                //    //Combine the original exception message wtih the new one
+                //    var exceptionMessage = string.Concat(ex.Message, "The validation errors are: ", fullErrorMessage);
                 {
-                    //retrieve the error message as a list of strings
-                    var errorMessages = ex.EntityValidationErrors
-                        .SelectMany(x => x.ValidationErrors)
-                        .Select(x => x.ErrorMessage);
-
-                    //Join the list to a single string
-                    var fullErrorMessage = string.Join(" ,", errorMessages);
-
-                    //Combine the original exception message wtih the new one
-                    var exceptionMessage = string.Concat(ex.Message, "The validation errors are: ", fullErrorMessage);
-
-                    // Throw a new DbEntityValidationException with the improved exception message.
-                    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
                 }
+                //    // Throw a new DbEntityValidationException with the improved exception message.
+                //    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                //}
+
 
             }
                 return View(participant);
