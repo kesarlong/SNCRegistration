@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -126,10 +127,10 @@ namespace SNCRegistration.ViewModels.Metadata
         public bool ClassroomScouting;
 
         [Display(Name = "Health Form")]
-        public bool? HealthForm;
+        public bool HealthForm;
 
         [Display(Name = "Checked In?")]
-        public bool? CheckedIn;
+        public bool CheckedIn;
 
         [Display(Name = "Photo Acknowledgment")]
         public bool? PhotoAck;
@@ -147,9 +148,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public string EventYear;
 
 
+        
+
     }
 
-    public class FamilyMember_Metadata
+    public class FamilyMember_Metadata 
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FamilyMemberID;
@@ -190,6 +193,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Checked In?")]
         public bool? CheckedIn;
 
+       
     }
 
     public class LeadContact_Metadata

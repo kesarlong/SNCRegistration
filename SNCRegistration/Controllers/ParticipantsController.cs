@@ -216,11 +216,20 @@ namespace SNCRegistration.Controllers
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+
             Participant participant = db.Participants.Find(id);
+
+            ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription", participant.ParticipantAge);
+            ViewBag.SelectedParticipantAge = participant.ParticipantAge;
+
+
             if (participant == null)
             {
                 return HttpNotFound();
@@ -295,21 +304,33 @@ namespace SNCRegistration.Controllers
             }
             var participant = db.Participants.Find(id);
 
-            if (TryUpdateModel(participant, "",
-               new string[] {"CheckedIn"}))
-            {
-                try
-                {
-                    db.SaveChanges();
-                    TempData["notice"] = "Check In Status Saved!";
 
-                }
-                catch (DataException /* dex */)
+
+            if (participant.HealthForm.Value == false)
+            {
+                ModelState.AddModelError("", "Health Form must be received before check in.");
+            }
+            else
+            {
+                if (TryUpdateModel(participant, "",
+                    new string[] { "CheckedIn" }))
                 {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    try
+                    {
+                        db.SaveChanges();
+                        TempData["notice"] = "Check In Status Saved!";
+
+                    }
+                    catch (DataException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    }
                 }
             }
+
+            
+
             return View(participant);
 
 

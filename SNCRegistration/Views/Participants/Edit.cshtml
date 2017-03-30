@@ -37,9 +37,21 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ParticipantAge, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.ParticipantAge, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ParticipantAge, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.ParticipantAge)
+            @Html.DropDownListFor(model => model.ParticipantAge,
+                    new List<SelectListItem>{
+                        new SelectListItem{ Value = "", Text = "-Select-" },
+                        new SelectListItem{ Value = "1", Text = "Under 6" },
+                        new SelectListItem{ Value = "2", Text = "7-10" },
+                        new SelectListItem{ Value = "3", Text = "11-13" },
+                        new SelectListItem{ Value = "4", Text = "14-17" },
+                        new SelectListItem{ Value = "5", Text = "18-20" },
+                        new SelectListItem{ Value = "6", Text = "Over 21" }
+                    }, new { @class = "form-control", style = "width: 220px" })
+
+            @*@Html.DropDownListFor(model => model.ParticipantAge,
+                    ViewBag.ParticipantAge as SelectList, new { @class = "form-control", style = "width: 220px" })*@
+            @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
@@ -153,32 +165,6 @@
             @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            <div class="btn-group" data-toggle="buttons">
-                @Html.LabelFor(model => model.CheckedIn, htmlAttributes: new { @class = "control-label" })  <br />
-                @Html.ValidationMessageFor(model => model.CheckedIn, "", new { @class = "text-danger" })
-                @if (Model.CheckedIn == true)
-                {
-                    <label class="btn btn-default active">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
-                    </label>
-                    <label class="btn btn-default">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
-                    </label>
-                }
-                else
-                {
-                    <label class="btn btn-default">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
-                    </label>
-                    <label class="btn btn-default active">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
-                    </label>
-
-                }
-            </div>
         </div>
 
 
