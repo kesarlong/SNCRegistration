@@ -91,6 +91,13 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="BSTypeID" Type="int" Nullable="false" />
           <Property Name="BSTypeDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ChapterTroopUnit">
+          <Key>
+            <PropertyRef Name="ChapterTroopUnitID" />
+          </Key>
+          <Property Name="ChapterTroopUnitID" Type="int" Nullable="false" />
+          <Property Name="ChapterTroopUnitDescription" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="EventYear" />
@@ -149,23 +156,23 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           </Key>
           <Property Name="LeadContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BSType" Type="int" Nullable="false" />
-          <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
-          <Property Name="LeadContactFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LeadContactLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LeadContactAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="LeadContactCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnitChapterNumber" Type="char" MaxLength="10" />
+          <Property Name="LeadContactFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LeadContactLastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LeadContactAddress" Type="varchar" MaxLength="50" />
+          <Property Name="LeadContactCity" Type="varchar" MaxLength="50" />
           <Property Name="LeadContactState" Type="char" MaxLength="10" />
-          <Property Name="LeadContactZip" Type="nchar" MaxLength="10" />
-          <Property Name="LeadContactCellPhone" Type="nchar" MaxLength="10" />
-          <Property Name="LeadContactEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="LeadContactZip" Type="char" MaxLength="5" />
+          <Property Name="LeadContactCellPhone" Type="char" MaxLength="10" />
+          <Property Name="LeadContactEmail" Type="varchar" MaxLength="100" />
           <Property Name="VolunteerAttendingCode" Type="int" Nullable="false" />
           <Property Name="SaturdayDinner" Type="bit" />
           <Property Name="TotalFee" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Booth" Type="nvarchar" MaxLength="50" />
-          <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+          <Property Name="Booth" Type="varchar" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="200" />
           <Property Name="LeadContactShirtOrder" Type="bit" Nullable="false" />
           <Property Name="LeadContactShirtSize" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LeaderGuid" Type="varchar" MaxLength="50" />
           <Property Name="CheckedIn" Type="bit" Nullable="false" />
           <Property Name="EventYear" Type="int" Nullable="false" />
           <Property Name="Marketing" Type="bit" Nullable="false" />
@@ -218,8 +225,8 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             <PropertyRef Name="VolunteerID" />
           </Key>
           <Property Name="VolunteerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VolunteerFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="VolunteerLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VolunteerFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VolunteerLastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="VolunteerAge" Type="int" Nullable="false" />
           <Property Name="LeadContactID" Type="int" />
           <Property Name="VolunteerShirtOrder" Type="bit" Nullable="false" />
@@ -227,10 +234,11 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="VolunteerAttendingCode" Type="int" Nullable="false" />
           <Property Name="SaturdayDinner" Type="bit" />
           <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
-          <Property Name="Comments" Type="nvarchar" MaxLength="200" />
-          <Property Name="LeaderGuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="200" />
+          <Property Name="LeaderGuid" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CheckedIn" Type="bit" Nullable="false" />
           <Property Name="EventYear" Type="int" Nullable="false" />
+          <Property Name="VolunteerFee" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__FamilyMem__Event__55009F39">
           <End Role="Event" Type="Self.Event" Multiplicity="1" />
@@ -389,6 +397,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BSType" EntityType="Self.BSType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChapterTroopUnit" EntityType="Self.ChapterTroopUnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guardians" EntityType="Self.Guardians" Schema="dbo" store:Type="Tables" />
@@ -489,6 +498,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="AspNetUserClaims" EntityType="SNCRegistrationModel.AspNetUserClaim" />
           <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
           <EntitySet Name="BSTypes" EntityType="SNCRegistrationModel.BSType" />
+          <EntitySet Name="ChapterTroopUnits" EntityType="SNCRegistrationModel.ChapterTroopUnit" />
           <EntitySet Name="Events" EntityType="SNCRegistrationModel.Event" />
           <EntitySet Name="FamilyMembers" EntityType="SNCRegistrationModel.FamilyMember" />
           <EntitySet Name="Guardians" EntityType="SNCRegistrationModel.Guardian" />
@@ -615,6 +625,13 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="BSTypeID" Type="Int32" Nullable="false" />
           <Property Name="BSTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ChapterTroopUnit">
+          <Key>
+            <PropertyRef Name="ChapterTroopUnitID" />
+          </Key>
+          <Property Name="ChapterTroopUnitID" Type="Int32" Nullable="false" />
+          <Property Name="ChapterTroopUnitDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="EventYear" />
@@ -684,23 +701,23 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           </Key>
           <Property Name="LeadContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BSType" Type="Int32" Nullable="false" />
-          <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="LeadContactFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LeadContactLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LeadContactAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LeadContactCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LeadContactFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LeadContactLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LeadContactAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LeadContactCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LeadContactState" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="LeadContactZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="LeadContactCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="LeadContactEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LeadContactZip" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="LeadContactCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LeadContactEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VolunteerAttendingCode" Type="Int32" Nullable="false" />
           <Property Name="SaturdayDinner" Type="Boolean" />
           <Property Name="TotalFee" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Booth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Booth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LeadContactShirtOrder" Type="Boolean" Nullable="false" />
           <Property Name="LeadContactShirtSize" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="LeaderGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeaderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <Property Name="Marketing" Type="Boolean" Nullable="false" />
@@ -757,8 +774,8 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             <PropertyRef Name="VolunteerID" />
           </Key>
           <Property Name="VolunteerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VolunteerFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="VolunteerLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VolunteerFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VolunteerLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VolunteerAge" Type="Int32" Nullable="false" />
           <Property Name="LeadContactID" Type="Int32" />
           <Property Name="VolunteerShirtOrder" Type="Boolean" Nullable="false" />
@@ -766,10 +783,11 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="VolunteerAttendingCode" Type="Int32" Nullable="false" />
           <Property Name="SaturdayDinner" Type="Boolean" />
           <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LeaderGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LeaderGuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
+          <Property Name="VolunteerFee" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__3E1D39E1" FromRole="Volunteer" ToRole="Age" />
           <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4" FromRole="Volunteer" ToRole="Event" />
         </EntityType>
@@ -1010,6 +1028,14 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ChapterTroopUnits">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.ChapterTroopUnit">
+              <MappingFragment StoreEntitySet="ChapterTroopUnit">
+                <ScalarProperty Name="ChapterTroopUnitDescription" ColumnName="ChapterTroopUnitDescription" />
+                <ScalarProperty Name="ChapterTroopUnitID" ColumnName="ChapterTroopUnitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Event">
               <MappingFragment StoreEntitySet="Event">
@@ -1143,6 +1169,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySetMapping Name="Volunteers">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteers">
+                <ScalarProperty Name="VolunteerFee" ColumnName="VolunteerFee" />
                 <ScalarProperty Name="EventYear" ColumnName="EventYear" />
                 <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="LeaderGuid" ColumnName="LeaderGuid" />

@@ -20,9 +20,10 @@ namespace SNCRegistration.Controllers
 
         // GET: Participants. For the Index
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
             if (searchString != null)
@@ -36,8 +37,12 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Participants select y.EventYear).Distinct();
+
             var participants = from s in db.Participants
-                           select s;
+                               where s.EventYear == searchYear
+                               select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -85,17 +90,39 @@ namespace SNCRegistration.Controllers
         {
 
             // Original delete if nothing is broken
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Participant participant = db.Participants.Find(id);
+            //if (participant == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(participant);
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Participant participant = db.Participants.Find(id);
-            if (participant == null)
+
+            var model = new GuardianParticipantFamily();
+
+            model.participant = db.Participants.Find(id);
+            model.relatedparticipants = db.Participants.Where(i => i.GuardianID == model.participant.GuardianID && i.ParticipantID != id);
+            model.guardians = db.Guardians.Where(i => i.GuardianID == model.participant.GuardianID);
+            //model.guardian = db.Guardians.Find(model.participant.GuardianID);
+            model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == model.participant.GuardianID);
+
+
+
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(participant);
 
+            return View(model);
 
         }
 
@@ -232,8 +259,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
+                    TempData["notice"] = "Edits Saved.";
+                    // return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -283,8 +310,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
+                    TempData["notice"] = "Check In Status Saved!";
 
-                    return RedirectToAction("Details","Guardians", new { id = participant.GuardianID });
                 }
                 catch (DataException /* dex */)
                 {

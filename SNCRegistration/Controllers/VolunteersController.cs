@@ -109,12 +109,14 @@ namespace SNCRegistration.Controllers
                 db.Volunteers.Add(volunteer);
                 var thisYear = DateTime.Now.Year.ToString();
                 volunteer.EventYear = int.Parse(thisYear);
-
+                var fee = 0;
+                volunteer.VolunteerFee = fee;
                 try
                 {
                     db.SaveChanges();
 
                     this.Session["lSession"] = volunteer.LeadContactID;
+                    var totalFee = Session["leaderFee"] as string;
                         if (Request["submit"].Equals("Add an additional volunteer"))
                     { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
 

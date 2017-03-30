@@ -61,11 +61,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public Nullable<System.DateTime> ReceiptDate;
 
 
-        [Display(Name = "Health Form Received")]
+        [Display(Name = "Health Form")]
         public Nullable<bool> HealthForm;
 
 
-        [Display(Name = "Photo Ack Received")]
+        [Display(Name = "Photo Acknowledgment")]
         public Nullable<bool> PhotoAck;
 
         [Required]
@@ -224,14 +224,12 @@ namespace SNCRegistration.ViewModels.Metadata
         public string LeadContactState;
 
         [Required]
-        [MaxLength(5)]
-        [MinLength(5)]
+        [RegularExpression(@"^(?!00000)[0-9]{5,5}$", ErrorMessage = "Zip Code should be five numbers long")]
         [Display(Name = "Zip Code")]
         public string LeadContactZip;
 
         [Required]
-        [MaxLength(10)]
-        [MinLength(10)]
+        [RegularExpression(@"^(?!0000000000)[0-9]{10,10}$", ErrorMessage = "Phone number should be ten numbers long")]
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string LeadContactCellPhone;
@@ -243,7 +241,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string LeadContactEmail;
 
         [Required]
-        [Display(Name = "T-Shirt Order")]
+        [Display(Name = "Do you want to order an event t-shirt?")]
         public bool LeadContactShirtOrder;
 
 
@@ -251,20 +249,21 @@ namespace SNCRegistration.ViewModels.Metadata
         public string LeadContactShirtSize;
 
         [Required]
-        [Display(Name = "Troop/Chapter/Unit")]
+        [Display(Name = "Group Type")]
         public string BSType;
 
         [Required]
         [MinLength(1)]
+        [MaxLength(10)]
         [Display(Name = "Troop/Chapter/Unit #")]
         public string UnitChapterNumber;
 
         [Required]
-        [Display(Name = "Attending")]
+        [Display(Name = " Days Attending")]
         public string VolunteerAttendingCode;
 
         [Required]
-        [Display(Name = "Saturday Dinner?")]
+        [Display(Name = "Are you joining us for Saturday dinner?")]
         public bool SaturdayDinner;
 
 
@@ -314,14 +313,16 @@ namespace SNCRegistration.ViewModels.Metadata
         public string VolunteerShirtSize;
 
         [Required]
-        [Display(Name = "Attending")]
+        [Display(Name = "Days Attending")]
         public string VolunteerAttendingCode;
 
         [Required]
-        [Display(Name = "Saturday Dinner?")]
+        [Display(Name = "Are you joining us for Saturday dinner?")]
         public Nullable<bool> SaturdayDinner;
 
         [Required]
+        [MinLength(1)]
+        [MaxLength(10)]
         [Display(Name = "Troop/Chapter/Unit Number")]
         public string UnitChapterNumber;
 

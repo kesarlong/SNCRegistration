@@ -193,9 +193,13 @@
             <div align="right" style="margin-right:20px;">
                 <input type="submit" value="Save" class="btn btn-primary" /> |
                 @Html.ActionLink("Edit", "Edit", new { id = Model.GuardianID }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Back to Guardian Details", "Details", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
             </div>
-        </p>
+            @if (TempData["notice"] != null)
+                {
+        <p style="color:green;">@TempData["notice"]</p> }
+        
+         </p>
 
 }
         @section Scripts {

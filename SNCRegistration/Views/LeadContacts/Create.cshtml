@@ -295,12 +295,15 @@
                         @Html.HiddenFor(model => model.EventYear, new { @Value = 0 })
                     </div>
                     <hr />
-                    <div class="form-group pull-left">
-                        <input type="submit" value="Add Volunteer" class="btn btn-primary" />
-                    </div>
-
                     <div class="form-group pull-right">
                         <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Dispose" />
+                    </div>
+
+                    <div class="form-group pull-left">
+                        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group pull-left">
+                        <input type="submit" name="submit" id="AddVolunteer" value="Add a volunteer" class="btn btn-primary" />
                     </div>
 }
 

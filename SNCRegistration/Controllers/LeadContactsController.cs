@@ -18,9 +18,11 @@ namespace SNCRegistration.Controllers
 
         // GET: LeadContacts
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
+
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
             if (searchString != null)
@@ -34,7 +36,11 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Guardians select y.EventYear).Distinct();
+
             var leadContacts = from s in db.LeadContacts
+                               where s.EventYear == searchYear
                                select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -57,12 +63,6 @@ namespace SNCRegistration.Controllers
             return View(leadContacts.ToPagedList(pageNumber, pageSize));
 
         }
-
-        // Original Index, delete if nothing broken.
-        //public ActionResult Index()
-        //{
-        //    return View(db.LeadContacts.ToList());
-        //}
 
 
 
@@ -132,7 +132,17 @@ namespace SNCRegistration.Controllers
                     this.Session["leaderEmail"] = leadContact.LeadContactEmail;
                     TempData["myPK"] = leadContact.LeadContactID;
                     TempData.Keep();
-                    return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
+                    if (Request["submit"].Equals("Add a volunteer"))
+                    {
+                        return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
+                    }
+                    if (Request["submit"].Equals("Complete registration"))
+                    //registration complete, no more people to add
+                    {
+                        var email = Session["leaderEmail"] as string;
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is $10.00");
+                        return Redirect("Registered");
+                    }
                 }
                 catch (DbEntityValidationException ex)
                 {

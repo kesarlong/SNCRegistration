@@ -30,7 +30,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.FamilyMemberAge,
-            ViewBag.FamilyMemerAge as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
+            ViewBag.FamilyMemberAge as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
     </div>
 
