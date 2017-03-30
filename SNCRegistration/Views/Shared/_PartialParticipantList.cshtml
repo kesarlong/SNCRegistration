@@ -1,0 +1,13 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.ParticipantsReportModel>
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantLastName)
+        </td>
+    </tr>
+    }
