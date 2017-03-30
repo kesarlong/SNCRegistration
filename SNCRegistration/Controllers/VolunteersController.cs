@@ -89,8 +89,9 @@ namespace SNCRegistration.Controllers
         // GET: Volunteers/Create
         public ActionResult Create()
         {
-            //ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName");
-            //ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName");
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
+            ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             return View();
         }
 
@@ -108,17 +109,22 @@ namespace SNCRegistration.Controllers
                 db.Volunteers.Add(volunteer);
                 var thisYear = DateTime.Now.Year.ToString();
                 volunteer.EventYear = int.Parse(thisYear);
-
+                var fee = 0;
+                volunteer.VolunteerFee = fee;
                 try
                 {
                     db.SaveChanges();
+
                     this.Session["lSession"] = volunteer.LeadContactID;
+                    var totalFee = Session["leaderFee"] as string;
                         if (Request["submit"].Equals("Add an additional volunteer"))
                     { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
 
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
+                        var email = Session["leaderEmail"] as string;
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is $10.00");
                         return Redirect("Registered");
                     }
                 }
@@ -213,7 +219,7 @@ namespace SNCRegistration.Controllers
         }
 
 
-        // GET: Participants/Edit/5
+        // GET: Volunteer/Checkin/5
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
@@ -230,7 +236,7 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
-        // POST: Participants/Edit/5
+        // POST: VolunteerCheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
@@ -245,8 +251,9 @@ namespace SNCRegistration.Controllers
             }
             var volunteer = db.Volunteers.Find(id);
 
+
             if (TryUpdateModel(volunteer, "",
-               new string[] { "VolunteerID", "VolunteerFirstName","VolunteerLastName","VolunteerAge","LeadContactID","VolunteerShirtOrder","VolunteerShirtSize","VolunteerAttendingCode","SaturdayDinner","UnitChapterNumber","CheckedIn", "Comments" }))
+               new string[] { "CheckedIn" }))
             {
                 try
                 {

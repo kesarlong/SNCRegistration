@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.Guardian>
+﻿@*@model IEnumerable<SNCRegistration.ViewModels.Guardian>*@
+@model PagedList.IPagedList<SNCRegistration.ViewModels.Guardian>
 @using PagedList.Mvc;
 
 
@@ -14,29 +15,37 @@
 @using (Html.BeginForm("Index", "Guardians", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Find by name: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)  &nbsp;&nbsp;  | &nbsp;&nbsp; 
+        Event year: @Html.DropDownList("searchYear", new SelectList(ViewBag.AllYears, ViewBag.CurrentYear))
         <input type="submit" value="Search" />
     </p>
 
+
 }
 
+<br />
 
+<h3>Results</h3>
 <table class="table table-condensed table-striped">
+
     <tr>
+        <th>
+            Year Enrolled
+        </th>
         <th>
             @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GuardianFirstName)
+            First Name
+        </th>
+        <th >
+            Health Form?
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HealthForm)
+            Photo Acknowledgement
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhotoAck)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckedIn)
+            Checked In?
         </th>        
 
         <th>
@@ -46,19 +55,22 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.EventYear)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.GuardianLastName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GuardianFirstName)
         </td>
-        <td>
+        <td align="center">
             @Html.DisplayFor(modelItem => item.HealthForm)
         </td>
-        <td>
+        <td align="center">
             @Html.DisplayFor(modelItem => item.PhotoAck)
         </td>
-        <td>
+        <td align="center">
             @Html.DisplayFor(modelItem => item.CheckedIn)
         </td>
 
@@ -69,6 +81,10 @@
 
 </table>
 
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort }))
 
 @*
     Original Tables for Index. Delete if nothing broken.

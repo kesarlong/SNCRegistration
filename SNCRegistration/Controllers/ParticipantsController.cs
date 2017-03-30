@@ -20,9 +20,10 @@ namespace SNCRegistration.Controllers
 
         // GET: Participants. For the Index
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
             if (searchString != null)
@@ -36,8 +37,12 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Participants select y.EventYear).Distinct();
+
             var participants = from s in db.Participants
-                           select s;
+                               where s.EventYear == searchYear
+                               select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -85,41 +90,58 @@ namespace SNCRegistration.Controllers
         {
 
             // Original delete if nothing is broken
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Participant participant = db.Participants.Find(id);
+            //if (participant == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(participant);
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Participant participant = db.Participants.Find(id);
-            if (participant == null)
+
+            var model = new GuardianParticipantFamily();
+
+            model.participant = db.Participants.Find(id);
+            model.relatedparticipants = db.Participants.Where(i => i.GuardianID == model.participant.GuardianID && i.ParticipantID != id);
+            model.guardians = db.Guardians.Where(i => i.GuardianID == model.participant.GuardianID);
+            //model.guardian = db.Guardians.Find(model.participant.GuardianID);
+            model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == model.participant.GuardianID);
+
+
+
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(participant);
 
+            return View(model);
 
         }
 
         // GET: Participants/Create
         public ActionResult Create() 
         {
-
+            ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
             return View();
         }
 
-        //public ActionResult Cancel([Bind(Include = "GuardianGuid"),]Participant participant)
-        //{
-                
-        //        return RedirectToAction("Edit", "Guardians", new { GuardianGuid = participant.GuardianGuid });
-
-        //}
-
+    
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
-            ] Participant participant,string submit)
+            ] Participant participant, string submit)
         {
 
 
@@ -128,6 +150,7 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    TempData.Keep();
                 }
 
 
@@ -143,39 +166,55 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
+                    this.Session["gSession"] = participant.GuardianGuid;
+
                     if (Request["submit"].Equals("Add another participant"))
                     //add another participant for guardian
-                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid }); }
+                    { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid}); }
 
 
                     if (Request["submit"].Equals("Add a family member"))
                     //add a family member
                     { return RedirectToAction("Create", "FamilyMembers", new { GuardianGuid = participant.GuardianGuid }); }
 
+                    if(Request["submit"].Equals("Cancel"))
+                    { return RedirectToAction("Redirect", new { GuardianGuid = participant.GuardianGuid }); }
+
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
-                    { return RedirectToAction("Registered"); }
-
-
-
-
+                    {
+                        var email = Session["pEmail"] as string;
+                        //to do: remove password
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!");
+                        return Redirect("Registered");
+                    }
+        
                 }
                 catch (DbEntityValidationException ex)
+                //{
+                //    //retrieve the error message as a list of strings
+                //    var errorMessages = ex.EntityValidationErrors
+                //        .SelectMany(x => x.ValidationErrors)
+                //        .Select(x => x.ErrorMessage);
+
+                //    //Join the list to a single string
+                //    var fullErrorMessage = string.Join(" ,", errorMessages);
+
+                //    //Combine the original exception message wtih the new one
+                //    var exceptionMessage = string.Concat(ex.Message, "The validation errors are: ", fullErrorMessage);
                 {
-                    //retrieve the error message as a list of strings
-                    var errorMessages = ex.EntityValidationErrors
-                        .SelectMany(x => x.ValidationErrors)
-                        .Select(x => x.ErrorMessage);
-
-                    //Join the list to a single string
-                    var fullErrorMessage = string.Join(" ,", errorMessages);
-
-                    //Combine the original exception message wtih the new one
-                    var exceptionMessage = string.Concat(ex.Message, "The validation errors are: ", fullErrorMessage);
-
-                    // Throw a new DbEntityValidationException with the improved exception message.
-                    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
                 }
+                //    // Throw a new DbEntityValidationException with the improved exception message.
+                //    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                //}
+
 
             }
                 return View(participant);
@@ -220,8 +259,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
+                    TempData["notice"] = "Edits Saved.";
+                    // return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -271,8 +310,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
+                    TempData["notice"] = "Check In Status Saved!";
 
-                    return RedirectToAction("Details","Guardians", new { id = participant.GuardianID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -350,7 +389,14 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    
                 }
+
+                //pass the guardianID to child form as FK                    
+                TempData["myPK"] = participant.GuardianID;
+                TempData.Keep();
+
+                
 
 
                 //store year of event
@@ -358,6 +404,8 @@ namespace SNCRegistration.Controllers
                 participant.EventYear = int.Parse(thisYear);
 
             }
+
+
                 return View();
 
         }

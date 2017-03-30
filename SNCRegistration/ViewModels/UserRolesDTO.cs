@@ -5,12 +5,16 @@ using System.ComponentModel.DataAnnotations;
 namespace SNCRegistration.ViewModels {
     public class ExpandedUserDTO {
         [Key]
+        [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long and no longer than {1} characters maximum.", MinimumLength = 4)]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be at maximum {2} characters long.")]
         public string Email { get; set; }
         [DataType(DataType.Password)]
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required (ErrorMessage = "Password must be at least 6 characters, contain one upper case, one lower case, and one numerical digit.")]
         public string Password { get; set; }
         [Display(Name = "Lockout End Date Utc")]
         public DateTime? LockoutEndDateUtc { get; set; }

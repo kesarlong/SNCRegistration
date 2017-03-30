@@ -1,4 +1,7 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.LeadContact>
+﻿@*@model IEnumerable<SNCRegistration.ViewModels.LeadContact>*@
+@model PagedList.IPagedList<SNCRegistration.ViewModels.LeadContact>
+@using PagedList.Mvc;
+
 
 @{
     ViewBag.Title = "Lead Contact List";
@@ -14,7 +17,8 @@
 @using (Html.BeginForm("Index", "LeadContacts", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) &nbsp;&nbsp;  | &nbsp;&nbsp;
+        Event year: @Html.DropDownList("searchYear", new SelectList(ViewBag.AllYears, ViewBag.CurrentYear))
         <input type="submit" value="Search" />
     </p>
 
@@ -26,19 +30,19 @@
             @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LeadContactFirstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BSType)
+            Troop/Chapter/Unit Type
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+            Troop/Chapter/Unit Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Booth)
+            Booth Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CheckedIn)
+            Checked In?
         </th>
         <th></th>
     </tr>
@@ -81,3 +85,8 @@
 }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort }))

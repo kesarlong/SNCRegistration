@@ -9,7 +9,7 @@ namespace SNCRegistration.ViewModels.Metadata
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-          public int GuardianID;
+        public int GuardianID;
 
         [Required]
         [MaxLength(50)]
@@ -17,6 +17,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string GuardianFirstName;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "Last Name")]
         public string GuardianLastName;
 
@@ -25,7 +26,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string GuardianAddress;
 
         [MaxLength(50)]
-        [Display(Name ="City")]
+        [Display(Name = "City")]
         public string GuardianCity;
 
         [Display(Name = "State")]
@@ -33,20 +34,21 @@ namespace SNCRegistration.ViewModels.Metadata
         public string GuardianState;
 
         [MaxLength(10)]
+        [MinLength(5)]
         [Display(Name = "Zip")]
         public int GuardianZip;
 
         [Phone]
         [MaxLength(10)]
         [MinLength(10)]
+        [Required]
         [Display(Name = "Cell Phone")]
         public string GuardianCellPhone;
 
 
-
-        //TO DO: is 50 characters sufficient for length - Erika review
         [MaxLength(50)]
-        [Display(Name="Email Address")]
+        [Required]
+        [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public string GuardianEmail;
 
@@ -59,11 +61,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public Nullable<System.DateTime> ReceiptDate;
 
 
-        [Display(Name="Health Form Received")]
+        [Display(Name = "Health Form")]
         public Nullable<bool> HealthForm;
 
 
-        [Display(Name = "Photo Ack Received")]
+        [Display(Name = "Photo Acknowledgment")]
         public Nullable<bool> PhotoAck;
 
         [Required]
@@ -74,15 +76,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Attending")]
         public int AttendingCode;
 
-        [MaxLength(50)]
-        
-        //TO DO: this needs to be a larger field
-        [Display(Name = "Comments")]
-        public string Comments;
-
         [Required]
         [Display(Name = "Relationship")]
-        public string Relationship;
+        public int Relationship;
 
         [Required]
         public string EventYear;
@@ -90,6 +86,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Checked In?")]
         public bool? CheckedIn;
 
+        [MaxLength(200)]
+        [Display(Name = "Comments")]
+        public string Comments;
     }
 
     public class Participant_Metadata
@@ -142,6 +141,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Returning")]
         public bool? Returning;
 
+        [Display(Name = "Comments")]
+        [MaxLength(200)]
+        public string Comments;
 
         [Required]
         public string EventYear;
@@ -156,34 +158,33 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [Required]
         [MaxLength(50)]
-        [Display(Name="First Name")]
+        [Display(Name = "First Name")]
         public string FamilyMemberFirstName;
 
         [Required]
         [MaxLength(50)]
-        [Display(Name="Last Name")]
+        [Display(Name = "Last Name")]
         public string FamilyMemberLastName;
 
 
         [Display(Name = "Health Form")]
         public Nullable<bool> HealthForm;
 
-        [Display(Name="Photo Ack")]
+        [Display(Name = "Photo Acknowledgment")]
         public Nullable<bool> PhotoAck;
 
         [Required]
-        [Display(Name="Attendance")]
+        [Display(Name = "Attendance")]
         public string AttendingCode;
 
-        [MaxLength(50)]
-        //to do: this needs to be a larger field
-        [Display(Name="Comments")]
+        [MaxLength(200)]
+        [Display(Name = "Comments")]
         public string Comments;
 
         [Required]
-        [Display(Name="Age")]
+        [Display(Name = "Age")]
         public int FamilyMemberAge;
-        
+
         [Required]
         public string EventYear;
 
@@ -199,17 +200,22 @@ namespace SNCRegistration.ViewModels.Metadata
         public int LeadContactID;
 
         [Required]
+        [MinLength(2)]
         [Display(Name = "First Name")]
         public string LeadContactFirstName;
 
         [Required]
+        [MinLength(2)]
         [Display(Name = "Last Name")]
         public string LeadContactLastName;
 
-
+        [Required]
+        [MinLength(2)]
         [Display(Name = "Street Address")]
         public string LeadContactAddress;
 
+        [Required]
+        [MinLength(2)]
         [Display(Name = "City")]
         public string LeadContactCity;
 
@@ -217,54 +223,59 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "State")]
         public string LeadContactState;
 
-
+        [Required]
+        [RegularExpression(@"^(?!00000)[0-9]{5,5}$", ErrorMessage = "Zip Code should be five numbers long")]
         [Display(Name = "Zip Code")]
-        public string LeadContactZip ;
-
-
-        [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
-        public string LeadContactCellPhone ;
-
-
-        [Display(Name = "Email Address")]
-        [DataType(DataType.EmailAddress)]
-        public string LeadContactEmail ;
+        public string LeadContactZip;
 
         [Required]
-        [Display(Name = "T-Shirt Order")]
-        public bool LeadContactShirtOrder ;
+        [RegularExpression(@"^(?!0000000000)[0-9]{10,10}$", ErrorMessage = "Phone number should be ten numbers long")]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string LeadContactCellPhone;
+
+        [Required]
+        [MinLength(7)]
+        [Display(Name = "Email Address")]
+        [DataType(DataType.EmailAddress)]
+        public string LeadContactEmail;
+
+        [Required]
+        [Display(Name = "Do you want to order an event t-shirt?")]
+        public bool LeadContactShirtOrder;
 
 
         [Display(Name = "T-Shirt Size")]
-        public string LeadContactShirtSize ;
+        public string LeadContactShirtSize;
 
         [Required]
-        [Display(Name = "Troop/Chapter/Unit")]
-        public string BSType ;
+        [Display(Name = "Group Type")]
+        public string BSType;
 
         [Required]
+        [MinLength(1)]
+        [MaxLength(10)]
         [Display(Name = "Troop/Chapter/Unit #")]
-        public string UnitChapterNumber ;
-        
-        [Required]
-        [Display(Name = "Attending")]
-        public string VolunteerAttendingCode ;
+        public string UnitChapterNumber;
 
         [Required]
-        [Display(Name = "Saturday Dinner?")]
-        public bool SaturdayDinner ;
+        [Display(Name = " Days Attending")]
+        public string VolunteerAttendingCode;
+
+        [Required]
+        [Display(Name = "Are you joining us for Saturday dinner?")]
+        public bool SaturdayDinner;
 
 
         [Display(Name = "Booth Name")]
-        public string Booth ;
+        public string Booth;
 
         [MaxLength(50)]
         [Display(Name = "Comments")]
-        public string Comments ;
+        public string Comments;
 
 
-        public Decimal TotalFee ;
+        public Decimal TotalFee;
 
 
         [Required]
@@ -274,56 +285,63 @@ namespace SNCRegistration.ViewModels.Metadata
         public bool? CheckedIn;
 
     }
-        public class Volunteer_Metadata
-        {
+    public class Volunteer_Metadata
+    {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VolunteerID ;
+        public int VolunteerID;
 
         [Required]
+        [MinLength(2)]
         [Display(Name = "First Name")]
-        public string VolunteerFirstName ;
+        public string VolunteerFirstName;
 
         [Required]
+        [MinLength(2)]
         [Display(Name = "Last Name")]
-        public string VolunteerLastName ;
+        public string VolunteerLastName;
 
         [Required]
         [Display(Name = "Age")]
-        public string VolunteerAge ;
+        public string VolunteerAge;
 
         [Required]
         [Display(Name = "T-Shirt Order")]
-        public Nullable<bool> VolunteerShirtOrder ;
+        public Nullable<bool> VolunteerShirtOrder;
 
         [Display(Name = "T-Shirt Size")]
-        public string VolunteerShirtSize ;
+        public string VolunteerShirtSize;
 
         [Required]
-        [Display(Name = "Attending")]
-        public string VolunteerAttendingCode ;
+        [Display(Name = "Days Attending")]
+        public string VolunteerAttendingCode;
 
         [Required]
-        [Display(Name = "Saturday Dinner?")]
-        public Nullable<bool> SaturdayDinner ;
+        [Display(Name = "Are you joining us for Saturday dinner?")]
+        public Nullable<bool> SaturdayDinner;
 
         [Required]
+        [MinLength(1)]
+        [MaxLength(10)]
         [Display(Name = "Troop/Chapter/Unit Number")]
-        public string UnitChapterNumber ;
+        public string UnitChapterNumber;
 
         [MaxLength(50)]
         [Display(Name = "Comments")]
-        public string Comments ;
+        public string Comments;
 
-        public Nullable<int> LeadContactID ;
+        public Nullable<int> LeadContactID;
 
 
         [Required]
         public string EventYear;
+
+        [Display(Name = "Checked In?")]
+        public bool? CheckedIn;
 
         //Messing things up with LeadContact/Details
         //[Display(Name = "Number of people in tent")]
         //public int NumberInTent;
     }
 
-    }
+}
