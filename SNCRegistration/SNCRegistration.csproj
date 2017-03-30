@@ -3475,6 +3475,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
+    <Folder Include="Views\Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

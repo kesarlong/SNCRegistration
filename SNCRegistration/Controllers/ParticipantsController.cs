@@ -112,10 +112,11 @@ namespace SNCRegistration.Controllers
             model.participant = db.Participants.Find(id);
             model.relatedparticipants = db.Participants.Where(i => i.GuardianID == model.participant.GuardianID && i.ParticipantID != id);
             model.guardians = db.Guardians.Where(i => i.GuardianID == model.participant.GuardianID);
-            //model.guardian = db.Guardians.Find(model.participant.GuardianID);
             model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == model.participant.GuardianID);
 
+            ViewBag.Age = db.Ages.SelectMany(model.participant.ParticipantAge, "AgeDescription");
 
+   //             string.Equals(db.Ages, "AgeID", "AgeDescription");
 
             if (model == null)
             {
@@ -235,9 +236,7 @@ namespace SNCRegistration.Controllers
 
             Participant participant = db.Participants.Find(id);
 
-            ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription", participant.ParticipantAge);
-            ViewBag.SelectedParticipantAge = participant.ParticipantAge;
-
+            SetAgeAttendanceViewBag(participant.ParticipantAge, participant.AttendingCode);
 
             if (participant == null)
             {
@@ -277,6 +276,9 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+
+            SetAgeAttendanceViewBag(participant.ParticipantAge, participant.AttendingCode);
+
             return View(participant);
 
 
@@ -430,6 +432,29 @@ namespace SNCRegistration.Controllers
                 return View();
 
         }
+
+
+        private void SetAgeAttendanceViewBag(int? age = null, int? attendance = null)
+        {
+
+            if (age == null)
+            {
+                ViewBag.AgeID = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            }
+            else
+                ViewBag.AgeID = new SelectList(db.Ages.ToArray(), "AgeID", "AgeDescription", age);
+
+            if (attendance == null)
+            {
+                ViewBag.AttendanceID = new SelectList(db.Attendances, "AttendanceID", "Description");
+            }
+            else
+                ViewBag.AttendanceID = new SelectList(db.Attendances.Where( i => i.Participant == true), "AttendanceID", "Description", attendance);
+
+
+
+        }
+
 
     }
 }
