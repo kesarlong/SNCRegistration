@@ -91,21 +91,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="BSTypeID" Type="int" Nullable="false" />
           <Property Name="BSTypeDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="ChapterTroopUnit">
-          <Key>
-            <PropertyRef Name="ChapterTroopUnitID" />
-          </Key>
-          <Property Name="ChapterTroopUnitID" Type="int" Nullable="false" />
-          <Property Name="ChapterTroopUnitDescription" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="EventYear" />
-          </Key>
-          <Property Name="EventYear" Type="int" Nullable="false" />
-          <Property Name="Enrollment" Type="bit" Nullable="false" />
-          <Property Name="Reporting" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="FamilyMembers">
           <Key>
             <PropertyRef Name="FamilyMemberID" />
@@ -240,18 +225,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="EventYear" Type="int" Nullable="false" />
           <Property Name="VolunteerFee" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__FamilyMem__Event__55009F39">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="FamilyMembers">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__FamilyMem__Famil__40F9A68C">
           <End Role="Age" Type="Self.Age" Multiplicity="1" />
           <End Role="FamilyMembers" Type="Self.FamilyMembers" Multiplicity="*" />
@@ -264,42 +237,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Guardians__Event__55F4C372">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="Guardians" Type="Self.Guardians" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="Guardians">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LeadConta__Event__58D1301D">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="LeadContacts">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Participa__Event__56E8E7AB">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="Participants">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Participa__Parti__41EDCAC5">
           <End Role="Age" Type="Self.Age" Multiplicity="1" />
           <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
@@ -309,18 +246,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             </Principal>
             <Dependent Role="Participants">
               <PropertyRef Name="ParticipantAge" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Volunteer__Event__57DD0BE4">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="Volunteers">
-              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -397,8 +322,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BSType" EntityType="Self.BSType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChapterTroopUnit" EntityType="Self.ChapterTroopUnit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guardians" EntityType="Self.Guardians" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadContacts" EntityType="Self.LeadContacts" Schema="dbo" store:Type="Tables" />
@@ -414,33 +337,13 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
     [AspNetUserLogins].[UserId] AS [UserId]
     FROM [dbo].[AspNetUserLogins] AS [AspNetUserLogins]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__FamilyMem__Event__55009F39" Association="Self.FK__FamilyMem__Event__55009F39">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="FamilyMembers" EntitySet="FamilyMembers" />
-          </AssociationSet>
           <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="Self.FK__FamilyMem__Famil__40F9A68C">
             <End Role="Age" EntitySet="Age" />
             <End Role="FamilyMembers" EntitySet="FamilyMembers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Event__55F4C372" Association="Self.FK__Guardians__Event__55F4C372">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Guardians" EntitySet="Guardians" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__Event__58D1301D" Association="Self.FK__LeadConta__Event__58D1301D">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="LeadContacts" EntitySet="LeadContacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Participa__Event__56E8E7AB" Association="Self.FK__Participa__Event__56E8E7AB">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Participants" EntitySet="Participants" />
-          </AssociationSet>
           <AssociationSet Name="FK__Participa__Parti__41EDCAC5" Association="Self.FK__Participa__Parti__41EDCAC5">
             <End Role="Age" EntitySet="Age" />
             <End Role="Participants" EntitySet="Participants" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Event__57DD0BE4" Association="Self.FK__Volunteer__Event__57DD0BE4">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Volunteers" EntitySet="Volunteers" />
           </AssociationSet>
           <AssociationSet Name="FK__Volunteer__Volun__3E1D39E1" Association="Self.FK__Volunteer__Volun__3E1D39E1">
             <End Role="Age" EntitySet="Age" />
@@ -498,8 +401,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="AspNetUserClaims" EntityType="SNCRegistrationModel.AspNetUserClaim" />
           <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
           <EntitySet Name="BSTypes" EntityType="SNCRegistrationModel.BSType" />
-          <EntitySet Name="ChapterTroopUnits" EntityType="SNCRegistrationModel.ChapterTroopUnit" />
-          <EntitySet Name="Events" EntityType="SNCRegistrationModel.Event" />
           <EntitySet Name="FamilyMembers" EntityType="SNCRegistrationModel.FamilyMember" />
           <EntitySet Name="Guardians" EntityType="SNCRegistrationModel.Guardian" />
           <EntitySet Name="LeadContacts" EntityType="SNCRegistrationModel.LeadContact" />
@@ -519,26 +420,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           </AssociationSet>
           <AssociationSet Name="FK__Volunteer__Volun__3E1D39E1" Association="SNCRegistrationModel.FK__Volunteer__Volun__3E1D39E1">
             <End Role="Age" EntitySet="Ages" />
-            <End Role="Volunteer" EntitySet="Volunteers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__FamilyMem__Event__55009F39" Association="SNCRegistrationModel.FK__FamilyMem__Event__55009F39">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="FamilyMember" EntitySet="FamilyMembers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Guardians__Event__55F4C372" Association="SNCRegistrationModel.FK__Guardians__Event__55F4C372">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="Guardian" EntitySet="Guardians" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LeadConta__Event__58D1301D" Association="SNCRegistrationModel.FK__LeadConta__Event__58D1301D">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="LeadContact" EntitySet="LeadContacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Participa__Event__56E8E7AB" Association="SNCRegistrationModel.FK__Participa__Event__56E8E7AB">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="Participant" EntitySet="Participants" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Event__57DD0BE4" Association="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4">
-            <End Role="Event" EntitySet="Events" />
             <End Role="Volunteer" EntitySet="Volunteers" />
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMembers" Association="SNCRegistrationModel.FK_FamilyMembers">
@@ -625,26 +506,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="BSTypeID" Type="Int32" Nullable="false" />
           <Property Name="BSTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="ChapterTroopUnit">
-          <Key>
-            <PropertyRef Name="ChapterTroopUnitID" />
-          </Key>
-          <Property Name="ChapterTroopUnitID" Type="Int32" Nullable="false" />
-          <Property Name="ChapterTroopUnitDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="EventYear" />
-          </Key>
-          <Property Name="EventYear" Type="Int32" Nullable="false" />
-          <Property Name="Enrollment" Type="Boolean" Nullable="false" />
-          <Property Name="Reporting" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK__FamilyMem__Event__55009F39" FromRole="Event" ToRole="FamilyMember" />
-          <NavigationProperty Name="Guardians" Relationship="SNCRegistrationModel.FK__Guardians__Event__55F4C372" FromRole="Event" ToRole="Guardian" />
-          <NavigationProperty Name="LeadContacts" Relationship="SNCRegistrationModel.FK__LeadConta__Event__58D1301D" FromRole="Event" ToRole="LeadContact" />
-          <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK__Participa__Event__56E8E7AB" FromRole="Event" ToRole="Participant" />
-          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4" FromRole="Event" ToRole="Volunteer" />
-        </EntityType>
         <EntityType Name="FamilyMember">
           <Key>
             <PropertyRef Name="FamilyMemberID" />
@@ -662,7 +523,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C" FromRole="FamilyMember" ToRole="Age" />
-          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__FamilyMem__Event__55009F39" FromRole="FamilyMember" ToRole="Event" />
           <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="FamilyMember" ToRole="Guardian" />
         </EntityType>
         <EntityType Name="Guardian">
@@ -691,7 +551,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <Property Name="NumberInTent" Type="Int32" />
-          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Guardians__Event__55F4C372" FromRole="Guardian" ToRole="Event" />
           <NavigationProperty Name="FamilyMembers" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="Guardian" ToRole="FamilyMember" />
           <NavigationProperty Name="Participants" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Guardian" ToRole="Participant" />
         </EntityType>
@@ -721,7 +580,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <Property Name="Marketing" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__LeadConta__Event__58D1301D" FromRole="LeadContact" ToRole="Event" />
         </EntityType>
         <EntityType Name="Participant">
           <Key>
@@ -744,7 +602,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Participa__Parti__41EDCAC5" FromRole="Participant" ToRole="Age" />
-          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Participa__Event__56E8E7AB" FromRole="Participant" ToRole="Event" />
           <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_Participants" FromRole="Participant" ToRole="Guardian" />
         </EntityType>
         <EntityType Name="Relationship">
@@ -789,7 +646,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <Property Name="VolunteerFee" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__Volunteer__Volun__3E1D39E1" FromRole="Volunteer" ToRole="Age" />
-          <NavigationProperty Name="Event" Relationship="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4" FromRole="Volunteer" ToRole="Event" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -834,66 +690,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             </Principal>
             <Dependent Role="Volunteer">
               <PropertyRef Name="VolunteerAge" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__FamilyMem__Event__55009F39">
-          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.FamilyMember" Role="FamilyMember" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="FamilyMember">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Guardians__Event__55F4C372">
-          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.Guardian" Role="Guardian" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="Guardian">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LeadConta__Event__58D1301D">
-          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="LeadContact">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Participa__Event__56E8E7AB">
-          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.Participant" Role="Participant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="Participant">
-              <PropertyRef Name="EventYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Volunteer__Event__57DD0BE4">
-          <End Type="SNCRegistrationModel.Event" Role="Event" Multiplicity="1" />
-          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="EventYear" />
-            </Principal>
-            <Dependent Role="Volunteer">
-              <PropertyRef Name="EventYear" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1025,23 +821,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
               <MappingFragment StoreEntitySet="BSType">
                 <ScalarProperty Name="BSTypeDescription" ColumnName="BSTypeDescription" />
                 <ScalarProperty Name="BSTypeID" ColumnName="BSTypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChapterTroopUnits">
-            <EntityTypeMapping TypeName="SNCRegistrationModel.ChapterTroopUnit">
-              <MappingFragment StoreEntitySet="ChapterTroopUnit">
-                <ScalarProperty Name="ChapterTroopUnitDescription" ColumnName="ChapterTroopUnitDescription" />
-                <ScalarProperty Name="ChapterTroopUnitID" ColumnName="ChapterTroopUnitID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="SNCRegistrationModel.Event">
-              <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="Reporting" ColumnName="Reporting" />
-                <ScalarProperty Name="Enrollment" ColumnName="Enrollment" />
-                <ScalarProperty Name="EventYear" ColumnName="EventYear" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
