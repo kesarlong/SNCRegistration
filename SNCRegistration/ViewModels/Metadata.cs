@@ -17,6 +17,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string GuardianFirstName;
 
         [Required]
+        [MaxLength(50)]
         [Display(Name = "Last Name")]
         public string GuardianLastName;
 
@@ -33,19 +34,20 @@ namespace SNCRegistration.ViewModels.Metadata
         public string GuardianState;
 
         [MaxLength(10)]
+        [MinLength(5)]
         [Display(Name = "Zip")]
         public int GuardianZip;
 
         [Phone]
         [MaxLength(10)]
         [MinLength(10)]
+        [Required]
         [Display(Name = "Cell Phone")]
         public string GuardianCellPhone;
 
 
-
-        //TO DO: is 50 characters sufficient for length - Erika review
         [MaxLength(50)]
+        [Required]
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public string GuardianEmail;
@@ -74,15 +76,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Attending")]
         public int AttendingCode;
 
-        [MaxLength(50)]
-
-        //TO DO: this needs to be a larger field
-        [Display(Name = "Comments")]
-        public string Comments;
-
         [Required]
         [Display(Name = "Relationship")]
-        public string Relationship;
+        public int Relationship;
 
         [Required]
         public string EventYear;
@@ -90,6 +86,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Checked In?")]
         public bool? CheckedIn;
 
+        [MaxLength(200)]
+        [Display(Name = "Comments")]
+        public string Comments;
     }
 
     public class Participant_Metadata
@@ -142,6 +141,9 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Returning")]
         public bool? Returning;
 
+        [Display(Name = "Comments")]
+        [MaxLength(200)]
+        public string Comments;
 
         [Required]
         public string EventYear;
@@ -175,8 +177,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Attendance")]
         public string AttendingCode;
 
-        [MaxLength(50)]
-        //to do: this needs to be a larger field
+        [MaxLength(200)]
         [Display(Name = "Comments")]
         public string Comments;
 
