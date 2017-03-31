@@ -31,6 +31,5 @@ namespace SNCRegistration.ViewModels
         public int VolunteerFee { get; set; }
     
         public virtual Age Age { get; set; }
-        public virtual Event Event { get; set; }
     }
 }

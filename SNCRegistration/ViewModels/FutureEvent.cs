@@ -12,9 +12,11 @@ namespace SNCRegistration.ViewModels
     using System;
     using System.Collections.Generic;
     
-    public partial class ChapterTroopUnit
+    public partial class FutureEvent
     {
-        public int ChapterTroopUnitID { get; set; }
-        public string ChapterTroopUnitDescription { get; set; }
+        public int FutureID { get; set; }
+        public int LeadContactID { get; set; }
+    
+        public virtual LeadContact LeadContact { get; set; }
     }
 }

@@ -32,7 +32,6 @@ namespace SNCRegistration.ViewModels
         public int EventYear { get; set; }
     
         public virtual Age Age { get; set; }
-        public virtual Event Event { get; set; }
         public virtual Guardian Guardian { get; set; }
     }
 }

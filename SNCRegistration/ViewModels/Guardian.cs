@@ -31,9 +31,6 @@ namespace SNCRegistration.ViewModels
         public string GuardianZip { get; set; }
         public string GuardianCellPhone { get; set; }
         public string GuardianEmail { get; set; }
-        public Nullable<System.DateTime> PacketSentDate { get; set; }
-        public Nullable<System.DateTime> ReceiptDate { get; set; }
-        public Nullable<System.DateTime> ConfirmationSentDate { get; set; }
         public Nullable<bool> HealthForm { get; set; }
         public Nullable<bool> PhotoAck { get; set; }
         public Nullable<bool> Tent { get; set; }
@@ -44,7 +41,6 @@ namespace SNCRegistration.ViewModels
         public int EventYear { get; set; }
         public Nullable<int> NumberInTent { get; set; }
     
-        public virtual Event Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMember> FamilyMembers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
