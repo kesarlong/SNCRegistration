@@ -1,0 +1,19 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.BoothCountModel>
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Booth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeadContactLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitChapterNumber)
+        </td>
+    </tr>
+    }

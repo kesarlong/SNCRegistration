@@ -49,12 +49,6 @@ public partial class Guardian
 
     public string GuardianEmail { get; set; }
 
-    public Nullable<System.DateTime> PacketSentDate { get; set; }
-
-    public Nullable<System.DateTime> ReceiptDate { get; set; }
-
-    public Nullable<System.DateTime> ConfirmationSentDate { get; set; }
-
     public Nullable<bool> HealthForm { get; set; }
 
     public Nullable<bool> PhotoAck { get; set; }
