@@ -13,13 +13,12 @@ using PagedList;
 
 namespace SNCRegistration.Controllers
 {
-
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
     public class ParticipantsController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: Participants. For the Index
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -85,7 +84,6 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Details/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
 
@@ -112,10 +110,10 @@ namespace SNCRegistration.Controllers
             model.participant = db.Participants.Find(id);
             model.relatedparticipants = db.Participants.Where(i => i.GuardianID == model.participant.GuardianID && i.ParticipantID != id);
             model.guardians = db.Guardians.Where(i => i.GuardianID == model.participant.GuardianID);
-            //model.guardian = db.Guardians.Find(model.participant.GuardianID);
             model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == model.participant.GuardianID);
 
 
+   //             string.Equals(db.Ages, "AgeID", "AgeDescription");
 
             if (model == null)
             {
@@ -127,6 +125,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/Create
+        [OverrideAuthorization]
         public ActionResult Create() 
         {
             ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
@@ -134,10 +133,11 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
-    
+
         // POST: Participants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
@@ -222,14 +222,22 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/Edit/5
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+
             Participant participant = db.Participants.Find(id);
+
+            SetAgeAttendanceViewBag(participant.ParticipantAge, participant.AttendingCode);
+
             if (participant == null)
             {
                 return HttpNotFound();
@@ -242,6 +250,7 @@ namespace SNCRegistration.Controllers
         // POST: Participants/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
@@ -268,13 +277,15 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+
+            SetAgeAttendanceViewBag(participant.ParticipantAge, participant.AttendingCode);
+
             return View(participant);
 
 
         }
 
         // GET: Participants/CheckIn/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
             if (id == null)
@@ -292,8 +303,6 @@ namespace SNCRegistration.Controllers
         // POST: Participants/CheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
         public ActionResult CheckInPost(int? id)
@@ -304,27 +313,41 @@ namespace SNCRegistration.Controllers
             }
             var participant = db.Participants.Find(id);
 
-            if (TryUpdateModel(participant, "",
-               new string[] {"CheckedIn"}))
-            {
-                try
-                {
-                    db.SaveChanges();
-                    TempData["notice"] = "Check In Status Saved!";
 
-                }
-                catch (DataException /* dex */)
+
+            if (participant.HealthForm.Value == false)
+            {
+                ModelState.AddModelError("", "Health Form must be received before check in.");
+            }
+            else
+            {
+                if (TryUpdateModel(participant, "",
+                    new string[] { "CheckedIn" }))
                 {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    try
+                    {
+                        db.SaveChanges();
+                        TempData["notice"] = "Check In Status Saved!";
+
+                    }
+                    catch (DataException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    }
                 }
             }
+
+            
+
             return View(participant);
 
 
         }
 
         // GET: Participants/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -340,6 +363,8 @@ namespace SNCRegistration.Controllers
         }
 
         // POST: Participants/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -375,6 +400,8 @@ namespace SNCRegistration.Controllers
             base.Dispose(disposing);
         }
 
+
+        [OverrideAuthorization]
         public ActionResult Registered()
         {
             return View();
@@ -409,6 +436,29 @@ namespace SNCRegistration.Controllers
                 return View();
 
         }
+
+
+        private void SetAgeAttendanceViewBag(int? age = null, int? attendance = null)
+        {
+
+            if (age == null)
+            {
+                ViewBag.AgeID = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            }
+            else
+                ViewBag.AgeID = new SelectList(db.Ages.ToArray(), "AgeID", "AgeDescription", age);
+
+            if (attendance == null)
+            {
+                ViewBag.AttendanceID = new SelectList(db.Attendances, "AttendanceID", "Description");
+            }
+            else
+                ViewBag.AttendanceID = new SelectList(db.Attendances.Where( i => i.Participant == true), "AttendanceID", "Description", attendance);
+
+
+
+        }
+
 
     }
 }

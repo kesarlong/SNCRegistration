@@ -36,7 +36,30 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.participant.ParticipantAge)
+            @if (Model.participant.ParticipantAge == 1)
+            {
+                <p>Under 6</p>
+            }
+            else if (Model.participant.AttendingCode == 2)
+            {
+                <p>7-10</p>
+            }
+            else if (Model.participant.AttendingCode == 3)
+            {
+                <p>11-13</p>
+            }
+            else if (Model.participant.AttendingCode == 4)
+            {
+                <p>14-17</p>
+            }
+            else if (Model.participant.AttendingCode == 5)
+            {
+                <p>18-20</p>
+            }
+            else if (Model.participant.AttendingCode == 6)
+            {
+                <p>Over 21</p>
+            }
         </dd>
 
         <dt>
