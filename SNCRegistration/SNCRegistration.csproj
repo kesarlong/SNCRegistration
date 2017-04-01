@@ -345,14 +345,8 @@
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ChapterTroopUnit.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\CompletedRegistrationModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\Event.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FamilyFriendsReport.cs" />
@@ -360,6 +354,9 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FirstTimeAttendeeModel.cs" />
+    <Compile Include="ViewModels\FutureEvent.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
