@@ -146,7 +146,7 @@ namespace SNCRegistration.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianState,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship,GuardianGuid,NumberInTent,CheckedIn")] Guardian guardian)
+		public ActionResult Create([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianState,GuardianZip,GuardianCellPhone,GuardianEmail,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship,GuardianGuid,NumberInTent,CheckedIn")] Guardian guardian)
 		{
 			if (ModelState.IsValid)
 				
@@ -230,25 +230,6 @@ namespace SNCRegistration.Controllers
 			return File(path, MediaTypeNames.Application.Pdf);
 		}
 
-		// Original Edit, delete these comments if nothing is broken
-		// POST: Guardians/Edit/5
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public ActionResult Edit([Bind(Include = "GuardianID,GuardianFirstName,GuardianLastName,GuardianAddress,GuardianCity,GuardianZip,GuardianCellPhone,GuardianEmail,PacketSentDate,ReceiptDate,ConfirmationSentDate,HealthForm,PhotoAck,Tent,AttendingCode,Comments,Relationship")] Guardian guardian)
-		//{
-		//    if (ModelState.IsValid)
-		//    {
-		//        db.Entry(guardian).State = EntityState.Modified;
-		//        db.SaveChanges();
-		//        //return RedirectToAction("Index");
-		//    }
-		//    return View(guardian);
-		//}
-
-
-
 
 		// POST: Guardians/Edit/5
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -265,7 +246,7 @@ namespace SNCRegistration.Controllers
 			var guardian = db.Guardians.Find(id);
 
 			if (TryUpdateModel(guardian, "",
-			   new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName","GuardianAddress","GuardianCity","GuardianZip","GuardianCellPhone","GuardianEmail","PacketSentDate","ReceiptDate","ConfirmationSentDate","HealthForm","PhotoAck","Tent","AttendingCode","CheckedIn", "Comments","Relationship" }))
+			   new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName","GuardianAddress","GuardianCity","GuardianZip","GuardianCellPhone","GuardianEmail","HealthForm","PhotoAck","Tent","AttendingCode","CheckedIn", "Comments","Relationship" }))
 			{
 				try
 				{
