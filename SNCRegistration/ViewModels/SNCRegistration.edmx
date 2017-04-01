@@ -108,6 +108,13 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="bit" Nullable="false" />
           <Property Name="EventYear" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="FutureEvent">
+          <Key>
+            <PropertyRef Name="FutureID" />
+          </Key>
+          <Property Name="FutureID" Type="int" Nullable="false" />
+          <Property Name="LeadContactID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Guardians">
           <Key>
             <PropertyRef Name="GuardianID" />
@@ -122,9 +129,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="GuardianZip" Type="nchar" MaxLength="10" />
           <Property Name="GuardianCellPhone" Type="nchar" MaxLength="10" />
           <Property Name="GuardianEmail" Type="nvarchar" MaxLength="100" />
-          <Property Name="PacketSentDate" Type="date" />
-          <Property Name="ReceiptDate" Type="date" />
-          <Property Name="ConfirmationSentDate" Type="date" />
           <Property Name="HealthForm" Type="bit" />
           <Property Name="PhotoAck" Type="bit" />
           <Property Name="Tent" Type="bit" />
@@ -237,6 +241,18 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__FutureEve__LeadC__2F9A1060">
+          <End Role="LeadContacts" Type="Self.LeadContacts" Multiplicity="1" />
+          <End Role="FutureEvent" Type="Self.FutureEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeadContacts">
+              <PropertyRef Name="LeadContactID" />
+            </Principal>
+            <Dependent Role="FutureEvent">
+              <PropertyRef Name="LeadContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Participa__Parti__41EDCAC5">
           <End Role="Age" Type="Self.Age" Multiplicity="1" />
           <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
@@ -323,6 +339,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BSType" EntityType="Self.BSType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMembers" EntityType="Self.FamilyMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FutureEvent" EntityType="Self.FutureEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guardians" EntityType="Self.Guardians" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadContacts" EntityType="Self.LeadContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
@@ -340,6 +357,10 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="Self.FK__FamilyMem__Famil__40F9A68C">
             <End Role="Age" EntitySet="Age" />
             <End Role="FamilyMembers" EntitySet="FamilyMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FutureEve__LeadC__2F9A1060" Association="Self.FK__FutureEve__LeadC__2F9A1060">
+            <End Role="LeadContacts" EntitySet="LeadContacts" />
+            <End Role="FutureEvent" EntitySet="FutureEvent" />
           </AssociationSet>
           <AssociationSet Name="FK__Participa__Parti__41EDCAC5" Association="Self.FK__Participa__Parti__41EDCAC5">
             <End Role="Age" EntitySet="Age" />
@@ -402,6 +423,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
           <EntitySet Name="BSTypes" EntityType="SNCRegistrationModel.BSType" />
           <EntitySet Name="FamilyMembers" EntityType="SNCRegistrationModel.FamilyMember" />
+          <EntitySet Name="FutureEvents" EntityType="SNCRegistrationModel.FutureEvent" />
           <EntitySet Name="Guardians" EntityType="SNCRegistrationModel.Guardian" />
           <EntitySet Name="LeadContacts" EntityType="SNCRegistrationModel.LeadContact" />
           <EntitySet Name="Participants" EntityType="SNCRegistrationModel.Participant" />
@@ -425,6 +447,10 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <AssociationSet Name="FK_FamilyMembers" Association="SNCRegistrationModel.FK_FamilyMembers">
             <End Role="Guardian" EntitySet="Guardians" />
             <End Role="FamilyMember" EntitySet="FamilyMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FutureEve__LeadC__2F9A1060" Association="SNCRegistrationModel.FK__FutureEve__LeadC__2F9A1060">
+            <End Role="LeadContact" EntitySet="LeadContacts" />
+            <End Role="FutureEvent" EntitySet="FutureEvents" />
           </AssociationSet>
           <AssociationSet Name="FK_Participants" Association="SNCRegistrationModel.FK_Participants">
             <End Role="Guardian" EntitySet="Guardians" />
@@ -525,6 +551,14 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <NavigationProperty Name="Age" Relationship="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C" FromRole="FamilyMember" ToRole="Age" />
           <NavigationProperty Name="Guardian" Relationship="SNCRegistrationModel.FK_FamilyMembers" FromRole="FamilyMember" ToRole="Guardian" />
         </EntityType>
+        <EntityType Name="FutureEvent">
+          <Key>
+            <PropertyRef Name="FutureID" />
+          </Key>
+          <Property Name="FutureID" Type="Int32" Nullable="false" />
+          <Property Name="LeadContactID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LeadContact" Relationship="SNCRegistrationModel.FK__FutureEve__LeadC__2F9A1060" FromRole="FutureEvent" ToRole="LeadContact" />
+        </EntityType>
         <EntityType Name="Guardian">
           <Key>
             <PropertyRef Name="GuardianID" />
@@ -539,9 +573,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="GuardianZip" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="GuardianCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="GuardianEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PacketSentDate" Type="DateTime" Precision="0" />
-          <Property Name="ReceiptDate" Type="DateTime" Precision="0" />
-          <Property Name="ConfirmationSentDate" Type="DateTime" Precision="0" />
           <Property Name="HealthForm" Type="Boolean" />
           <Property Name="PhotoAck" Type="Boolean" />
           <Property Name="Tent" Type="Boolean" />
@@ -580,6 +611,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <Property Name="Marketing" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FutureEvents" Relationship="SNCRegistrationModel.FK__FutureEve__LeadC__2F9A1060" FromRole="LeadContact" ToRole="FutureEvent" />
         </EntityType>
         <EntityType Name="Participant">
           <Key>
@@ -702,6 +734,18 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             </Principal>
             <Dependent Role="FamilyMember">
               <PropertyRef Name="GuardianID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FutureEve__LeadC__2F9A1060">
+          <End Type="SNCRegistrationModel.LeadContact" Role="LeadContact" Multiplicity="1" />
+          <End Type="SNCRegistrationModel.FutureEvent" Role="FutureEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeadContact">
+              <PropertyRef Name="LeadContactID" />
+            </Principal>
+            <Dependent Role="FutureEvent">
+              <PropertyRef Name="LeadContactID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -842,6 +886,14 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FutureEvents">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.FutureEvent">
+              <MappingFragment StoreEntitySet="FutureEvent">
+                <ScalarProperty Name="LeadContactID" ColumnName="LeadContactID" />
+                <ScalarProperty Name="FutureID" ColumnName="FutureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Guardians">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Guardian">
               <MappingFragment StoreEntitySet="Guardians">
@@ -854,9 +906,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
                 <ScalarProperty Name="Tent" ColumnName="Tent" />
                 <ScalarProperty Name="PhotoAck" ColumnName="PhotoAck" />
                 <ScalarProperty Name="HealthForm" ColumnName="HealthForm" />
-                <ScalarProperty Name="ConfirmationSentDate" ColumnName="ConfirmationSentDate" />
-                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
-                <ScalarProperty Name="PacketSentDate" ColumnName="PacketSentDate" />
                 <ScalarProperty Name="GuardianEmail" ColumnName="GuardianEmail" />
                 <ScalarProperty Name="GuardianCellPhone" ColumnName="GuardianCellPhone" />
                 <ScalarProperty Name="GuardianZip" ColumnName="GuardianZip" />

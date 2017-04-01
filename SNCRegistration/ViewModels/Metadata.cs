@@ -51,15 +51,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public string GuardianEmail;
-
-        [DataType(DataType.Date)]
-        [Display(Name = "Date Packet Sent")]
-        public Nullable<System.DateTime> PacketSentDate;
-
-        [DataType(DataType.Date)]
-        [Display(Name = "Paperwork Received")]
-        public Nullable<System.DateTime> ReceiptDate;
-
+        
 
         [Display(Name = "Health Form")]
         public Nullable<bool> HealthForm;
