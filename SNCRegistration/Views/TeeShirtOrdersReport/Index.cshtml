@@ -10,48 +10,55 @@
 
 
     <h2>T-Shirt Orders Report</h2>
-        <div class="row">
-            <div class="col-sm-3">
-                <h4>Total: @Model.Count()</h4>
+            <div class="row">
+                <div class="col-sm-3">
+                    <h4>Total: @Model.Count()</h4>
+                </div>
+                <div class="col-sm-9 text-right">
+                    <div class="col-sm-7"><h4>Select Event Year:</h4></div>
+                    <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
+                    <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+                </div>
             </div>
-            <div class="col-sm-offset-10">
-                <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
-
-            </div>
-        </div>
         <table class="table table-striped">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.LeadContactFirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LeadContactLastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LeadContactShirtOrder)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LeadContactShirtSize)
-                </th>
-            </tr>
-            @foreach (var item in Model)
-                    {
+            <thead>
                 <tr>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeadContactFirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeadContactLastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeadContactShirtOrder)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeadContactShirtSize)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitChapterNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VolunteerFirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VolunteerLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LeadContactFirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LeadContactLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VolunteerShirtOrder)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VolunteerShirtSize)
+                    </th>
                 </tr>
-                }
-
+            </thead>
+            <tbody>
+                @Html.Partial("_PartialTeeShirtOrdersList", Model)
+            </tbody>
         </table>
     }
+
+
+@section scripts{
+    <script>
+        function updateGrid() {
+            $.post('/TeeShirtOrdersReport/GetTeeShirtsOrdersByYear', { eventYear: $('#eventYear').val() }, function (data) {
+                $('table tbody').html(data);
+            })
+        }
+    </script>
+}

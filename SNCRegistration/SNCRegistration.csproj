@@ -300,7 +300,7 @@
     <Compile Include="Controllers\PendingRegistrationReportController.cs" />
     <Compile Include="Controllers\PeopleCheckedInCountController.cs" />
     <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
-    <Compile Include="Controllers\TeeShirtOrderReportController.cs" />
+    <Compile Include="Controllers\TeeShirtOrderReportsController.cs" />
     <Compile Include="Controllers\VolunteersFridayOnlyController.cs" />
     <Compile Include="Controllers\VolunteersFridayThruSaturdayController.cs" />
     <Compile Include="Controllers\VolunteersOvernightController.cs" />
@@ -503,6 +503,7 @@
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\roslyn\msdia80.dll" />
     <Content Include="bin\roslyn\System.AppContext.dll" />
     <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
     <Content Include="bin\roslyn\System.Console.dll" />
@@ -3476,9 +3477,8 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_PartialBoothsList.cshtml" />
     <Content Include="Views\Shared\_PartialParticipantList.cshtml" />
-    <Content Include="Views\Participants\AddAdditionalParticipant.cshtml" />
-    <Content Include="Views\FamilyMembers\AddAdditionalFamily.cshtml" />
-    <Content Include="Views\Volunteers\AddAdditionalVolunteer.cshtml" />
+    <Content Include="Views\Shared\_PartialTeeShirtOrdersList.cshtml" />
+    <Content Include="Views\Shared\_PartialWristBandCountList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
@@ -3486,7 +3486,6 @@
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
-    <Folder Include="Views\Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
