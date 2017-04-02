@@ -223,9 +223,10 @@ namespace SNCRegistration.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             FamilyMember familyMember = db.FamilyMembers.Find(id);
+            int? prevID = familyMember.GuardianID;
             db.FamilyMembers.Remove(familyMember);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Guardians", new { id = prevID });
         }
 
         protected override void Dispose(bool disposing)
@@ -243,6 +244,7 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
+        [OverrideAuthorization]
         public ActionResult Redirect([Bind(Include = "GuardianID,GuardianGuid"),
             ] FamilyMember familyMember, string submit)
         {
@@ -299,19 +301,28 @@ namespace SNCRegistration.Controllers
             var familymember = db.FamilyMembers.Find(id);
 
 
-            if (TryUpdateModel(familymember, "",
-               new string[] { "CheckedIn" }))
-            {
-                try
-                {
-                    db.SaveChanges();
 
-                    TempData["notice"] = "Check In Status Saved!";
-                }
-                catch (DataException /* dex */)
+            if (familymember.HealthForm.Value == false && familymember.CheckedIn == false)
+            {
+                ModelState.AddModelError("", "Health Form must be received before check in.");
+            }
+            else
+            {
+
+                if (TryUpdateModel(familymember, "",
+               new string[] { "CheckedIn" }))
                 {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    try
+                    {
+                        db.SaveChanges();
+
+                        TempData["notice"] = "Check In Status Saved!";
+                    }
+                    catch (DataException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    }
                 }
             }
             return View(familymember);
@@ -320,6 +331,59 @@ namespace SNCRegistration.Controllers
         }
 
 
+        // GET: FamilyMembers/AddAdditionalFamily
+        [OverrideAuthorization]
+        public ActionResult AddAdditionalFamily()
+        {
+
+            ViewBag.FamilyMemberAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.AttendingCode = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            ViewBag.guardGuid = Session["gUIDSession"];
+            ViewBag.guardID = Session["gIDSession"];
+            return View();
+        }
+
+        // POST: FamilyMembers/AddAdditionalFamily
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAdditionalFamily([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,FamilyMemberAge,GuardianID,HealthForm,PhotoAck,AttendingCode,Comments,GuardianGuid")] FamilyMember familyMember)
+        {
+            if (ModelState.IsValid)
+            {
+
+             
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                familyMember.EventYear = int.Parse(thisYear);
+
+                db.FamilyMembers.Add(familyMember);
+
+                try
+                {
+
+                    ViewBag.guardGuid = Session["gUIDSession"];
+                    ViewBag.guardID = Session["gIDSession"];
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
+            }
+            ViewBag.FamilyMemberAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.AttendingCode = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            return RedirectToAction("Details", "Guardians", new { id = familyMember.GuardianID });
+        }
 
 
 

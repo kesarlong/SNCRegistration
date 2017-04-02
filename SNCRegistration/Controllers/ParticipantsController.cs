@@ -62,23 +62,6 @@ namespace SNCRegistration.Controllers
             int pageNumber = (page ?? 1);
             return View(participants.ToPagedList(pageNumber, pageSize));
 
-            //Original. Delete comments if no problems. 
-            //public ActionResult Index() 
-            //try
-            //{
-            //    return View(db.Participants.ToList());
-            //}
-            //catch (DbEntityValidationException ex)
-            //{
-            //    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-            //    {
-            //        foreach (var validationError in entityValidationErrors.ValidationErrors)
-            //        {
-            //            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-            //        }
-            //    }
-            //}
-            //return View(db.Participants.ToList());
         }
 
 
@@ -87,19 +70,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Details(int? id)
         {
 
-            // Original delete if nothing is broken
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Participant participant = db.Participants.Find(id);
-            //if (participant == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(participant);
-
-
+         
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -130,6 +101,7 @@ namespace SNCRegistration.Controllers
         {
             ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+
             return View();
         }
 
@@ -315,7 +287,7 @@ namespace SNCRegistration.Controllers
 
 
 
-            if (participant.HealthForm.Value == false)
+            if (participant.HealthForm.Value == false && participant.CheckedIn == false)
             {
                 ModelState.AddModelError("", "Health Form must be received before check in.");
             }
@@ -370,9 +342,11 @@ namespace SNCRegistration.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Participant participant = db.Participants.Find(id);
+            int? prevID = participant.GuardianID;
+
             db.Participants.Remove(participant);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Guardians", new { id = prevID });
         }
         public ActionResult GetFile(string file) {
             var appData = Server.MapPath("~/App_Data/PDF");
@@ -408,6 +382,7 @@ namespace SNCRegistration.Controllers
         }
 
         //public ActionResult Redirect()
+        [OverrideAuthorization]
         public ActionResult Redirect([Bind(Include = "GuardianID,GuardianGuid"),
             ] Participant participant, string submit)
         {
@@ -457,6 +432,66 @@ namespace SNCRegistration.Controllers
 
 
 
+        }
+
+
+        // GET: Participants/AddAdditionalParticipant
+        public ActionResult AddAdditionalParticipant(string guardGuid, int guardID)
+        {
+            ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            ViewBag.guardGuid = Session["gUIDSession"];
+            ViewBag.guardID = Session["gIDSession"];
+            return View();
+        }
+
+
+        // POST: Participants/AddAdditionalParticipant
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAdditionalParticipant([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),
+            ] Participant participant, string submit)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                //store year of event
+                var thisYear = DateTime.Now.Year.ToString();
+                participant.EventYear = int.Parse(thisYear);
+
+
+                db.Participants.Add(participant);
+
+
+                try
+                {
+
+                    this.Session["gUIDSession"] = participant.GuardianGuid;
+                    this.Session["gIDSession"] = participant.GuardianID;
+                    db.SaveChanges();
+
+
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
+
+
+
+            }
+            ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
         }
 
 

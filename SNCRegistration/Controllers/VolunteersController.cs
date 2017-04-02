@@ -83,15 +83,17 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
+
+        [OverrideAuthorization]
         public ActionResult Registered() {
             return View();
         }
 
         // GET: Volunteers/Create
-        [OverrideAuthentication]
+        [OverrideAuthorization]
         public ActionResult Create()
         {
-            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             return View();
@@ -284,9 +286,10 @@ namespace SNCRegistration.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Volunteer volunteer = db.Volunteers.Find(id);
+            int? prevID = volunteer.LeadContactID;
             db.Volunteers.Remove(volunteer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "LeadContacts", new { id = prevID });
         }
 
         protected override void Dispose(bool disposing)
@@ -297,5 +300,65 @@ namespace SNCRegistration.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Volunteers/AddAdditionalVolunteer
+        public ActionResult AddAdditionalVolunteer()
+        {
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
+            ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
+
+            ViewBag.leadGuid = Session["lGuidSession"];
+            ViewBag.leadID = Session["lIDSession"];
+            return View();
+        }
+
+        // POST: Volunteers/AddAdditionalVolunteer
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAdditionalVolunteer([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid")] Volunteer volunteer)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+
+                var thisYear = DateTime.Now.Year.ToString();
+                volunteer.EventYear = int.Parse(thisYear);
+                db.Volunteers.Add(volunteer);
+                var fee = 0;
+                volunteer.VolunteerFee = fee;
+
+                try
+                {
+
+                    this.Session["lIDSession"] = volunteer.LeadContactID;
+                    this.Session["lGuidSession"] = volunteer.LeaderGuid;
+                    db.SaveChanges();
+
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
+               
+            }
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
+            ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
+
+            return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
+        }
+
+
+
     }
 }

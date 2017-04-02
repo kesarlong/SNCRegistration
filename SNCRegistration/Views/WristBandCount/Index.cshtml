@@ -10,37 +10,50 @@
 
 
     <h2>Wristband Count Report</h2>
-        <div class="row">
-            <div class="col-sm-3">
-                <h4>Total: @Model.Count()</h4>
-            </div>
-            <div class="col-sm-offset-10">
-                <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
-
-            </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>Total: @Model.Count()</h4>
         </div>
-        <table class="table table-striped">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.LeadContactFirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LeadContactLastName)
-                </th>
-            </tr>
-            @foreach (var item in Model)
-                    {
-                <tr>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeadContactFirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeadContactLastName)
-                    </td>
-
-                </tr>
-                }
-
-        </table>
+        <div class="col-sm-9 text-right">
+            <div class="col-sm-7"><h4>Select Event Year:</h4></div>
+            <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
+            <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+        </div>
+    </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.VolunteerFirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.VolunteerLastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LeadContactFirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LeadContactLastName)
+                        </th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.Partial("_PartialWristBandCountList", Model)
+                </tbody>
+            </table>
     }
+
+
+@section scripts{
+    <script>
+        function updateGrid() {
+            $.post('/WristBandCount/GetWristBandCountByYear', { eventYear: $('#eventYear').val() }, function (data) {
+                $('table tbody').html(data);
+            })
+        }
+    </script>
+} 

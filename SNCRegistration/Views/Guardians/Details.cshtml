@@ -146,53 +146,65 @@
     </p>
 
     <hr />
-    <h3>Participant Attendees</h3>
-        <table class="table"> 
-            <tr >
-                <th>
-                    @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.participant.HealthForm)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.participant.PhotoAck)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.participant.CheckedIn)
-                </th>
-            
-                <th></th>
-            </tr>
-            @foreach (var item in Model.participants)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParticipantFirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParticipantLastName)
-                    </td>
-                    <th>
-                        @Html.DisplayFor(modelItem => item.HealthForm)
-                    </th>
-                    <th>
-                        @Html.DisplayFor(modelItem => item.PhotoAck)
-                    </th>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CheckedIn)
-                    </td>
-                    <td align="center">
-                        @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" }) |
-                        @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" }) 
-                    </td>
-                </tr>
-            }
+    <div>
+        <div style="float: left;"><h3>Participant Attendees</h3></div>
+    </div>
 
-            </table>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.ParticipantFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.ParticipantLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.HealthForm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.PhotoAck)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.participant.CheckedIn)
+            </th>
+
+            <th></th>
+        </tr>
+        @foreach (var item in Model.participants)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParticipantLastName)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.HealthForm)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.PhotoAck)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckedIn)
+                </td>
+                <td align="center">
+                    @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+
+
+
+    </table>
+    <div style="float: right;">
+        @Html.ActionLink("+ Add Additional Participant", "AddAdditionalParticipant", "Participants", new { guardGuid = Model.guardian.GuardianGuid, guardID = Model.guardian.GuardianID }, new { @class = "btn btn-default" })
+    </div>
+    <br />
+
+
     <hr />
     <h3>Family Attendees</h3>
     <table class="table">
@@ -240,7 +252,9 @@
         }
 
     </table>
-
+    <div style="float: right;">
+        @Html.ActionLink("+ Add Additional Family Member", "AddAdditionalFamily", "FamilyMembers", new { guardGuid = Model.guardian.GuardianGuid, guardID = Model.guardian.GuardianID }, new { @class = "btn btn-default" })
+    </div>
            
 </div>
 

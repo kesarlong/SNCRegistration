@@ -40,23 +40,23 @@
             {
                 <p>Under 6</p>
             }
-            else if (Model.participant.AttendingCode == 2)
+            else if (Model.participant.ParticipantAge == 2)
             {
                 <p>7-10</p>
             }
-            else if (Model.participant.AttendingCode == 3)
+            else if (Model.participant.ParticipantAge == 3)
             {
                 <p>11-13</p>
             }
-            else if (Model.participant.AttendingCode == 4)
+            else if (Model.participant.ParticipantAge == 4)
             {
                 <p>14-17</p>
             }
-            else if (Model.participant.AttendingCode == 5)
+            else if (Model.participant.ParticipantAge == 5)
             {
                 <p>18-20</p>
             }
-            else if (Model.participant.AttendingCode == 6)
+            else if (Model.participant.ParticipantAge == 6)
             {
                 <p>Over 21</p>
             }
@@ -139,7 +139,8 @@
             @Html.ActionLink("Check In", "CheckIn", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-success" }) |
             @Html.ActionLink("Edit", "Edit", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-info" }) |
             @Html.ActionLink("Delete", "Delete", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-danger" }) |
-            @Html.ActionLink("Back to List", "Index", "Participants", new { }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Back to Participant List", "Index", "Participants", new { }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Back to Guardian", "Details", "Guardians", new { id=Model.participant.GuardianID}, new { @class = "btn btn-info" })
         </div>
     </p>
 
