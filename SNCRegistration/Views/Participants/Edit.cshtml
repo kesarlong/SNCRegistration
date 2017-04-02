@@ -37,9 +37,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ParticipantAge, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.ParticipantAge, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ParticipantAge, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.ParticipantAge)
+            @Html.DropDownListFor(model => model.ParticipantAge,
+                    ViewBag.AgeID as SelectList, new { @class = "form-control", style = "width: 220px" })
+            @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
@@ -135,50 +136,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AttendingCode)
             @Html.DropDownListFor(model => model.AttendingCode,
-                    new List<SelectListItem>{
-                        new SelectListItem{ Value = "", Text = "-Select-" },
-                        new SelectListItem{ Value = "2", Text = "Saturday Only" },
-                        new SelectListItem{ Value = "3", Text = "Overnight" }
-                    }, new { @class = "form-control", style = "width: 220px" })
+                    ViewBag.AttendanceID as SelectList, new { @class = "form-control", style = "width: 220px" })
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.GuardianID, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.GuardianID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GuardianID, "", new { @class = "text-danger" })
-        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            <div class="btn-group" data-toggle="buttons">
-                @Html.LabelFor(model => model.CheckedIn, htmlAttributes: new { @class = "control-label" })  <br />
-                @Html.ValidationMessageFor(model => model.CheckedIn, "", new { @class = "text-danger" })
-                @if (Model.CheckedIn == true)
-                {
-                    <label class="btn btn-default active">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
-                    </label>
-                    <label class="btn btn-default">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
-                    </label>
-                }
-                else
-                {
-                    <label class="btn btn-default">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
-                    </label>
-                    <label class="btn btn-default active">
-                        @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
-                    </label>
-
-                }
-            </div>
         </div>
 
 
