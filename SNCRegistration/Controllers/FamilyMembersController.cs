@@ -244,6 +244,7 @@ namespace SNCRegistration.Controllers
             return View();
         }
 
+        [OverrideAuthorization]
         public ActionResult Redirect([Bind(Include = "GuardianID,GuardianGuid"),
             ] FamilyMember familyMember, string submit)
         {
