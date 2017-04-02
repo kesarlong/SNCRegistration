@@ -12,6 +12,7 @@ using PagedList;
 
 namespace SNCRegistration.Controllers
 {
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
     public class VolunteersController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
@@ -82,14 +83,17 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
+
+        [OverrideAuthorization]
         public ActionResult Registered() {
             return View();
         }
 
         // GET: Volunteers/Create
+        [OverrideAuthorization]
         public ActionResult Create()
         {
-            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             return View();
@@ -98,6 +102,7 @@ namespace SNCRegistration.Controllers
         // POST: Volunteers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid")] Volunteer volunteer)
@@ -152,6 +157,8 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Volunteers/Edit/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -169,25 +176,9 @@ namespace SNCRegistration.Controllers
         }
 
 
-        // Original Edit Code, Delete this if nothing broken
-        // POST: Volunteers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments")] Volunteer volunteer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(volunteer).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
-        //    ViewBag.VolunteerID = new SelectList(db.Volunteers, "VolunteerID", "VolunteerFirstName", volunteer.VolunteerID);
-        //    return View(volunteer);
-        //}
 
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
@@ -220,7 +211,6 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Volunteer/Checkin/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
             if (id == null)
@@ -239,8 +229,6 @@ namespace SNCRegistration.Controllers
         // POST: VolunteerCheckIn/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
         public ActionResult CheckInPost(int? id)
@@ -274,6 +262,8 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Volunteers/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -289,14 +279,17 @@ namespace SNCRegistration.Controllers
         }
 
         // POST: Volunteers/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Volunteer volunteer = db.Volunteers.Find(id);
+            int? prevID = volunteer.LeadContactID;
             db.Volunteers.Remove(volunteer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "LeadContacts", new { id = prevID });
         }
 
         protected override void Dispose(bool disposing)
@@ -307,5 +300,65 @@ namespace SNCRegistration.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Volunteers/AddAdditionalVolunteer
+        public ActionResult AddAdditionalVolunteer()
+        {
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
+            ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
+
+            ViewBag.leadGuid = Session["lGuidSession"];
+            ViewBag.leadID = Session["lIDSession"];
+            return View();
+        }
+
+        // POST: Volunteers/AddAdditionalVolunteer
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAdditionalVolunteer([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid")] Volunteer volunteer)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+
+                var thisYear = DateTime.Now.Year.ToString();
+                volunteer.EventYear = int.Parse(thisYear);
+                db.Volunteers.Add(volunteer);
+                var fee = 0;
+                volunteer.VolunteerFee = fee;
+
+                try
+                {
+
+                    this.Session["lIDSession"] = volunteer.LeadContactID;
+                    this.Session["lGuidSession"] = volunteer.LeaderGuid;
+                    db.SaveChanges();
+
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
+               
+            }
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
+            ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
+
+            return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
+        }
+
+
+
     }
 }

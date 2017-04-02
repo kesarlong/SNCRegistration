@@ -48,6 +48,8 @@ public partial class SNCRegistrationEntities : DbContext
 
     public virtual DbSet<FamilyMember> FamilyMembers { get; set; }
 
+    public virtual DbSet<FutureEvent> FutureEvents { get; set; }
+
     public virtual DbSet<Guardian> Guardians { get; set; }
 
     public virtual DbSet<LeadContact> LeadContacts { get; set; }

@@ -23,7 +23,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Home", "Index", "Admin")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Admin")</li>*@
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
 
@@ -36,7 +36,6 @@
         <div class="container">
             <div class="row">
                 <div class="banner">
-                    <h2>Administration Panel</h2>
                 </div>
                 <div class="col-sm-2">
                     <!-- Left column -->
@@ -54,28 +53,32 @@
                                     <ul class="nav nav-stacked collapse in">
                                         <li><a href="@Url.Action("ManageUsers", "Admin")"><em class="glyphicon glyphicon-user"></em> Manage Admin Users</a></li>
                                     </ul>
-                                    <ul class="nav nav-stacked collapse in">
-                                        <li><a href="@Url.Action("Index", "Guardians")"><em class="glyphicon glyphicon-user"></em> Manage Guardians</a></li>
+
+                                <li class="nav-header">
+                                    <a href="#" data-toggle="collapse" data-target="#menu1"><em class="glyphicon glyphicon-th-list"></em> Manage Attendees<i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    <ul class="nav nav-stacked collapse" id="menu1">
+                                        <li>
+                                            <a href="@Url.Action("Index", "Guardians")"><em class="glyphicon glyphicon-user"></em> Guardians</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "Participants")"><em class="glyphicon glyphicon-user"></em> Participants</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "LeadContacts")"><em class="glyphicon glyphicon-user"></em> Volunteers</a>
+                                        </li>
                                     </ul>
-                                    <ul class="nav nav-stacked collapse in">
-                                        <li><a href="@Url.Action("Index", "Participants")"><em class="glyphicon glyphicon-user"></em> Manage Participants</a></li>
-                                    </ul>
-                                    <ul class="nav nav-stacked collapse in">
-                                        <li><a href="@Url.Action("Index", "LeadContacts")"><em class="glyphicon glyphicon-user"></em> Manage Volunteers</a></li>
-                                    </ul>
+
+
                                 </li>
+
+
                                 <li class="nav-header">
                                     <a href="#" data-toggle="collapse" data-target="#menu2"><em class="glyphicon glyphicon-stats"></em> Reports<i class="glyphicon glyphicon-chevron-right"></i></a>
                                     <ul class="nav nav-stacked collapse" id="menu2">
                                         <li>
-                                            <a href="@Url.Action("Index", "ParticipantsReport")"><em class="glyphicon glyphicon-list"></em> Participants</a>
+                                            <a href="@Url.Action("Index", "Dashboard")"><em class="glyphicon glyphicon-dashboard"></em> Dashboard</a>
                                         </li>
-                                        <li>
-                                            <a href="@Url.Action("Index", "VolunteersReport")"><em class="glyphicon glyphicon-list"></em> Volunteers</a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Index", "BoothCount")"><em class="glyphicon glyphicon-list"></em> Booth Count</a>
-                                        </li>     
+                       
                                     </ul>
                                 <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
                             </ul>
