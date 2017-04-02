@@ -83,12 +83,14 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
+
+        [OverrideAuthorization]
         public ActionResult Registered() {
             return View();
         }
 
         // GET: Volunteers/Create
-        [OverrideAuthentication]
+        [OverrideAuthorization]
         public ActionResult Create()
         {
             ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");

@@ -105,6 +105,7 @@ namespace SNCRegistration.Controllers
         // POST: LeadContacts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactCellPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize, LeaderGuid")] LeadContact leadContact)
@@ -261,6 +262,11 @@ namespace SNCRegistration.Controllers
 
         }
 
+        [OverrideAuthorization]
+        public ActionResult Registered()
+        {
+            return View();
+        }
 
         // GET: LeadContacts/Delete/5
         [OverrideAuthorization]
