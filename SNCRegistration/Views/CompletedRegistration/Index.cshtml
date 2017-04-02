@@ -5,19 +5,26 @@
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-@using (Html.BeginForm("CompletedRegistrationReport", "CompletedRegistrationReport", FormMethod.Post))
+@using (Html.BeginForm("CompletedRegistration", "CompletedRegistration", FormMethod.Post))
     {
     <h2>Completed Registration Count Report</h2>
-    <div class="row">
-        <div class="col-sm-3">
-            <h4>Total: @Model.Count()</h4>
-        </div>
-        <div class="col-sm-offset-10">
-            <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
-        </div>
+ 
+<div class="row">
+    <div class="col-sm-3">
+        <h4>Total: @Model.Count()</h4>
     </div>
-    <table class="table table-striped">
-        <tr>
+    <div class="col-sm-9 text-right">
+        <div class="col-sm-7"><h4>Select Event Year:</h4></div>
+        <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
+        <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+       <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Registrant)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ParticipantFirstName)
             </th>
@@ -30,23 +37,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.PhotoAck)
             </th>
+           
         </tr>
-        @foreach (var item in Model)
-                    {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParticipantFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParticipantLastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HealthForm)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhotoAck)
-                </td>
-            </tr>
-            }
-    </table>
+    </thead>
+    <tbody>
+        @Html.Partial("_PartialCompletedRegistrationList", Model)
+    </tbody>
+</table>
     }
+
+@section scripts{
+    <script>
+        function updateGrid() {
+            $.post('/CompletedRegistration/GetCompletedRegistrationByYear', { eventYear: $('#eventYear').val() }, function (data) {
+                $('table tbody').html(data);
+            })
+        }
+    </script>
+} 

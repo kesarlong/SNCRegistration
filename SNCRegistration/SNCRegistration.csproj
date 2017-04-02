@@ -3307,15 +3307,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SNCRegistration.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -3423,6 +3414,16 @@
     <Content Include="Views\Participants\AddAdditionalParticipant.cshtml" />
     <Content Include="Views\Volunteers\AddAdditionalVolunteer.cshtml" />
     <Content Include="Views\FamilyMembers\AddAdditionalFamily.cshtml" />
+    <Content Include="Views\Shared\_PartialCompletedRegistrationList.cshtml" />
+    <Content Include="Web - Copy.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web - Copy.Debug.config">
+      <DependentUpon>Web - Copy.config</DependentUpon>
+    </Content>
+    <Content Include="Web - Copy.Release.config">
+      <DependentUpon>Web - Copy.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
