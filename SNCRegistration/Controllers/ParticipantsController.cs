@@ -436,7 +436,6 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/AddAdditionalParticipant
-        [OverrideAuthorization]
         public ActionResult AddAdditionalParticipant(string guardGuid, int guardID)
         {
             ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
@@ -450,7 +449,6 @@ namespace SNCRegistration.Controllers
         // POST: Participants/AddAdditionalParticipant
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [OverrideAuthorization]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddAdditionalParticipant([Bind(Include = "ParticipantID,ParticipantFirstName,ParticipantLastName,ParticipantAge,ParticipantSchool,ParticipantTeacher,ClassroomScouting,HealthForm,PhotoAck,AttendingCode,Returning,GuardianID,GuardianGuid,Comments,GuardianGuid,CheckedIn,EventYear"),

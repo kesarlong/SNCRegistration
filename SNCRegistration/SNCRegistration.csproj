@@ -53,15 +53,6 @@
       <HintPath>..\packages\ClosedXML.0.86.0\lib\net40\ClosedXML.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.Shared">
-      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
@@ -411,9 +402,6 @@
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\ClosedXML.dll" />
     <Content Include="bin\ClosedXML.pdb" />
-    <Content Include="bin\CrystalDecisions.CrystalReports.Engine.dll" />
-    <Content Include="bin\CrystalDecisions.ReportSource.dll" />
-    <Content Include="bin\CrystalDecisions.Shared.dll" />
     <Content Include="bin\DocumentFormat.OpenXml.dll" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
@@ -3483,7 +3471,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
-    <Folder Include="obj\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
