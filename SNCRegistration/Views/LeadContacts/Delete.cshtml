@@ -77,11 +77,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LeadContactPhone)
+            @Html.DisplayNameFor(model => model.LeadContactCellPhone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LeadContactPhone)
+            @Html.DisplayFor(model => model.LeadContactCellPhone)
         </dd>
 
         <dt>
@@ -154,8 +154,14 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <div class="form-group pull-left">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+
+            <div class="form-group pull-right">
+                @Html.ActionLink("Back to Lead Contact", "Details", "LeadContacts", new { id = Model.LeadContactID }, new { @class = "btn btn-info" })
+
+            </div>
         </div>
     }
 </div>

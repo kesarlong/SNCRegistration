@@ -69,16 +69,6 @@ namespace SNCRegistration.Controllers
         // GET: LeadContacts/Details/5
         public ActionResult Details(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //LeadContact leadContact = db.LeadContacts.Find(id);
-            //if (leadContact == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(leadContact);
 
             if (id == null)
             {
@@ -90,6 +80,8 @@ namespace SNCRegistration.Controllers
             model.leadContact = db.LeadContacts.Find(id);
             model.volunteers = db.Volunteers.Where(i => i.LeadContactID == id);
 
+            this.Session["lGuidSession"] = model.leadContact.LeaderGuid;
+            this.Session["lIDSession"] = model.leadContact.LeadContactID;
 
             if (model == null)
             {

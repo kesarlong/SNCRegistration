@@ -3476,13 +3476,14 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_PartialBoothsList.cshtml" />
     <Content Include="Views\Shared\_PartialParticipantList.cshtml" />
+    <Content Include="Views\Participants\AddAdditionalParticipant.cshtml" />
+    <Content Include="Views\FamilyMembers\AddAdditionalFamily.cshtml" />
+    <Content Include="Views\Volunteers\AddAdditionalVolunteer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
     <Folder Include="obj\" />
     <Folder Include="Resources\" />
-    <Folder Include="SqlServerTypes\x64\" />
-    <Folder Include="SqlServerTypes\x86\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
     <Folder Include="Views\Image\" />

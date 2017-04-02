@@ -69,23 +69,6 @@ namespace SNCRegistration.Controllers
 			int pageNumber = (page ?? 1);
 			return View(guardians.ToPagedList(pageNumber, pageSize));
 
-
-			// Original Index code. Delete if nothing broken.
-			//try
-			//{
-			//    return View(db.Guardians.ToList());
-			//}
-			//catch (DbEntityValidationException ex)
-			//{
-			//    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-			//    {
-			//        foreach (var validationError in entityValidationErrors.ValidationErrors)
-			//        {
-			//            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-			//        }
-			//    }
-			//}
-			//return View(db.Guardians.ToList());
 		}
 
 		// GET: Guardians/Details/5
@@ -103,9 +86,11 @@ namespace SNCRegistration.Controllers
 			model.guardian = db.Guardians.Find(id);
 			model.participants = db.Participants.Where(i => i.GuardianID == id);
 			model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == id);
-            
 
-			if (model == null)
+            this.Session["gUIDSession"] = model.guardian.GuardianGuid;
+            this.Session["gIDSession"] = model.guardian.GuardianID;
+
+            if (model == null)
 			{
 				return HttpNotFound();
 			}
@@ -317,7 +302,14 @@ namespace SNCRegistration.Controllers
 		   var guardian = db.Guardians.Find(id);
 
 
-			if (TryUpdateModel(guardian, "",
+
+            if (guardian.HealthForm.Value == false && guardian.CheckedIn == false)
+            {
+                ModelState.AddModelError("", "Health Form must be received before check in.");
+            }
+            else
+            { 
+            if (TryUpdateModel(guardian, "",
 			   new string[] { "CheckedIn" }))
 			{
 				try
@@ -332,7 +324,8 @@ namespace SNCRegistration.Controllers
 					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
 				}
 			}
-			return View(guardian);
+            }
+            return View(guardian);
 
 
 		}
@@ -363,10 +356,23 @@ namespace SNCRegistration.Controllers
 		public ActionResult DeleteConfirmed(int id)
 		{
 			Guardian guardian = db.Guardians.Find(id);
-			db.Guardians.Remove(guardian);
-			db.SaveChanges();
 
-			return RedirectToAction("Index");
+
+            try
+            {
+                db.Guardians.Remove(guardian);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception err)
+            {
+
+                ModelState.AddModelError("DBerror", "Unable to Delete Guardian. Please delete participant and family member records first before deleting Guardian.");
+            }
+
+
+
+			return View(guardian);
 		}
 
 
