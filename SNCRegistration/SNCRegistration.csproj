@@ -57,6 +57,16 @@
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Cryptography.Internal">
       <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.1.1.1\lib\net451\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
       <Private>True</Private>
@@ -219,12 +229,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -399,80 +403,45 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\ClosedXML.dll" />
-    <Content Include="bin\ClosedXML.pdb" />
     <Content Include="bin\DocumentFormat.OpenXml.dll" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
     <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
     <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
     <Content Include="bin\Microsoft.AspNetCore.Cryptography.Internal.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.Cryptography.Internal.xml" />
     <Content Include="bin\Microsoft.AspNetCore.DataProtection.Abstractions.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.DataProtection.Abstractions.xml" />
     <Content Include="bin\Microsoft.AspNetCore.DataProtection.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.DataProtection.xml" />
     <Content Include="bin\Microsoft.AspNetCore.Hosting.Abstractions.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.Hosting.Abstractions.xml" />
     <Content Include="bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml" />
     <Content Include="bin\Microsoft.AspNetCore.Http.Abstractions.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.Http.Abstractions.xml" />
     <Content Include="bin\Microsoft.AspNetCore.Http.Features.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.Http.Features.xml" />
     <Content Include="bin\Microsoft.AspNetCore.Session.dll" />
-    <Content Include="bin\Microsoft.AspNetCore.Session.xml" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.xml" />
     <Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.xml" />
     <Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
     <Content Include="bin\Microsoft.Extensions.FileProviders.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.FileProviders.Abstractions.xml" />
     <Content Include="bin\Microsoft.Extensions.Logging.Abstractions.dll" />
-    <Content Include="bin\Microsoft.Extensions.Logging.Abstractions.xml" />
     <Content Include="bin\Microsoft.Extensions.Options.dll" />
-    <Content Include="bin\Microsoft.Extensions.Options.xml" />
     <Content Include="bin\Microsoft.Extensions.Primitives.dll" />
-    <Content Include="bin\Microsoft.Extensions.Primitives.xml" />
     <Content Include="bin\Microsoft.Owin.dll" />
     <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
     <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
     <Content Include="bin\Microsoft.Owin.Security.dll" />
     <Content Include="bin\Microsoft.Owin.Security.Facebook.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Facebook.xml" />
     <Content Include="bin\Microsoft.Owin.Security.Google.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Google.xml" />
     <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.xml" />
     <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
     <Content Include="bin\Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Twitter.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.xml" />
-    <Content Include="bin\Microsoft.Owin.xml" />
     <Content Include="bin\Microsoft.ReportViewer.WebForms.DLL" />
     <Content Include="bin\Microsoft.SqlServer.Types.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\Owin.dll" />
     <Content Include="bin\PagedList.dll" />
     <Content Include="bin\PagedList.Mvc.dll" />
-    <Content Include="bin\PagedList.Mvc.xml" />
-    <Content Include="bin\PagedList.xml" />
     <Content Include="bin\ReportViewerForMvc.dll" />
     <Content Include="bin\roslyn\csc.exe" />
     <Content Include="bin\roslyn\csc.exe.config" />
@@ -491,7 +460,6 @@
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
-    <Content Include="bin\roslyn\msdia80.dll" />
     <Content Include="bin\roslyn\System.AppContext.dll" />
     <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
     <Content Include="bin\roslyn\System.Console.dll" />
@@ -528,36 +496,22 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="bin\SNCRegistration.pdb" />
-    <Content Include="bin\SqlServerTypes\x64\msvcr100.dll" />
     <Content Include="bin\SqlServerTypes\x64\msvcr120.dll" />
-    <Content Include="bin\SqlServerTypes\x64\SqlServerSpatial110.dll" />
     <Content Include="bin\SqlServerTypes\x64\SqlServerSpatial140.dll" />
-    <Content Include="bin\SqlServerTypes\x86\msvcr100.dll" />
     <Content Include="bin\SqlServerTypes\x86\msvcr120.dll" />
-    <Content Include="bin\SqlServerTypes\x86\SqlServerSpatial110.dll" />
     <Content Include="bin\SqlServerTypes\x86\SqlServerSpatial140.dll" />
-    <Content Include="bin\stdole.dll" />
     <Content Include="bin\System.IO.Compression.dll" />
     <Content Include="bin\System.Net.Http.dll" />
     <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
-    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.xml" />
     <Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
     <Content Include="bin\System.Text.Encodings.Web.dll" />
-    <Content Include="bin\System.Text.Encodings.Web.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -3277,6 +3231,7 @@
     <Content Include="packages\System.Xml.XDocument.4.3.0\System.Xml.XDocument.4.3.0.nupkg" />
     <Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
     <Content Include="packages\WindowsAzure.Storage.8.0.1\WindowsAzure.Storage.8.0.1.nupkg" />
+    <None Include="Properties\PublishProfiles\SNCRegistration - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -3292,19 +3247,18 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll" />
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />
-    <Content Include="SqlServerTypes\x86\msvcr120.dll" />
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Properties\PublishProfiles\SNCRegistration - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll" />
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />
+    <Content Include="SqlServerTypes\x86\msvcr120.dll" />
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="ViewModels\font-awesome\css\font-awesome.css" />
     <Content Include="ViewModels\font-awesome\css\font-awesome.min.css" />
     <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -3428,7 +3382,6 @@
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\EditRoles.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
-    <Content Include="Views\Reporting\Index.cshtml" />
     <Content Include="Views\Volunteers\Registered.cshtml" />
     <Content Include="Views\Participants\Registered.cshtml" />
     <Content Include="Views\FamilyMembers\Registered.cshtml" />
