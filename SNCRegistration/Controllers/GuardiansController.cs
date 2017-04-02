@@ -367,7 +367,7 @@ namespace SNCRegistration.Controllers
             catch (Exception err)
             {
 
-                ModelState.AddModelError("DBerror", "Unable to Delete Guardian. Please delete participant and family member records first before deleting Guardian.");
+                ModelState.AddModelError("DBerror", "Unable to Delete Guardian. Please delete associated participant and family member records first before deleting Guardian.");
             }
 
 

@@ -286,10 +286,25 @@ namespace SNCRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             LeadContact leadContact = db.LeadContacts.Find(id);
-            db.LeadContacts.Remove(leadContact);
-            db.SaveChanges();
+
+
+
+            try
+            {
+                db.LeadContacts.Remove(leadContact);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception err)
+            {
+
+                ModelState.AddModelError("DBerror", "Unable to Delete LEad Contact. Please delete associated volunteer records first before deleting Lead Contact.");
+            }
+
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)
