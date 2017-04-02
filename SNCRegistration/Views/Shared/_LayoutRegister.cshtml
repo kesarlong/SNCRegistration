@@ -37,17 +37,16 @@
         <div class="container">
             <div class="row">
                 <div class="banner">
-                    <h2>Registration</h2>
                 </div>
                 <div class="col-sm-2">
                     <!-- Left column -->
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h4><span class="glyphicon glyphicon-wrench"></span>Tools</h4></div>
+                        <div class="panel-heading"><h4><span class="glyphicon glyphicon-list-alt"></span> Menu</h4></div>
                         <div class="panel-body">
                             <ul class="nav nav-stacked">
                                 <li class="nav-header">
                                     <ul class="nav nav-stacked collapse in">
-                                        <li><a href="@Url.Action("Index", "Home")"><em class="glyphicon glyphicon-home"></em>Home</a></li>
+                                        <li><a href="@Url.Action("Index", "Home")"><em class="glyphicon glyphicon-home"></em> Home</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-header">
@@ -67,7 +66,7 @@
 
 
                                 <li class="nav-header">
-                                    <a href="#" data-toggle="collapse" data-target="#menu3">Forms<i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    <a href="#" data-toggle="collapse" data-target="#menu3"><em class="glyphicon glyphicon-file"></em> Forms<i class="glyphicon glyphicon-chevron-right"></i></a>
                                     <ul class="nav nav-stacked collapse" id="menu3">
                                         <li>
                                             <a href="https://sncr.blob.core.windows.net/pdfs/ParticipantWelcomePacket.pdf" target="_blank">Event Info</a>
@@ -89,7 +88,7 @@
                 <div class="col-sm-10">
                     <div class="panel panel-default">
                         <!-- Dashboard panel contents -->
-                        <div class="panel-heading"><h3>Participant Registration</h3></div>
+                        <div class="panel-heading"><h3><em class="glyphicon glyphicon-user"></em> Participant Registration</h3></div>
                         <div class="panel-body">
                             @RenderBody()
                         </div>

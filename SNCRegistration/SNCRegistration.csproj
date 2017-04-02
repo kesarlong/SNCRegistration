@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -288,7 +288,6 @@
     <Compile Include="Controllers\CompletedRegistrationController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FamilyFriendsReportController.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
     <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
@@ -312,10 +311,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EmailHelpers.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="packages\Microsoft.SqlServer.Types.11.0.2\content\SqlServerTypes\Loader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\VolunteersController.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Age.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -340,14 +339,8 @@
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ChapterTroopUnit.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\CompletedRegistrationModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\Event.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FamilyFriendsReport.cs" />
@@ -355,6 +348,9 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FirstTimeAttendeeModel.cs" />
+    <Compile Include="ViewModels\FutureEvent.cs">
+      <DependentUpon>SNCRegistration.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -381,22 +377,20 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SNCRegistration.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>SNCRegistration.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="ViewModels\SNCRegistration.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>SNCRegistration.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="ViewModels\SNCRegistration.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Table.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -405,7 +399,6 @@
     <Compile Include="ViewModels\Volunteer.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\VolunteersController.cs" />
     <Compile Include="ViewModels\VolunteersFridayOnlyModel.cs" />
     <Compile Include="ViewModels\VolunteersFridayThruSaturdayModel.cs" />
     <Compile Include="ViewModels\VolunteersOvernightModel.cs" />
@@ -482,6 +475,7 @@
     <Content Include="bin\Microsoft.Owin.Security.Twitter.xml" />
     <Content Include="bin\Microsoft.Owin.Security.xml" />
     <Content Include="bin\Microsoft.Owin.xml" />
+    <Content Include="bin\Microsoft.ReportViewer.WebForms.DLL" />
     <Content Include="bin\Microsoft.SqlServer.Types.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
@@ -493,30 +487,69 @@
     <Content Include="bin\PagedList.xml" />
     <Content Include="bin\ReportViewerForMvc.dll" />
     <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
     <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
     <Content Include="bin\roslyn\System.AppContext.dll" />
     <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.Process.dll" />
     <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
     <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.DriveInfo.dll" />
     <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.IO.Pipes.dll" />
     <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Security.AccessControl.dll" />
+    <Content Include="bin\roslyn\System.Security.Claims.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Security.Principal.Windows.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.Threading.Thread.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
     <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bin\SNCRegistration.dll" />
+    <Content Include="bin\SNCRegistration.dll.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bin\SNCRegistration.pdb" />
+    <Content Include="bin\SqlServerTypes\x64\msvcr100.dll" />
     <Content Include="bin\SqlServerTypes\x64\msvcr120.dll" />
+    <Content Include="bin\SqlServerTypes\x64\SqlServerSpatial110.dll" />
     <Content Include="bin\SqlServerTypes\x64\SqlServerSpatial140.dll" />
+    <Content Include="bin\SqlServerTypes\x86\msvcr100.dll" />
     <Content Include="bin\SqlServerTypes\x86\msvcr120.dll" />
+    <Content Include="bin\SqlServerTypes\x86\SqlServerSpatial110.dll" />
     <Content Include="bin\SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="bin\stdole.dll" />
+    <Content Include="bin\System.IO.Compression.dll" />
+    <Content Include="bin\System.Net.Http.dll" />
     <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
     <Content Include="bin\System.Runtime.CompilerServices.Unsafe.xml" />
     <Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
@@ -596,13 +629,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="obj\Debug\SNCRegistration.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\SNCRegistration.dll" />
-    <Content Include="obj\Debug\SNCRegistration.pdb" />
-    <Content Include="obj\Debug\TempPE\Reporting.ParticipantsList.cs.dll" />
-    <Content Include="obj\Debug\TempPE\ReportingDataSet.ReportingDataSet.Designer.cs.dll" />
-    <Content Include="obj\Debug\TempPE\ViewModels.SNCRegistration.cs.dll" />
-    <Content Include="obj\Debug\TempPE\ViewModels.SNCRegistration.Designer.cs.dll" />
     <Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll" />
     <Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.pdb" />
     <Content Include="packages\bootstrap.3.3.7\content\Content\bootstrap-theme.css" />
@@ -624,11 +650,6 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.csdl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.msl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\ViewModels\SNCRegistration.ssdl" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
     <None Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="packages\jQuery.3.1.1\Content\Scripts\jquery-3.1.1.js" />
@@ -911,16 +932,24 @@
     <Content Include="packages\Microsoft.Extensions.Primitives.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.xml" />
     <Content Include="packages\Microsoft.jQuery.Unobtrusive.Validation.3.2.3\Content\Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="packages\Microsoft.jQuery.Unobtrusive.Validation.3.2.3\Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\Microsoft.Net.Compilers.1.3.2.nupkg" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\ThirdPartyNotices.rtf" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csc.exe" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csc.exe.config" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csc.rsp" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csi.exe" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csi.rsp" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.Build.Tasks.CodeAnalysis.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.CodeAnalysis.CSharp.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.CodeAnalysis.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.CodeAnalysis.Scripting.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.CSharp.Core.targets" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.DiaSymReader.Native.amd64.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.VisualBasic.Core.targets" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\System.AppContext.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\System.Collections.Immutable.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\System.Diagnostics.StackTrace.dll" />
@@ -928,7 +957,10 @@
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\System.IO.FileSystem.Primitives.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\System.Reflection.Metadata.dll" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\vbc.exe" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\vbc.exe.config" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\vbc.rsp" />
     <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\VBCSCompiler.exe" />
+    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\VBCSCompiler.exe.config" />
     <Content Include="packages\Microsoft.NETCore.Platforms.1.1.0\dotnet_library_license.txt" />
     <Content Include="packages\Microsoft.NETCore.Platforms.1.1.0\ThirdPartyNotices.txt" />
     <Content Include="packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll" />
@@ -2385,17 +2417,6 @@
     <Content Include="ClassDiagram_Controllers.cd" />
     <Content Include="ClassDiagram_Metadata.cd" />
     <Content Include="ClassDiagram1.cd" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="bin\SNCRegistration.dll.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="packages\Antlr.3.5.0.2\Antlr.3.5.0.2.nupkg" />
     <Content Include="packages\bootstrap.3.3.7\bootstrap.3.3.7.nupkg" />
     <Content Include="packages\bootstrap.3.3.7\content\Content\bootstrap-theme.css.map" />
@@ -2464,17 +2485,6 @@
     <Content Include="packages\Microsoft.Extensions.Options.1.1.0\Microsoft.Extensions.Options.1.1.0.nupkg" />
     <Content Include="packages\Microsoft.Extensions.Primitives.1.1.0\Microsoft.Extensions.Primitives.1.1.0.nupkg" />
     <Content Include="packages\Microsoft.jQuery.Unobtrusive.Validation.3.2.3\Microsoft.jQuery.Unobtrusive.Validation.3.2.3.nupkg" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\Microsoft.Net.Compilers.1.3.2.nupkg" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\ThirdPartyNotices.rtf" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csc.exe.config" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csc.rsp" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\csi.rsp" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.CSharp.Core.targets" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\vbc.exe.config" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\vbc.rsp" />
-    <Content Include="packages\Microsoft.Net.Compilers.1.3.2\tools\VBCSCompiler.exe.config" />
     <Content Include="packages\Microsoft.NETCore.Platforms.1.1.0\lib\netstandard1.0\_._" />
     <Content Include="packages\Microsoft.NETCore.Platforms.1.1.0\Microsoft.NETCore.Platforms.1.1.0.nupkg" />
     <Content Include="packages\Microsoft.NETCore.Platforms.1.1.0\runtime.json" />
@@ -3293,30 +3303,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="ViewModels\font-awesome\css\font-awesome.css" />
-    <Content Include="ViewModels\font-awesome\css\font-awesome.min.css" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="ViewModels\SNCRegistration.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SNCRegistration.edmx</DependentUpon>
-      <LastGenOutput>SNCRegistration.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ViewModels\SNCRegistration.edmx.sql" />
-    <Content Include="ViewModels\SNCRegistration.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SNCRegistration.edmx</DependentUpon>
-      <LastGenOutput>SNCRegistration.cs</LastGenOutput>
-    </Content>
+    <Content Include="SqlServerTypes\x64\msvcr120.dll" />
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />
+    <Content Include="SqlServerTypes\x86\msvcr120.dll" />
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="ViewModels\SNCRegistration.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SNCRegistration.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ViewModels\SNCRegistration.edmx.diagram">
-      <DependentUpon>SNCRegistration.edmx</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Properties\PublishProfiles\SNCRegistration - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery.js" />
@@ -3324,6 +3316,54 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="ViewModels\font-awesome\css\font-awesome.css" />
+    <Content Include="ViewModels\font-awesome\css\font-awesome.min.css" />
+    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="ViewModels\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="ViewModels\font-awesome\less\bordered-pulled.less" />
+    <Content Include="ViewModels\font-awesome\less\core.less" />
+    <Content Include="ViewModels\font-awesome\less\fixed-width.less" />
+    <Content Include="ViewModels\font-awesome\less\font-awesome.less" />
+    <Content Include="ViewModels\font-awesome\less\icons.less" />
+    <Content Include="ViewModels\font-awesome\less\larger.less" />
+    <Content Include="ViewModels\font-awesome\less\list.less" />
+    <Content Include="ViewModels\font-awesome\less\mixins.less" />
+    <Content Include="ViewModels\font-awesome\less\path.less" />
+    <Content Include="ViewModels\font-awesome\less\rotated-flipped.less" />
+    <Content Include="ViewModels\font-awesome\less\spinning.less" />
+    <Content Include="ViewModels\font-awesome\less\stacked.less" />
+    <Content Include="ViewModels\font-awesome\less\variables.less" />
+    <Content Include="ViewModels\font-awesome\scss\font-awesome.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_core.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_icons.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_larger.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_list.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_mixins.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_path.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_spinning.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_stacked.scss" />
+    <Content Include="ViewModels\font-awesome\scss\_variables.scss" />
+    <Content Include="ViewModels\SNCRegistration.Context.tt">
+      <DependentUpon>SNCRegistration.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SNCRegistration.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ViewModels\SNCRegistration.edmx.diagram">
+      <DependentUpon>SNCRegistration.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ViewModels\SNCRegistration.edmx.sql" />
+    <Content Include="ViewModels\SNCRegistration.tt">
+      <DependentUpon>SNCRegistration.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SNCRegistration.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -3411,42 +3451,6 @@
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Participants\Redirect.cshtml" />
-    <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Views\Events\Delete.cshtml" />
-    <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Events\Edit.cshtml" />
-    <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Events\ActiveRegistrationYear.cshtml" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="ViewModels\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="ViewModels\font-awesome\less\bordered-pulled.less" />
-    <Content Include="ViewModels\font-awesome\less\core.less" />
-    <Content Include="ViewModels\font-awesome\less\fixed-width.less" />
-    <Content Include="ViewModels\font-awesome\less\font-awesome.less" />
-    <Content Include="ViewModels\font-awesome\less\icons.less" />
-    <Content Include="ViewModels\font-awesome\less\larger.less" />
-    <Content Include="ViewModels\font-awesome\less\list.less" />
-    <Content Include="ViewModels\font-awesome\less\mixins.less" />
-    <Content Include="ViewModels\font-awesome\less\path.less" />
-    <Content Include="ViewModels\font-awesome\less\rotated-flipped.less" />
-    <Content Include="ViewModels\font-awesome\less\spinning.less" />
-    <Content Include="ViewModels\font-awesome\less\stacked.less" />
-    <Content Include="ViewModels\font-awesome\less\variables.less" />
-    <Content Include="ViewModels\font-awesome\scss\font-awesome.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_bordered-pulled.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_core.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_fixed-width.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_icons.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_larger.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_list.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_mixins.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_path.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_rotated-flipped.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_spinning.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_stacked.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_variables.scss" />
     <Content Include="Views\BoothCount\Index.cshtml" />
     <Content Include="Views\ParticipantsReport\Index.cshtml" />
     <Content Include="Views\VolunteersReport\Index.cshtml" />
@@ -3469,12 +3473,19 @@
     <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
     <Content Include="Views\WristBandCount\Index.cshtml" />
     <Content Include="Views\LeadContacts\Registered.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialBoothsList.cshtml" />
+    <Content Include="Views\Shared\_PartialParticipantList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />
+    <Folder Include="obj\" />
     <Folder Include="Resources\" />
+    <Folder Include="SqlServerTypes\x64\" />
+    <Folder Include="SqlServerTypes\x86\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
+    <Folder Include="Views\Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3483,6 +3494,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="ViewModels\SNCRegistration.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SNCRegistration.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -3517,7 +3534,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

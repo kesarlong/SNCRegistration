@@ -12,12 +12,12 @@ using PagedList;
 
 namespace SNCRegistration.Controllers
 {
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
     public class LeadContactsController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         // GET: LeadContacts
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
 
@@ -37,7 +37,7 @@ namespace SNCRegistration.Controllers
             ViewBag.CurrentFilter = searchString;
 
             ViewBag.CurrentYear = DateTime.Now.Year;
-            ViewBag.AllYears = (from y in db.Guardians select y.EventYear).Distinct();
+            ViewBag.AllYears = (from y in db.LeadContacts select y.EventYear).Distinct();
 
             var leadContacts = from s in db.LeadContacts
                                where s.EventYear == searchYear
@@ -67,8 +67,6 @@ namespace SNCRegistration.Controllers
 
 
         // GET: LeadContacts/Details/5
-
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Details(int? id)
         {
             //if (id == null)
@@ -102,6 +100,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: LeadContacts/Create
+        [OverrideAuthorization]
         public ActionResult Create()
         {
             ViewBag.ShirtSizes = new SelectList (db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
@@ -169,6 +168,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: LeadContacts/Edit/5
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Edit(int? id)
         {
@@ -187,6 +187,7 @@ namespace SNCRegistration.Controllers
         // POST: LeadContacts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
@@ -216,23 +217,9 @@ namespace SNCRegistration.Controllers
             return View(leadContact);
         }
 
-        // ORIGINAL EDIT, DELETE IF NOTHING BROKEN.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "LeadContactID,BSType,UnitChapterNumber,LeadContactFirstName,LeadContactLastName,LeadContactAddress,LeadContactCity,LeadContactState,LeadContactZip,LeadContactPhone,LeadContactEmail,VolunteerAttendingCode,SaturdayDinner,TotalFee,Booth,Comments,LeadContactShirtOrder,LeadContactShirtSize")] LeadContact leadContact)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(leadContact).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(leadContact);
-        //}
 
 
         // GET: Participants/CheckIn/5
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult CheckIn(int? id)
         {
             if (id == null)
@@ -251,7 +238,6 @@ namespace SNCRegistration.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
         public ActionResult CheckInPost(int? id)
@@ -285,6 +271,7 @@ namespace SNCRegistration.Controllers
 
 
         // GET: LeadContacts/Delete/5
+        [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Delete(int? id)
         {
@@ -301,6 +288,8 @@ namespace SNCRegistration.Controllers
         }
 
         // POST: LeadContacts/Delete/5
+        [OverrideAuthorization]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

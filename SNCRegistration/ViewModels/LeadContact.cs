@@ -18,6 +18,15 @@ using System;
 public partial class LeadContact
 {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public LeadContact()
+    {
+
+        this.FutureEvents = new HashSet<FutureEvent>();
+
+    }
+
+
     public int LeadContactID { get; set; }
 
     public int BSType { get; set; }
@@ -64,7 +73,9 @@ public partial class LeadContact
 
 
 
-    public virtual Event Event { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<FutureEvent> FutureEvents { get; set; }
 
 }
 
