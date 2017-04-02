@@ -382,6 +382,7 @@ namespace SNCRegistration.Controllers
         }
 
         //public ActionResult Redirect()
+        [OverrideAuthorization]
         public ActionResult Redirect([Bind(Include = "GuardianID,GuardianGuid"),
             ] Participant participant, string submit)
         {

@@ -95,7 +95,7 @@ namespace SNCRegistration.Controllers
         [OverrideAuthorization]
         public ActionResult Create()
         {
-            ViewBag.ShirtSizes = new SelectList (db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.ShirtSizes = new SelectList (db.ShirtSizes.Where(s=>s.ShirtSizeCode!="00"), "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
 

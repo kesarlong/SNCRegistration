@@ -99,10 +99,15 @@
     </div>
     <br />
 
+    //set t-shirt value to no shirt default
+    <div>
+        @Html.HiddenFor(model => model.VolunteerShirtSize, new { @Value = "00" })
+    </div>
+
          <div class="form-group" id="ShirtSize">
     @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
     @Html.DropDownListFor(model => model.VolunteerShirtSize,
-     ViewBag.ShirtSizes as SelectList
+     ViewBag.ShirtSizes as SelectList, "-Select Option-"
     , new { @class = "form-control", style = "width: 220px" })
     @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
 </div>

@@ -3420,6 +3420,9 @@
     <Content Include="Views\Shared\_PartialParticipantList.cshtml" />
     <Content Include="Views\Shared\_PartialTeeShirtOrdersList.cshtml" />
     <Content Include="Views\Shared\_PartialWristBandCountList.cshtml" />
+    <Content Include="Views\Participants\AddAdditionalParticipant.cshtml" />
+    <Content Include="Views\Volunteers\AddAdditionalVolunteer.cshtml" />
+    <Content Include="Views\FamilyMembers\AddAdditionalFamily.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="font-awesome\" />

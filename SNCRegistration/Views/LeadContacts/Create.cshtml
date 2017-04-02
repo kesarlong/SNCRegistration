@@ -17,7 +17,7 @@
 
 </script>
 
-@using System.Collections.Generic; 
+@using System.Collections.Generic;
 
 @model SNCRegistration.ViewModels.LeadContact
 @{
@@ -66,15 +66,15 @@
             @Html.ValidationMessageFor(model => model.LeadContactLastName, "", new { @class = "text-danger" })
         </div>
     </div>
-            <br />
-            @Html.LabelFor(model => model.LeadContactAddress, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="row">
+    <br />
+    @Html.LabelFor(model => model.LeadContactAddress, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="row">
 
-                <div class="col-md-9">
-                    @Html.EditorFor(model => model.LeadContactAddress, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LeadContactAddress, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.LeadContactAddress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LeadContactAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
             <br />
             @Html.LabelFor(model => model.LeadContactCity, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="row">
@@ -173,14 +173,25 @@
             </div>
             <br />
             <div class="form-group">
-                <div class="btn-group" data-toggle="buttons">
-                    @*@Html.LabelFor(model => model.Marketing, htmlAttributes: new { @class = "control-label" })<br />*@
-                    <label class="control-label" for="Marketing">Do you want to receive notification of upcoming events?</label><br/>
-                    <label class="btn btn-default">
+                @*to do: remove after tested*@
+
+                @*<div class="btn-group" data-toggle="buttons">*@
+                @*@Html.LabelFor(model => model.Marketing, htmlAttributes: new { @class = "control-label" })<br />*@
+                @*<label class="control-label" for="Marketing">Do you want to receive notification of upcoming events?</label><br/>*@
+                @*<label class="btn btn-default">
                         @Html.RadioButtonFor(model => model.Marketing, true, new { @checked = "checked" }) Yes
                     </label>
                     <label class="btn btn-default">
                         @Html.RadioButtonFor(model => model.Marketing, false) No
+                    </label>*@
+
+                <div class="btn-group" data-toggle="buttons" id="marketing">
+                    <label class="control-label" for="Marketing">Do you want to receive notification of upcoming events?</label><br />
+                    <label id="chkYes" label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.Marketing, true, new { @id = "chkYes", @name = "marketing" }) Yes
+                    </label>
+                    <label id="chkNo" label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.Marketing, false, new { @id = "chkNo", @name = "marketing" }) No
                     </label>
                 </div>
                 @Html.ValidationMessageFor(model => model.Marketing, "", new { @class = "text-danger" })
@@ -200,31 +211,37 @@
             </div>
             <br />
 
-                    <div class="form-group" id="ShirtSize">
-                        @Html.LabelFor(model => model.LeadContactShirtSize, htmlAttributes: new { @class = "control-label" })
-                      
-                        @Html.DropDownListFor(model => model.LeadContactShirtSize,
-                            ViewBag.ShirtSizes as SelectList
+            //set t-shirt value to no shirt default
+            <div>
+                @Html.HiddenFor(model => model.LeadContactShirtSize, new { @Value = "00" })
+            </div>
+
+            //user will select shirt size if select to order a t-shirt
+            <div class="form-group" id="ShirtSize">
+                @Html.LabelFor(model => model.LeadContactShirtSize, htmlAttributes: new { @class = "control-label" })
+
+                @Html.DropDownListFor(model => model.LeadContactShirtSize,
+                            ViewBag.ShirtSizes as SelectList, "-Select Option-"
                             , new { @class = "form-control", style = "width: 200px" })
 
-                        @*@Html.DropDownListFor(model => model.LeadContactShirtSize, *@
-                        @*//new List<SelectListItem>{
-                        //    new SelectListItem{ Value = "00", Text = "-Select Size-" },
-                        //     new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
-                        //    new SelectListItem{ Value = "YS", Text = "Youth - Small" },
-                        //    new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
-                        //    new SelectListItem{ Value = "YL", Text = "Youth - Large" },
-                        //    new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
-                        //    new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
-                        //    new SelectListItem{ Value = "AS", Text = "Adult - Small" },
-                        //    new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
-                        //    new SelectListItem{ Value = "AL", Text = "Adult - Large" },
-                        //    new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" },
-                        //}, new { @class = "form-control", style = "width: 200px" })*@
-                        @Html.ValidationMessageFor(model => model.LeadContactShirtSize, "", new { @class = "text-danger" })
-                    </div>
+                @*@Html.DropDownListFor(model => model.LeadContactShirtSize, *@
+                @*//new List<SelectListItem>{
+                    //    new SelectListItem{ Value = "00", Text = "-Select Size-" },
+                    //     new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
+                    //    new SelectListItem{ Value = "YS", Text = "Youth - Small" },
+                    //    new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
+                    //    new SelectListItem{ Value = "YL", Text = "Youth - Large" },
+                    //    new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
+                    //    new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
+                    //    new SelectListItem{ Value = "AS", Text = "Adult - Small" },
+                    //    new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
+                    //    new SelectListItem{ Value = "AL", Text = "Adult - Large" },
+                    //    new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" },
+                    //}, new { @class = "form-control", style = "width: 200px" })*@
+                @Html.ValidationMessageFor(model => model.LeadContactShirtSize, "", new { @class = "text-danger" })
+            </div>
 
-                    <br />
+            <br />
                     <div class="form-group">
                         @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
                         @Html.DropDownListFor(model => model.BSType,
@@ -287,13 +304,15 @@
                             @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0 })
-                    @Html.HiddenFor(model => model.EventYear, new { @Value = 0 })
+
                     <div>
                         <!--set default values for fields not set in initial form-->
+                        @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0 })
                         @Html.HiddenFor(model => model.TotalFee, new { @Value = 0 })
                         @Html.HiddenFor(model => model.EventYear, new { @Value = 0 })
+                        @Html.HiddenFor(model => model.CheckedIn, new { @value = 0 })
                     </div>
+
                     <hr />
                     <div class="form-group pull-right">
                         <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Dispose" />
