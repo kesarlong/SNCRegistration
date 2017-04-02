@@ -83,7 +83,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.leadContact.SaturdayDinner)
+            Saturday Dinner?
         </dt>
 
         <dd>
@@ -106,16 +106,9 @@
             @Html.DisplayFor(model => model.leadContact.Booth)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.leadContact.Comments)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.leadContact.Comments)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.leadContact.LeadContactShirtOrder)
+            Ordered Shirt?
         </dt>
 
         <dd>
@@ -134,6 +127,14 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.leadContact.CheckedIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leadContact.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leadContact.Comments)
         </dd>
 
     </dl>
@@ -185,3 +186,6 @@
     }
 
 </table>
+<div style="float: right;">
+    @Html.ActionLink("+ Add Additional Volunteer", "AddAdditionalVolunteer", "Volunteers", new { leaderGuid = Model.leadContact.LeaderGuid, leaderID = Model.leadContact.LeadContactID }, new { @class = "btn btn-default" })
+</div>

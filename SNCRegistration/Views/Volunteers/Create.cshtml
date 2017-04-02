@@ -70,14 +70,6 @@
         @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.VolunteerAge,
         ViewBag.Age as SelectList, "- Select option - "
-            //new List<SelectListItem>{
-            //    new SelectListItem{ Value = "", Text = "-Select Age-" },
-            //    new SelectListItem{ Value = "1", Text = "Under 6" },
-            //    new SelectListItem{ Value = "2", Text = "7-10" },
-            //    new SelectListItem{ Value = "3", Text = "11-13" },
-            //    new SelectListItem{ Value = "4", Text = "14-17" },
-            //    new SelectListItem{ Value = "5", Text = "18-20" },
-            //    new SelectListItem{ Value = "6", Text = "Over 21" }
             , new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.VolunteerAge, "", new { @class = "text-danger" })
     </div>
@@ -111,18 +103,6 @@
     @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
     @Html.DropDownListFor(model => model.VolunteerShirtSize,
      ViewBag.ShirtSizes as SelectList
-    //new List<SelectListItem>{
-    //    new SelectListItem{ Value = "00", Text = "-Select Size-" },
-    //     new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
-    //    new SelectListItem{ Value = "YS", Text = "Youth - Small" },
-    //    new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
-    //    new SelectListItem{ Value = "YL", Text = "Youth - Large" },
-    //    new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
-    //    new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
-    //    new SelectListItem{ Value = "AS", Text = "Adult - Small" },
-    //    new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
-    //    new SelectListItem{ Value = "AL", Text = "Adult - Large" },
-    //    new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" }
     , new { @class = "form-control", style = "width: 220px" })
     @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
 </div>
@@ -133,11 +113,6 @@
             @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
             @Html.DropDownListFor(model => model.VolunteerAttendingCode,
             ViewBag.Attendance as SelectList, "- Select option - "
-            //new List<SelectListItem>{
-            //    new SelectListItem{ Value = "", Text = "-Select-" },
-            //    new SelectListItem{ Value = "1", Text = "Friday Evening Only" },
-            //    new SelectListItem{ Value = "2", Text = "Saturday Only" },
-            //    new SelectListItem{ Value = "4", Text = "Friday through Sunday" }
             , new { @class = "form-control", style = "width: 220px" })
             @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
         </div>
@@ -186,27 +161,18 @@
         <input type="submit" name="submit" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" />
     </div>
 
-    <!-- <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.LeaderGuid, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.DisplayFor(model => model.LeaderGuid, new { htmlAttributes = new { @class = "form-control" } })
+
+                    @*@Html.LabelFor(model => model.LeaderGuid, htmlAttributes: new { @class = "control-label col-md-3" })*@
+
+                        @*@Html.DisplayFor(model => model.LeaderGuid, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.LeaderGuid, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    -->
+
 
     @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0 })
     @Html.HiddenFor(model => model.EventYear, new { @Value = 0 })
     @Html.HiddenFor(model => model.VolunteerFee, new { @Value = 0 })
 }
 
-@*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
