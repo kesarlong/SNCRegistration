@@ -14,49 +14,93 @@ namespace SNCRegistration.Controllers
 {
     public class PendingRegistrationReportController : Controller
     {
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         // GET: PendingRegistrationsReport
-        public ActionResult Index()
+        public ActionResult Index(int? eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
-            SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantFirstName, ParticipantLastName, HealthForm, PhotoAck FROM Participants WHERE HealthFOrm = 0 AND PhotoAck = 0 UNION SELECT GuardianFirstName, GuardianLastName, HealthFOrm, PhotoAck FROM Guardians WHERE HealthForm = 0 AND PhotoAck = 0 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = 0 AND PhotoAck = 0;";
+
+            // Dropdown List For Event Year
+            ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
+            List<PendingRegistrationModel> model = new List<PendingRegistrationModel>();
+            string query = String.Empty;
             DataTable dt = new DataTable();
-            con.Open();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            da.Fill(dt);
-            con.Close();
-            IList<PendingRegistrationsReport> model = new List<PendingRegistrationsReport>();
-            for (int i = 0; i < dt.Rows.Count; i++)
+
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
                 {
-                model.Add(new PendingRegistrationsReport()
+                dt = new DataTable();
+                connection.Open();
+                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
+                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
+                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 0 OR PhotoAck = 0  AND EventYear = @EventYear "
+                    + "ORDER BY ParticipantFirstName ASC");
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
-                    ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
-                    ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
-                    HealthForm = dt.Rows[i]["HealthForm"].ToString(),
-                    PhotoAck = dt.Rows[i]["PhotoAck"].ToString()
-                    });
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new PendingRegistrationModel()
+                        {
+                        Registrant = x["Registrant"].ToString(),
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        }).ToList();
+                    }
                 }
             return View(model);
             }
 
-        public ActionResult PendingRegistrationReport()
+        //Get the year onchange javascript
+        public ActionResult GetPendingRegistrationReportByYear(int eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
-            SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantFirstName, ParticipantLastName, HealthForm, PhotoAck FROM Participants WHERE HealthFOrm = 0 AND PhotoAck = 0 UNION SELECT GuardianFirstName, GuardianLastName, HealthFOrm, PhotoAck FROM Guardians WHERE HealthForm = 0 AND PhotoAck = 0 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = 0 AND PhotoAck = 0;";
+            List<PendingRegistrationModel> model = new List<PendingRegistrationModel>();
+            string query = String.Empty;
             DataTable dt = new DataTable();
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
+                {
+                dt = new DataTable();
+                connection.Open();
+                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
+                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
+                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = 0 OR PhotoAck = 0  AND EventYear = @EventYear "
+                    + "ORDER BY ParticipantFirstName ASC";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new PendingRegistrationModel()
+                        {
+                        Registrant = x["Registrant"].ToString(),
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        }).ToList();
+                    }
+                }
+            return PartialView("_PartialPendingRegistrationList", model);
+            }
+
+        //Export to excel
+        public ActionResult PendingRegistrationReport(int eventYear)
+            {
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(constring);
+            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
+                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
+                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 0 OR PhotoAck = 0  AND EventYear = @EventYear "
+                    + "ORDER BY ParticipantFirstName ASC";
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
             dt.TableName = "Participants";
             con.Open();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
+            da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
             da.Fill(dt);
             con.Close();
-
             using (XLWorkbook wb = new XLWorkbook())
                 {
                 wb.Worksheets.Add(dt);
                 wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 wb.Style.Font.Bold = true;
-
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
@@ -71,8 +115,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-
-            return RedirectToAction("Index", "PeopleCheckedInCount");
+            return RedirectToAction("Index", "PendingRegistrationReport");
             }
 
         private void releaseObject(object obj)

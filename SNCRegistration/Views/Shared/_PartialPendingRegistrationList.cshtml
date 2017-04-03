@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.CompletedRegistrationModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.PendingRegistrationModel>
 
 @foreach (var item in Model)
     {
@@ -13,4 +13,5 @@
             @Html.DisplayFor(modelItem => item.ParticipantLastName)
         </td>
     </tr>
+   
     }

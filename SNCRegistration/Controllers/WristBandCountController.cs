@@ -14,6 +14,9 @@ namespace SNCRegistration.Controllers
 {
     public class WristBandCountController : Controller
     {
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         // GET: WristBandCount
         public ActionResult Index(int? eventYear)
             {
@@ -76,8 +79,7 @@ namespace SNCRegistration.Controllers
                 }
             return PartialView("_PartialWristBandCountList", model);
             }
-
-
+        
         //Export to excel
         public ActionResult WristBandCount(int eventYear)
             {
