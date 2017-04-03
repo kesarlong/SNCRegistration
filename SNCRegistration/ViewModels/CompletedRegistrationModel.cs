@@ -8,6 +8,8 @@ namespace SNCRegistration.ViewModels
     {
     public class CompletedRegistrationModel
         {
+        [Display(Name = "Registrant")]
+        public string Registrant { get; set; }
         [Display(Name = "First Name")]
         public string ParticipantFirstName { get; set; }
         [Display(Name = "Last Name")]
