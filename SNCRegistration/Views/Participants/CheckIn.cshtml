@@ -34,7 +34,30 @@
                 @Html.DisplayNameFor(model => model.ParticipantAge)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.ParticipantAge)
+                @if (Model.ParticipantAge == 1)
+                {
+                    <p>Under 6</p>
+                }
+                else if (Model.ParticipantAge == 2)
+                {
+                    <p>7-10</p>
+                }
+                else if (Model.ParticipantAge == 3)
+                {
+                  <p>11-13</p>
+                }
+                else if (Model.ParticipantAge == 4)
+                {
+                    <p>14-17</p>
+                }
+                else if (Model.ParticipantAge == 5)
+                {
+                    <p>18-20</p>
+                }
+                else if (Model.ParticipantAge == 6)
+                {
+                    <p>Over 21</p>
+                }
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.ParticipantSchool)
@@ -70,7 +93,14 @@
                 @Html.DisplayNameFor(model => model.AttendingCode)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.AttendingCode)
+                @if (Model.AttendingCode == 2)
+                {
+                    <p>Saturday Only</p>
+                }
+                else if (Model.AttendingCode == 3)
+                {
+                    <p>Overnight</p>
+                }
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Comments)

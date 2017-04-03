@@ -6,15 +6,13 @@ using System.Web;
 
 namespace SNCRegistration.ViewModels
     {
-    public class PendingRegistrationsReport
+    public class PendingRegistrationModel
         {
+        [Display(Name = "Registrant")]
+        public string Registrant { get; set; }
         [Display(Name = "First Name")]
         public string ParticipantFirstName { get; set; }
         [Display(Name = "Last Name")]
         public string ParticipantLastName { get; set; }
-        [Display(Name = "Health Form")]
-        public string HealthForm { get; set; }
-        [Display(Name = "Photo Acknowledgement")]
-        public string PhotoAck { get; set; }
         }
     }

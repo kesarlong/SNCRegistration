@@ -1,0 +1,115 @@
+﻿@model SNCRegistration.ViewModels.Participant
+
+@{
+    ViewBag.Title = "Add Additional Participant";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm())
+{ @Html.AntiForgeryToken()
+    <h4>Add Additional Participant</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.GuardianID, new { @Value = Session["gIDSession"] })
+    @Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gUIDSession"] })
+
+    @Html.ValidationMessageFor(model => model.GuardianGuid, "", new { @class = "text-danger" })
+    @Html.ValidationMessageFor(model => model.GuardianID, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ParticipantFirstName, htmlAttributes: new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.ParticipantFirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ParticipantFirstName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ParticipantLastName, htmlAttributes: new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.ParticipantLastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ParticipantLastName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ParticipantAge, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.ParticipantAge, ViewBag.ParticipantAge as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.ParticipantAge, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AttendingCode, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.AttendingCode,
+            ViewBag.Attendance as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
+        @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ParticipantSchool, htmlAttributes: new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.ParticipantSchool, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ParticipantSchool, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ParticipantTeacher, htmlAttributes: new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.ParticipantTeacher, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ParticipantTeacher, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <div class="btn-group" data-toggle="buttons">
+            @Html.Label("Participant in classroom scouting?")<br />
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.ClassroomScouting, true, new { id = "radio_ClassroomScouting_True" }) Yes
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.ClassroomScouting, false, new { id = "radio_ClassroomScouting_False" }) No
+            </label>
+        </div>
+        @Html.ValidationMessageFor(model => model.ClassroomScouting, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <div class="btn-group" data-toggle="buttons">
+            @Html.Label("Is this your first time at camp?")<br />
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Returning, true, new { id = "radio_returning_true" }) Yes
+            </label>
+            <label class="btn btn-default">
+                @Html.RadioButtonFor(model => model.Returning, false, new { id = "radio_returning_false" }) No
+            </label>
+        </div>
+        @Html.ValidationMessageFor(model => model.Returning, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        <!--set default values for fields not set in initial form-->
+        @Html.HiddenFor(model => model.HealthForm, new { @Value = false })
+        @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+        @Html.HiddenFor(model => model.PhotoAck, new { @Value = false })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+    </div>
+
+    <hr />
+
+    <div class="form-group pull-left">
+        <input type="submit" name="submit" id="Complete" value="Complete Additional Participant" class="btn btn-primary" />
+    </div>
+
+    <div class="form-group pull-right">
+        @Html.ActionLink("Back to Guardian Details", "Details", "Guardians", new { id = Session["gIDSession"] }, new { @class = "btn btn-info" })
+        
+    </div>
+}
+
+@section Scripts
+        {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
