@@ -599,11 +599,11 @@
     <Content Include="Views\CompletedRegistrationReport\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialParkingPassList.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\_PartialPendingRegistrationList.cshtml" />
-    <Content Include="Views\Shared\_PartialParkingPassList.cshtml" />
     <Content Include="Views\ParkingPass\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

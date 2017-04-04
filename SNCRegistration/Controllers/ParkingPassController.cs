@@ -20,8 +20,9 @@ namespace SNCRegistration.Controllers
         // GET: Reporting
         public ActionResult Index(int? eventYear)
             {
-            
+
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
+
             List<ParkingPassModel> model = new List<ParkingPassModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
@@ -49,7 +50,7 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetParticipantsByYear(int eventYear)
+        public ActionResult GetParkingPassByYear(int eventYear)
             {
             List<ParkingPassModel> model = new List<ParkingPassModel>();
             string query = String.Empty;
