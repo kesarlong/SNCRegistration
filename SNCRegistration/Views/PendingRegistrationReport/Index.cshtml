@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.PendingRegistrationModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.PendingRegistrationReportModel>
 
 @{
     ViewBag.Title = "Pending Registrations Count Report";
@@ -14,9 +14,7 @@
         </div>
         <div class="col-sm-9 text-right">
             <div class="col-sm-7"><h4>Select Event Year:</h4></div>
-
             <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
-
             <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
         </div>
     </div>
@@ -37,7 +35,6 @@
         </thead>
         <tbody>
             @Html.Partial("_PartialPendingRegistrationList", Model)
-        </tbody>
     </table>
     }
 
@@ -45,7 +42,7 @@
 @section scripts{
     <script>
         function updateGrid() {
-            $.post('/PendingRegistrationReport/GetPendingRegistrationReportByYear', { eventYear: $('#eventYear').val() }, function (data) {
+            $.post('/PendingRegistrationReport/GetPendingRegistrationByYear', { eventYear: $('#eventYear').val() }, function (data) {
                 $('table tbody').html(data);
             })
         }

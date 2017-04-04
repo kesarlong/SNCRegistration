@@ -6,55 +6,92 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace SNCRegistration.Controllers
 {
     public class VolunteersReportController : Controller
     {
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        // GET: VolunteersReport
-        public ActionResult Index()
+        // GET: Reporting
+        public ActionResult Index(int? eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
-            SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Volunteers";
+
+            // Get Volunteer Count to display in view
+
+            ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
+            List<VolunteersReportModel> model = new List<VolunteersReportModel>();
+            string query = String.Empty;
             DataTable dt = new DataTable();
-            con.Open();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            da.Fill(dt);
-            con.Close();
-            IList<VolunteersReportModel> model = new List<VolunteersReportModel>();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
                 {
-                model.Add(new VolunteersReportModel()
+                dt = new DataTable();
+                connection.Open();
+                query = String.Concat("SELECT VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName");
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
-                    VolunteerID = Convert.ToInt32(dt.Rows[i]["VolunteerID"]),
-                    VolunteerFirstName = dt.Rows[i]["VolunteerFirstName"].ToString(),
-                    VolunteerLastName = dt.Rows[i]["VolunteerLastName"].ToString(),
-                    });
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new VolunteersReportModel()
+                        {
+                        VolunteerFirstName = x["FirstName"].ToString(),
+                        VolunteerLastName = x["LastName"].ToString(),
+                        }).ToList();
+                    }
                 }
             return View(model);
             }
 
-        public ActionResult VolunteersReport()
+        //Get the year onchange javascript
+        public ActionResult GetVolunteersReportByYear(int eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
+            List<VolunteersReportModel> model = new List<VolunteersReportModel>();
+            string query = String.Empty;
+            DataTable dt = new DataTable();
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
+                {
+                dt = new DataTable();
+                connection.Open();
+                query = "SELECT VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new VolunteersReportModel()
+                        {
+                        
+                        VolunteerFirstName = x["FirstName"].ToString(),
+                        VolunteerLastName = x["LastName"].ToString(),
+                        }).ToList();
+                    }
+                }
+            return PartialView("_PartialVolunteersReportList", model);
+            }
+
+        //Export to excel
+        public ActionResult VolunteersReport(int eventYear)
+            {
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Volunteers";
+            string query = "SELECT VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
+            da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
             da.Fill(dt);
             con.Close();
-
             using (XLWorkbook wb = new XLWorkbook())
                 {
                 wb.Worksheets.Add(dt);
                 wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 wb.Style.Font.Bold = true;
-
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
@@ -69,7 +106,6 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-
             return RedirectToAction("Index", "VolunteersReport");
             }
 
