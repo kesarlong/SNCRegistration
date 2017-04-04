@@ -34,6 +34,7 @@ namespace SNCRegistration.Controllers
             ViewBag.WristBandCount = GetWristBandCount();
             ViewBag.PeopleCheckedInCount = GetPeopleCheckedInCount();
             ViewBag.AldenRoadCount = GetAldenRoadCount();
+            ViewBag.ParkingPassCount = db.Guardians.Count();
             return View();
             }
         protected override void Dispose(bool disposing)

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.ParkingPassModel>
+
+@{
+    ViewBag.Title = "Parking Pass";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+@using (Html.BeginForm("ParkingPass", "ParkingPass", FormMethod.Post))
+    {
+    <h2>Parking Pass</h2>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>Total: @Model.Count()</h4>
+        </div>
+        <div class="col-sm-9 text-right">
+            <div class="col-sm-7"><h4>Select Event Year:</h4></div>
+            <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
+            <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.GuardianFirstName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.GuardianFirstName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.GuardianCellPhone)
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                @Html.Partial("_PartialParkingPassList", Model)
+            </tbody>
+        </table>
+                }
+
+@section scripts{
+    <script>
+        function updateGrid() {
+            $.post('/ParkingPass/GetParkingPassByYear', { eventYear: $('#eventYear').val() }, function (data) {
+                $('table tbody').html(data);
+            })
+        }
+    </script>
+}

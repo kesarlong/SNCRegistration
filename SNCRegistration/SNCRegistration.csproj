@@ -291,6 +291,7 @@
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
+    <Compile Include="Controllers\ParkingPassController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
     <Compile Include="Controllers\PendingRegistrationReportController.cs" />
     <Compile Include="Controllers\PeopleCheckedInCountController.cs" />
@@ -349,6 +350,7 @@
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ParkingPassModel.cs" />
     <Compile Include="ViewModels\GuardianParticipantFamily.cs" />
     <Compile Include="ViewModels\IdentityModels.cs" />
     <Compile Include="ViewModels\LeadContact.cs">
@@ -601,6 +603,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\_PartialPendingRegistrationList.cshtml" />
+    <Content Include="Views\Shared\_PartialParkingPassList.cshtml" />
+    <Content Include="Views\ParkingPass\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
