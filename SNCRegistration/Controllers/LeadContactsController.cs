@@ -12,7 +12,7 @@ using PagedList;
 
 namespace SNCRegistration.Controllers
 {
-    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
     public class LeadContactsController : Controller
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();

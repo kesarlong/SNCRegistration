@@ -15,7 +15,7 @@ namespace SNCRegistration.Controllers
 
 {
 
-    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+    [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
     public class GuardiansController : Controller
 	{
 		private SNCRegistrationEntities db = new SNCRegistrationEntities();

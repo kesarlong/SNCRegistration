@@ -6,26 +6,24 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace SNCRegistration.Controllers
-{
-    public class PendingRegistrationReportController : Controller
     {
+    public class VolunteersCoverSheetController: Controller
+        {
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
-        // GET: PendingRegistrationsReport
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        // GET: Reporting
         public ActionResult Index(int? eventYear)
             {
 
-            // Dropdown List For Event Year
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
 
-            List<PendingRegistrationReportModel> model = new List<PendingRegistrationReportModel>();
+            List<VolunteersCoverSheetModel> model = new List<VolunteersCoverSheetModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -33,19 +31,16 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants "
-                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians "
-                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers "
-                    + "WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC");
+                query = String.Concat("SELECT VolunteerID, VolunteerFirstName, VolunteerLastName FROM Volunteers WHERE EventYear = @EventYear ORDER BY VolunteerFirstName");
+                  
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new PendingRegistrationReportModel()
+                    model = dt.AsEnumerable().Select(x => new VolunteersCoverSheetModel()
                         {
-                        Registrant = x["Registrant"].ToString(),
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
+                        VolunteerLastName = x["VolunteerLastName"].ToString(),
                         }).ToList();
                     }
                 }
@@ -53,9 +48,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetPendingRegistrationByYear(int eventYear)
+        public ActionResult GetVolunteersCoverSheetByYear(int eventYear)
             {
-            List<PendingRegistrationReportModel> model = new List<PendingRegistrationReportModel>();
+            List<VolunteersCoverSheetModel> model = new List<VolunteersCoverSheetModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -63,38 +58,31 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants "
-                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians "
-                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers "
-                    + "WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+                query = "SELECT VolunteerID, VolunteerFirstName, VolunteerLastName FROM Volunteers WHERE EventYear = @EventYear ORDER BY VolunteerFirstName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new PendingRegistrationReportModel()
+                    model = dt.AsEnumerable().Select(x => new VolunteersCoverSheetModel()
                         {
-                        Registrant = x["Registrant"].ToString(),
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
+                        VolunteerLastName = x["VolunteerLastName"].ToString(),
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialPendingRegistrationList", model);
+            return PartialView("_PartialVolunteersCoverSheetList", model);
             }
 
         //Export to excel
-        public ActionResult PendingRegistrationReport(int eventYear)
+        public ActionResult VolunteersCoverSheet(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants "
-                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians "
-                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers "
-                    + "WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+            string query = "SELECT VolunteerID, VolunteerFirstName, VolunteerLastName FROM Volunteers WHERE EventYear = @EventYear ORDER BY VolunteerFirstName";
             DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            dt.TableName = "Participants";
+            dt.TableName = "Volunteers";
             con.Open();
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
             da.Fill(dt);
             con.Close();
@@ -107,7 +95,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= PendingRegistrationReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= VolunteersCoverSheet.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -117,7 +105,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", "PendingRegistrationReport");
+            return RedirectToAction("Index", "VolunteersCoverSheet");
             }
 
         private void releaseObject(object obj)

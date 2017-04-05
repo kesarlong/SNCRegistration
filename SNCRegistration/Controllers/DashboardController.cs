@@ -15,7 +15,7 @@ namespace SNCRegistration.Controllers
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
         // GET: Dashboard
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         public ActionResult Index()
             {
             ViewBag.ParticipantsCount = db.Participants.Count();

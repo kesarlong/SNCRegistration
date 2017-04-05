@@ -1,16 +1,13 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersSaturdayOnlyModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersCoverSheetModel>
 
 @{
-    ViewBag.Title = "Volunteers Report";
+    ViewBag.Title = "Volunteers Cover Sheet";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-
-@using (Html.BeginForm("VolunteersSaturdayOnly", "VolunteersSaturdayOnly", FormMethod.Post))
+@using (Html.BeginForm("VolunteersCoverSheet", "VolunteersCoverSheet", FormMethod.Post))
     {
-
-
-    <h2>Volunteers Saturday Only Report</h2>
+    <h2>Volunteers Cover Sheet</h2>
     <div class="row">
         <div class="col-sm-3">
             <h4>Total: @Model.Count()</h4>
@@ -30,23 +27,20 @@
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.VolunteerLastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.VolunteerFirstName)
                 </th>
             </tr>
-        </thead>
-        <tbody>
-            @Html.Partial("_PartialVolunteersSaturdayOnlyList", Model)
-        </tbody>
-    </table>
-    }
+            </thead>
+            <tbody>
+                @Html.Partial("_PartialVolunteersCoverSheetList", Model)
+            </tbody>
+        </table>
+                }
 
 @section scripts{
     <script>
         function updateGrid() {
-            $.post('/VolunteersSaturdayOnly/GetVolunteersSaturdayOnlyByYear', { eventYear: $('#eventYear').val() }, function (data) {
+            $.post('/VolunteersCoverSheet/GetVolunteersCoverSheetByYear', { eventYear: $('#eventYear').val() }, function (data) {
                 $('table tbody').html(data);
             })
         }
