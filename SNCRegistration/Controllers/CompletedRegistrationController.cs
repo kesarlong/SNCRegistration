@@ -15,9 +15,6 @@ namespace SNCRegistration.Controllers
 {
     public class CompletedRegistrationController : Controller
     {
-        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
-        private SNCRegistrationEntities db = new SNCRegistrationEntities();
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         // GET: CompletedRegistration
         public ActionResult Index(int? eventYear)
             {

@@ -290,7 +290,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\VolunteersCoverSheetController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\ParkingPassController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
@@ -399,7 +398,6 @@
     </Compile>
     <Compile Include="ViewModels\VolunteersFridayOnlyModel.cs" />
     <Compile Include="ViewModels\VolunteersFridayThruSaturdayModel.cs" />
-    <Compile Include="ViewModels\VolunteersCoverSheetModel.cs" />
     <Compile Include="ViewModels\VolunteersOvernightModel.cs" />
     <Compile Include="ViewModels\VolunteersReportModel.cs" />
     <Compile Include="ViewModels\VolunteersSaturdayOnlyModel.cs" />
@@ -608,10 +606,6 @@
     <Content Include="Views\ParkingPass\Index.cshtml" />
     <Content Include="Views\Shared\_PartialVolunteersReportList.cshtml" />
     <Content Include="Views\CompletedRegistrationReport\Index.cshtml" />
-    <Content Include="Views\VolunteersCoverSheet\Index.cshtml" />
-    <Content Include="Views\Shared\_PartialVolunteersCoverSheetList.cshtml" />
-    <Content Include="Views\Shared\_PartialVolunteersSaturdayOnlyList.cshtml" />
-    <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3425,6 +3419,7 @@
     <Content Include="Views\VolunteersFridayOnly\Index.cshtml" />
     <Content Include="Views\VolunteersFridayThruSaturday\Index.cshtml" />
     <Content Include="Views\VolunteersOvernight\Index.cshtml" />
+    <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
     <Content Include="Views\WristBandCount\Index.cshtml" />
     <Content Include="Views\LeadContacts\Registered.cshtml" />
     <Content Include="Views\Shared\_PartialBoothsList.cshtml" />
