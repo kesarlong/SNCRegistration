@@ -156,7 +156,7 @@
     <hr />
 
     <div class="form-group pull-right">
-        <input type="reset" value="Reset Form" class="btn btn-danger" onsubmit="Dispose" />
+        <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "LeadContacts") + "'");" />
     </div>
 
     <div class="form-group pull-left">

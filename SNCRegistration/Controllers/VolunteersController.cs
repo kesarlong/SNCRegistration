@@ -125,6 +125,10 @@ namespace SNCRegistration.Controllers
                         if (Request["submit"].Equals("Add an additional volunteer"))
                     { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
 
+                    if (Request["submit"].Equals("Cancel"))
+                    { return RedirectToAction("Redirect", new { LeaderGuid = volunteer.LeaderGuid }); }
+                    
+
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
