@@ -302,15 +302,17 @@ namespace SNCRegistration.Controllers
 
 
 
-            if (familymember.HealthForm.Value == false && familymember.CheckedIn == false)
-            {
-                ModelState.AddModelError("", "Health Form must be received before check in.");
-            }
-            else
-            {
+
 
                 if (TryUpdateModel(familymember, "",
-               new string[] { "CheckedIn" }))
+               new string[] { "HealthForm", "PhotoAck", "CheckedIn" }))
+                {
+
+                if (familymember.HealthForm.Value == false && familymember.CheckedIn == true)
+                {
+                    ModelState.AddModelError("", "Health Form must be received before check in.");
+                }
+                else
                 {
                     try
                     {

@@ -143,7 +143,7 @@
             {
                 @Html.ActionLink("Check In", "CheckIn", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-success" }) { <text>|</text>}
 
-}
+            }
                 
             @Html.ActionLink("Edit", "Edit", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-info" }) |
             @Html.ActionLink("Delete", "Delete", new { id = Model.guardian.GuardianID }, new { @class = "btn btn-danger" }) |
@@ -255,9 +255,13 @@
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>
                 <td align="center">
-                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
-                </td>
+                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" }) 
+                   @if (!item.CheckedIn)
+                   {
+                       { <text>| </text>}
+                     @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
+                   }
+                 </td>
             </tr>
         }
 

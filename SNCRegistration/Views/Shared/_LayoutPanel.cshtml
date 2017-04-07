@@ -50,9 +50,14 @@
                                     <ul class="nav nav-stacked collapse in">
                                         <li><a href="@Url.Action("Index", "Manage")"><em class="glyphicon glyphicon-cog"></em> Manage Your Account</a></li>
                                     </ul>
-                                    <ul class="nav nav-stacked collapse in">
-                                        <li><a href="@Url.Action("ManageUsers", "Admin")"><em class="glyphicon glyphicon-user"></em> Manage Admin Users</a></li>
-                                    </ul>
+                                    @if (ViewContext.HttpContext.User.IsInRole("SystemAdmin"))
+                                    {
+                                        <ul class="nav nav-stacked collapse in">
+                                            <li><a href="@Url.Action("ManageUsers", "Admin")"><em class="glyphicon glyphicon-user"></em> Manage Admin Users</a></li>
+                                        </ul>
+                                    }
+
+                                   
 
                                 <li class="nav-header">
                                     <a href="#" data-toggle="collapse" data-target="#menu1"><em class="glyphicon glyphicon-th-list"></em> Manage Attendees<i class="glyphicon glyphicon-chevron-right"></i></a>

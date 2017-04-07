@@ -136,7 +136,11 @@
 
     <p align="right">
         <div align="right" style="margin-right:20px;">
-            @Html.ActionLink("Check In", "CheckIn", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-success" }) |
+           @if (!Model.participant.CheckedIn)
+           {
+
+            @Html.ActionLink("Check In", "CheckIn", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-success" })                { <text>| </text>}
+            }
             @Html.ActionLink("Edit", "Edit", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-info" }) |
             @Html.ActionLink("Delete", "Delete", new { id = Model.participant.ParticipantID }, new { @class = "btn btn-danger" }) |
             @Html.ActionLink("Back to Participant List", "Index", "Participants", new { }, new { @class = "btn btn-info" }) |
@@ -185,8 +189,12 @@
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>
                 <td align="center">
-                    @Html.ActionLink("Details", "Details", "Guardians", new { id = item.GuardianID }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Details", "Details", "Guardians", new { id = item.GuardianID }, new { @class = "btn btn-info" }) 
+                    @if (!item.CheckedIn)
+                    {
+                        { <text>| </text>}
                     @Html.ActionLink("Check In", "CheckIn", "Guardians", new { id = item.GuardianID }, new { @class = "btn btn-success" })
+                    }
                 </td>
             </tr>
         }
@@ -237,8 +245,12 @@
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>
                 <td align="center">
-                    @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" })
+                   @if (!item.CheckedIn)
+                   {
+                       { <text>| </text>}
+                     @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" })
+                   }
                 </td>
             </tr>
         }
@@ -287,8 +299,13 @@
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>
                 <td align="center">
-                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" })
+                   
+                   @if (!item.CheckedIn)
+                   {
+                       { <text>| </text>}
+                     @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
+                   }
                 </td>
             </tr>
         }

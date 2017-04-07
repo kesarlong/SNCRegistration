@@ -81,13 +81,59 @@
                 @Html.DisplayNameFor(model => model.HealthForm)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.HealthForm)
+                <div class="form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                        @Html.ValidationMessageFor(model => model.HealthForm, "", new { @class = "text-danger" })
+                        @if (Model.HealthForm == true)
+                {
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.HealthForm, "True", new { name = "HealthForm" }) Yes
+                            </label>
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.HealthForm, "False", new { name = "HealthForm" }) No
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.HealthForm, "True", new { name = "HealthForm" }) Yes
+                            </label>
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.HealthForm, "False", new { name = "HealthForm" }) No
+                            </label>
+
+                        }
+                    </div>
+                </div>
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.PhotoAck)
+                @Html.LabelFor(model => model.PhotoAck, htmlAttributes: new { @class = "control-label" })
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.PhotoAck)
+                <div class="form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                        @Html.ValidationMessageFor(model => model.PhotoAck, "", new { @class = "text-danger" })
+                        @if (Model.PhotoAck == true)
+                {
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "True", new { name = "PhotoAck" }) Yes
+                            </label>
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "False", new { name = "PhotoAck" }) No
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "True", new { name = "PhotoAck" }) Yes
+                            </label>
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "False", new { name = "PhotoAck" }) No
+                            </label>
+
+                        }
+                    </div>
+                </div>
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.AttendingCode)
