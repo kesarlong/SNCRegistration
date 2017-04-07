@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.ParkingPassModel>
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianCellPhone)
+        </td>
+    </tr>
+    }

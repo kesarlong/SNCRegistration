@@ -6,44 +6,43 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace SNCRegistration.Controllers
-{
-    public class PendingRegistrationReportController : Controller
     {
+    public class ParkingPassController : Controller
+        {
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        // GET: PendingRegistrationsReport
+        // GET: Reporting
         public ActionResult Index(int? eventYear)
             {
 
-            // Dropdown List For Event Year
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
-            List<PendingRegistrationModel> model = new List<PendingRegistrationModel>();
+
+            List<ParkingPassModel> model = new List<ParkingPassModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
-
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             using (var connection = new SqlConnection(constring))
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 0 OR PhotoAck = 0  AND EventYear = @EventYear "
-                    + "ORDER BY ParticipantFirstName ASC");
+                query = String.Concat("SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName");
+                  
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new PendingRegistrationModel()
+                    model = dt.AsEnumerable().Select(x => new ParkingPassModel()
                         {
-                        Registrant = x["Registrant"].ToString(),
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        GuardianID = Convert.ToInt32(x["GuardianID"]),
+                        GuardianFirstName = x["GuardianFirstName"].ToString(),
+                        GuardianLastName = x["GuardianLastName"].ToString(),
+                        GuardianCellPhone = x["GuardianCellPhone"].ToString(),
                         }).ToList();
                     }
                 }
@@ -51,9 +50,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetPendingRegistrationReportByYear(int eventYear)
+        public ActionResult GetParkingPassByYear(int eventYear)
             {
-            List<PendingRegistrationModel> model = new List<PendingRegistrationModel>();
+            List<ParkingPassModel> model = new List<ParkingPassModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -61,38 +60,33 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = 0 OR PhotoAck = 0  AND EventYear = @EventYear "
-                    + "ORDER BY ParticipantFirstName ASC";
+                query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new PendingRegistrationModel()
+                    model = dt.AsEnumerable().Select(x => new ParkingPassModel()
                         {
-                        Registrant = x["Registrant"].ToString(),
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        GuardianID = Convert.ToInt32(x["GuardianID"]),
+                        GuardianFirstName = x["GuardianFirstName"].ToString(),
+                        GuardianLastName = x["GuardianLastName"].ToString(),
+                        GuardianCellPhone = x["GuardianCellPhone"].ToString(),
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialPendingRegistrationList", model);
+            return PartialView("_PartialParkingPassList", model);
             }
 
         //Export to excel
-        public ActionResult PendingRegistrationReport(int eventYear)
+        public ActionResult ParkingPass(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 0 OR PhotoAck = 0  AND EventYear = @EventYear "
-                    + "ORDER BY ParticipantFirstName ASC";
+            string query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
             DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            dt.TableName = "Participants";
+            dt.TableName = "Guardians";
             con.Open();
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
             da.Fill(dt);
             con.Close();
@@ -105,7 +99,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= PendingRegistrationReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= ParkingPass.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -115,7 +109,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", "PendingRegistrationReport");
+            return RedirectToAction("Index", "ParkingPass");
             }
 
         private void releaseObject(object obj)

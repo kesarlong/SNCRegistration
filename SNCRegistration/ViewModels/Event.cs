@@ -15,14 +15,18 @@ namespace SNCRegistration.ViewModels
 using System;
     using System.Collections.Generic;
     
-public partial class Age
+public partial class Event
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Age()
+    public Event()
     {
 
         this.FamilyMembers = new HashSet<FamilyMember>();
+
+        this.Guardians = new HashSet<Guardian>();
+
+        this.LeadContacts = new HashSet<LeadContact>();
 
         this.Participants = new HashSet<Participant>();
 
@@ -31,15 +35,25 @@ public partial class Age
     }
 
 
-    public int AgeID { get; set; }
+    public int EventYear { get; set; }
 
-    public string AgeDescription { get; set; }
+    public bool Enrollment { get; set; }
+
+    public bool Reporting { get; set; }
 
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<FamilyMember> FamilyMembers { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Guardian> Guardians { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<LeadContact> LeadContacts { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

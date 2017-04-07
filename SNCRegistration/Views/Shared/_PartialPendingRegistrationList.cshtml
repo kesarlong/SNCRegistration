@@ -1,0 +1,17 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.PendingRegistrationModel>
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Registrant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantLastName)
+        </td>
+    </tr>
+   
+    }

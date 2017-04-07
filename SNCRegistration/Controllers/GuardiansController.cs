@@ -235,7 +235,7 @@ namespace SNCRegistration.Controllers
 
                     TempData["notice"] = "Edits Saved.";
 
-                    //return RedirectToAction("Details", "Guardians", new { id = guardian.GuardianID });
+                    return RedirectToAction("Details", "Guardians", new { id = guardian.GuardianID });
                 }
 				catch (DataException /* dex */)
 				{
@@ -283,27 +283,32 @@ namespace SNCRegistration.Controllers
 
 
 
-            if (guardian.HealthForm.Value == false && guardian.CheckedIn == false)
-            {
-                ModelState.AddModelError("", "Health Form must be received before check in.");
-            }
-            else
-            { 
-            if (TryUpdateModel(guardian, "",
-			   new string[] { "CheckedIn" }))
-			{
-				try
-				{
-					db.SaveChanges();
 
-                    TempData["notice"] = "Check In Status Saved!";
+            if (TryUpdateModel(guardian, "",
+			   new string[] { "HealthForm", "PhotoAck", "CheckedIn" }))
+			{
+
+
+                if (guardian.CheckedIn == true && guardian.HealthForm.Value == false)
+                {
+                    ModelState.AddModelError("", "Health Form must be received before check in.");
+                    return View(guardian);
                 }
-				catch (DataException /* dex */)
-				{
-					//Log the error (uncomment dex variable name and add a line here to write a log.
-					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-				}
-			}
+                else
+                {
+                    try
+                    {
+                        db.SaveChanges();
+
+                        TempData["notice"] = "Check In Status Saved!";
+                    }
+                    catch (DataException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    }
+
+                }
             }
             return View(guardian);
 

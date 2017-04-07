@@ -17,6 +17,7 @@ namespace SNCRegistration.Controllers
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
+
         // GET: Volunteers
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {

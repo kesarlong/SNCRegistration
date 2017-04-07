@@ -14,8 +14,6 @@ namespace SNCRegistration.Controllers
 {
     public class BoothCountController : Controller
     {
-        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
-        private SNCRegistrationEntities db = new SNCRegistrationEntities();
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         // GET: BoothCount
         public ActionResult Index(int? eventYear)
@@ -40,7 +38,6 @@ namespace SNCRegistration.Controllers
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new BoothCountModel()
                         {
-                        
                         Booth = x["Booth"].ToString(),
                         LeadContactFirstName = x["LeadContactFirstName"].ToString(),
                         LeadContactLastName = x["LeadContactLastName"].ToString(),
