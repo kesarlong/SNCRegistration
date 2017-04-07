@@ -6,9 +6,24 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <h4>Additional Attendees</h4>
+    <h3>Additional Attendees</h3>
     <hr />
+        <h5><font color="red">You must enter a value unless the field is marked as Optional</font></h5>
+        <p>
+
+            If you selected this form in error, the Cancel button will allow you to select a different form.<br />
+            <font color="grey">
+                Enter information for the participant attending camp then select your next action:<br />
+                &nbsp;&nbsp;&nbsp;1.  Complete Registration if no additional registrations needed.<br />
+                &nbsp;&nbsp;&nbsp;2.  Add Another Participant if there is another participant attending.<br />
+                &nbsp;&nbsp;&nbsp;3.  Add a Family Member to register additional family attending the event.<br />
+
+            </font>
+        </p>
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
 
     //added back for cancel feature
     @Html.HiddenFor(model => model.GuardianGuid, new { @Value = Session["gSession"] })
