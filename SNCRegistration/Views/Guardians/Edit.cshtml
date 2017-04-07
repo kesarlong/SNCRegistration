@@ -155,6 +155,31 @@
                 @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
         </div>
 
+
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.CheckedIn)
+            <br />
+            @if (Model.CheckedIn == true)
+            {
+                <label class="btn btn-default active">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                </label>
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+            }
+            else
+            {
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                </label>
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+
+            }
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
                 @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })

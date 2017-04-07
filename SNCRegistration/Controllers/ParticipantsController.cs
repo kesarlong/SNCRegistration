@@ -241,7 +241,7 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
                     TempData["notice"] = "Edits Saved.";
-                    // return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
+                    return RedirectToAction("Details", "Participants", new { id = participant.ParticipantID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -287,14 +287,16 @@ namespace SNCRegistration.Controllers
 
 
 
-            if (participant.HealthForm.Value == false && participant.CheckedIn == false)
-            {
-                ModelState.AddModelError("", "Health Form must be received before check in.");
-            }
-            else
-            {
                 if (TryUpdateModel(participant, "",
-                    new string[] { "CheckedIn" }))
+                    new string[] { "HealthForm", "PhotoAck", "CheckedIn" }))
+                {
+
+
+                if (participant.HealthForm.Value == false && participant.CheckedIn == true)
+                {
+                    ModelState.AddModelError("", "Health Form must be received before check in.");
+                }
+                else
                 {
                     try
                     {

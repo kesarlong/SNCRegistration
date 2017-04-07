@@ -170,6 +170,9 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             LeadContact leadContact = db.LeadContacts.Find(id);
+
+            SetGroupAttendingViewBag(leadContact.BSType, leadContact.VolunteerAttendingCode, leadContact.LeadContactShirtSize);
+
             if (leadContact == null)
             {
                 return HttpNotFound();
@@ -207,6 +210,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+            SetGroupAttendingViewBag(leadContact.BSType, leadContact.VolunteerAttendingCode, leadContact.LeadContactShirtSize);
             return View(leadContact);
         }
 
@@ -306,7 +310,7 @@ namespace SNCRegistration.Controllers
             catch (Exception err)
             {
 
-                ModelState.AddModelError("DBerror", "Unable to Delete LEad Contact. Please delete associated volunteer records first before deleting Lead Contact.");
+                ModelState.AddModelError("DBerror", "Unable to Delete Lead Contact. Please delete associated volunteer records first before deleting Lead Contact.");
             }
 
             return RedirectToAction("Index");
@@ -325,6 +329,31 @@ namespace SNCRegistration.Controllers
         public ActionResult GetYear()
         {
             return View("ActiveRegistrationYear");
+        }
+
+        private void SetGroupAttendingViewBag(int? bstgroup = null, int? attending = null, string shirtSize = null)
+        {
+
+            if (bstgroup == null)
+            {
+                ViewBag.bstID = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
+            }
+            else
+                ViewBag.bstID = new SelectList(db.BSTypes.ToArray(), "BSTypeID", "BSTypeDescription", bstgroup);
+
+            if (attending == null)
+            {
+                ViewBag.AttendanceID = new SelectList(db.Attendances, "AttendanceID", "Description");
+            }
+            else
+                ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description", attending);
+
+            if (shirtSize == null)
+            {
+                ViewBag.shirtSizeName = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            }
+            else
+                ViewBag.shirtSizeName = new SelectList(db.ShirtSizes.ToArray(), "ShirtSizeCode", "ShirtSizeDescription", shirtSize);
         }
     }
 }
