@@ -18,7 +18,7 @@ namespace SNCRegistration.Controllers
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         public ActionResult Index()
             {
-            ViewBag.ParticipantsCount = db.Participants.Count();
+            ViewBag.ParticipantsCount = GetParticipantsCount();
             ViewBag.VounteersFridayOnlyCount = GetVounteersFridayOnlyCount();
             ViewBag.VounteersSaturdayOnlyCount = GetVounteersSaturdayOnlyCount();
             ViewBag.VolunteersFridayThruSaturdayCount = GetVolunteersFridayThruSaturdayCount();
@@ -45,6 +45,21 @@ namespace SNCRegistration.Controllers
                 }
             base.Dispose(disposing);
             }
+
+        private int GetParticipantsCount(int eventYear)
+            {
+            using (var connection = new SqlConnection(constring))
+                {
+                connection.Open();
+                string query = "SELECT Count(*) FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = @EventYear";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                    cmd.Parameters.AddWithValue("@EventYear", eventYear);
+                    return (int)cmd.ExecuteScalar();
+                    }
+                }
+            }
+
 
         private int GetVounteersFridayOnlyCount()
             {
