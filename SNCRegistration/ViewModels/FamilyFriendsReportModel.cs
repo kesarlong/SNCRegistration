@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SNCRegistration.ViewModels
     {
-    public class FamilyFriendsReport
+    public class FamilyFriendsReportModel
         {
         public int FamilyMemberID { get; set; }
         [Display(Name = "First Name")]

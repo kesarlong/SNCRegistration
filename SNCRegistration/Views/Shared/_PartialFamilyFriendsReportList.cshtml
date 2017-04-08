@@ -1,0 +1,21 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.FamilyFriendsReportModel>
+
+
+<tr>
+    <td colspan="2">
+        <h4>Total: @Model.Count()</h4>
+    </td>
+</tr>
+
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FamilyMemberFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FamilyMemberLastName)
+        </td>
+    </tr>
+    }

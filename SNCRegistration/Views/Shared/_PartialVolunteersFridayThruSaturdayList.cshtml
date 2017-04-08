@@ -1,7 +1,7 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersReportModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersFridayThruSaturdayModel>
 
 <tr>
-    <td colspan="2">
+    <td colspan="3">
         <h4>Total: @Model.Count()</h4>
     </td>
 </tr>
@@ -14,6 +14,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.VolunteerLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
     </tr>
     }

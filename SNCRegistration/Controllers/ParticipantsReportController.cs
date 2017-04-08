@@ -16,13 +16,10 @@ namespace SNCRegistration.Controllers
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         // GET: Reporting
         public ActionResult Index(int? eventYear)
             {
-
-            // Get Participant Count to display in view
-            ViewBag.ParticipantsCount = db.Participants.Count();
 
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
             List<ParticipantsReportModel> model = new List<ParticipantsReportModel>();

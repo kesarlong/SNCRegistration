@@ -17,7 +17,7 @@ namespace SNCRegistration.Controllers
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         // GET: PendingRegistrationsReport
         public ActionResult Index(int? eventYear)
             {

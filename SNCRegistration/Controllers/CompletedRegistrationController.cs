@@ -6,15 +6,20 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 
 namespace SNCRegistration.Controllers
 {
     public class CompletedRegistrationController : Controller
     {
+
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+        // GET: Dashboard
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+
         // GET: CompletedRegistration
         public ActionResult Index(int? eventYear)
             {
@@ -29,12 +34,10 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck AND EventYear = @EventYear");
+                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
-                    adapter.SelectCommand.Parameters.AddWithValue("@HealthForm", 1);
-                    adapter.SelectCommand.Parameters.AddWithValue("@PhotoAck", 1);
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new CompletedRegistrationModel()
                         {
@@ -58,12 +61,10 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck AND EventYear = @EventYear";
+                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
-                    adapter.SelectCommand.Parameters.AddWithValue("@HealthForm", 1);
-                    adapter.SelectCommand.Parameters.AddWithValue("@PhotoAck", 1);
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new CompletedRegistrationModel()
                         {
@@ -81,14 +82,12 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck AND EventYear = @EventYear";
+            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear";
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             dt.TableName = "Participants";
             con.Open();
             da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
-            da.SelectCommand.Parameters.AddWithValue("@HealthForm", 1);
-            da.SelectCommand.Parameters.AddWithValue("@PhotoAck", 1);
             da.Fill(dt);
             con.Close();
             using (XLWorkbook wb = new XLWorkbook())

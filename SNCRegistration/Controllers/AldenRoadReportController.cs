@@ -13,7 +13,11 @@ namespace SNCRegistration.Controllers
     {
     public class AldenRoadReportController : Controller
         {
-     
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+        // GET: Dashboard
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+
         // GET: Reporting
         public ActionResult Index()
             {

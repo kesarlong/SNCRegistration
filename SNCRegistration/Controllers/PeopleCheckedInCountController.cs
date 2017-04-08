@@ -14,53 +14,92 @@ namespace SNCRegistration.Controllers
 {
     public class PeopleCheckedInCountController : Controller
     {
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         // GET: PeopleCheckedInCount
-        public ActionResult Index()
+        public ActionResult Index(int? eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
-            SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = 1 UNION SELECT GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = 1 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 UNION SELECT LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = 1 UNION SELECT VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = 1; ";
+            ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
+            List<PeopleCheckedInCountModel> model = new List<PeopleCheckedInCountModel>();
+            string query = String.Empty;
             DataTable dt = new DataTable();
-            con.Open();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            da.Fill(dt);
-            con.Close();
-            IList<PeopleCheckedInCountModel> model = new List<PeopleCheckedInCountModel>();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
                 {
-                model.Add(new PeopleCheckedInCountModel()
+                dt = new DataTable();
+                connection.Open();
+                query = String.Concat("SELECT UnitChapterNumber = 'NULL', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = 'NULL', 'Guardians', GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = 'NULL', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC");
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
-                    ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
-                    ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
-                    CheckedIn = dt.Rows[i]["CheckedIn"].ToString(),
-                    });
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new PeopleCheckedInCountModel()
+                        {
+                        UnitChapterNumber = x["UnitChapterNumber"].ToString(),
+                        Registrant = x["Registrant"].ToString(),
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        CheckedIn = x["CheckedIn"].ToString()
+                        }).ToList();
+                    }
                 }
             return View(model);
             }
 
-        public ActionResult PeopleCheckedInCount()
+        //Get the year onchange javascript
+        public ActionResult GetPeopleCheckedInCountByYear(int eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
-            SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = 1 UNION SELECT GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = 1 UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 UNION SELECT LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = 1 UNION SELECT VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = 1; ";
+            List<PeopleCheckedInCountModel> model = new List<PeopleCheckedInCountModel>();
+            string query = String.Empty;
             DataTable dt = new DataTable();
-            dt.TableName = "Participants";
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
+                {
+                dt = new DataTable();
+                connection.Open();
+                query = "SELECT UnitChapterNumber = 'NULL', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = 'NULL', 'Guardians', GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = 'NULL', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new PeopleCheckedInCountModel()
+                        {
+                        UnitChapterNumber = x["UnitChapterNumber"].ToString(),
+                        Registrant = x["Registrant"].ToString(),
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        CheckedIn = x["CheckedIn"].ToString()
+                        }).ToList();
+                    }
+                }
+            return PartialView("_PartialPeopleCheckedInList", model);
+            }
+
+        //Export to excel
+        public ActionResult PeopleCheckedInCount(int eventYear)
+            {
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(constring);
+            string query = "SELECT UnitChapterNumber = 'NULL', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = 'NULL', 'Guardians', GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = 'NULL', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+            DataTable dt = new DataTable();
+            dt.TableName = "Volunteers";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
+            da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
             da.Fill(dt);
             con.Close();
-
             using (XLWorkbook wb = new XLWorkbook())
                 {
                 wb.Worksheets.Add(dt);
                 wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 wb.Style.Font.Bold = true;
-
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= PeopleCheckedInCountReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= PeopleCheckedInCount.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -70,7 +109,6 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-
             return RedirectToAction("Index", "PeopleCheckedInCount");
             }
 
