@@ -17,7 +17,7 @@
 @using (Html.BeginForm("Index", "LeadContacts", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) &nbsp;&nbsp;  | &nbsp;&nbsp;
+        Find by name or TCU (Troop/Chapter/Unit): @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) &nbsp;&nbsp;  | &nbsp;&nbsp;
         Event year: @Html.DropDownList("searchYear", new SelectList(ViewBag.AllYears, ViewBag.CurrentYear))
         <input type="submit" value="Search" />
     </p>
@@ -27,16 +27,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+               <text>Last Name</text> @Html.ActionLink("▼", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
         </th>
         <th>
             First Name
         </th>
         <th>
-            Troop/Chapter/Unit Type
+           <text>TCU Type</text> @Html.ActionLink("▼", "Index", new { sortOrder = ViewBag.TcuTypeSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
         </th>
         <th>
-            Troop/Chapter/Unit Number
+            <text>TCU Number</text> @Html.ActionLink("▼", "Index", new { sortOrder = ViewBag.TcuNumSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
         </th>
         <th>
             Booth Name
@@ -44,6 +44,7 @@
         <th>
             Checked In?
         </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -78,9 +79,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.CheckedIn)
         </td>
+
         <td>
+            @if (!item.CheckedIn)
+            {
+                @Html.ActionLink("Check In", "CheckIn", new { id = item.LeadContactID }, new { @class = "btn btn-success" }) 
+
+            }
+        </td>
+
+        
         <td>@Html.ActionLink("Details", "Details", new { id = item.LeadContactID }, new { @class = "btn btn-info" })</td>
-        <td align="center"></td>
     </tr>
 }
 
@@ -89,4 +98,4 @@
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort }))
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort}))

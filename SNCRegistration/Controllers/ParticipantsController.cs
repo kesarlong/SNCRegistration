@@ -240,8 +240,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-                    TempData["notice"] = "Edits Saved.";
-                    return RedirectToAction("Details", "Participants", new { id = participant.ParticipantID });
+                    TempData["notice"] = "Edits Saved!";
+                    return RedirectToAction("Edit", "Participants", new { id = participant.ParticipantID });
                 }
                 catch (DataException /* dex */)
                 {

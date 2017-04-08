@@ -23,7 +23,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.guardian.GuardianAddress) <br />    
-            @Html.DisplayFor(model => model.guardian.GuardianCity), @Html.DisplayFor(model => model.guardian.GuardianZip)
+            @Html.DisplayFor(model => model.guardian.GuardianCity), @Html.DisplayFor(model => model.guardian.GuardianState) @Html.DisplayFor(model => model.guardian.GuardianZip)
         </dd>
 
         <dt>
@@ -174,7 +174,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.participant.CheckedIn)
             </th>
-
+            <th></th>
             <th></th>
         </tr>
         @foreach (var item in Model.participants)
@@ -196,13 +196,15 @@
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>
                 <td align="center">
-                    @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" }) 
+                    @Html.ActionLink("Details", "Details", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-info" })
+                </td>
+                <td>
                     @if (!item.CheckedIn)
                     {
-                        { <text>| </text>}
-                    @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" })
+
+                        @Html.ActionLink("Check In", "CheckIn", "Participants", new { id = item.ParticipantID }, new { @class = "btn btn-success" })
                     }
-                 </td>
+                </td>
             </tr>
         }
 
@@ -235,6 +237,7 @@
                 @Html.DisplayNameFor(model => model.familymember.CheckedIn)
             </th>
             <th></th>
+            <th></th>
         </tr>
         @foreach (var item in Model.familymembers)
             {
@@ -255,13 +258,15 @@
                     @Html.DisplayFor(modelItem => item.CheckedIn)
                 </td>
                 <td align="center">
-                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" }) 
-                   @if (!item.CheckedIn)
-                   {
-                       { <text>| </text>}
-                     @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
-                   }
-                 </td>
+                    @Html.ActionLink("Details", "Details", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-info" })
+                </td>
+                <td>
+                    @if (!item.CheckedIn)
+                    {
+
+                        @Html.ActionLink("Check In", "CheckIn", "FamilyMembers", new { id = item.FamilyMemberID }, new { @class = "btn btn-success" })
+                    }
+                </td>
             </tr>
         }
 

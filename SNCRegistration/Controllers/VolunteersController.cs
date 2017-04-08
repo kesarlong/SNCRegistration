@@ -19,11 +19,14 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Volunteers
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
 
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TcuTypeSortParam = sortOrder == "tcutype_asc" ? "tcutype_desc" : "tcutype_asc";
+            ViewBag.TcuNumSortParam = sortOrder == "tcunum_asc" ? "tcunum_desc" : "tcunum_asc";
 
             if (searchString != null)
             {
@@ -36,8 +39,12 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Volunteers select y.EventYear).Distinct();
+
             var volunteers = from s in db.Volunteers
-                               select s;
+                             where s.EventYear == searchYear
+                             select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -48,6 +55,15 @@ namespace SNCRegistration.Controllers
             {
                 case "name_desc":
                     volunteers = volunteers.OrderByDescending(s => s.VolunteerLastName);
+                    break;
+                case "tcunum_desc":
+                    volunteers = volunteers.OrderByDescending(s => s.UnitChapterNumber);
+                    break;
+                case "name_asc":
+                    volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
+                    break;
+                case "tcunum_asc":
+                    volunteers = volunteers.OrderBy(s => s.UnitChapterNumber);
                     break;
                 default:
                     volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
@@ -167,6 +183,9 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Volunteer volunteer = db.Volunteers.Find(id);
+
+            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode);
+
             if (volunteer == null)
             {
                 return HttpNotFound();
@@ -205,6 +224,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode);
             return View(volunteer);
 
 
@@ -360,6 +380,25 @@ namespace SNCRegistration.Controllers
         }
 
 
+        private void SetAgeAttendanceViewBag(int? age = null, int? attendance = null)
+        {
 
+            if (age == null)
+            {
+                ViewBag.AgeID = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            }
+            else
+                ViewBag.AgeID = new SelectList(db.Ages.ToArray(), "AgeID", "AgeDescription", age);
+
+            if (attendance == null)
+            {
+                ViewBag.AttendanceID = new SelectList(db.Attendances, "AttendanceID", "Description");
+            }
+            else
+                ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", attendance);
+
+
+
+        }
     }
 }

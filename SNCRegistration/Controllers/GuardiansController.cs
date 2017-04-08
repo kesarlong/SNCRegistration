@@ -227,7 +227,7 @@ namespace SNCRegistration.Controllers
 			var guardian = db.Guardians.Find(id);
 
 			if (TryUpdateModel(guardian, "",
-			   new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName","GuardianAddress","GuardianCity","GuardianZip","GuardianCellPhone","GuardianEmail","PacketSentDate","ReceiptDate","ConfirmationSentDate","HealthForm","PhotoAck","Tent","AttendingCode","CheckedIn", "Comments","Relationship" }))
+			   new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName","GuardianAddress","GuardianState","GuardianCity","GuardianZip","GuardianCellPhone","GuardianEmail","PacketSentDate","ReceiptDate","ConfirmationSentDate","HealthForm","PhotoAck","Tent","AttendingCode","CheckedIn", "Comments","Relationship" }))
 			{
 				try
 				{

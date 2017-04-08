@@ -33,7 +33,7 @@
             Year Enrolled
         </th>
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
         </th>
         <th>
             First Name
@@ -48,6 +48,9 @@
             Checked In?
         </th>        
 
+        <th>
+
+        </th>
         <th>
 
         </th>
@@ -74,8 +77,19 @@
             @Html.DisplayFor(modelItem => item.CheckedIn)
         </td>
 
-        <td>@Html.ActionLink("Details", "Details", new { id = item.GuardianID }, new { @class = "btn btn-info" })</td>
-        <td align="center"></td>
+
+
+        <td>
+            @if (!item.CheckedIn)
+            {
+                @Html.ActionLink("Check In", "CheckIn", new { id = item.GuardianID }, new { @class = "btn btn-success" }) 
+
+            }           
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.GuardianID }, new { @class = "btn btn-info" }) 
+
+        </td>
     </tr>
 }
 
