@@ -17,16 +17,25 @@ namespace SNCRegistration.Controllers
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-
+        
         // GET: Volunteers
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CurrentYearSort = searchYear;
+            ViewBag.currentFilter = currentFilter;
+            ViewBag.searchString = searchString;
+            ViewBag.page = page;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.TcuTypeSortParam = sortOrder == "tcutype_asc" ? "tcutype_desc" : "tcutype_asc";
             ViewBag.TcuNumSortParam = sortOrder == "tcunum_asc" ? "tcunum_desc" : "tcunum_asc";
+
+            Session["SessionSortOrder"] = ViewBag.CurrentSort;
+            Session["SessionCurrentFilter"] = ViewBag.currentFilter;
+            Session["SessionSearchYear"] = ViewBag.CurrentYearSort;
+            Session["SessionPage"] = ViewBag.page;
+            Session["SessionSearchString"] = ViewBag.searchString;
+            
 
             if (searchString != null)
             {
@@ -48,7 +57,7 @@ namespace SNCRegistration.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                volunteers = volunteers.Where(s => s.VolunteerLastName.Contains(searchString) || s.VolunteerFirstName.Contains(searchString));
+                volunteers = volunteers.Where(s => s.VolunteerLastName.Contains(searchString) || s.VolunteerFirstName.Contains(searchString) || s.UnitChapterNumber.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -70,8 +79,12 @@ namespace SNCRegistration.Controllers
                     break;
             }
 
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
+            
+
+
+
             return View(volunteers.ToPagedList(pageNumber, pageSize));
 
 
@@ -215,8 +228,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
+                    TempData["notice"] = "Edits Saved!";
+                    return RedirectToAction("Details", "Volunteers", new { id = volunteer.VolunteerID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -267,8 +280,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
+                    TempData["notice"] = "Volunteer Checked In Status Saved!";
+                    return RedirectToAction("CheckIn", "Volunteers", new { id = volunteer.VolunteerID });
                 }
                 catch (DataException /* dex */)
                 {

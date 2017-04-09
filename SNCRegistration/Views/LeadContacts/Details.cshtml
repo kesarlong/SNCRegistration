@@ -142,10 +142,15 @@
 
 <p align="right">
     <div align="right" style="margin-right:20px;">
-        @Html.ActionLink("Check In", "CheckIn", new { id = Model.leadContact.LeadContactID }, new { @class = "btn btn-success" }) |
+
+        @if (!Model.leadContact.CheckedIn)
+            {
+            @Html.ActionLink("Check In", "CheckIn", new { id = Model.leadContact.LeadContactID }, new { @class = "btn btn-success" })  { <text>|</text>}
+
+            }
         @Html.ActionLink("Edit", "Edit", new { id = Model.leadContact.LeadContactID }, new { @class = "btn btn-info" }) |
         @Html.ActionLink("Delete", "Delete", new { id = Model.leadContact.LeadContactID }, new { @class = "btn btn-danger" }) |
-        @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+        @Html.ActionLink("Back to Lead Contact Search", "Index", "LeadContacts", new { SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] }, new { @class = "btn btn-info" })
     </div>
 </p>
 
@@ -163,7 +168,7 @@
         <th>
             @Html.DisplayNameFor(model => model.volunteer.CheckedIn)
         </th>
-
+        <th></th>
         <th></th>
     </tr>
     @foreach (var item in Model.volunteers)
@@ -178,9 +183,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CheckedIn)
             </td>
-            <td align="center">
-                @Html.ActionLink("Details", "Details", "Volunteers", new { id = item.VolunteerID }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Check In", "CheckIn", "Volunteers", new { id = item.VolunteerID }, new { @class = "btn btn-success" })
+            <td align="right">
+
+
+
+                @if (!item.CheckedIn)
+                {
+                    @Html.ActionLink("Check In", "CheckIn", "Volunteers", new { id = item.VolunteerID }, new { @class = "btn btn-success" })
+
+                }
+                </td>
+                <td>
+
+                @Html.ActionLink("Details", "Details", "Volunteers", new { id = item.VolunteerID }, new { @class = "btn btn-info" })
+
             </td>
         </tr>
     }

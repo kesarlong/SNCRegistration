@@ -6,7 +6,10 @@
 }
 
 <h2>Check In Lead Contact</h2>
-
+<div>
+    @if (TempData["notice"] != null)
+    {<h2 style="color:green;">@TempData["notice"]</h2> }
+</div>
 
 @using (Html.BeginForm())
 {
@@ -176,7 +179,7 @@
             <div align="right" style="margin-right:20px;">
                 <input type="submit" value="Save" class="btn btn-primary" /> |
                 @Html.ActionLink("Edit", "Edit", new { id = Model.LeadContactID }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Back to Lead Contact Search", "Index", "LeadContacts", new { SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] }, new { @class = "btn btn-info" })
             </div>
         </p>
 

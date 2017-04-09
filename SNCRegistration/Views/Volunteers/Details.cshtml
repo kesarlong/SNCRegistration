@@ -34,14 +34,6 @@
             @Html.DisplayFor(model => model.VolunteerAge)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.LeadContactID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LeadContactID)
-        </dd>*@
-
         <dt>
             @Html.DisplayNameFor(model => model.VolunteerShirtOrder)
         </dt>
@@ -98,26 +90,10 @@
             @Html.DisplayFor(model => model.Comments)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Volunteers1.VolunteerFirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Volunteers1.VolunteerFirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Volunteer1.VolunteerFirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Volunteer1.VolunteerFirstName)
-        </dd>*@
-
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.VolunteerID }, new { @class = "btn btn-danger" }) |
-    @Html.ActionLink("Back Lead Contact", "Details", "LeadContacts", new { id = Model.LeadContactID }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back to Volunteer Search", "Index", "Volunteers", new { }, new { @class = "btn btn-info" })
 </p>
