@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using PagedList;
+using System.Net.Mail;
+using System.Web.Hosting;
 
 namespace SNCRegistration.Controllers
 {
@@ -161,7 +163,8 @@ namespace SNCRegistration.Controllers
                     //registration complete, no more people to add
                     {
                         var email = Session["leaderEmail"] as string;
-                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is $10.00");
+                        var attach = "~/ App_Data /EventInfo.pdf";
+                       Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is"+(leadContact.TotalFee ?? 0).ToString("c"), HostingEnvironment.MapPath(@"~/App_Data/PDF/EventInfo.pdf"));
                         return Redirect("Registered");
                     }
                 }

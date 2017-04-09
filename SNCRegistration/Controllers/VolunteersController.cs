@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using SNCRegistration.Helpers;
 
 namespace SNCRegistration.Controllers
 {
@@ -162,8 +163,9 @@ namespace SNCRegistration.Controllers
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
+                        var total = db.ComputeTotal(volunteer.LeadContactID);
                         var email = Session["leaderEmail"] as string;
-                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is $10.00");
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is " + total.ToString("c"), " ");
                         return Redirect("Registered");
                     }
                 }

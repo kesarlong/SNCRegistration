@@ -256,7 +256,6 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Group Type")]
         public string BSType;
 
-        [Required]
         [MinLength(1)]
         [MaxLength(10)]
         [Display(Name = "Troop/Chapter/Unit #")]
@@ -266,7 +265,6 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = " Days Attending")]
         public string VolunteerAttendingCode;
 
-        [Required]
         [Display(Name = "Are you joining us for Saturday dinner?")]
         public bool SaturdayDinner;
 
@@ -328,11 +326,10 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Days Attending")]
         public string VolunteerAttendingCode;
 
-        [Required]
+
         [Display(Name = "Are you joining us for Saturday dinner?")]
         public Nullable<bool> SaturdayDinner;
 
-        [Required]
         [MinLength(1)]
         [MaxLength(10)]
         [Display(Name = "Troop/Chapter/Unit Number")]
@@ -342,7 +339,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Comments (Optional)")]
         public string Comments;
 
-        public Nullable<int> LeadContactID;
+        public int LeadContactID;
 
 
         [Required]

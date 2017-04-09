@@ -32,8 +32,19 @@
     @Html.AntiForgeryToken()
 
 
-        <h4>Volunteer Information</h4>
-        <hr />
+        <h4>Volunteer Information</h4><hr />
+        <h5><font color="red">All fields not indicated as optional are required</font></h5>
+            <p>
+                <font color="grey">
+                    1. For Troop/Chapter leaders:<br />
+            <p style="text-indent: 20px">a. Enter information for each volunteer being registered.<br />
+            <p style="text-indent: 20px">b. Complete registration button will save your input and complete the registration process.<br />
+                2. For Individuals:
+            <p style="text-indent: 20px">a. Enter information for the volunteer being registered.<br />
+            <p style="text-indent: 20px">b. Complete registration button will save your input and complete the registration process.<br />
+                <br />
+                </font>
+            </p>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

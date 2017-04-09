@@ -9,11 +9,12 @@ namespace SNCRegistration.Helpers
 {
     public static class EmailHelpers
     {
-        public static void SendEmail(string fAddress, string tAddress, string subj, string bdy)
+        public static void SendEmail(string fAddress, string tAddress, string subj, string bdy, string atch)
         {
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
             var bcc = "sncracc@gmail.com";
+            var att = new Attachment(atch);
             const string fromPassword = "Coffee1$";
 
             var smtp = new SmtpClient
@@ -29,11 +30,11 @@ namespace SNCRegistration.Helpers
             using (var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = subj,
-                Body = bdy,
 
-            })
+        })
             {
                 message.Bcc.Add(new MailAddress(bcc));
+                //message.Attachments.Add(new Attachment("~/App_Data/VolunteerHealthForm.pdf"));
                 smtp.Send(message);
             }
         }

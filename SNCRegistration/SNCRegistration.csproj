@@ -306,6 +306,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DatabaseExtensions.cs" />
     <Compile Include="Helpers\EmailHelpers.cs" />
     <Compile Include="packages\Microsoft.SqlServer.Types.11.0.2\content\SqlServerTypes\Loader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -605,6 +606,8 @@
     </Content>
     <Content Include="Views\Shared\_PartialPendingRegistrationList.cshtml" />
     <Content Include="Views\ParkingPass\Index.cshtml" />
+    <Content Include="Views\Volunteers\Redirect.cshtml" />
+    <Content Include="App_Data\PDF\EventInfo.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3435,6 +3438,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
+    <Folder Include="Views\Reporting\" />
     <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>
   <ItemGroup>
