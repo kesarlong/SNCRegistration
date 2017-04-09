@@ -22,8 +22,18 @@ namespace SNCRegistration.Controllers
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.currentFilter = currentFilter;
             ViewBag.CurrentYearSort = searchYear;
+            ViewBag.searchString = searchString;
+            ViewBag.page = page;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            Session["SessionSortOrder"] = ViewBag.CurrentSort;
+            Session["SessionCurrentFilter"] = ViewBag.currentFilter;
+            Session["SessionSearchYear"] = ViewBag.CurrentYearSort;
+            Session["SessionPage"] = ViewBag.page;
+            Session["SessionSearchString"] = ViewBag.searchString;
+
 
             if (searchString != null)
             {
@@ -240,8 +250,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-                    TempData["notice"] = "Edits Saved.";
-                    return RedirectToAction("Details", "Participants", new { id = participant.ParticipantID });
+                    TempData["notice"] = "Edits Saved!";
+                    return RedirectToAction("Edit", "Participants", new { id = participant.ParticipantID });
                 }
                 catch (DataException /* dex */)
                 {

@@ -23,7 +23,19 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CurrentYearSort = searchYear;
+            ViewBag.currentFilter = currentFilter;
+            ViewBag.page = page;
+            ViewBag.searchString = searchString;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TcuTypeSortParam = sortOrder == "tcutype_asc" ? "tcutype_desc" : "tcutype_asc";
+            ViewBag.TcuNumSortParam = sortOrder == "tcunum_asc" ? "tcunum_desc" : "tcunum_asc";
+
+            Session["SessionSortOrder"] = ViewBag.CurrentSort;
+            Session["SessionCurrentFilter"] = ViewBag.currentFilter;
+            Session["SessionSearchYear"] = ViewBag.CurrentYearSort;
+            Session["SessionPage"] = ViewBag.page;
+            Session["SessionSearchString"] = ViewBag.searchString;
+
 
             if (searchString != null)
             {
@@ -43,15 +55,31 @@ namespace SNCRegistration.Controllers
                                where s.EventYear == searchYear
                                select s;
 
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                leadContacts = leadContacts.Where(s => s.LeadContactLastName.Contains(searchString) || s.LeadContactFirstName.Contains(searchString));
+                leadContacts = leadContacts.Where(s => s.LeadContactLastName.Contains(searchString) || s.LeadContactFirstName.Contains(searchString) || s.UnitChapterNumber.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
                     leadContacts = leadContacts.OrderByDescending(s => s.LeadContactLastName);
+                    break;
+                case "tcutype_desc":
+                    leadContacts = leadContacts.OrderByDescending(s => s.BSType);
+                    break;
+                case "tcunum_desc":
+                    leadContacts = leadContacts.OrderByDescending(s => s.UnitChapterNumber);
+                    break;
+                case "name_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
+                    break;
+                case "tcutype_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.BSType);
+                    break;
+                case "tcunum_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.UnitChapterNumber);
                     break;
                 default:
                     leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
@@ -60,6 +88,7 @@ namespace SNCRegistration.Controllers
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
+
             return View(leadContacts.ToPagedList(pageNumber, pageSize));
 
         }
@@ -252,8 +281,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "LeadContacts", new { id = leadcontact.LeadContactID });
+                    TempData["notice"] = "Volunteer Checked In Status Saved!";
+                    return RedirectToAction("CheckIn", "LeadContacts", new { id = leadcontact.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {

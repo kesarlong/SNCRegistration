@@ -26,10 +26,20 @@ namespace SNCRegistration.Controllers
 		{
 
 			ViewBag.CurrentSort = sortOrder;
+            ViewBag.currentFilter = currentFilter;
             ViewBag.CurrentYearSort = searchYear;
+            ViewBag.searchString = searchString;
+            ViewBag.page = page;
 			ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-			if (searchString != null)
+            Session["SessionSortOrder"] = ViewBag.CurrentSort;
+            Session["SessionCurrentFilter"] = ViewBag.currentFilter;
+            Session["SessionSearchYear"] = ViewBag.CurrentYearSort;
+            Session["SessionPage"] = ViewBag.page;
+            Session["SessionSearchString"] = ViewBag.searchString;
+
+
+            if (searchString != null)
 			{
 				page = 1;
 			}
@@ -227,15 +237,15 @@ namespace SNCRegistration.Controllers
 			var guardian = db.Guardians.Find(id);
 
 			if (TryUpdateModel(guardian, "",
-			   new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName","GuardianAddress","GuardianCity","GuardianZip","GuardianCellPhone","GuardianEmail","PacketSentDate","ReceiptDate","ConfirmationSentDate","HealthForm","PhotoAck","Tent","AttendingCode","CheckedIn", "Comments","Relationship" }))
+			   new string[] { "GuardianID", "GuardianFirstName", "GuardianLastName","GuardianAddress","GuardianState","GuardianCity","GuardianZip","GuardianCellPhone","GuardianEmail","PacketSentDate","ReceiptDate","ConfirmationSentDate","HealthForm","PhotoAck","Tent","AttendingCode","CheckedIn", "Comments","Relationship" }))
 			{
 				try
 				{
 					db.SaveChanges();
 
-                    TempData["notice"] = "Edits Saved.";
+                    TempData["notice"] = "Edits Saved!";
 
-                    return RedirectToAction("Details", "Guardians", new { id = guardian.GuardianID });
+                    return RedirectToAction("Edit", "Guardians", new { id = guardian.GuardianID });
                 }
 				catch (DataException /* dex */)
 				{
