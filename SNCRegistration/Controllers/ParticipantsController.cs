@@ -100,7 +100,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Create() 
         {
             ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
-            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description",TempData["gAttend"]);
 
             return View();
         }
@@ -122,6 +122,7 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    TempData["gAttend"] = participant.AttendingCode;
                     TempData.Keep();
                 }
 
@@ -137,6 +138,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
+
+                    TempData["gAttend"] = participant.AttendingCode;
 
                     this.Session["gSession"] = participant.GuardianGuid;
 

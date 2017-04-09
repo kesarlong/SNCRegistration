@@ -40,7 +40,7 @@ namespace SNCRegistration.Controllers
         {
 
             ViewBag.FamilyMemberAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
-            ViewBag.AttendingCode = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            ViewBag.AttendingCode = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", TempData["gAttend"]);
             return View();
         }
 
@@ -58,21 +58,28 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     familyMember.GuardianID = (int)TempData["myPK"];
+                    
+                    //set attendance choice to pass to family member form
+                     TempData["gAttend"] = familyMember.AttendingCode;
+                    //familyMember.AttendingCode = (int)TempData["gAttend"];
+                    
+
+                    TempData.Keep();
                 }
 
                 //store year of event
                 var thisYear = DateTime.Now.Year.ToString();
                 familyMember.EventYear = int.Parse(thisYear);
 
+
+
                 db.FamilyMembers.Add(familyMember);
 
                 try
                 {
-
-
-
-
                     db.SaveChanges();
+
+
 
                     //add another participant for guardian                   
                     if (Request["submit"].Equals("Add another participant"))

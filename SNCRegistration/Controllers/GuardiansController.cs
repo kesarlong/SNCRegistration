@@ -149,6 +149,7 @@ namespace SNCRegistration.Controllers
 
 					//pass the guardianID to child form as FK                    
 					TempData["myPK"] = guardian.GuardianID;
+                    TempData["gAttend"] = guardian.AttendingCode;
 					TempData.Keep();
 
 					this.Session["pEmail"] = guardian.GuardianEmail;
