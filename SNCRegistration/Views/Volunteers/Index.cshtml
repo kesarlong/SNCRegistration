@@ -15,7 +15,8 @@
 @using (Html.BeginForm("Index", "Volunteers", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Find by name or TCU (Troop/Chapter/Unit): @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) &nbsp;&nbsp;  | &nbsp;&nbsp;
+        Event year: @Html.DropDownList("searchYear", new SelectList(ViewBag.AllYears, ViewBag.CurrentYear))
         <input type="submit" value="Search" />
     </p>
 
@@ -24,17 +25,17 @@
 <table class="table table-condensed table-striped">
     <tr>
         <th align="center">
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+            <text>Last Name</text> @Html.ActionLink("▼", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
         </th>
         <th align="center">
             First Name
         </th>
         <th align="center">
-            Unit Chapter Number
+            <text>TCU Number</text> @Html.ActionLink("▼", "Index", new { sortOrder = ViewBag.TcuNumSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
         </th>
         <th align="center">
             Checked In?
-        <th> </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -54,8 +55,17 @@
                 @Html.DisplayFor(modelItem => item.CheckedIn)
             </td>
 
-            <td>@Html.ActionLink("Details", "Details", new { id = item.VolunteerID }, new { @class = "btn btn-info" }) | @Html.ActionLink("Check In", "CheckIn", new { id = item.VolunteerID }, new { @class = "btn btn-success" })</td>
+            <td align="right">
+                @if (!item.CheckedIn)
+                {
+                    @Html.ActionLink("Check In", "CheckIn", new { id = item.VolunteerID }, new { @class = "btn btn-success" })
 
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.VolunteerID }, new { @class = "btn btn-info" })
+
+            </td>
 
 
         </tr>
@@ -65,9 +75,9 @@
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+
 @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort }))
 
 
-
-
+@Html.Raw(Session["SessionVolSearch"])

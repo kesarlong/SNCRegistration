@@ -8,7 +8,7 @@
 <h2>Edit Family Member</h2>
 <div>
     @if (TempData["notice"] != null)
-{<p style="color:green;">@TempData["notice"]</p> }
+{<h2 style="color:green;">@TempData["notice"]</h2> }
 </div>
 
 
@@ -94,6 +94,30 @@
                         new SelectListItem{ Value = "3", Text = "Overnight" }
                     }, new { @class = "form-control", style = "width: 220px" })
             @Html.ValidationMessageFor(model => model.AttendingCode, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.CheckedIn)
+            <br />
+            @if (Model.CheckedIn == true)
+            {
+                <label class="btn btn-default active">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                </label>
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                </label>
+            }
+            else
+            {
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                </label>
+                <label class="btn btn-default active">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                </label>
+
+            }
         </div>
 
         <div class="form-group">

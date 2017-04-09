@@ -6,7 +6,8 @@
 }
 
 <h2>Check In Participant</h2>
-
+@if (TempData["notice"] != null)
+{<h2 style="color:green;">@TempData["notice"]</h2> }
 
 @using (Html.BeginForm())
 {
@@ -194,11 +195,11 @@
         <div align="right" style="margin-right:20px;">
             <input type="submit" value="Save" class="btn btn-primary" /> |
             @Html.ActionLink("Edit", "Edit", new { id = Model.ParticipantID }, new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Back to Guardian Details", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Back to Participant Details", "Details", "Participants", new { id = Model.ParticipantID }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Guardian Details", "Details", "Guardians", new { id = Model.GuardianID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Participant Details", "Details", "Participants", new { id = Model.ParticipantID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Back to Participant Search", "Index", "Participants", new { SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] }, new { @class = "btn btn-info" })
         </div>
-        @if (TempData["notice"] != null)
-                {<p style="color:green;">@TempData["notice"]</p> }
+
 
         </p>
 
