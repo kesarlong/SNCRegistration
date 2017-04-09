@@ -22,8 +22,18 @@ namespace SNCRegistration.Controllers
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.currentFilter = currentFilter;
             ViewBag.CurrentYearSort = searchYear;
+            ViewBag.searchString = searchString;
+            ViewBag.page = page;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            Session["SessionSortOrder"] = ViewBag.CurrentSort;
+            Session["SessionCurrentFilter"] = ViewBag.currentFilter;
+            Session["SessionSearchYear"] = ViewBag.CurrentYearSort;
+            Session["SessionPage"] = ViewBag.page;
+            Session["SessionSearchString"] = ViewBag.searchString;
+
 
             if (searchString != null)
             {
@@ -100,7 +110,7 @@ namespace SNCRegistration.Controllers
         public ActionResult Create() 
         {
             ViewBag.ParticipantAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
-            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description",TempData["gAttend"]);
 
             return View();
         }
@@ -122,6 +132,7 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
+                    TempData["gAttend"] = participant.AttendingCode;
                     TempData.Keep();
                 }
 
@@ -137,6 +148,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
+
+                    TempData["gAttend"] = participant.AttendingCode;
 
                     this.Session["gSession"] = participant.GuardianGuid;
 
@@ -240,8 +253,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-                    TempData["notice"] = "Edits Saved.";
-                    // return RedirectToAction("Details", "Guardians", new { id = participant.GuardianID });
+                    TempData["notice"] = "Edits Saved!";
+                    return RedirectToAction("Edit", "Participants", new { id = participant.ParticipantID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -287,14 +300,16 @@ namespace SNCRegistration.Controllers
 
 
 
-            if (participant.HealthForm.Value == false && participant.CheckedIn == false)
-            {
-                ModelState.AddModelError("", "Health Form must be received before check in.");
-            }
-            else
-            {
                 if (TryUpdateModel(participant, "",
-                    new string[] { "CheckedIn" }))
+                    new string[] { "HealthForm", "PhotoAck", "CheckedIn" }))
+                {
+
+
+                if (participant.HealthForm.Value == false && participant.CheckedIn == true)
+                {
+                    ModelState.AddModelError("", "Health Form must be received before check in.");
+                }
+                else
                 {
                     try
                     {

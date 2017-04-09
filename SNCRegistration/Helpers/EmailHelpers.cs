@@ -13,6 +13,7 @@ namespace SNCRegistration.Helpers
         {
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
+            var bcc = "sncracc@gmail.com";
             const string fromPassword = "Coffee1$";
 
             var smtp = new SmtpClient
@@ -28,9 +29,11 @@ namespace SNCRegistration.Helpers
             using (var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = subj,
-                Body = bdy
+                Body = bdy,
+
             })
             {
+                message.Bcc.Add(new MailAddress(bcc));
                 smtp.Send(message);
             }
         }

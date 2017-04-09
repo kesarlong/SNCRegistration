@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SNCRegistration.ViewModels;
 using PagedList;
-
+using System.Web.Security;
 
 namespace SNCRegistration.Controllers
     {
@@ -122,6 +122,7 @@ namespace SNCRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ExpandedUserDTO paramExpandedUserDTO)
             {
+
             try
                 {
                 if (paramExpandedUserDTO == null)
@@ -153,6 +154,7 @@ namespace SNCRegistration.Controllers
                 var objNewAdminUser = new ApplicationUser { UserName = UserName, Email = Email };
                 var AdminUserCreateResult = UserManager.Create(objNewAdminUser, Password);
 
+
                 if (AdminUserCreateResult.Succeeded == true)
                     {
                     string strNewRole = Convert.ToString(Request.Form["Roles"]);
@@ -169,17 +171,33 @@ namespace SNCRegistration.Controllers
                     {
                     ViewBag.Roles = GetAllRolesAsSelectList();
                     ModelState.AddModelError(string.Empty,
-                        "Error: Failed to create the user. See below for details.");
+                        "Error: Failed to create the user. Ensure that user or email does not already exist. Check that password has at least 6 characters, contain one upper case, contain one lower case, and one numerical digit.");
                     return View(paramExpandedUserDTO);
                     }
                 }
             catch
                 {
                 ViewBag.Roles = GetAllRolesAsSelectList();
-                ModelState.AddModelError(string.Empty, "Error: Failed to create the user. See below for details.");
+                ModelState.AddModelError(string.Empty, "Error: See below for errors.");
                 return View("Create");
                 }
             }
+
+        public JsonResult doesUserNameExist(string UserName)
+        {
+
+            var user = Membership.GetUser(UserName);
+
+            return Json(user == null);
+        }
+
+        public JsonResult doesEmailExist(string Email)
+        {
+
+            var email = Membership.GetUser(Email);
+
+            return Json(email == null);
+        }
 
         //User Edit. Only System Admins can edit other users.
         // GET: /Admin/ManageUsers/Edit/User 

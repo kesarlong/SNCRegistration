@@ -3435,6 +3435,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
+    <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

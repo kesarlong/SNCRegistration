@@ -8,7 +8,7 @@
 <h2>Edit Guardian</h2>
 <div>
                 @if (TempData["notice"] != null)
-                {<p style="color:green;">@TempData["notice"]</p> }
+                {<h2 style="color:green;">@TempData["notice"]</h2> }
         </div>
 
 
@@ -45,6 +45,65 @@
             @Html.ValidationMessageFor(model => model.GuardianCity, "", new { @class = "text-danger" })
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.GuardianState, htmlAttributes: new { @class = "control-label" })<br />
+            @Html.DropDownListFor(model => model.GuardianState,
+             new List<SelectListItem>
+             {
+                 new SelectListItem() {Text="Alabama", Value="AL"},
+                    new SelectListItem() { Text="Alaska", Value="AK"},
+                    new SelectListItem() { Text="Arizona", Value="AZ"},
+                    new SelectListItem() { Text="Arkansas", Value="AR"},
+                    new SelectListItem() { Text="California", Value="CA"},
+                    new SelectListItem() { Text="Colorado", Value="CO"},
+                    new SelectListItem() { Text="Connecticut", Value="CT"},
+                    new SelectListItem() { Text="District of Columbia", Value="DC"},
+                    new SelectListItem() { Text="Delaware", Value="DE"},
+                    new SelectListItem() { Text="Florida", Value="FL", Selected=true},
+                    new SelectListItem() { Text="Georgia", Value="GA"},
+                    new SelectListItem() { Text="Hawaii", Value="HI"},
+                    new SelectListItem() { Text="Idaho", Value="ID"},
+                    new SelectListItem() { Text="Illinois", Value="IL"},
+                    new SelectListItem() { Text="Indiana", Value="IN"},
+                    new SelectListItem() { Text="Iowa", Value="IA"},
+                    new SelectListItem() { Text="Kansas", Value="KS"},
+                    new SelectListItem() { Text="Kentucky", Value="KY"},
+                    new SelectListItem() { Text="Louisiana", Value="LA"},
+                    new SelectListItem() { Text="Maine", Value="ME"},
+                    new SelectListItem() { Text="Maryland", Value="MD"},
+                    new SelectListItem() { Text="Massachusetts", Value="MA"},
+                    new SelectListItem() { Text="Michigan", Value="MI"},
+                    new SelectListItem() { Text="Minnesota", Value="MN"},
+                    new SelectListItem() { Text="Mississippi", Value="MS"},
+                    new SelectListItem() { Text="Missouri", Value="MO"},
+                    new SelectListItem() { Text="Montana", Value="MT"},
+                    new SelectListItem() { Text="Nebraska", Value="NE"},
+                    new SelectListItem() { Text="Nevada", Value="NV"},
+                    new SelectListItem() { Text="New Hampshire", Value="NH"},
+                    new SelectListItem() { Text="New Jersey", Value="NJ"},
+                    new SelectListItem() { Text="New Mexico", Value="NM"},
+                    new SelectListItem() { Text="New York", Value="NY"},
+                    new SelectListItem() { Text="North Carolina", Value="NC"},
+                    new SelectListItem() { Text="North Dakota", Value="ND"},
+                    new SelectListItem() { Text="Ohio", Value="OH"},
+                    new SelectListItem() { Text="Oklahoma", Value="OK"},
+                    new SelectListItem() { Text="Oregon", Value="OR"},
+                    new SelectListItem() { Text="Pennsylvania", Value="PA"},
+                    new SelectListItem() { Text="Rhode Island", Value="RI"},
+                    new SelectListItem() { Text="South Carolina", Value="SC"},
+                    new SelectListItem() { Text="South Dakota", Value="SD"},
+                    new SelectListItem() { Text="Tennessee", Value="TN"},
+                    new SelectListItem() { Text="Texas", Value="TX"},
+                    new SelectListItem() { Text="Utah", Value="UT"},
+                    new SelectListItem() { Text="Vermont", Value="VT"},
+                    new SelectListItem() { Text="Virginia", Value="VA"},
+                    new SelectListItem() { Text="Washington", Value="WA"},
+                    new SelectListItem() { Text="West Virginia", Value="WV"},
+                    new SelectListItem() { Text="Wisconsin", Value="WI"},
+                    new SelectListItem() { Text="Wyoming", Value="WY"}
+                    }, new { @class = "form-control", style = "width: 220px" })
+            @Html.ValidationMessageFor(model => model.GuardianState, "", new { @class = "text-danger" })
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.GuardianZip, htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.EditorFor(model => model.GuardianZip, new { htmlAttributes = new { @class = "form-control" } })
@@ -153,6 +212,31 @@
             @Html.DropDownListFor(model => model.Relationship,
                     ViewBag.relationshipID as SelectList, new { @class = "form-control", style = "width: 475px" })
                 @Html.ValidationMessageFor(model => model.Relationship, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="btn-group" data-toggle="buttons">
+            @Html.LabelFor(model => model.CheckedIn)
+            <br />
+            @if (Model.CheckedIn == true)
+            {
+                <label class="btn btn-default active">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                </label>
+                        <label class="btn btn-default">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+            }
+            else
+            {
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.CheckedIn, "True", new { name = "CheckedIn" }) Yes
+                </label>
+                        <label class="btn btn-default active">
+                            @Html.RadioButtonFor(model => model.CheckedIn, "False", new { name = "CheckedIn" }) No
+                        </label>
+
+            }
         </div>
 
         <div class="form-group">

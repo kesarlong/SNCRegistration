@@ -6,7 +6,10 @@
 }
 
 <h2>Check In Lead Contact</h2>
-
+<div>
+    @if (TempData["notice"] != null)
+    {<h2 style="color:green;">@TempData["notice"]</h2> }
+</div>
 
 @using (Html.BeginForm())
 {
@@ -23,6 +26,7 @@
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.LeadContactFirstName) @Html.DisplayFor(model => model.LeadContactLastName)
+                @Html.ValidationMessageFor(model => model.LeadContactFirstName, "", new { @class = "text-danger" })
             </dd>
 
             <dt>
@@ -31,7 +35,12 @@
 
             <dd>
                 @Html.DisplayFor(model => model.LeadContactAddress) <br />
-                @Html.DisplayFor(model => model.LeadContactCity), @Html.DisplayFor(model => model.LeadContactState) @Html.DisplayFor(model => model.LeadContactZip)
+                @Html.DisplayFor(model => model.LeadContactCity), @*@Html.DisplayFor(model => model.LeadContactState)*@ @Html.DisplayFor(model => model.LeadContactZip)
+                @Html.ValidationMessageFor(model => model.LeadContactAddress, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.LeadContactCity, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.LeadContactState, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.LeadContactZip, "", new { @class = "text-danger" })
+
             </dd>
 
             <dt>
@@ -40,6 +49,7 @@
 
             <dd>
                 @Html.DisplayFor(model => model.LeadContactCellPhone)
+                @Html.ValidationMessageFor(model => model.LeadContactCellPhone, "", new { @class = "text-danger" })
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.LeadContactEmail)
@@ -47,6 +57,7 @@
 
             <dd>
                 @Html.DisplayFor(model => model.LeadContactEmail)
+                @Html.ValidationMessageFor(model => model.LeadContactEmail, "", new { @class = "text-danger" })
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.UnitChapterNumber)
@@ -54,6 +65,7 @@
 
             <dd>
                 @Html.DisplayFor(model => model.UnitChapterNumber)
+                @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
@@ -72,6 +84,7 @@
                 {
                     <p>Friday through Sunday</p>
                 }
+                @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
             </dd>
 
             <dt>
@@ -80,6 +93,7 @@
 
             <dd>
                 @Html.DisplayFor(model => model.SaturdayDinner)
+                @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
             </dd>
 
             <dt>
@@ -88,6 +102,7 @@
 
             <dd>
                 @Html.DisplayFor(model => model.TotalFee)
+                @Html.ValidationMessageFor(model => model.TotalFee, "", new { @class = "text-danger" })
             </dd>
 
             <dt>
@@ -96,6 +111,7 @@
 
             <dd>
                 @Html.DisplayFor(model => model.Booth)
+                @Html.ValidationMessageFor(model => model.Booth, "", new { @class = "text-danger" })
             </dd>
 
             <dt>
@@ -112,6 +128,7 @@
 
             <dd>
                 @Html.DisplayFor(model => model.LeadContactShirtOrder)
+                @Html.ValidationMessageFor(model => model.LeadContactShirtOrder, "", new { @class = "text-danger" })
             </dd>
 
             <dt>
@@ -120,11 +137,13 @@
 
             <dd>
                 @Html.DisplayFor(model => model.LeadContactShirtSize)
+                @Html.ValidationMessageFor(model => model.LeadContactShirtSize, "", new { @class = "text-danger" })
             </dd>
 
 
             <dt>
                 @Html.DisplayNameFor(model => model.CheckedIn)
+                @Html.ValidationMessageFor(model => model.CheckedIn, "", new { @class = "text-danger" })
             </dt>
 
             <dd>
@@ -160,7 +179,7 @@
             <div align="right" style="margin-right:20px;">
                 <input type="submit" value="Save" class="btn btn-primary" /> |
                 @Html.ActionLink("Edit", "Edit", new { id = Model.LeadContactID }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Back to Lead Contact Search", "Index", "LeadContacts", new { SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] }, new { @class = "btn btn-info" })
             </div>
         </p>
 

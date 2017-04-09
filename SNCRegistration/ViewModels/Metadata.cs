@@ -23,11 +23,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public string GuardianLastName;
 
         [MaxLength(50)]
-        [Display(Name = "Street Address")]
+        [Display(Name = "Street Address (Optional)")]
         public string GuardianAddress;
 
         [MaxLength(50)]
-        [Display(Name = "City")]
+        [Display(Name = "City (Optional)")]
         public string GuardianCity;
 
         [Display(Name = "State")]
@@ -36,7 +36,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [MaxLength(10)]
         [MinLength(5)]
-        [Display(Name = "Zip")]
+        [Display(Name = "Zip (Optional)")]
         public int GuardianZip;
 
         [Phone]
@@ -51,6 +51,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Required]
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter a valid e-mail adress")]
         public string GuardianEmail;
         
 
@@ -80,7 +81,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public bool? CheckedIn;
 
         [MaxLength(200)]
-        [Display(Name = "Comments")]
+        [Display(Name = "Comments (Optional)")]
         public string Comments;
     }
 
@@ -106,11 +107,11 @@ namespace SNCRegistration.ViewModels.Metadata
 
         //School is optional input field
         [MaxLength(50)]
-        [Display(Name = "School")]
+        [Display(Name = "School (Optional)")]
         public string ParticipantSchool;
 
         [MaxLength(50)]
-        [Display(Name = "Teacher")]
+        [Display(Name = "Teacher (Optional)")]
         public string ParticipantTeacher;
 
         [Required]
@@ -134,7 +135,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Returning")]
         public bool? Returning;
 
-        [Display(Name = "Comments")]
+        [Display(Name = "Comments (Optional)")]
         [MaxLength(200)]
         public string Comments;
 
@@ -173,7 +174,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string AttendingCode;
 
         [MaxLength(200)]
-        [Display(Name = "Comments")]
+        [Display(Name = "Comments (Optional)")]
         public string Comments;
 
         [Required]
@@ -210,13 +211,13 @@ namespace SNCRegistration.ViewModels.Metadata
         //[Required]
         [MinLength(2)]
         [MaxLength(50)]
-        [Display(Name = "Street Address")]
+        [Display(Name = "Street Address (Optional)")]
         public string LeadContactAddress;
 
         //[Required]
         [MinLength(2)]
         [MaxLength(50)]
-        [Display(Name = "City")]
+        [Display(Name = "City (Optional)")]
         public string LeadContactCity;
 
 
@@ -226,7 +227,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         //[Required]
         [RegularExpression(@"^(?!00000)[0-9]{5,5}$", ErrorMessage = "Zip Code should be five numbers long")]
-        [Display(Name = "Zip Code")]
+        [Display(Name = "Zip Code (Optional)")]
         public string LeadContactZip;
 
         [Required]
@@ -240,6 +241,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [MaxLength(100)]
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter a valid e-mail adress")]
         public string LeadContactEmail;
 
         [Required]
@@ -269,11 +271,11 @@ namespace SNCRegistration.ViewModels.Metadata
         public bool SaturdayDinner;
 
         [MaxLength(50)]
-        [Display(Name = "Booth Name")]
+        [Display(Name = "Booth Name (Optional)")]
         public string Booth;
 
         [MaxLength(200)]
-        [Display(Name = "Comments")]
+        [Display(Name = "Comments (Optional)")]
         public string Comments;
 
 
@@ -337,7 +339,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public string UnitChapterNumber;
 
         [MaxLength(200)]
-        [Display(Name = "Comments")]
+        [Display(Name = "Comments (Optional)")]
         public string Comments;
 
         public Nullable<int> LeadContactID;

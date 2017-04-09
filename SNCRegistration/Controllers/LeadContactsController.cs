@@ -23,7 +23,19 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CurrentYearSort = searchYear;
+            ViewBag.currentFilter = currentFilter;
+            ViewBag.page = page;
+            ViewBag.searchString = searchString;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TcuTypeSortParam = sortOrder == "tcutype_asc" ? "tcutype_desc" : "tcutype_asc";
+            ViewBag.TcuNumSortParam = sortOrder == "tcunum_asc" ? "tcunum_desc" : "tcunum_asc";
+
+            Session["SessionSortOrder"] = ViewBag.CurrentSort;
+            Session["SessionCurrentFilter"] = ViewBag.currentFilter;
+            Session["SessionSearchYear"] = ViewBag.CurrentYearSort;
+            Session["SessionPage"] = ViewBag.page;
+            Session["SessionSearchString"] = ViewBag.searchString;
+
 
             if (searchString != null)
             {
@@ -43,15 +55,31 @@ namespace SNCRegistration.Controllers
                                where s.EventYear == searchYear
                                select s;
 
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                leadContacts = leadContacts.Where(s => s.LeadContactLastName.Contains(searchString) || s.LeadContactFirstName.Contains(searchString));
+                leadContacts = leadContacts.Where(s => s.LeadContactLastName.Contains(searchString) || s.LeadContactFirstName.Contains(searchString) || s.UnitChapterNumber.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
                     leadContacts = leadContacts.OrderByDescending(s => s.LeadContactLastName);
+                    break;
+                case "tcutype_desc":
+                    leadContacts = leadContacts.OrderByDescending(s => s.BSType);
+                    break;
+                case "tcunum_desc":
+                    leadContacts = leadContacts.OrderByDescending(s => s.UnitChapterNumber);
+                    break;
+                case "name_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
+                    break;
+                case "tcutype_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.BSType);
+                    break;
+                case "tcunum_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.UnitChapterNumber);
                     break;
                 default:
                     leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
@@ -60,6 +88,7 @@ namespace SNCRegistration.Controllers
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
+
             return View(leadContacts.ToPagedList(pageNumber, pageSize));
 
         }
@@ -170,6 +199,9 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             LeadContact leadContact = db.LeadContacts.Find(id);
+
+            SetGroupAttendingViewBag(leadContact.BSType, leadContact.VolunteerAttendingCode, leadContact.LeadContactShirtSize);
+
             if (leadContact == null)
             {
                 return HttpNotFound();
@@ -207,6 +239,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+            SetGroupAttendingViewBag(leadContact.BSType, leadContact.VolunteerAttendingCode, leadContact.LeadContactShirtSize);
             return View(leadContact);
         }
 
@@ -248,8 +281,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "LeadContacts", new { id = leadcontact.LeadContactID });
+                    TempData["notice"] = "Volunteer Checked In Status Saved!";
+                    return RedirectToAction("CheckIn", "LeadContacts", new { id = leadcontact.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -306,7 +339,7 @@ namespace SNCRegistration.Controllers
             catch (Exception err)
             {
 
-                ModelState.AddModelError("DBerror", "Unable to Delete LEad Contact. Please delete associated volunteer records first before deleting Lead Contact.");
+                ModelState.AddModelError("DBerror", "Unable to Delete Lead Contact. Please delete associated volunteer records first before deleting Lead Contact.");
             }
 
             return RedirectToAction("Index");
@@ -325,6 +358,31 @@ namespace SNCRegistration.Controllers
         public ActionResult GetYear()
         {
             return View("ActiveRegistrationYear");
+        }
+
+        private void SetGroupAttendingViewBag(int? bstgroup = null, int? attending = null, string shirtSize = null)
+        {
+
+            if (bstgroup == null)
+            {
+                ViewBag.bstID = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
+            }
+            else
+                ViewBag.bstID = new SelectList(db.BSTypes.ToArray(), "BSTypeID", "BSTypeDescription", bstgroup);
+
+            if (attending == null)
+            {
+                ViewBag.AttendanceID = new SelectList(db.Attendances, "AttendanceID", "Description");
+            }
+            else
+                ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description", attending);
+
+            if (shirtSize == null)
+            {
+                ViewBag.shirtSizeName = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            }
+            else
+                ViewBag.shirtSizeName = new SelectList(db.ShirtSizes.ToArray(), "ShirtSizeCode", "ShirtSizeDescription", shirtSize);
         }
     }
 }
