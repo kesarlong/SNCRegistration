@@ -6,58 +6,96 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using PagedList;
+
 
 namespace SNCRegistration.Controllers
     {
     public class RepeatAttendeeReportController: Controller
         {
-     
-        // GET: RepeatAttendeeReportController
-        public ActionResult Index()
-            {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
-            SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantFirstName, ParticipantLastName, Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 Order By Description;";
-            DataTable dt = new DataTable();
-            con.Open();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            da.Fill(dt);
-            con.Close();
-            IList<RepeatAttendeeReport> model = new List<RepeatAttendeeReport>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                model.Add(new RepeatAttendeeReport()
-                    {
 
-                    ParticipantFirstName = dt.Rows[i]["ParticipantFirstName"].ToString(),
-                    ParticipantLastName = dt.Rows[i]["ParticipantLastName"].ToString(),
-                    Returning = dt.Rows[i]["Returning"].ToString(),
-                    Description = dt.Rows[i]["Description"].ToString()
-                    });
+        // GET: RepeatAttendeeReportController
+        public ActionResult Index(int? eventYear)
+            {
+
+            ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
+
+            List<RepeatAttendeeReportModel> model = new List<RepeatAttendeeReportModel>();
+            string query = String.Empty;
+            DataTable dt = new DataTable();
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
+                {
+                dt = new DataTable();
+                connection.Open();
+                query = String.Concat("SELECT ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 AND EventYear = @EventYear Order By Description");
+
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new RepeatAttendeeReportModel()
+                        {
+
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        Returning = x["Returning"].ToString(),
+                        Description = x["Description"].ToString()
+                        }).ToList();
+                    }
                 }
             return View(model);
             }
 
-        public ActionResult RepeatAttendeeReport()
+        //Get the year onchange javascript
+        public ActionResult GetRepeatAttendeeByYear(int eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
+            List<RepeatAttendeeReportModel> model = new List<RepeatAttendeeReportModel>();
+            string query = String.Empty;
+            DataTable dt = new DataTable();
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
+                {
+                dt = new DataTable();
+                connection.Open();
+                query = "SELECT ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 AND EventYear = @EventYear Order By Description";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new RepeatAttendeeReportModel()
+                        {
+
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        Returning = x["Returning"].ToString(),
+                        Description = x["Description"].ToString()
+                        }).ToList();
+                    }
+                }
+            return PartialView("_PartialRepeatAttendeeList", model);
+            }
+
+        //Export to excel
+        public ActionResult RepeatAttendeeReport(int eventYear)
+            {
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantFirstName, ParticipantLastName, Returning, Discription FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 Order By Description;";
+            string query = "SELECT ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 AND EventYear = @EventYear Order By Description";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
+            da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
             da.Fill(dt);
             con.Close();
-
             using (XLWorkbook wb = new XLWorkbook())
                 {
                 wb.Worksheets.Add(dt);
                 wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 wb.Style.Font.Bold = true;
-
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
@@ -72,7 +110,6 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-
             return RedirectToAction("Index", "RepeatAttendeeReport");
             }
 

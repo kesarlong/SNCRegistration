@@ -14,6 +14,10 @@ namespace SNCRegistration.Controllers
 {
     public class BoothCountController : Controller
     {
+
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+        // GET: Dashboard
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
         // GET: BoothCount
         public ActionResult Index(int? eventYear)

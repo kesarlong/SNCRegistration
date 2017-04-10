@@ -1,0 +1,22 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersFridayOnlyModel>
+
+<tr>
+    <td colspan="3">
+        <h4>Total: @Model.Count()</h4>
+    </td>
+</tr>
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+    }

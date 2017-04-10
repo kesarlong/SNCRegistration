@@ -6,55 +6,88 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
+
 
 namespace SNCRegistration.Controllers
 {
     public class VolunteersFridayThruSaturdayController : Controller
     {
         // GET: VolunteersFridayThruSaturday
-        public ActionResult Index()
+        public ActionResult Index(int? eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
-            SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT *  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 4;";
-            DataTable dt = new DataTable();
-            con.Open();
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-            da.Fill(dt);
-            con.Close();
-            IList<VolunteersFridayThruSaturdayModel> model = new List<VolunteersFridayThruSaturdayModel>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                model.Add(new VolunteersFridayThruSaturdayModel()
-                    {
 
-                    VolunteerFirstName = dt.Rows[i]["VolunteerFirstName"].ToString(),
-                    VolunteerLastName = dt.Rows[i]["VolunteerLastName"].ToString(),
-                    Description = dt.Rows[i]["Description"].ToString(),
-                    });
+            ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
+            List<VolunteersFridayThruSaturdayModel> model = new List<VolunteersFridayThruSaturdayModel>();
+            string query = String.Empty;
+            DataTable dt = new DataTable();
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
+                {
+                dt = new DataTable();
+                connection.Open();
+                query = String.Concat("SELECT * FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 4 AND EventYear = @EventYear");
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new VolunteersFridayThruSaturdayModel()
+                        {
+                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
+                        VolunteerLastName = x["VolunteerLastName"].ToString(),
+                        Description = x["Description"].ToString()
+                        }).ToList();
+                    }
                 }
             return View(model);
             }
 
-        public ActionResult VolunteersFridayThruSaturday()
+        //Get the year onchange javascript
+        public ActionResult GetVolunteersFridayThruSaturdayByYear(int eventYear)
             {
-            string constring = ConfigurationManager.ConnectionStrings["ReportConnection"].ConnectionString;
+            List<VolunteersFridayThruSaturdayModel> model = new List<VolunteersFridayThruSaturdayModel>();
+            string query = String.Empty;
+            DataTable dt = new DataTable();
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(constring))
+                {
+                dt = new DataTable();
+                connection.Open();
+                query = "SELECT * FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 4 AND EventYear = @EventYear";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+                    {
+                    adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
+                    adapter.Fill(dt);
+                    model = dt.AsEnumerable().Select(x => new VolunteersFridayThruSaturdayModel()
+                        {
+                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
+                        VolunteerLastName = x["VolunteerLastName"].ToString(),
+                        Description = x["Description"].ToString()
+                        }).ToList();
+                    }
+                }
+            return PartialView("_PartialVolunteersFridayThruSaturdayList", model);
+            }
+
+        //Export to excel
+        public ActionResult VolunteersSaturdayOnly(int eventYear)
+            {
+            string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT *  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 4;";
+            string query = "SELECT * FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 4 AND EventYear = @EventYear";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
+            da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
             da.Fill(dt);
             con.Close();
-
             using (XLWorkbook wb = new XLWorkbook())
                 {
                 wb.Worksheets.Add(dt);
                 wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 wb.Style.Font.Bold = true;
-
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
@@ -69,8 +102,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-
-            return RedirectToAction("Index", "VolunteersFridayThruSaturday");
+            return RedirectToAction("Index", " VolunteersFridayThruSaturday");
             }
 
         private void releaseObject(object obj)

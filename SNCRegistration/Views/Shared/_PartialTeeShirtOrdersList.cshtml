@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<SNCRegistration.ViewModels.TeeShirtOrdersModel>
 
+<tr>
+    <td colspan="7">
+        <h4>Total: @Model.Count()</h4>
+    </td>
+</tr>
+
 @foreach (var item in Model)
     {
     <tr>

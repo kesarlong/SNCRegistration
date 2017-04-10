@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SNCRegistration.ViewModels
     {
-    public class PendingRegistrationModel
+    public class PendingRegistrationReportModel
         {
         [Display(Name = "Registrant")]
         public string Registrant { get; set; }

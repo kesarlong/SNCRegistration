@@ -7,16 +7,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SNCRegistration.ViewModels
     {
-    public class FirstTImeAttendeeModel
+    public class FirstTimeAttendeeModel
         {
-        public int ParticipantID { get; set; }
-        [Display(Name = "First Name")]
         public string ParticipantFirstName { get; set; }
         [Display(Name = "Last Name")]
         public string ParticipantLastName { get; set; }
         [Display(Name = "Repeat Attendee")]
         public string Returning { get; set; }
-        [Display(Name = "Attending")]
-        public string Description{ get; set; }
+        [Display(Name = "Description")]
+        public string Description { get; set; }
         }
     }

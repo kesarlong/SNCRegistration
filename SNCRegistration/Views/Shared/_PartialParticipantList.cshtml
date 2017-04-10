@@ -1,5 +1,13 @@
 ﻿@model IEnumerable<SNCRegistration.ViewModels.ParticipantsReportModel>
 
+
+
+<tr>
+    <td colspan="2">
+        <h4>Total: @Model.Count()</h4>
+    </td>
+</tr>
+
 @foreach (var item in Model)
     {
     <tr>

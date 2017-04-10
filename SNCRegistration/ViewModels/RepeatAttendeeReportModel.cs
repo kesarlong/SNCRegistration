@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SNCRegistration.ViewModels
     {
-    public class RepeatAttendeeReport
+    public class RepeatAttendeeReportModel
         {
         public int ParticipantID { get; set; }
         [Display(Name = "First Name")]

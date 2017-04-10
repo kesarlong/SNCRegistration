@@ -15,7 +15,7 @@ namespace SNCRegistration.Controllers
     public class TeeShirtOrdersReportController : Controller
 
     {
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         // GET: TeeShirtOrdersReportController
         public ActionResult Index(int? eventYear)
             {

@@ -8,35 +8,35 @@
 @using (Html.BeginForm("CompletedRegistrationReport", "CompletedRegistrationReport", FormMethod.Post))
     {
     <h2>Completed Registration Count Report</h2>
- 
-<div class="row">
-    <div class="col-sm-3">
-        <h4>Total: @Model.Count()</h4>
+
+    <div class="row">
+        <div class="col-sm-3">
+           
+        </div>
+        <div class="col-sm-9 text-right">
+            <div class="col-sm-7"><h4>Select Event Year:</h4></div>
+            <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
+            <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+        </div>
     </div>
-    <div class="col-sm-9 text-right">
-        <div class="col-sm-7"><h4>Select Event Year:</h4></div>
-        <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
-        <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
-    </div>
-</div>
-<table class="table table-striped">
-    <thead>
-       <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Registrant)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParticipantFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParticipantLastName)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @Html.Partial("_PartialCompletedRegistrationList", Model)
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Registrant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParticipantFirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParticipantLastName)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @Html.Partial("_PartialCompletedRegistrationList", Model)
+        </tbody>
+    </table>
     }
 
 @section scripts{

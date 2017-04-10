@@ -16,13 +16,10 @@ namespace SNCRegistration.Controllers
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
         // GET: Reporting
         public ActionResult Index(int? eventYear)
             {
-
-            // Get Participant Count to display in view
-            ViewBag.ParticipantsCount = db.Participants.Count();
 
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
             List<ParticipantsReportModel> model = new List<ParticipantsReportModel>();
@@ -33,11 +30,13 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge , ParticipantSchool,"
-                    + "CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, " 
-                    + "CASE WHEN HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckIn,"
-                    + "ParticipantTeacher, AttendingCode, GuardianID, Comments, "
-                    + "EventYear FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = @EventYear");
+                query = String.Concat("SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, AgeDescription, ParticipantSchool, "
+                    + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
+                    + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
+                    + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName,GuardianLastName "
+                    + "FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
+                    + "INNER JOIN Attendance ON AttendanceID = Participants.AttendingCode INNER JOIN Age ON ParticipantAge = AgeID WHERE Participants.EventYear = @EventYear ORDER BY ParticipantFirstName;");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -64,11 +63,13 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge , ParticipantSchool,"
-                    + "CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
-                    + "CASE WHEN HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckIn,"
-                    + "ParticipantTeacher, AttendingCode, GuardianID, Comments, "
-                    + "EventYear FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = @EventYear";
+                query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, AgeDescription, ParticipantSchool, "
+                    + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
+                    + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
+                    + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName,GuardianLastName "
+                    + "FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
+                    + "INNER JOIN Attendance ON AttendanceID = Participants.AttendingCode INNER JOIN Age ON ParticipantAge = AgeID WHERE Participants.EventYear = @EventYear ORDER BY ParticipantFirstName;";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -89,11 +90,13 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge , ParticipantSchool,"
-                    + "CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
-                    + "CASE WHEN HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckIn,"
-                    + "ParticipantTeacher, AttendingCode, GuardianID, Comments, "
-                    + "EventYear FROM Participants INNER JOIN Age ON ParticipantAge = AgeID WHERE EventYear = @EventYear";
+            string query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, AgeDescription, ParticipantSchool, "
+                    + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
+                    + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
+                    + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName,GuardianLastName "
+                    + "FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
+                    + "INNER JOIN Attendance ON AttendanceID = Participants.AttendingCode INNER JOIN Age ON ParticipantAge = AgeID WHERE Participants.EventYear = @EventYear ORDER BY ParticipantFirstName;";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";
             con.Open();

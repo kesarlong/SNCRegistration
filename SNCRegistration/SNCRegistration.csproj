@@ -280,7 +280,7 @@
     <Compile Include="Controllers\AldenRoadReportController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BoothCountController.cs" />
-    <Compile Include="Controllers\CompletedRegistrationController.cs" />
+    <Compile Include="Controllers\CompletedRegistrationReportController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FamilyFriendsReportController.cs" />
@@ -306,7 +306,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DatabaseExtensions.cs" />
     <Compile Include="Helpers\EmailHelpers.cs" />
     <Compile Include="packages\Microsoft.SqlServer.Types.11.0.2\content\SqlServerTypes\Loader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -365,12 +364,12 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ParticipantsReportModel.cs" />
-    <Compile Include="ViewModels\PendingRegistrationModel.cs" />
+    <Compile Include="ViewModels\PendingRegistrationReportModel.cs" />
     <Compile Include="ViewModels\PeopleCheckedInCountModel.cs" />
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\RepeatAttendeeModel.cs" />
+    <Compile Include="ViewModels\RepeatAttendeeReportModel.cs" />
     <Compile Include="ViewModels\ShirtSize.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -388,9 +387,6 @@
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="ViewModels\Sponsor.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Table.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -600,17 +596,28 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
-    <Content Include="Views\CompletedRegistrationReport\Index.cshtml" />
+    <Content Include="Scripts\sponsors-carousel.js" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParkingPassList.cshtml" />
+    <Content Include="Views\Shared\_PartialPeopleCheckedInList.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\_PartialPendingRegistrationList.cshtml" />
     <Content Include="Views\ParkingPass\Index.cshtml" />
-    <Content Include="Views\Volunteers\Redirect.cshtml" />
-    <Content Include="App_Data\PDF\EventInfo.pdf" />
+    <Content Include="Views\Shared\_PartialVolunteersReportList.cshtml" />
+    <Content Include="Views\CompletedRegistrationReport\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersSaturdayOnlyList.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersOvernightList.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersFridayOnlyList.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersFridayThruSaturdayList.cshtml" />
+    <Content Include="Views\Shared\_PartialFamilyFriendsReportList.cshtml" />
+    <Content Include="ClassDiagram2.cd" />
+    <Content Include="Views\Shared\_PartialFirstTimeAttendeeList.cshtml" />
+    <Content Include="Views\Shared\_PartialRepeatAttendeeList.cshtml" />
+    <Content Include="Views\Shared\_PartialAldenRoadReportList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3416,7 +3423,6 @@
     <Content Include="Views\FamilyMembers\CheckIn.cshtml" />
     <Content Include="Views\LeadContacts\CheckIn.cshtml" />
     <Content Include="Views\AldenRoadReport\Index.cshtml" />
-    <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\FirstTimeAttendeeReport\Index.cshtml" />
     <Content Include="Views\PeopleCheckedInCount\Index.cshtml" />
     <Content Include="Views\RepeatAttendeeReport\Index.cshtml" />
@@ -3441,7 +3447,6 @@
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
-    <Folder Include="Views\Reporting\" />
     <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,6 @@ namespace SNCRegistration.ViewModels
     {
     public class VolunteersReportModel
         {
-        public int VolunteerID { get; set; }
         [Display(Name = "First Name")]
         public string VolunteerFirstName { get; set; }
         [Display(Name = "Last Name")]

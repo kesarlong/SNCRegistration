@@ -5002,12 +5002,8 @@ a.badge:focus {
 }
 .thumbnail {
   display: block;
-  padding: 4px;
-  margin-bottom: 20px;
-  line-height: 1.42857143;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 2px;
+  margin-bottom: 10px;
   -webkit-transition: border .2s ease-in-out;
        -o-transition: border .2s ease-in-out;
           transition: border .2s ease-in-out;
@@ -5023,7 +5019,7 @@ a.thumbnail.active {
   border-color: #337ab7;
 }
 .thumbnail .caption {
-  padding: 9px;
+  padding: 5px;
   color: #333;
 }
 .alert {

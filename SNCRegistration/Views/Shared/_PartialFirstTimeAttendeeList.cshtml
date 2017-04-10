@@ -1,23 +1,27 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.PendingRegistrationReportModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.FirstTimeAttendeeModel>
 
 <tr>
-    <td colspan="3">
+    <td colspan="4">
         <h4>Total: @Model.Count()</h4>
     </td>
 </tr>
 
+
 @foreach (var item in Model)
     {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Registrant)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantFirstName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ParticipantLastName)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Returning)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+       
     </tr>
-   
     }
