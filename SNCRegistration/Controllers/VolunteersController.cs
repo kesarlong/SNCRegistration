@@ -127,6 +127,7 @@ namespace SNCRegistration.Controllers
             ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
             return View();
         }
 
@@ -165,7 +166,7 @@ namespace SNCRegistration.Controllers
                     {
                         var total = db.ComputeTotal(volunteer.LeadContactID);
                         var email = Session["leaderEmail"] as string;
-                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is " + total.ToString("c"), " ");
+                        Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is " + total.ToString("c"));
                         return Redirect("Registered");
                     }
                 }

@@ -17,6 +17,43 @@
 
 </script>
 
+<script type="text/javascript">
+    //hide Satuday Dinner field if selected that attending Friday only or Saturday
+    $(document).ready(function () {
+        $("#Dinner").hide();
+        $("#Attending").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optValue = $(this).attr("value");
+                if (optValue == 2) {
+                    $("#Dinner").show();
+
+                } else {
+                    $("#Dinner").hide();
+                }
+            });
+        }).change();
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#UnitChapterNumber").hide();
+        $("#BSType").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optionValue = $(this).attr("value");
+                if (optionValue >= 3) {
+                    $("#UnitChapterNumber").hide();
+
+                } else {
+                    $("#UnitChapterNumber").show();
+                }
+            });
+        }).change();
+    });
+
+</script>
+
 
 @model SNCRegistration.ViewModels.Volunteer
 
@@ -125,7 +162,7 @@
   
 
     <br />
-        <div class="form-group">
+        <div class="form-group"id="Attending">
             @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
             @Html.DropDownListFor(model => model.VolunteerAttendingCode,
             ViewBag.Attendance as SelectList, "- Select option - "
@@ -134,7 +171,7 @@
         </div>
         <br />
         <div class="form-group">
-            <div class="btn-group" data-toggle="buttons">
+            <div class="btn-group" data-toggle="buttons"  id="Dinner">
                 @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
                 <label class="btn btn-default">
                     @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
@@ -146,15 +183,30 @@
             @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
         </div>
     <br />
-    @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
-    <div class="row">
 
-        <div class="col-md-9">
-            @Html.EditorFor(model => model.UnitChapterNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
     <br />
+                <div class="form-group" id="BSType">
+                    @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.BSType,
+                        ViewBag.BSType as SelectList, "- Select option - "
+                        //new List<SelectListItem>{
+                        //    new SelectListItem{ Value = "", Text = "-Select Type-" },
+                        //    new SelectListItem{ Value = "1", Text = "Troop/Crew" },
+                        //    new SelectListItem{ Value = "2", Text = "OA Chapter" },
+                        //    new SelectListItem{ Value = "3", Text = "Individual" }
+                        , new { @class = "form-control", style = "width: 200px" })
+                    @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                    <div class="row" id="UnitChapterNumber">
+                        @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.UnitChapterNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
     @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-3" })
     <div class="row">
 

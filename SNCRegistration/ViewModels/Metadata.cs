@@ -348,6 +348,10 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Checked In?")]
         public bool? CheckedIn;
 
+        [Required]
+        [Display(Name = "Group Type")]
+        public string BSType;
+
         //Messing things up with LeadContact/Details
         //[Display(Name = "Number of people in tent")]
         //public int NumberInTent;

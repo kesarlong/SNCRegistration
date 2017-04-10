@@ -29,5 +29,8 @@ namespace SNCRegistration.ViewModels
         public bool CheckedIn { get; set; }
         public int EventYear { get; set; }
         public int VolunteerFee { get; set; }
+        public int BSType { get; set; }
+    
+        public virtual BSType BSType1 { get; set; }
     }
 }

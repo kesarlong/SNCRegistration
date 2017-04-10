@@ -20,34 +20,37 @@
     //hide Satuday Dinner field if selected that attending Friday only or Saturday
     $(document).ready(function () {
         $("#Dinner").hide();
-
         $("#Attending").change(function () {
-            var attending = ($('input[name=VolunteerAttendingCode]:selected').val());
-            if ($('input[name=VolunteerAttendingCode]:selected').val() == 2) {
-                $("#Dinner").show();
-            }
-            else {
-                $("#Dinner").hide();
-            }
-        });
+            $(this).find("option:selected").each(function () {
+                var optValue = $(this).attr("value");
+                if (optValue == 2) {
+                    $("#Dinner").show();
+
+                } else {
+                    $("#Dinner").hide();
+                }
+            });
+        }).change();
     });
 </script>
 
 <script type="text/javascript">
-    //hide Satuday Dinner field if selected that attending Friday only or Saturday
+
     $(document).ready(function () {
         $("#UnitChapterNumber").hide();
-
         $("#BSType").change(function () {
-            var type = ($('input[name=BSType]:selected').val());
-            if ($('input[name=BSType]:selected').val() == 4) {
-                $("#UnitChapterNumber").show();
-            }
-            else {
-                $("#UnitChapterNumber").hide();
-            }
-        });
+            $(this).find("option:selected").each(function () {
+                var optionValue = $(this).attr("value");
+                if (optionValue >= 3) {
+                    $("#UnitChapterNumber").hide();
+                   
+                } else {
+                    $("#UnitChapterNumber").show();
+                }
+            });
+        }).change();
     });
+
 </script>
 
 @using System.Collections.Generic;

@@ -39,6 +39,7 @@ namespace SNCRegistration.ViewModels
         public virtual DbSet<Participant> Participants { get; set; }
         public virtual DbSet<Relationship> Relationships { get; set; }
         public virtual DbSet<ShirtSize> ShirtSizes { get; set; }
+        public virtual DbSet<Sponsor> Sponsors { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<Volunteer> Volunteers { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }

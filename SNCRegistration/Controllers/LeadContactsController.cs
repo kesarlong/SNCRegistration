@@ -163,8 +163,7 @@ namespace SNCRegistration.Controllers
                     //registration complete, no more people to add
                     {
                         var email = Session["leaderEmail"] as string;
-                        var attach = "~/ App_Data /EventInfo.pdf";
-                       Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is"+(leadContact.TotalFee ?? 0).ToString("c"), HostingEnvironment.MapPath(@"~/App_Data/PDF/EventInfo.pdf"));
+                       Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is "+(leadContact.TotalFee ?? 0).ToString("c"));
                         return Redirect("Registered");
                     }
                 }

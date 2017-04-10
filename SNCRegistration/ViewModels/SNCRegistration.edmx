@@ -202,6 +202,13 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="ShirtSizeCode" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="ShirtSizeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Sponsors">
+          <Key>
+            <PropertyRef Name="SponsorID" />
+          </Key>
+          <Property Name="SponsorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="src" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Table">
           <Key>
             <PropertyRef Name="LoginProvider" />
@@ -229,6 +236,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="bit" Nullable="false" />
           <Property Name="EventYear" Type="int" Nullable="false" />
           <Property Name="VolunteerFee" Type="int" Nullable="false" />
+          <Property Name="BSType" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__FamilyMem__Famil__40F9A68C">
           <End Role="Age" Type="Self.Age" Multiplicity="1" />
@@ -263,6 +271,18 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             </Principal>
             <Dependent Role="Participants">
               <PropertyRef Name="ParticipantAge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Volunteer__BSTyp__3CF40B7E">
+          <End Role="BSType" Type="Self.BSType" Multiplicity="1" />
+          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BSType">
+              <PropertyRef Name="BSTypeID" />
+            </Principal>
+            <Dependent Role="Volunteers">
+              <PropertyRef Name="BSType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -334,6 +354,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sponsors" EntityType="Self.Sponsors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" store:Type="Tables" store:Schema="dbo">
@@ -354,6 +375,10 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <AssociationSet Name="FK__Participa__Parti__41EDCAC5" Association="Self.FK__Participa__Parti__41EDCAC5">
             <End Role="Age" EntitySet="Age" />
             <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__BSTyp__3CF40B7E" Association="Self.FK__Volunteer__BSTyp__3CF40B7E">
+            <End Role="BSType" EntitySet="BSType" />
+            <End Role="Volunteers" EntitySet="Volunteers" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -414,6 +439,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Participants" EntityType="SNCRegistrationModel.Participant" />
           <EntitySet Name="Relationships" EntityType="SNCRegistrationModel.Relationship" />
           <EntitySet Name="ShirtSizes" EntityType="SNCRegistrationModel.ShirtSize" />
+          <EntitySet Name="Sponsors" EntityType="SNCRegistrationModel.Sponsor" />
           <EntitySet Name="Tables" EntityType="SNCRegistrationModel.Table" />
           <EntitySet Name="Volunteers" EntityType="SNCRegistrationModel.Volunteer" />
           <EntitySet Name="AspNetUserLogins" EntityType="SNCRegistrationModel.AspNetUserLogin" />
@@ -424,6 +450,10 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <AssociationSet Name="FK__Participa__Parti__41EDCAC5" Association="SNCRegistrationModel.FK__Participa__Parti__41EDCAC5">
             <End Role="Age" EntitySet="Ages" />
             <End Role="Participant" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__BSTyp__3CF40B7E" Association="SNCRegistrationModel.FK__Volunteer__BSTyp__3CF40B7E">
+            <End Role="BSType" EntitySet="BSTypes" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMembers" Association="SNCRegistrationModel.FK_FamilyMembers">
             <End Role="Guardian" EntitySet="Guardians" />
@@ -511,6 +541,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           </Key>
           <Property Name="BSTypeID" Type="Int32" Nullable="false" />
           <Property Name="BSTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK__Volunteer__BSTyp__3CF40B7E" FromRole="BSType" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="FamilyMember">
           <Key>
@@ -631,6 +662,13 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="ShirtSizeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="ShirtSizeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="SponsorID" />
+          </Key>
+          <Property Name="SponsorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="src" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Table">
           <Key>
             <PropertyRef Name="LoginProvider" />
@@ -658,6 +696,8 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="CheckedIn" Type="Boolean" Nullable="false" />
           <Property Name="EventYear" Type="Int32" Nullable="false" />
           <Property Name="VolunteerFee" Type="Int32" Nullable="false" />
+          <Property Name="BSType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BSType1" Relationship="SNCRegistrationModel.FK__Volunteer__BSTyp__3CF40B7E" FromRole="Volunteer" ToRole="BSType" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -690,6 +730,18 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
             </Principal>
             <Dependent Role="Participant">
               <PropertyRef Name="ParticipantAge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Volunteer__BSTyp__3CF40B7E">
+          <End Type="SNCRegistrationModel.BSType" Role="BSType" Multiplicity="1" />
+          <End Type="SNCRegistrationModel.Volunteer" Role="Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BSType">
+              <PropertyRef Name="BSTypeID" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="BSType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -954,6 +1006,14 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Sponsors">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.Sponsor">
+              <MappingFragment StoreEntitySet="Sponsors">
+                <ScalarProperty Name="src" ColumnName="src" />
+                <ScalarProperty Name="SponsorID" ColumnName="SponsorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tables">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Table">
               <MappingFragment StoreEntitySet="Table">
@@ -966,6 +1026,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySetMapping Name="Volunteers">
             <EntityTypeMapping TypeName="SNCRegistrationModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteers">
+                <ScalarProperty Name="BSType" ColumnName="BSType" />
                 <ScalarProperty Name="VolunteerFee" ColumnName="VolunteerFee" />
                 <ScalarProperty Name="EventYear" ColumnName="EventYear" />
                 <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
