@@ -12,6 +12,7 @@ namespace SNCRegistration.ViewModels
 
 
         public IEnumerable<Volunteer> volunteers { get; set; }
+        public IEnumerable<LeadContact> leadcontacts { get; set; }
 
     }
 }

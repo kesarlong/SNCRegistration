@@ -150,7 +150,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="LeadContactLastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LeadContactAddress" Type="varchar" MaxLength="50" />
           <Property Name="LeadContactCity" Type="varchar" MaxLength="50" />
-          <Property Name="LeadContactState" Type="char" MaxLength="10" />
+          <Property Name="LeadContactState" Type="varchar" MaxLength="2" />
           <Property Name="LeadContactZip" Type="char" MaxLength="5" />
           <Property Name="LeadContactCellPhone" Type="char" MaxLength="10" />
           <Property Name="LeadContactEmail" Type="varchar" MaxLength="100" />
@@ -596,7 +596,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="LeadContactLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LeadContactAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LeadContactCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LeadContactState" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LeadContactState" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="LeadContactZip" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="LeadContactCellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="LeadContactEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />

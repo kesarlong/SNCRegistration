@@ -40,7 +40,7 @@ namespace SNCRegistration.Controllers
         {
 
             ViewBag.FamilyMemberAge = new SelectList(db.Ages, "AgeID", "AgeDescription");
-            ViewBag.AttendingCode = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description");
+            ViewBag.AttendingCode = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", TempData["gAttend"]);
             return View();
         }
 
@@ -58,21 +58,28 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     familyMember.GuardianID = (int)TempData["myPK"];
+                    
+                    //set attendance choice to pass to family member form
+                     TempData["gAttend"] = familyMember.AttendingCode;
+                    //familyMember.AttendingCode = (int)TempData["gAttend"];
+                    
+
+                    TempData.Keep();
                 }
 
                 //store year of event
                 var thisYear = DateTime.Now.Year.ToString();
                 familyMember.EventYear = int.Parse(thisYear);
 
+
+
                 db.FamilyMembers.Add(familyMember);
 
                 try
                 {
-
-
-
-
                     db.SaveChanges();
+
+
 
                     //add another participant for guardian                   
                     if (Request["submit"].Equals("Add another participant"))
@@ -96,21 +103,6 @@ namespace SNCRegistration.Controllers
 
                 }
                 catch (DbEntityValidationException ex)
-                //{
-                //    //retrieve the error message as a list of strings
-                //    var errorMessages = ex.EntityValidationErrors
-                //        .SelectMany(x => x.ValidationErrors)
-                //        .Select(x => x.ErrorMessage);
-
-                //    //Join the list to a single string
-                //    var fullErrorMessage = string.Join(" ,", errorMessages);
-
-                //    //Combine the original exception message wtih the new one
-                //    var exceptionMessage = string.Concat(ex.Message, "The validation errors are: ", fullErrorMessage);
-
-                //    // Throw a new DbEntityValidationException with the improved exception message.
-                //    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
-                //}
                 {
                     foreach (var entityValidationErrors in ex.EntityValidationErrors)
                     {
@@ -142,23 +134,6 @@ namespace SNCRegistration.Controllers
             return View(familyMember);
         }
 
-
-        //Original POST Edit, Delete if nothing broken
-        // POST: FamilyMembers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "FamilyMemberID,FamilyMemberFirstName,FamilyMemberLastName,GuardianID,HealthForm,PhotoAck,AttendingCode,CheckedIn,Comments")] FamilyMember familyMember)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(familyMember).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(familyMember);
-        //}
 
         // POST: FamilyMembers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -302,15 +277,17 @@ namespace SNCRegistration.Controllers
 
 
 
-            if (familymember.HealthForm.Value == false && familymember.CheckedIn == false)
-            {
-                ModelState.AddModelError("", "Health Form must be received before check in.");
-            }
-            else
-            {
+
 
                 if (TryUpdateModel(familymember, "",
-               new string[] { "CheckedIn" }))
+               new string[] { "HealthForm", "PhotoAck", "CheckedIn" }))
+                {
+
+                if (familymember.HealthForm.Value == false && familymember.CheckedIn == true)
+                {
+                    ModelState.AddModelError("", "Health Form must be received before check in.");
+                }
+                else
                 {
                     try
                     {

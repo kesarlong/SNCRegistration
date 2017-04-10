@@ -17,12 +17,25 @@ namespace SNCRegistration.Controllers
     {
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
+        
         // GET: Volunteers
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? searchYear, int? page)
         {
 
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentYearSort = searchYear;
+            ViewBag.currentFilter = currentFilter;
+            ViewBag.searchString = searchString;
+            ViewBag.page = page;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TcuNumSortParam = sortOrder == "tcunum_asc" ? "tcunum_desc" : "tcunum_asc";
+
+            Session["SessionSortOrder"] = ViewBag.CurrentSort;
+            Session["SessionCurrentFilter"] = ViewBag.currentFilter;
+            Session["SessionSearchYear"] = ViewBag.CurrentYearSort;
+            Session["SessionPage"] = ViewBag.page;
+            Session["SessionSearchString"] = ViewBag.searchString;
+            
 
             if (searchString != null)
             {
@@ -35,12 +48,16 @@ namespace SNCRegistration.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            ViewBag.CurrentYear = DateTime.Now.Year;
+            ViewBag.AllYears = (from y in db.Volunteers select y.EventYear).Distinct();
+
             var volunteers = from s in db.Volunteers
-                               select s;
+                             where s.EventYear == searchYear
+                             select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                volunteers = volunteers.Where(s => s.VolunteerLastName.Contains(searchString) || s.VolunteerFirstName.Contains(searchString));
+                volunteers = volunteers.Where(s => s.VolunteerLastName.Contains(searchString) || s.VolunteerFirstName.Contains(searchString) || s.UnitChapterNumber.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -48,13 +65,26 @@ namespace SNCRegistration.Controllers
                 case "name_desc":
                     volunteers = volunteers.OrderByDescending(s => s.VolunteerLastName);
                     break;
+                case "tcunum_desc":
+                    volunteers = volunteers.OrderByDescending(s => s.UnitChapterNumber);
+                    break;
+                case "name_asc":
+                    volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
+                    break;
+                case "tcunum_asc":
+                    volunteers = volunteers.OrderBy(s => s.UnitChapterNumber);
+                    break;
                 default:
                     volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
                     break;
             }
 
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
+            
+
+
+
             return View(volunteers.ToPagedList(pageNumber, pageSize));
 
 
@@ -166,6 +196,9 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Volunteer volunteer = db.Volunteers.Find(id);
+
+            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode);
+
             if (volunteer == null)
             {
                 return HttpNotFound();
@@ -195,8 +228,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
+                    TempData["notice"] = "Edits Saved!";
+                    return RedirectToAction("Details", "Volunteers", new { id = volunteer.VolunteerID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -204,6 +237,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode);
             return View(volunteer);
 
 
@@ -246,8 +280,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-
-                    return RedirectToAction("Details", "LeadContacts", new { id = volunteer.LeadContactID });
+                    TempData["notice"] = "Volunteer Checked In Status Saved!";
+                    return RedirectToAction("CheckIn", "Volunteers", new { id = volunteer.VolunteerID });
                 }
                 catch (DataException /* dex */)
                 {
@@ -359,6 +393,25 @@ namespace SNCRegistration.Controllers
         }
 
 
+        private void SetAgeAttendanceViewBag(int? age = null, int? attendance = null)
+        {
 
+            if (age == null)
+            {
+                ViewBag.AgeID = new SelectList(db.Ages, "AgeID", "AgeDescription");
+            }
+            else
+                ViewBag.AgeID = new SelectList(db.Ages.ToArray(), "AgeID", "AgeDescription", age);
+
+            if (attendance == null)
+            {
+                ViewBag.AttendanceID = new SelectList(db.Attendances, "AttendanceID", "Description");
+            }
+            else
+                ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", attendance);
+
+
+
+        }
     }
 }

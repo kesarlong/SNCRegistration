@@ -7,6 +7,10 @@
 
 <h2>Check In Guardian</h2>
 
+@if (TempData["notice"] != null)
+{
+    <h2 style="color:green;">@TempData["notice"]</h2> }
+
 
 @using (Html.BeginForm())
 {
@@ -55,15 +59,61 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.HealthForm)
+                <div class="form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                        @Html.ValidationMessageFor(model => model.HealthForm, "", new { @class = "text-danger" })
+                        @if (Model.HealthForm == true)
+                {
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.HealthForm, "True", new { name = "HealthForm" }) Yes
+                            </label>
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.HealthForm, "False", new { name = "HealthForm" }) No
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.HealthForm, "True", new { name = "HealthForm" }) Yes
+                            </label>
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.HealthForm, "False", new { name = "HealthForm" }) No
+                            </label>
+
+                        }
+                    </div>
+                </div>
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PhotoAck)
+                @Html.LabelFor(model => model.PhotoAck, htmlAttributes: new { @class = "control-label" })
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.PhotoAck)
+                <div class="form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                       @Html.ValidationMessageFor(model => model.PhotoAck, "", new { @class = "text-danger" })
+                        @if (Model.PhotoAck == true)
+                {
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "True", new { name = "PhotoAck" }) Yes
+                            </label>
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "False", new { name = "PhotoAck" }) No
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="btn btn-default">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "True", new { name = "PhotoAck" }) Yes
+                            </label>
+                            <label class="btn btn-default active">
+                                @Html.RadioButtonFor(model => model.PhotoAck, "False", new { name = "PhotoAck" }) No
+                            </label>
+
+                        }
+                    </div>
+                </div>
             </dd>
 
             <dt>
@@ -169,13 +219,11 @@
             <div align="right" style="margin-right:20px;">
                 <input type="submit" value="Save" class="btn btn-primary" /> |
                 @Html.ActionLink("Edit", "Edit", new { id = Model.GuardianID }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Back to Guardian Details", "Details", new { id = Model.GuardianID }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Guardian Details", "Details", new { id = Model.GuardianID }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Back to Guardian Search", "Index", "Guardians", new { SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] }, new { @class = "btn btn-info" })
             </div>
-            @if (TempData["notice"] != null)
-                {
-        <p style="color:green;">@TempData["notice"]</p> }
         
-         </p>
+            </p>
 
 }
         @section Scripts {
