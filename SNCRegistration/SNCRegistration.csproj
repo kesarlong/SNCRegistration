@@ -280,7 +280,7 @@
     <Compile Include="Controllers\AldenRoadReportController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BoothCountController.cs" />
-    <Compile Include="Controllers\CompletedRegistrationController.cs" />
+    <Compile Include="Controllers\CompletedRegistrationReportController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FamilyFriendsReportController.cs" />
@@ -339,7 +339,7 @@
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\FamilyFriendsReportModel.cs" />
+    <Compile Include="ViewModels\FamilyFriendsReport.cs" />
     <Compile Include="ViewModels\FamilyMember.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -369,7 +369,7 @@
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\RepeatAttendeeModel.cs" />
+    <Compile Include="ViewModels\RepeatAttendeeReportModel.cs" />
     <Compile Include="ViewModels\ShirtSize.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -598,6 +598,7 @@
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
     <Content Include="Scripts\sponsors-carousel.js" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParkingPassList.cshtml" />
     <Content Include="Views\Shared\_PartialPeopleCheckedInList.cshtml" />
@@ -614,6 +615,9 @@
     <Content Include="Views\Shared\_PartialVolunteersFridayThruSaturdayList.cshtml" />
     <Content Include="Views\Shared\_PartialFamilyFriendsReportList.cshtml" />
     <Content Include="ClassDiagram2.cd" />
+    <Content Include="Views\Shared\_PartialFirstTimeAttendeeList.cshtml" />
+    <Content Include="Views\Shared\_PartialRepeatAttendeeList.cshtml" />
+    <Content Include="Views\Shared\_PartialAldenRoadReportList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3419,7 +3423,6 @@
     <Content Include="Views\FamilyMembers\CheckIn.cshtml" />
     <Content Include="Views\LeadContacts\CheckIn.cshtml" />
     <Content Include="Views\AldenRoadReport\Index.cshtml" />
-    <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\FirstTimeAttendeeReport\Index.cshtml" />
     <Content Include="Views\PeopleCheckedInCount\Index.cshtml" />
     <Content Include="Views\RepeatAttendeeReport\Index.cshtml" />

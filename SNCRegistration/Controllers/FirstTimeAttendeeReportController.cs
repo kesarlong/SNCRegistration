@@ -25,7 +25,7 @@ namespace SNCRegistration.Controllers
 
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
 
-            List<ParkingPassModel> model = new List<ParkingPassModel>();
+            List<FirstTimeAttendeeModel> model = new List<FirstTimeAttendeeModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -33,18 +33,19 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT * FROM FamilyMembers WHERE EventYear = @EventYear ORDER BY FamilyMemberFirstName");
+                query = String.Concat("SELECT ParticipantFirstName, ParticipantLastName, Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 AND EventYear = @EventYear Order By Description");
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new ParkingPassModel()
+                    model = dt.AsEnumerable().Select(x => new FirstTimeAttendeeModel()
                         {
-                        GuardianID = Convert.ToInt32(x["GuardianID"]),
-                        GuardianFirstName = x["GuardianFirstName"].ToString(),
-                        GuardianLastName = x["GuardianLastName"].ToString(),
-                        GuardianCellPhone = x["GuardianCellPhone"].ToString(),
+                       
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        Returning = x["Returning"].ToString(),
+                        Description = x["Description"].ToString()
                         }).ToList();
                     }
                 }
@@ -52,9 +53,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetParkingPassByYear(int eventYear)
+        public ActionResult GetFirstTimeAttendeeByYear(int eventYear)
             {
-            List<ParkingPassModel> model = new List<ParkingPassModel>();
+            List<FirstTimeAttendeeModel> model = new List<FirstTimeAttendeeModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -62,31 +63,32 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
+                query = "SELECT ParticipantFirstName, ParticipantLastName, Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new ParkingPassModel()
+                    model = dt.AsEnumerable().Select(x => new FirstTimeAttendeeModel()
                         {
-                        GuardianID = Convert.ToInt32(x["GuardianID"]),
-                        GuardianFirstName = x["GuardianFirstName"].ToString(),
-                        GuardianLastName = x["GuardianLastName"].ToString(),
-                        GuardianCellPhone = x["GuardianCellPhone"].ToString(),
+                        
+                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        Returning = x["Returning"].ToString(),
+                        Description = x["Description"].ToString()
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialParkingPassList", model);
+            return PartialView("_PartialFirstTimeAttendeeList", model);
             }
 
         //Export to excel
-        public ActionResult ParkingPass(int eventYear)
+        public ActionResult FirstTimeAttendeeReport(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
+            string query = "SELECT ParticipantFirstName, ParticipantLastName, Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
             DataTable dt = new DataTable();
-            dt.TableName = "Guardians";
+            dt.TableName = "Participants";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -101,7 +103,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= ParkingPass.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= FirstTimeAttendee.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -111,7 +113,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", "ParkingPass");
+            return RedirectToAction("Index", "FirstTimeAttendeeReport");
             }
 
         private void releaseObject(object obj)

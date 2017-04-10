@@ -24,7 +24,7 @@ namespace SNCRegistration.Controllers
 
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
 
-            List<FamilyFriendsReportModel> model = new List<FamilyFriendsReportModel>();
+            List<FamilyFriendsReport> model = new List<FamilyFriendsReport>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -38,7 +38,7 @@ namespace SNCRegistration.Controllers
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new FamilyFriendsReportModel()
+                    model = dt.AsEnumerable().Select(x => new FamilyFriendsReport()
                         {
                         FamilyMemberID = Convert.ToInt32(x["FamilyMemberID"]),
                         FamilyMemberFirstName = x["FamilyMemberFirstName"].ToString(),
@@ -52,7 +52,7 @@ namespace SNCRegistration.Controllers
         //Get the year onchange javascript
         public ActionResult GetFamilyFriendsReportByYear(int eventYear)
             {
-            List<FamilyFriendsReportModel> model = new List<FamilyFriendsReportModel>();
+            List<FamilyFriendsReport> model = new List<FamilyFriendsReport>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -65,7 +65,7 @@ namespace SNCRegistration.Controllers
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new FamilyFriendsReportModel()
+                    model = dt.AsEnumerable().Select(x => new FamilyFriendsReport()
                         {
                         FamilyMemberID = Convert.ToInt32(x["FamilyMemberID"]),
                         FamilyMemberFirstName = x["FamilyMemberFirstName"].ToString(),

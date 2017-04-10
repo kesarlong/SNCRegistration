@@ -12,15 +12,15 @@ using System.Linq;
 
 namespace SNCRegistration.Controllers
 {
-    public class CompletedRegistrationController : Controller
+    public class CompletedRegistrationReportController : Controller
     {
 
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
         // GET: Dashboard
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
 
-        // GET: CompletedRegistration
+        // GET: CompletedRegistrationReport
         public ActionResult Index(int? eventYear)
             {
             // Dropdown List For Event Year
@@ -78,7 +78,7 @@ namespace SNCRegistration.Controllers
             }
         
         //Export to excel
-        public ActionResult CompletedRegistration(int eventYear)
+        public ActionResult CompletedRegistrationReport(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);

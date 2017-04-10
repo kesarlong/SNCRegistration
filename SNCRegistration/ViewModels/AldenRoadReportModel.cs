@@ -14,7 +14,13 @@ namespace SNCRegistration.ViewModels
         public string ParticipantFirstName { get; set; }
         [Display(Name = "Last Name")]
         public string ParticipantLastName { get; set; }
+        [Display(Name = "Guardian First Name")]
+        public string GuardianFirstName { get; set; }
+        [Display(Name = "Guardian Last Name")]
+        public string GuardianLastName { get; set; }
         [Display(Name = "School")]
         public string ParticipantSchool { get; set; }
+        [Display(Name = "Attending")]
+        public string Description { get; set; }
         }
     }

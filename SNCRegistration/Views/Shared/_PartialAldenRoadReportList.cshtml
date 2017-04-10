@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.AldenRoadReportModel>
+
+
+
+<tr>
+    <td colspan="6">
+        <h4>Total: @Model.Count()</h4>
+    </td>
+</tr>
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantSchool)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+    }
