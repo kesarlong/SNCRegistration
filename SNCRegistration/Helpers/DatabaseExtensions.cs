@@ -11,7 +11,7 @@ namespace SNCRegistration.Helpers
         public static decimal ComputeTotal(this SNCRegistrationEntities db, LeadContact leadContact)
         {
             var volunteercount = db.Volunteers.Count(x => x.LeadContactID == leadContact.LeadContactID);
-            var rate = new decimal(10.00); //compute based on group
+            var rate = new decimal(15.00); //compute based on group
             leadContact.TotalFee = (volunteercount + 1) * rate;
             db.SaveChanges();
             return leadContact.TotalFee ?? 0;

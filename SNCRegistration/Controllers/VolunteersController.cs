@@ -148,13 +148,30 @@ namespace SNCRegistration.Controllers
                 volunteer.EventYear = int.Parse(thisYear);
                 var fee = 0;
                 volunteer.VolunteerFee = fee;
+
                 try
                 {
                     db.SaveChanges();
 
                     this.Session["lSession"] = volunteer.LeadContactID;
+                    
                     var totalFee = Session["leaderFee"] as string;
-                        if (Request["submit"].Equals("Add an additional volunteer"))
+
+
+                    var type = volunteer.BSType;
+
+                    if (type >= 3)
+                    {
+                        volunteer.VolunteerFee = 20;
+                    }
+                    else
+                    {
+                        volunteer.VolunteerFee = 15;
+                    }
+
+                    this.Session["fSession"] = volunteer.VolunteerFee;
+
+                    if (Request["submit"].Equals("Add an additional volunteer"))
                     { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
 
                     if (Request["submit"].Equals("Cancel"))

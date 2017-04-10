@@ -155,6 +155,9 @@ namespace SNCRegistration.Controllers
                     this.Session["leaderEmail"] = leadContact.LeadContactEmail;
                     TempData["myPK"] = leadContact.LeadContactID;
                     TempData.Keep();
+
+                    var volFee = Session["fSession"]  as string;
+
                     if (Request["submit"].Equals("Add a volunteer"))
                     {
                         return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
