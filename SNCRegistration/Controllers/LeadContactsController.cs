@@ -11,6 +11,7 @@ using System.Data.Entity.Validation;
 using PagedList;
 using System.Net.Mail;
 using System.Web.Hosting;
+using SNCRegistration.Helpers;
 
 namespace SNCRegistration.Controllers
 {
@@ -165,8 +166,11 @@ namespace SNCRegistration.Controllers
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
+                        var leadFee = db.BSTypes.Single(x => x.BSTypeID == leadContact.BSType).BSFee;
+                        var total = db.ComputeTotal(leadContact.LeadContactID);
                         var email = Session["leaderEmail"] as string;
-                       Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is "+(leadContact.TotalFee ?? 0).ToString("c"));
+                        var body = "You have successfully registered for the Special Needs Camporee.The total fee due is $" + leadFee + "<br />" + db.GetVolunteerList(leadContact.LeadContactID);
+                        Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
                         return Redirect("Registered");
                     }
                 }

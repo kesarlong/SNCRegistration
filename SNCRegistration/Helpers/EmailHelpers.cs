@@ -9,7 +9,7 @@ namespace SNCRegistration.Helpers
 {
     public static class EmailHelpers
     {        
-        public static void SendEmail(string fAddress, string tAddress, string subj, string bdy)
+        public static void SendEmail(string fAddress, string tAddress, string subj, string bdy, string pdfFolder)
         {
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
@@ -34,14 +34,14 @@ namespace SNCRegistration.Helpers
             })
             {
                 message.Bcc.Add(new MailAddress(bcc));
-                message.Attachments.Add(new Attachment("c:\\temp\\MediaRelease.pdf"));
-                message.Attachments.Add(new Attachment("c:\\temp\\ParticipantHealthForm.pdf"));
-                message.Attachments.Add(new Attachment("c:\\temp\\ParticipantWelcomePacket.pdf"));
+                message.Attachments.Add(new Attachment(pdfFolder + "MediaRelease.pdf"));
+                message.Attachments.Add(new Attachment(pdfFolder + "ParticipantHealthForm.pdf"));
+                message.Attachments.Add(new Attachment(pdfFolder + "ParticipantWelcomePacket.pdf"));
                 smtp.Send(message);
             }
         }
 
-        public static void SendVolEmail(string fAddress, string tAddress, string subj, string bdy)
+        public static void SendVolEmail(string fAddress, string tAddress, string subj, string bdy, string pdfFolder)
         {
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
@@ -62,12 +62,14 @@ namespace SNCRegistration.Helpers
             {
                 Subject = subj,
                 Body = bdy,
+                IsBodyHtml = true,
 
             })
             {
                 message.Bcc.Add(new MailAddress(bcc));
-                message.Attachments.Add(new Attachment("c:\\temp\\EventInfo.pdf"));
-                message.Attachments.Add(new Attachment("c:\\temp\\VolunteerHealthForm.pdf"));
+
+                message.Attachments.Add(new Attachment(pdfFolder + "EventInfo.pdf"));
+                message.Attachments.Add(new Attachment(pdfFolder + "VolunteerHealthForm.pdf"));
                 smtp.Send(message);
             }
         }

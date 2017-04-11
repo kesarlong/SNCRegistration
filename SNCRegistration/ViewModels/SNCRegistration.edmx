@@ -90,6 +90,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           </Key>
           <Property Name="BSTypeID" Type="int" Nullable="false" />
           <Property Name="BSTypeDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="BSFee" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="FamilyMembers">
           <Key>
@@ -541,6 +542,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           </Key>
           <Property Name="BSTypeID" Type="Int32" Nullable="false" />
           <Property Name="BSTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BSFee" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Volunteers" Relationship="SNCRegistrationModel.FK__Volunteer__BSTyp__3CF40B7E" FromRole="BSType" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="FamilyMember">
@@ -883,6 +885,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySetMapping Name="BSTypes">
             <EntityTypeMapping TypeName="SNCRegistrationModel.BSType">
               <MappingFragment StoreEntitySet="BSType">
+                <ScalarProperty Name="BSFee" ColumnName="BSFee" />
                 <ScalarProperty Name="BSTypeDescription" ColumnName="BSTypeDescription" />
                 <ScalarProperty Name="BSTypeID" ColumnName="BSTypeID" />
               </MappingFragment>
