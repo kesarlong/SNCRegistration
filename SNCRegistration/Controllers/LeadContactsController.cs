@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using PagedList;
+using System.Net.Mail;
+using System.Web.Hosting;
+using SNCRegistration.Helpers;
 
 namespace SNCRegistration.Controllers
 {
@@ -153,6 +156,9 @@ namespace SNCRegistration.Controllers
                     this.Session["leaderEmail"] = leadContact.LeadContactEmail;
                     TempData["myPK"] = leadContact.LeadContactID;
                     TempData.Keep();
+
+                    var volFee = Session["fSession"]  as string;
+
                     if (Request["submit"].Equals("Add a volunteer"))
                     {
                         return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] });
@@ -160,8 +166,11 @@ namespace SNCRegistration.Controllers
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
+                        var leadFee = db.BSTypes.Single(x => x.BSTypeID == leadContact.BSType).BSFee;
+                        var total = db.ComputeTotal(leadContact.LeadContactID);
                         var email = Session["leaderEmail"] as string;
-                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. The total fee due is $10.00");
+                        var body = "You have successfully registered for the Special Needs Camporee.The total fee due is $" + leadFee + "<br />" + db.GetVolunteerList(leadContact.LeadContactID);
+                        Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
                         return Redirect("Registered");
                     }
                 }

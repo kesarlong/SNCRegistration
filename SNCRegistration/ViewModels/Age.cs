@@ -26,8 +26,6 @@ public partial class Age
 
         this.Participants = new HashSet<Participant>();
 
-        this.Volunteers = new HashSet<Volunteer>();
-
     }
 
 
@@ -44,10 +42,6 @@ public partial class Age
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Participant> Participants { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Volunteer> Volunteers { get; set; }
 
 }
 

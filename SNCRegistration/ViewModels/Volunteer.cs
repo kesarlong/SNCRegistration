@@ -26,7 +26,7 @@ public partial class Volunteer
 
     public int VolunteerAge { get; set; }
 
-    public Nullable<int> LeadContactID { get; set; }
+    public int LeadContactID { get; set; }
 
     public bool VolunteerShirtOrder { get; set; }
 
@@ -48,9 +48,11 @@ public partial class Volunteer
 
     public int VolunteerFee { get; set; }
 
+    public int BSType { get; set; }
 
 
-    public virtual Age Age { get; set; }
+
+    public virtual BSType BSType1 { get; set; }
 
 }
 

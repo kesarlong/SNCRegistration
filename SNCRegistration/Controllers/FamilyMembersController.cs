@@ -97,7 +97,7 @@ namespace SNCRegistration.Controllers
                     {
                         var email = Session["pEmail"] as string;
                         //to do: remove password
-                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!");
+                        Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!", Server.MapPath("~/App_Data/PDF/"));
                         return Redirect("Registered");
                     }
 

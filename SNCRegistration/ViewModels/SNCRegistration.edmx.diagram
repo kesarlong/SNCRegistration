@@ -16,25 +16,26 @@
         <AssociationConnector Association="SNCRegistrationModel.FK__LeadConta__Event__58D1301D" />
         <AssociationConnector Association="SNCRegistrationModel.FK__Participa__Event__56E8E7AB" />
         <AssociationConnector Association="SNCRegistrationModel.FK__Volunteer__Event__57DD0BE4" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Age" Width="1.5" PointX="0.75" PointY="8.25" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetRole" Width="1.5" PointX="0.75" PointY="4.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserClaim" Width="1.5" PointX="5.75" PointY="1.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Attendance" Width="1.5" PointX="5.75" PointY="4.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.BSType" Width="1.5" PointX="8.75" PointY="8.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.FamilyMember" Width="1.5" PointX="6" PointY="7.375" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.FutureEvent" Width="1.5" PointX="11" PointY="3.875" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Guardian" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.LeadContact" Width="1.5" PointX="8.75" PointY="2" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Participant" Width="1.5" PointX="3" PointY="7" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Relationship" Width="1.5" PointX="10.75" PointY="1.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.ShirtSize" Width="1.5" PointX="10.75" PointY="6.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Table" Width="1.5" PointX="10.75" PointY="9.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Volunteer" Width="1.5" PointX="3" PointY="16.875" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserLogin" Width="1.5" PointX="0.75" PointY="12.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="1.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Age" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetRole" Width="1.5" PointX="4.75" PointY="1.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserClaim" Width="1.5" PointX="8.75" PointY="7.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Attendance" Width="1.5" PointX="7.75" PointY="10.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.BSType" Width="1.5" PointX="8.75" PointY="3.25" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.FamilyMember" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.FutureEvent" Width="1.5" PointX="5" PointY="12" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Guardian" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.LeadContact" Width="1.5" PointX="2.75" PointY="10" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Participant" Width="1.5" PointX="6" PointY="4.375" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Relationship" Width="1.5" PointX="4.75" PointY="9.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.ShirtSize" Width="1.5" PointX="9.75" PointY="10.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Sponsor" Width="1.5" PointX="10.75" PointY="7.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Table" Width="1.5" PointX="11.75" PointY="10.625" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Volunteer" Width="1.5" PointX="11" PointY="2" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserLogin" Width="1.5" PointX="12.75" PointY="7.625" />
         <AssociationConnector Association="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C" />
         <AssociationConnector Association="SNCRegistrationModel.FK__Participa__Parti__41EDCAC5" />
-        <AssociationConnector Association="SNCRegistrationModel.FK__Volunteer__Volun__3E1D39E1" />
+        <AssociationConnector Association="SNCRegistrationModel.FK__Volunteer__BSTyp__3CF40B7E" />
         <AssociationConnector Association="SNCRegistrationModel.FK_FamilyMembers" />
         <AssociationConnector Association="SNCRegistrationModel.FK__FutureEve__LeadC__2F9A1060" />
         <AssociationConnector Association="SNCRegistrationModel.FK_Participants" />

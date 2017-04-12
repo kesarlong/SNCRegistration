@@ -1,6 +1,6 @@
 ﻿<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-    //require number of people in tent if selected that tent is required
+    //require t-shirt size if selected that ordering t-shirt
     $(document).ready(function () {
         $("#ShirtSize").hide();
 
@@ -13,6 +13,42 @@
                 $("#ShirtSize").hide();
             }
         });
+    });
+</script>
+
+<script type="text/javascript">
+    //hide Satuday Dinner field if selected that attending Friday only or Saturday
+    $(document).ready(function () {
+        $("#Dinner").hide();
+        $("#Attending").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optValue = $(this).attr("value");
+                if (optValue == 2) {
+                    $("#Dinner").show();
+
+                } else {
+                    $("#Dinner").hide();
+                }
+            });
+        }).change();
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#UnitChapterNumber").hide();
+        $("#BSType").change(function () {
+            $(this).find("option:selected").each(function () {
+                var optionValue = $(this).attr("value");
+                if (optionValue >= 3) {
+                    $("#UnitChapterNumber").hide();
+                   
+                } else {
+                    $("#UnitChapterNumber").show();
+                }
+            });
+        }).change();
     });
 
 </script>
@@ -30,8 +66,21 @@
 {
     @Html.AntiForgeryToken()
 
-    <h4>Leader Information</h4>
-    <hr />
+    <h4>Leader Information</h4><hr />
+    <h5><font color="red">All fields not indicated as optional are required</font></h5>
+    <p>
+        <font color="grey">
+            1. For Troop/Chapter leaders:<br />
+            <p style="text-indent: 20px">a. Enter information for the adult responsible for the group being registered.<br />
+            <p style="text-indent: 20px">b. Add volunteer button will save your input and bring you to the volunteer registration.<br />
+            <p style="text-indent: 20px">c. Additional volunteers may be registered following leader registration. <br />
+            2. For Individuals:
+            <p style="text-indent: 20px">a. Enter information for the adult being registered.<br />
+            <p style="text-indent: 20px">b. Complete registration button will save your input and complete the registration process.<br />
+            <p style="text-indent: 20px">c. IF YOU NEED TO REGISTER AN INDIVIDUAL CHILD VOLUNTEER, PLEASE CALL 904-555-1234. <br />
+    <br />
+    </font>
+</p>
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -242,9 +291,9 @@
             </div>
 
             <br />
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
-                        @Html.DropDownListFor(model => model.BSType,
+            <div class="form-group" id="BSType">
+                @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.BSType,
                         ViewBag.BSType as SelectList, "- Select option - "
                         //new List<SelectListItem>{
                         //    new SelectListItem{ Value = "", Text = "-Select Type-" },
@@ -252,18 +301,19 @@
                         //    new SelectListItem{ Value = "2", Text = "OA Chapter" },
                         //    new SelectListItem{ Value = "3", Text = "Individual" }
                         , new { @class = "form-control", style = "width: 200px" })
-                        @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
-                    </div>
+                @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
+            </div>
                     <br />
-                    @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="row">
+                    <div class="row" id="UnitChapterNumber">
+                        @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+
                         <div class="col-md-9">
                             @Html.EditorFor(model => model.UnitChapterNumber, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <br />
-                    <div class="form-group">
+                    <div class="form-group" id="Attending">
                         @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
                         @Html.DropDownListFor(model => model.VolunteerAttendingCode,
                         ViewBag.Attendance as SelectList, "- Select option - "
@@ -276,7 +326,7 @@
                         @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
                     </div>
                     <br />
-                    <div class="form-group">
+                    <div class="form-group" id="Dinner">
                         <div class="btn-group" data-toggle="buttons">
                             @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
                             <label class="btn btn-default">

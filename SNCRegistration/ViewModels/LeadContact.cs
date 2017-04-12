@@ -71,6 +71,8 @@ public partial class LeadContact
 
     public bool Marketing { get; set; }
 
+    public Nullable<decimal> LeaderFee { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
