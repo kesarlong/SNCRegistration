@@ -32,15 +32,18 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName");
+                query = String.Concat("SELECT UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new VolunteersReportModel()
                         {
+                        UnitChapterNumber = x["UnitChapterNumber"].ToString(),
                         VolunteerFirstName = x["FirstName"].ToString(),
                         VolunteerLastName = x["LastName"].ToString(),
+                        LeadContactFirstName = x["LeadContact FirsttName"].ToString(),
+                        LeadContactLastName = x["LeadContact LastNName"].ToString(),
                         }).ToList();
                     }
                 }
@@ -58,16 +61,18 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
+                query = "SELECT UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new VolunteersReportModel()
                         {
-                        
+                        UnitChapterNumber = x["UnitChapterNumber"].ToString(),
                         VolunteerFirstName = x["FirstName"].ToString(),
                         VolunteerLastName = x["LastName"].ToString(),
+                        LeadContactFirstName = x["LeadContact FirsttName"].ToString(),
+                        LeadContactLastName = x["LeadContact LastNName"].ToString(),
                         }).ToList();
                     }
                 }
@@ -79,7 +84,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
+            string query = "SELECT UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

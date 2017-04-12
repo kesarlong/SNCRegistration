@@ -335,7 +335,7 @@
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CompletedRegistrationModel.cs" />
+    <Compile Include="ViewModels\CompletedRegistrationReportModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -596,7 +596,6 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
-    <Content Include="Scripts\sponsors-carousel.js" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
