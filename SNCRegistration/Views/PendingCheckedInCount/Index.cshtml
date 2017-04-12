@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.PendingCheckedInCountModel>
+
+@{
+    ViewBag.Title = "Pending Checked In Count Report";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+@using (Html.BeginForm("PendingCheckedInCount", "PendingCheckedInCount", FormMethod.Post))
+    {
+
+
+    <h2>Pending Checked In Count Report</h2>
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-9 text-right">
+            <div class="col-sm-7"><h4>Select Event Year:</h4></div>
+            <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
+            <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitChapterNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Registrant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParticipantFirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParticipantLastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckedIn)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @Html.Partial("_PartialPendingCheckedInList", Model)
+    </table>
+    }
+
+@section scripts{
+    <script>
+        function updateGrid() {
+            $.post('/PendingCheckedInCount/GetPendingCheckedInCountByYear', { eventYear: $('#eventYear').val() }, function (data) {
+                $('table tbody').html(data);
+            })
+        }
+    </script>
+}
