@@ -424,7 +424,7 @@ pulse
 	background-image: none;
     }
     .carousel .item {
-	min-height: 175px; 
+	min-height: 200px; 
 	height: 100%;
 	width:100%;
     background-color: #a5e5e5;
@@ -433,10 +433,10 @@ pulse
 
     .carousel .item img {
         margin: auto;
+        height: 100px;
+        width: 100px;
     }
     .carousel .icon-container {
 	display: inline-block;
 	font-size: 11px;
     }
-
-  
