@@ -310,7 +310,7 @@ namespace SNCRegistration.Controllers
                     try
                     {
                         db.SaveChanges();
-
+                        return Redirect(Request.UrlReferrer.ToString());
                         TempData["notice"] = "Check In Status Saved!";
                     }
                     catch (DataException /* dex */)
