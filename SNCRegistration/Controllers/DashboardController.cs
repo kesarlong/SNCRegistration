@@ -36,6 +36,7 @@ namespace SNCRegistration.Controllers
             ViewBag.PendingCheckedInCount = GetPendingCheckedInCount();
             ViewBag.AldenRoadCount = GetAldenRoadCount();
             ViewBag.ParkingPassCount = db.Guardians.Count();
+            ViewBag.FutureEventsCount = db.FutureEvents.Count();
             return View();
             }
         protected override void Dispose(bool disposing)
@@ -242,6 +243,19 @@ namespace SNCRegistration.Controllers
                     }
                 }
             }
+
+        private int FutureEventsCount()
+        {
+            using (var connection = new SqlConnection(constring))
+            {
+                connection.Open();
+                string query = "select LeadContactFirstName, LeadContactLastName, B.BSTypeBSDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    return (int)cmd.ExecuteScalar();
+                }
+            }
+        }
 
         private int GetAldenRoadCount()
             {
