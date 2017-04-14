@@ -146,12 +146,19 @@ namespace SNCRegistration.Controllers
             {
                 db.LeadContacts.Add(leadContact);
 
+                //create GUID for record ID
+                var myGuid = Guid.NewGuid().ToString();
+                leadContact.LeaderGuid = myGuid;
+
                 var thisYear = DateTime.Now.Year.ToString();
                 leadContact.EventYear = int.Parse(thisYear);
 
                 try
                 {
                     db.SaveChanges();
+                    //added back for cancel feature
+                    this.Session["gSession"] = leadContact.LeaderGuid;
+
                     this.Session["lSession"] = leadContact.LeadContactID;
                     this.Session["leaderEmail"] = leadContact.LeadContactEmail;
                     TempData["myPK"] = leadContact.LeadContactID;

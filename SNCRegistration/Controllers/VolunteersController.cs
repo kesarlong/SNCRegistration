@@ -453,7 +453,7 @@ namespace SNCRegistration.Controllers
                 TempData["myPK"] = volunteer.LeadContactID;
                 TempData.Keep();
 
-
+                this.Session["lSession"] = volunteer.LeadContactID;
 
 
                 //store year of event
@@ -484,7 +484,7 @@ namespace SNCRegistration.Controllers
                 TempData.Keep();
 
 
-
+                this.Session["gSession"] = volunteer.LeaderGuid;
 
                 //store year of event
                 var thisYear = DateTime.Now.Year.ToString();
@@ -493,7 +493,7 @@ namespace SNCRegistration.Controllers
                 this.Session["lSession"] = volunteer.LeadContactID;
 
                 if (Request["submit"].Equals("Continue adding volunteers"))
-                { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
+                { return RedirectToAction("Create", "Volunteers", new { LeadContactGuid = volunteer.LeaderGuid }); }
 
                 if (Request["submit"].Equals("Complete registration"))
                 //registration complete, no more people to add
