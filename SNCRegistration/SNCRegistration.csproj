@@ -592,6 +592,7 @@
     <Content Include="Views\PendingCheckedInCount\Index.cshtml" />
     <Content Include="Views\Shared\_PartialPendingCheckedInList.cshtml" />
     <Content Include="Views\Shared\_Layout_Nav.cshtml" />
+    <Content Include="Views\Volunteers\VolunteersRegisteredView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
