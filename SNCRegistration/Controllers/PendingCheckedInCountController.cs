@@ -12,17 +12,17 @@ using System.Web.Mvc;
 
 namespace SNCRegistration.Controllers
 {
-    public class PeopleCheckedInCountController : Controller
+    public class PendingCheckedInCountController : Controller
     {
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        // GET: PeopleCheckedInCount
+        // GET: PendingCheckedInCount
         public ActionResult Index(int? eventYear)
             {
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
-            List<PeopleCheckedInCountModel> model = new List<PeopleCheckedInCountModel>();
+            List<PendingCheckedInCountModel> model = new List<PendingCheckedInCountModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -30,12 +30,12 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT UnitChapterNumber = ' ', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'Guardians', GuardianFirstName, GuardianLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC");
+                query = String.Concat("SELECT UnitChapterNumber = ' ', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'Guardians', GuardianFirstName, GuardianLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new PeopleCheckedInCountModel()
+                    model = dt.AsEnumerable().Select(x => new PendingCheckedInCountModel()
                         {
                         UnitChapterNumber = x["UnitChapterNumber"].ToString(),
                         Registrant = x["Registrant"].ToString(),
@@ -49,9 +49,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetPeopleCheckedInCountByYear(int eventYear)
+        public ActionResult GetPendingCheckedInCountByYear(int eventYear)
             {
-            List<PeopleCheckedInCountModel> model = new List<PeopleCheckedInCountModel>();
+            List<PendingCheckedInCountModel> model = new List<PendingCheckedInCountModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -59,12 +59,12 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT UnitChapterNumber = ' ', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'Guardians', GuardianFirstName, GuardianLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+                query = "SELECT UnitChapterNumber = ' ', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'Guardians', GuardianFirstName, GuardianLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new PeopleCheckedInCountModel()
+                    model = dt.AsEnumerable().Select(x => new PendingCheckedInCountModel()
                         {
                         UnitChapterNumber = x["UnitChapterNumber"].ToString(),
                         Registrant = x["Registrant"].ToString(),
@@ -74,15 +74,15 @@ namespace SNCRegistration.Controllers
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialPeopleCheckedInList", model);
+            return PartialView("_PartialPendingCheckedInList", model);
             }
 
         //Export to excel
-        public ActionResult PeopleCheckedInCount(int eventYear)
+        public ActionResult PendingCheckedInCount(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT UnitChapterNumber = ' ', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'Guardians', GuardianFirstName, GuardianLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+            string query = "SELECT UnitChapterNumber = ' ', 'Participants' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'Guardians', GuardianFirstName, GuardianLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber = ' ', 'FamilyMembers', FamilyMemberFirstName, FamilyMemberLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'LeadContacts', LeadContactFirstName, LeadContactLastName,  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 0 AND EventYear = @EventYear UNION SELECT UnitChapterNumber, 'Volunteers', VolunteerFirstName, VolunteerLastName, CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();
@@ -99,7 +99,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= PeopleCheckedInCount.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= PendingCheckedInCount.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -109,7 +109,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", "PeopleCheckedInCount");
+            return RedirectToAction("Index", "PendingCheckedInCount");
             }
 
         private void releaseObject(object obj)
