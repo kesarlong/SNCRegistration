@@ -33,8 +33,8 @@ namespace SNCRegistration.Controllers
                     + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
                     + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
                     + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
-                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName, GuardianLastName "
-                    + "FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
+                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName, GuardianLastName, "
+                    + "CASE WHEN Participants.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
                     + "INNER JOIN Attendance ON AttendanceID = Participants.AttendingCode INNER JOIN Age ON ParticipantAge = AgeID WHERE ParticipantSchool LIKE '%Alden%' AND Participants.EventYear = @EventYear ORDER BY ParticipantFirstName;");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
@@ -70,8 +70,8 @@ namespace SNCRegistration.Controllers
                     + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
                     + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
                     + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
-                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName, GuardianLastName "
-                    + "FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
+                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName, GuardianLastName, "
+                    + "CASE WHEN Participants.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
                     + "INNER JOIN Attendance ON AttendanceID = Participants.AttendingCode INNER JOIN Age ON ParticipantAge = AgeID WHERE ParticipantSchool LIKE '%Alden%' AND Participants.EventYear = @EventYear ORDER BY ParticipantFirstName;";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
@@ -101,8 +101,8 @@ namespace SNCRegistration.Controllers
                     + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
                     + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
                     + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
-                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName, GuardianLastName "
-                    + "FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
+                    + "Attendance.Description AS 'Attending', Participants.GuardianID, GuardianFirstName, GuardianLastName, "
+                    + "CASE WHEN Participants.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' FROM Participants INNER JOIN Guardians ON Guardians.GuardianID = Participants.GuardianID "
                     + "INNER JOIN Attendance ON AttendanceID = Participants.AttendingCode INNER JOIN Age ON ParticipantAge = AgeID WHERE ParticipantSchool LIKE '%Alden%' AND Participants.EventYear = @EventYear ORDER BY ParticipantFirstName;";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";

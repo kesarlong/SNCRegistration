@@ -32,7 +32,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName");
+                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -42,8 +42,9 @@ namespace SNCRegistration.Controllers
                         UnitChapterNumber = x["UnitChapterNumber"].ToString(),
                         VolunteerFirstName = x["FirstName"].ToString(),
                         VolunteerLastName = x["LastName"].ToString(),
-                        LeadContactFirstName = x["LeadContact FirsttName"].ToString(),
-                        LeadContactLastName = x["LeadContact LastNName"].ToString(),
+                        LeadContactFirstName = x["LeadContactFirstName"].ToString(),
+                        LeadContactLastName = x["LeadContactLastName"].ToString()
+                       
                         }).ToList();
                     }
                 }
@@ -61,7 +62,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
+                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -71,8 +72,9 @@ namespace SNCRegistration.Controllers
                         UnitChapterNumber = x["UnitChapterNumber"].ToString(),
                         VolunteerFirstName = x["FirstName"].ToString(),
                         VolunteerLastName = x["LastName"].ToString(),
-                        LeadContactFirstName = x["LeadContact FirsttName"].ToString(),
-                        LeadContactLastName = x["LeadContact LastNName"].ToString(),
+                        LeadContactFirstName = x["LeadContactFirstName"].ToString(),
+                        LeadContactLastName = x["LeadContactLastName"].ToString()
+                       
                         }).ToList();
                     }
                 }
@@ -84,7 +86,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY VolunteerFirstName";
+            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

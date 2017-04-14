@@ -22,5 +22,14 @@ namespace SNCRegistration.ViewModels
 
         [Display(Name = "Lead Contact First Name")]
         public string LeadContactLastName { get; set; }
+
+        [Display(Name = "Shirt Size")]
+        public string VolunteerShirtSize { get; set; }
+
+        [Display(Name = "Attending")]
+        public string Description { get; set; }
+
+        [Display(Name = "Checked In")]
+        public string CheckedIn{ get; set; }
         }
     }
