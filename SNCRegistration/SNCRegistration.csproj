@@ -591,6 +591,7 @@
     <Content Include="App_Data\PDF\EventInfo.pdf" />
     <Content Include="Views\PendingCheckedInCount\Index.cshtml" />
     <Content Include="Views\Shared\_PartialPendingCheckedInList.cshtml" />
+    <Content Include="Views\Shared\_Layout_Nav.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
