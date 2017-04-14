@@ -1,17 +1,18 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.CompletedRegistrationReportModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.PendingCheckedInCountModel>
 
 @{
-    ViewBag.Title = "Completed Registrations Count Report";
+    ViewBag.Title = "Pending Checked In Count Report";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-@using (Html.BeginForm("CompletedRegistrationReport", "CompletedRegistrationReport", FormMethod.Post))
+@using (Html.BeginForm("PendingCheckedInCount", "PendingCheckedInCount", FormMethod.Post))
     {
-    <h2>Completed Registration Count Report</h2>
 
+
+    <h2>Pending Checked In Count Report</h2>
     <div class="row">
         <div class="col-sm-3">
-           
+
         </div>
         <div class="col-sm-9 text-right">
             <div class="col-sm-7"><h4>Select Event Year:</h4></div>
@@ -23,6 +24,9 @@
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.UnitChapterNumber)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Registrant)
                 </th>
                 <th>
@@ -31,20 +35,23 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ParticipantLastName)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckedIn)
+                </th>
+
             </tr>
         </thead>
         <tbody>
-            @Html.Partial("_PartialCompletedRegistrationList", Model)
-        </tbody>
+            @Html.Partial("_PartialPendingCheckedInList", Model)
     </table>
     }
 
 @section scripts{
     <script>
         function updateGrid() {
-            $.post('/CompletedRegistrationReport/GetCompletedRegistrationByYear', { eventYear: $('#eventYear').val() }, function (data) {
+            $.post('/PendingCheckedInCount/GetPendingCheckedInCountByYear', { eventYear: $('#eventYear').val() }, function (data) {
                 $('table tbody').html(data);
             })
         }
     </script>
-} 
+}

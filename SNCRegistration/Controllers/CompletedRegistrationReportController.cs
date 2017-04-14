@@ -26,7 +26,7 @@ namespace SNCRegistration.Controllers
             // Dropdown List For Event Year
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
 
-            List<CompletedRegistrationModel> model = new List<CompletedRegistrationModel>();
+            List<CompletedRegistrationReportModel> model = new List<CompletedRegistrationReportModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -39,11 +39,11 @@ namespace SNCRegistration.Controllers
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new CompletedRegistrationModel()
+                    model = dt.AsEnumerable().Select(x => new CompletedRegistrationReportModel()
                         {
                         Registrant = x["Registrant"].ToString(),
                         ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString()
                         }).ToList();
                     }
                 }
@@ -53,7 +53,7 @@ namespace SNCRegistration.Controllers
         //Get the year onchange javascript
         public ActionResult GetCompletedRegistrationByYear(int eventYear)
             {
-            List<CompletedRegistrationModel> model = new List<CompletedRegistrationModel>();
+            List<CompletedRegistrationReportModel> model = new List<CompletedRegistrationReportModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -66,11 +66,11 @@ namespace SNCRegistration.Controllers
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new CompletedRegistrationModel()
+                    model = dt.AsEnumerable().Select(x => new CompletedRegistrationReportModel()
                         {
                         Registrant = x["Registrant"].ToString(),
                         ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        ParticipantLastName = x["ParticipantLastName"].ToString()
                         }).ToList();
                     }
                 }

@@ -33,6 +33,7 @@ namespace SNCRegistration.Controllers
             ViewBag.BoothCount = GetBoothCount();
             ViewBag.WristBandCount = GetWristBandCount();
             ViewBag.PeopleCheckedInCount = GetPeopleCheckedInCount();
+            ViewBag.PendingCheckedInCount = GetPendingCheckedInCount();
             ViewBag.AldenRoadCount = GetAldenRoadCount();
             ViewBag.ParkingPassCount = db.Guardians.Count();
             ViewBag.FutureEventsCount = db.FutureEvents.Count();
@@ -224,6 +225,20 @@ namespace SNCRegistration.Controllers
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@CheckedIn", 1);
+                    return (int)cmd.ExecuteScalar();
+                    }
+                }
+            }
+
+        private int GetPendingCheckedInCount()
+            {
+            using (var connection = new SqlConnection(constring))
+                {
+                connection.Open();
+                string query = "SELECT COUNT(*) from (SELECT ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = @CheckedIn UNION SELECT GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = @CheckedIn UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = @CheckedIn UNION SELECT LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = @CheckedIn UNION SELECT VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = @CheckedIn) as totalCount";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                    cmd.Parameters.AddWithValue("@CheckedIn", 0);
                     return (int)cmd.ExecuteScalar();
                     }
                 }
