@@ -29,7 +29,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, ParticipantSchool, "
+                query = String.Concat("SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, AgeDescription, ParticipantSchool, "
                     + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
                     + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
                     + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
@@ -66,7 +66,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, ParticipantSchool, "
+                query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, AgeDescription, ParticipantSchool, "
                     + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
                     + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
                     + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
@@ -97,7 +97,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, ParticipantSchool, "
+            string query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, ParticipantAge, AgeDescription, ParticipantSchool, "
                     + "ParticipantTeacher, CASE WHEN ClassroomScouting = 1 THEN 'Yes' ELSE 'No' END AS ClassroomScouting, "
                     + "CASE WHEN Participants.Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, "
                     + "CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "

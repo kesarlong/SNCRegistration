@@ -4267,6 +4267,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-fixed-top {
   top: 0;
   border-width: 0 0 1px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .navbar-fixed-bottom {
   bottom: 0;
@@ -4274,12 +4275,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 1px 0 0;
 }
 .navbar-brand {
-  float: left;
-  height: 50px;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
-  background: url(https://sncr.blob.core.windows.net/images/CHAMPOINSLOGO.png);
+     float: left;
+    height: 100px;
+    padding: 15px;
+    font-size: 22px;
+    line-height: 70px;
 
 }
 .navbar-brand:hover,
@@ -4288,9 +4288,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand > img {
   display: block;
-  height: 50px;
-  width: 50px;
-
+  width: 80px;
+  height: 65px;
 }
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
@@ -4328,12 +4327,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-nav {
-  margin: 7.5px -15px;
+  margin: 7.5px 15px;
 }
 .navbar-nav > li > a {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  line-height: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  line-height: 70px;
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
@@ -4439,7 +4438,26 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-form .form-group:last-child {
     margin-bottom: 0;
   }
+  .navbar-brand{
+    float: left;
+    height: 50px;
+    padding: 15px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .navbar-brand > img {
+      display: none;
+  }
+
+.navbar-nav > li > a {
+    color: #777;
+    margin-left: 20px;
+    line-height: 5px;
+    width: auto;
 }
+}
+
 @media (min-width: 768px) {
   .navbar-form {
     width: auto;
@@ -5455,8 +5473,8 @@ button.list-group-item-danger.active:focus {
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-          box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  -webkit-box-shadow:  0 2px 2px rgba(0, 0, 0, .10);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .10);
 }
 .panel-body {
   padding: 15px;
