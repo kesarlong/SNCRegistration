@@ -31,7 +31,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT * FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3 AND EventYear = @EventYear");
+                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3 AND EventYear = @EventYear");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -58,7 +58,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT * FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3 AND EventYear = @EventYear";
+                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3 AND EventYear = @EventYear";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -75,11 +75,11 @@ namespace SNCRegistration.Controllers
             }
 
         //Export to excel
-        public ActionResult VolunteersSaturdayOnly(int eventYear)
+        public ActionResult VolunteersOvernight(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3 AND EventYear = @EventYear";
+            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = 3 AND EventYear = @EventYear";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();
