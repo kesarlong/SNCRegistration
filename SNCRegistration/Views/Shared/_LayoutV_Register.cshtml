@@ -10,26 +10,8 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Special Needs Camporee", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.Partial("_LoginPartial")</li>
-                </ul>
+    @Html.Partial("_Layout_Nav")
 
-            </div>
-        </div>
-    </nav>
     <!-- Header -->
 
     <!-- Main -->
@@ -48,53 +30,56 @@
                                         <li><a href="@Url.Action("Index", "Home")"><em class="glyphicon glyphicon-home"></em> Home</a></li>
                                     </ul>
                                 </li>
-                                <a href="#" data-toggle="collapse" data-target="#menu3"><em class="glyphicon glyphicon-file"></em> Forms<i class="glyphicon glyphicon-chevron-right"></i></a>
-                                <ul class="nav nav-stacked collapse" id="menu3">
-                                    <li>
-                                        <a href="https://sncr.blob.core.windows.net/pdfs/EventInfo.pdf" target="_blank">Event Info</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://sncr.blob.core.windows.net/pdfs/VolunteerHealthForm.pdf" target="_blank">Volunteer Health Form</a>
-                                    </li>
-                                </ul>
-                                <!-- 
                                 <li class="nav-header">
-                                    <a href="#" data-toggle="collapse" data-target="#menu2">Volunteer Registration<i class="glyphicon glyphicon-chevron-right"></i></a>
-                                    <ul class="nav nav-stacked collapse" id="menu2">
-                                        <li>
-                                            <a href="@Url.Action("Create", "LeadContacts")">Leader</a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Create", "Volunteers")">Volunteer</a>
-                                        </li>
-                                    </ul>
-                                    
-
-                                <li class="nav-header">
-                                    <a href="#" data-toggle="collapse" data-target="#menu3">Forms<i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    <a href="#" data-toggle="collapse" data-target="#menu3"><em class="glyphicon glyphicon-file"></em> Forms<i class="glyphicon glyphicon-chevron-right"></i></a>
                                     <ul class="nav nav-stacked collapse" id="menu3">
-                                        <li>
-                                            <a href="@Url.Action("Index", "EventInfo")">Event Info</a>
-                                        </li>
+                                                <li>
+                                                    <a href="https://sncr.blob.core.windows.net/pdfs/EventInfo.pdf" target="_blank">Event Info</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://sncr.blob.core.windows.net/pdfs/VolunteerHealthForm.pdf" target="_blank">Volunteer Health Form</a>
+                                                </li>
+                                            </ul>
+                                    </li>
                                     </ul>
-                                    -->
+                                    <!--
+            <li class="nav-header">
+                <a href="#" data-toggle="collapse" data-target="#menu2">Volunteer Registration<i class="glyphicon glyphicon-chevron-right"></i></a>
+                <ul class="nav nav-stacked collapse" id="menu2">
+                    <li>
+                        <a href="@Url.Action("Create", "LeadContacts")">Leader</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Volunteers")">Volunteer</a>
+                    </li>
+                </ul>
+
+
+            <li class="nav-header">
+                <a href="#" data-toggle="collapse" data-target="#menu3">Forms<i class="glyphicon glyphicon-chevron-right"></i></a>
+                <ul class="nav nav-stacked collapse" id="menu3">
+                    <li>
+                        <a href="@Url.Action("Index", "EventInfo")">Event Info</a>
+                    </li>
+                </ul>
+                -->
 
                             </ul>
-                            </div>
-                        </div>
+                                            </div>
+                                        </div>
                         </div>
                         <!-- /col-3 -->
-                <div class="col-sm-10">
-                    <div class="panel panel-default">
-                        <!-- Dashboard panel contents -->
-                        <div class="panel-heading"><h3>Volunteer Registration</h3></div>
-                        <div class="panel-body">
-                            @RenderBody()
+                        <div class="col-sm-10">
+                            <div class="panel panel-default">
+                                <!-- Dashboard panel contents -->
+                                <div class="panel-heading"><h3>Volunteer Registration</h3></div>
+                                <div class="panel-body">
+                                    @RenderBody()
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                     </div>
+                    </div>
                 </div>
-          </div>
                     <!--/col-span-9-->
                 </div>
                     <!-- /Main -->
