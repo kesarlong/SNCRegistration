@@ -1,0 +1,15 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersCountByGroupModel>
+
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitChapterNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+       
+    </tr>
+    }

@@ -297,6 +297,7 @@
     <Compile Include="Controllers\PendingCheckedInCountController.cs" />
     <Compile Include="Controllers\PeopleCheckedInCountController.cs" />
     <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
+    <Compile Include="Controllers\VolunteersCountByGroupController.cs" />
     <Compile Include="Controllers\TeeShirtCountBySizeController.cs" />
     <Compile Include="Controllers\TeeShirtOrderReportsController.cs" />
     <Compile Include="Controllers\VolunteersFridayOnlyController.cs" />
@@ -398,6 +399,7 @@
     <Compile Include="ViewModels\Table.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\VolunteersCountByGroupModel.cs" />
     <Compile Include="ViewModels\TeeShirtCountBySizeModel.cs" />
     <Compile Include="ViewModels\TeeShirtOrdersModel.cs" />
     <Compile Include="ViewModels\UserRolesDTO.cs" />
@@ -596,6 +598,8 @@
     <Content Include="Views\Shared\_Layout_Nav.cshtml" />
     <Content Include="Views\Shared\_PartialTeeShirtCountBySizeList.cshtml" />
     <Content Include="Views\TeeShirtCountBySize\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersCountByGroupList.cshtml" />
+    <Content Include="Views\VolunteersCountByGroup\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
