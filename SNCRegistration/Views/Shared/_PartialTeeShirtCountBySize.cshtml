@@ -1,0 +1,15 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.TeeShirtCountBySizeModel>
+
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerShirtSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+       
+    </tr>
+    }
