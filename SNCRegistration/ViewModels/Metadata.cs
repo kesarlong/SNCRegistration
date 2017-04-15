@@ -248,7 +248,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Do you want to order an event t-shirt?")]
         public bool LeadContactShirtOrder;
 
-        [Required]
+      
         [Display(Name = "T-Shirt Size")]
         public string LeadContactShirtSize;
 
@@ -318,7 +318,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "T-Shirt Order")]
         public Nullable<bool> VolunteerShirtOrder;
 
-        [Required]
+      
         [Display(Name = "T-Shirt Size")]
         public string VolunteerShirtSize;
 

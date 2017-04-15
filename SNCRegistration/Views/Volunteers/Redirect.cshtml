@@ -26,4 +26,8 @@
         <input type="submit" name="submit" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
     </div>
 
+    @section Scripts
+    {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

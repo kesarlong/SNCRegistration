@@ -1,4 +1,5 @@
-﻿@model SNCRegistration.ViewModels.Volunteer
+﻿@model  PagedList.IPagedList<SNCRegistration.ViewModels.Volunteer>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Create";
@@ -16,14 +17,40 @@
 
     <h4>Here is the list of volunteers you have registered so far:</h4> <br />
     <br />
+
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th align="center">
+                <text>First Name</text> 
+            </th>
+            <th align="center">
+                Last Name
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VolunteerFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VolunteerLastName)
+                </td>
+            </tr>
+        }
+
+    </table>
+
             <h4>Please select an option to continue.</h4>
     <hr />
 
-    <div class="form-group pull-left">
-        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered")'"/>
-    </div>
-    <div class="form-group pull-left">
-        <input type="submit" name="submit" id="AddVolunteer" value="Continue adding volunteers" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'"/>
-    </div>
+        <div class="form-group pull-left">
+            <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered")'" />
+        </div>
+        <div class="form-group pull-left">
+            <input type="submit" name="submit" id="AddVolunteer" value="Continue adding volunteers" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
+        </div>
 
-}
+        }
