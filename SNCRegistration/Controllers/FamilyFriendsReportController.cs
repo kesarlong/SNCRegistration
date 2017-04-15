@@ -32,7 +32,13 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT * FROM FamilyMembers WHERE EventYear = @EventYear ORDER BY FamilyMemberFirstName");
+                query = String.Concat("SELECT FamilyMemberID, FamilyMemberFirstName, FamilyMemberLastName, FamilyMemberAge, AgeDescription, "
+      + "FamilyMembers.GuardianID, GuardianFirstName, GuardianLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+      + "CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck, Attendance.Description AS 'Attending', "
+      + "CASE WHEN FamilyMembers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' "
+      + "FROM FamilyMembers INNER JOIN Guardians ON Guardians.GuardianID = FamilyMembers.GuardianID "
+      + "INNER JOIN Attendance ON AttendanceID = FamilyMembers.AttendingCode INNER JOIN Age ON FamilyMemberAge = AgeID "
+      + "WHERE FamilyMembers.EventYear = @EventYear ORDER BY FamilyMemberFirstName ASC");
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
@@ -60,7 +66,13 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT * FROM FamilyMembers WHERE EventYear = @EventYear ORDER BY FamilyMemberFirstName";
+                query = "SELECT FamilyMemberID, FamilyMemberFirstName, FamilyMemberLastName, FamilyMemberAge, AgeDescription, "
+      + "FamilyMembers.GuardianID, GuardianFirstName, GuardianLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+      + "CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck, Attendance.Description AS 'Attending', "
+      + "CASE WHEN FamilyMembers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' "
+      + "FROM FamilyMembers INNER JOIN Guardians ON Guardians.GuardianID = FamilyMembers.GuardianID "
+      + "INNER JOIN Attendance ON AttendanceID = FamilyMembers.AttendingCode INNER JOIN Age ON FamilyMemberAge = AgeID "
+      + "WHERE FamilyMembers.EventYear = @EventYear ORDER BY FamilyMemberFirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -81,7 +93,13 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM FamilyMembers WHERE EventYear = @EventYear ORDER BY FamilyMemberFirstName";
+            string query = "SELECT FamilyMemberID, FamilyMemberFirstName, FamilyMemberLastName, FamilyMemberAge, AgeDescription, "
+      + "FamilyMembers.GuardianID, GuardianFirstName, GuardianLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+      + "CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck, Attendance.Description AS 'Attending', "
+      + "CASE WHEN FamilyMembers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' "
+      + "FROM FamilyMembers INNER JOIN Guardians ON Guardians.GuardianID = FamilyMembers.GuardianID "
+      + "INNER JOIN Attendance ON AttendanceID = FamilyMembers.AttendingCode INNER JOIN Age ON FamilyMemberAge = AgeID "
+      + "WHERE FamilyMembers.EventYear = @EventYear ORDER BY FamilyMemberFirstName ASC";
             DataTable dt = new DataTable();
             dt.TableName = "FamilyMembers";
             con.Open();

@@ -33,7 +33,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT ParticipantFirstName, ParticipantLastName, Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 AND EventYear = @EventYear Order By Description");
+                query = String.Concat("SELECT ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 AND EventYear = @EventYear Order By Description");
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
@@ -63,7 +63,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT ParticipantFirstName, ParticipantLastName, Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
+                query = "SELECT ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -86,7 +86,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantFirstName, ParticipantLastName, Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
+            string query = "SELECT ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";
             con.Open();
