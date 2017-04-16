@@ -255,7 +255,7 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/CheckIn/5
-        public ActionResult CheckIn(int? id, string returnUrl)
+        public ActionResult CheckIn(int? id)
         {
             if (id == null)
             {
@@ -266,14 +266,6 @@ namespace SNCRegistration.Controllers
             {
                 return HttpNotFound();
             }
-
-            if (String.IsNullOrEmpty(returnUrl)
-                && Request.UrlReferrer != null
-                && Request.UrlReferrer.ToString().Length > 0)
-            {
-                return RedirectToAction("CheckIn",
-                    new { returnUrl = Request.UrlReferrer.ToString() });
-            }
             return View(leadContact);
         }
 
@@ -283,7 +275,7 @@ namespace SNCRegistration.Controllers
 
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckInPost(int? id, string returnUrl)
+        public ActionResult CheckInPost(int? id)
         {
             if (id == null)
             {
@@ -298,10 +290,8 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-                    if (!String.IsNullOrEmpty(returnUrl))
-                        return Redirect(returnUrl);
-                    else
-                        return RedirectToAction("Index");
+                    TempData["notice"] = "Volunteer Checked In Status Saved!";
+                    return RedirectToAction("CheckIn", "LeadContacts", new { id = leadcontact.LeadContactID });
                 }
                 catch (DataException /* dex */)
                 {
