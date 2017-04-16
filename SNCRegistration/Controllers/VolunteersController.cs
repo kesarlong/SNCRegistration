@@ -91,12 +91,7 @@ namespace SNCRegistration.Controllers
 
 
 
-            //Original Class before changes. Delete if no problems. -Einar
-            //public ActionResult Index()
-            //{
-
-            //    return View(db.Volunteers.ToList());
-            //}
+         
         }
 
         // GET: Volunteers/Details/5

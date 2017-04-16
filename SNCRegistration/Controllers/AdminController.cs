@@ -289,70 +289,70 @@ namespace SNCRegistration.Controllers
             }
 
 
-        //User edit roles. Only System Admins can edit user roles.
+        //User edit roles. Only System Admins can edit user roles. Edit Role feature disabled. Keep commented in case of future changes. 
         // GET: /Admin/ManageUsers/EditRoles/TestUser 
 
-        public ActionResult EditRoles(string UserName)
-            {
-            if (UserName == null)
-                {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
+        //public ActionResult EditRoles(string UserName)
+        //    {
+        //    if (UserName == null)
+        //        {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //        }
 
-            UserName = UserName.ToLower();
+        //    UserName = UserName.ToLower();
 
-            // Checks if user exists
-            ExpandedUserDTO objExpandedUserDTO = GetUser(UserName);
+        //    // Checks if user exists
+        //    ExpandedUserDTO objExpandedUserDTO = GetUser(UserName);
 
-            if (objExpandedUserDTO == null)
-                {
-                return HttpNotFound();
-                }
+        //    if (objExpandedUserDTO == null)
+        //        {
+        //        return HttpNotFound();
+        //        }
 
-            UserAndRolesDTO objUserAndRolesDTO =
-                GetUserAndRoles(UserName);
+        //    UserAndRolesDTO objUserAndRolesDTO =
+        //        GetUserAndRoles(UserName);
 
-            return View(objUserAndRolesDTO);
-            }
+        //    return View(objUserAndRolesDTO);
+        //    }
 
 
-        // PUT: /Admin/ManageUsers/EditRoles/TestUser 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditRoles(UserAndRolesDTO paramUserAndRolesDTO)
-            {
-            try
-                {
-                if (paramUserAndRolesDTO == null)
-                    {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
+        //// PUT: /Admin/ManageUsers/EditRoles/TestUser 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditRoles(UserAndRolesDTO paramUserAndRolesDTO)
+        //    {
+        //    try
+        //        {
+        //        if (paramUserAndRolesDTO == null)
+        //            {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //            }
 
-                string UserName = paramUserAndRolesDTO.UserName;
-                string strNewRole = Convert.ToString(Request.Form["AddRole"]);
+        //        string UserName = paramUserAndRolesDTO.UserName;
+        //        string strNewRole = Convert.ToString(Request.Form["AddRole"]);
 
-                if (strNewRole != "No Roles Found")
-                    {
-                    // Gets the User
-                    ApplicationUser user = UserManager.FindByName(UserName);
+        //        if (strNewRole != "No Roles Found")
+        //            {
+        //            // Gets the User
+        //            ApplicationUser user = UserManager.FindByName(UserName);
 
-                    // Put user in role
-                    UserManager.AddToRole(user.Id, strNewRole);
-                    }
+        //            // Put user in role
+        //            UserManager.AddToRole(user.Id, strNewRole);
+        //            }
 
-                ViewBag.AddRole = new SelectList(RolesUserIsNotIn(UserName));
+        //        ViewBag.AddRole = new SelectList(RolesUserIsNotIn(UserName));
 
-                UserAndRolesDTO objUserAndRolesDTO =
-                    GetUserAndRoles(UserName);
+        //        UserAndRolesDTO objUserAndRolesDTO =
+        //            GetUserAndRoles(UserName);
 
-                return View(objUserAndRolesDTO);
-                }
-            catch (Exception ex)
-                {
-                ModelState.AddModelError(string.Empty, "Error: " + ex);
-                return View("EditRoles");
-                }
-            }
+        //        return View(objUserAndRolesDTO);
+        //        }
+        //    catch (Exception ex)
+        //        {
+        //        ModelState.AddModelError(string.Empty, "Error: " + ex);
+        //        return View("EditRoles");
+        //        }
+        //    }
 
         // DELETE: /Admin/ManageUsers/DeleteRole?UserName="TestUser&RoleName=SystemAdmin
         public ActionResult DeleteRole(string UserName, string RoleName)
