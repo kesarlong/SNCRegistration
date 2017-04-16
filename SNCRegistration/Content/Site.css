@@ -16,7 +16,6 @@ h5,
 h6 {
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
-
 }
 
 body{
@@ -93,7 +92,6 @@ table th {
     }
 }
 
-
 .content-section-a {
     padding: 50px 0;
     background-color: #f8f8f8;
@@ -165,12 +163,13 @@ table th {
 }
 
 .footer-top {
-    background:url('../img/footer.png') center;
+    background:url('../img/footer-top.png') center;
     background-repeat: no-repeat;
     height: 630px;
     width: 100%;
     margin-top: -400px;
-    z-index: 10000;
+    z-index: 500;
+    position: relative;
 }
 
 footer {
@@ -377,7 +376,6 @@ pulse
 }
 
 
-
 .wrapper {	
 	margin-top: 200px;
     margin-bottom: 50px;
@@ -536,3 +534,13 @@ pulse
   box-shadow: 0 0 0.25em rgba(0,0,0,0.5) !important;
   text-shadow: 0 0 0.25em rgba(0,0,0,0.5)!important;
  }
+
+ canvas {
+  padding: 0px;
+  bottom: 58px;
+  left: 58%;
+  margin: auto;
+  display: block;
+  width: 300px;
+  position: absolute;
+}

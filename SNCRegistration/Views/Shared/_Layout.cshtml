@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Special Needs Camporee</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/campfire.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
 </head>
@@ -21,9 +22,12 @@
         <div class="cloud"></div>
     </div>
     <!-- Footer -->
-    <div class="footer-top">
-    </div>
- 
+   
+                <div class="footer-top">
+                    <canvas id="theCanvas" width="300px" height="300px">
+                        Camp
+                    </canvas>
+                </div>
                 <footer>
                     <div class="container">
                         <div class="row">
