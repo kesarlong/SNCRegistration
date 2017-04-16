@@ -602,7 +602,6 @@
     <Content Include="Views\TeeShirtCountBySize\Index.cshtml" />
     <Content Include="Views\Shared\_PartialVolunteersCountByGroupList.cshtml" />
     <Content Include="Views\VolunteersCountByGroup\Index.cshtml" />
-    <Content Include="Views\Volunteers\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3360,6 +3359,7 @@
     <Content Include="Views\Participants\Delete.cshtml" />
     <Content Include="Views\Participants\Edit.cshtml" />
     <Content Include="Views\Volunteers\Create.cshtml" />
+    <Content Include="Views\Volunteers\Delete.cshtml" />
     <Content Include="Views\Volunteers\Details.cshtml" />
     <Content Include="Views\Volunteers\Edit.cshtml" />
     <Content Include="Views\Volunteers\Index.cshtml" />
@@ -3427,7 +3427,9 @@
     <Content Include="Views\Shared\_PartialCompletedRegistrationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="font-awesome\" />
     <Folder Include="Resources\" />
+    <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CustomAuthorize\" />
     <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>

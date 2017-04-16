@@ -91,7 +91,8 @@
 
     <div class="form-group pull-right">
         <input type="submit" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");" />
-       
+        @*<input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants",new { GuardianGuid = Model.GuardianGuid));" />*@
+
     </div>
 
 }
