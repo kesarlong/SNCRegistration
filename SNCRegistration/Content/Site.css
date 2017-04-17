@@ -39,23 +39,26 @@ table th {
 }
 
 .intro-header {
-    padding-top: 55px;
     padding-bottom: 0px;
     text-align: center;
     color: #f8f8f8;
     background-size: cover;
+    z-index:500;
 }
 
 .intro-message {
     position: relative;
     padding-top: 0%;
     padding-bottom: 0%;
+      z-index:800;
+     margin-top: -135px;
 }
 
 .intro-message > h1 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
+      z-index:600;
 }
 
 .intro-divider {
@@ -165,15 +168,15 @@ table th {
 .footer-top {
     background:url('../img/footer-top.png') center;
     background-repeat: no-repeat;
-    height: 630px;
+    height: 500px;
     width: 100%;
-    margin-top: -400px;
-    z-index: 500;
+    margin-top: -325px;
+    z-index: -10;
     position: relative;
 }
 
 footer {
-    padding: 30px 0;
+    padding: 35px 0;
     background: #a5e5e5;
     width: 100%;
 }
@@ -220,7 +223,7 @@ p.copyright {
 	-webkit-transform: scale(0.2);
 	-moz-transform: scale(0.2);
 	transform: scale(0.2);
-    z-index:-1;
+        z-index: -100;
 }
 
 .x2 {
@@ -230,9 +233,8 @@ p.copyright {
 	-webkit-transform: scale(0.60);
 	-moz-transform: scale(0.60);
 	transform: scale(0.60);
-    z-index:-1;
+        z-index: -100;
 }
-
 
 /* OBJECTS */
 
@@ -259,7 +261,7 @@ p.copyright {
     background: #fff;
 	content: '';
 	position: absolute;
-	z-indeX: -1;
+	z-indeX: -10;
 }
 
 .cloud:after {
@@ -430,10 +432,10 @@ pulse
 	background-image: none;
     }
     .carousel .item {
-	min-height: 165px; 
+	min-height: 150px; 
 	height: 100%;
 	width:100%;
-    background-color: #a5e5e5;
+    background-color: rgba(116,207,250,1);
     margin: auto;
     }
 
@@ -470,6 +472,7 @@ pulse
     -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.1) !important;
     box-shadow: 0 2px 2px rgba(0,0,0,.1) !important;
     height: 80px !important;
+    background-color: rgba(255, 255, 255, 0.55);
 }
 
     @media (max-width: 767px) {
@@ -512,6 +515,7 @@ pulse
     margin-left: 25px !important;
     line-height: 10px !important;
     width: auto !important;
+    background-color: #fff !important;
 }
 }
 
@@ -527,7 +531,7 @@ pulse
  .navbar-nav > li > a {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
-    line-height: 65px !important;
+    line-height: 55px !important;
 }
 
  .btn {
@@ -537,10 +541,20 @@ pulse
 
  canvas {
   padding: 0px;
-  bottom: 58px;
-  left: 58%;
+  bottom: 30px;
+  left: 28%;
   margin: auto;
   display: block;
   width: 300px;
   position: absolute;
+}
+
+ .panel {
+    margin-bottom: 20px !important;
+    background-color: #fff !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .10) !important;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .10) !important;
+    z-index:500 !important;
 }

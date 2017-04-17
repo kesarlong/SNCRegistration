@@ -602,6 +602,7 @@
     <Content Include="Views\TeeShirtCountBySize\Index.cshtml" />
     <Content Include="Views\Shared\_PartialVolunteersCountByGroupList.cshtml" />
     <Content Include="Views\VolunteersCountByGroup\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
