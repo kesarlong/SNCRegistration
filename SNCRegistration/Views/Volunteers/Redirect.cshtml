@@ -18,12 +18,12 @@
 
     //complete registration
     <div class="form-group pull-left">
-        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered")'" />
+        <input type="button" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered")'" />
     </div>
 
     //add another volunteer
     <div class="form-group pull-left">
-        <input type="submit" name="submit" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
+        <input type="button" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" onclick="location.href='@Url.Action("Create", new { LeadContactID = ViewBag.LeadContactID } )'" />
     </div>
 
     @section Scripts

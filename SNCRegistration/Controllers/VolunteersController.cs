@@ -116,18 +116,21 @@ namespace SNCRegistration.Controllers
 
 
         [OverrideAuthorization]
-        public ActionResult Registered() {
+        public ActionResult Registered()
+        {
+
             return View();
         }
 
         // GET: Volunteers/Create
         [OverrideAuthorization]
-        public ActionResult Create()
+        public ActionResult Create(int LeadContactID)
         {
             ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
+            ViewBag.LeadContactID = LeadContactID;
             return View();
         }
 
@@ -488,37 +491,33 @@ namespace SNCRegistration.Controllers
         //}
 
         [OverrideAuthorization]
-        public ActionResult Redirect([Bind(Include = "LeadContactID,LeaderGuid"),
-            ] Volunteer volunteer, string submit)
+        public ActionResult Redirect(string submit)
         {
-            if (ModelState.IsValid)
+            int leadContactID = 0;
+            if (TempData["myPK"] != null)
             {
-                if (TempData["myPK"] != null)
-                {
-                    volunteer.LeadContactID = (int)TempData["myPK"];
-
-                }
-
-                //pass the LeadContactID to child form as FK                    
-                TempData["myPK"] = volunteer.LeadContactID;
-                TempData.Keep();
-
-
-
-
-                //store year of event
-                var thisYear = DateTime.Now.Year.ToString();
-                volunteer.EventYear = int.Parse(thisYear);
+                leadContactID = (int)TempData["myPK"];
 
             }
 
+            ViewBag.LeadContactID = leadContactID;
 
             return View();
+        }
 
+        // GET: Volunteers/Create
+        [OverrideAuthorization]
+        public ActionResult VolunteersRegisteredView(int LeadContactID)
+        {
+
+            ViewBag.LeadContactID = LeadContactID;
+
+            var vols = from vol in db.Volunteers where vol.LeadContactID == LeadContactID select vol;
+            return View(vols.ToPagedList(1, 100));
         }
 
         [OverrideAuthorization]
-
+        [HttpPost]
         public ActionResult VolunteersRegisteredView([Bind(Include = "LeadContactID, VolunteerFirstName, VolunteerLastName"),
             ] Volunteer volunteer, string submit)
         {

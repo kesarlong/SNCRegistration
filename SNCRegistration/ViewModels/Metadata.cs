@@ -294,21 +294,21 @@ namespace SNCRegistration.ViewModels.Metadata
     }
     public class Volunteer_Metadata
     {
-
+ 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VolunteerID;
 
         [Required]
-        [MinLength(2)]
+        //[MinLength(2)]
         [MaxLength(50)]
         [Display(Name = "First Name")]
-        public string VolunteerFirstName;
+        public string VolunteerFirstName = "";
 
         [Required]
-        [MinLength(2)]
+        //[MinLength(2)]
         [MaxLength(50)]
         [Display(Name = "Last Name")]
-        public string VolunteerLastName;
+        public string VolunteerLastName = "";
 
         [Required]
         [Display(Name = "Age")]

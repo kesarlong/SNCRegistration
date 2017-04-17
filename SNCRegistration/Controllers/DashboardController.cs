@@ -36,7 +36,13 @@ namespace SNCRegistration.Controllers
             ViewBag.PendingCheckedInCount = GetPendingCheckedInCount();
             ViewBag.AldenRoadCount = GetAldenRoadCount();
             ViewBag.ParkingPassCount = db.Guardians.Count();
-            ViewBag.FutureEventCount = db.FutureEvents.Count();
+            //    ViewBag.FutureEventCount = db.FutureEvents.Count();
+
+            ViewBag.FutureEventCount = (from a in db.LeadContacts
+                                        join bs in db.BSTypes on a.BSType equals bs.BSTypeID
+                                        where a.Marketing == true
+                                       select a).Count();
+           // select count(*) from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1
             return View();
             }
         protected override void Dispose(bool disposing)
@@ -249,7 +255,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
             {
                 connection.Open();
-                string query = "select LeadContactFirstName, LeadContactLastName, B.BSTypeBSDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
+                string query = "select LeadContactFirstName, LeadContactLastName, B.BSTypeDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
                     return (int)cmd.ExecuteScalar();
