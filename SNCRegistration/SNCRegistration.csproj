@@ -572,6 +572,7 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
     <Content Include="Scripts\campfire.js" />
+    <Content Include="Scripts\sponsors.js" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
