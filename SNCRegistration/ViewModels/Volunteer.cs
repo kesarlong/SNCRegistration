@@ -14,13 +14,15 @@ namespace SNCRegistration.ViewModels
 
 using System;
     using System.Collections.Generic;
-    
-public partial class Volunteer
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    public partial class Volunteer
 {
 
     public int VolunteerID { get; set; }
 
-    public string VolunteerFirstName { get; set; }
+    public string VolunteerFirstName  { get; set; }
 
     public string VolunteerLastName { get; set; }
 
@@ -50,7 +52,7 @@ public partial class Volunteer
 
     public int BSType { get; set; }
 
-
+    public virtual LeadContact LeadContact { get; set; }
 
     public virtual BSType BSType1 { get; set; }
 
