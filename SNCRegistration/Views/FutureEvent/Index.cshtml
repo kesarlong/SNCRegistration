@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SNCRegistration.ViewModels.FutureEventsModel>
 
 @{
-    ViewBag.Title = "Volunteers Report";
+    ViewBag.Title = "Future Event Report";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
@@ -25,11 +25,11 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.VolunteerFirstName)
+                    @Html.DisplayNameFor(model => model.LeadContactFirstName)
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.VolunteerLastName)
+                    @Html.DisplayNameFor(model => model.LeadContactLastName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BSDescription)

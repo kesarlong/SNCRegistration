@@ -36,7 +36,7 @@ namespace SNCRegistration.Controllers
             ViewBag.PendingCheckedInCount = GetPendingCheckedInCount();
             ViewBag.AldenRoadCount = GetAldenRoadCount();
             ViewBag.ParkingPassCount = db.Guardians.Count();
-            ViewBag.FutureEventsCount = db.FutureEvents.Count();
+            ViewBag.FutureEventCount = db.FutureEvents.Count();
             return View();
             }
         protected override void Dispose(bool disposing)

@@ -33,8 +33,8 @@ namespace SNCRegistration.Controllers
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new FutureEventsModel()
                     {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
+                        LeadContactFirstName = x["LeadContactFirstName"].ToString(),
+                        LeadContactLastName = x["LeadContactLastName"].ToString(),
                         BSDescription = x["BSDescription"].ToString(),
                         UnitChapterNumber = x["UnitChapterNumber"].ToString()
                     }).ToList();
@@ -61,14 +61,14 @@ namespace SNCRegistration.Controllers
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new FutureEventsModel()
                     {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
+                        LeadContactFirstName = x["LeadContactFirstName"].ToString(),
+                        LeadContactLastName = x["LeadContactLastName"].ToString(),
                         BSDescription = x["BSDescription"].ToString(),
                         UnitChapterNumber = x["UnitChapterNumber"].ToString()
                     }).ToList();
                 }
             }
-            return PartialView("_PartialFutureEventsList", model);
+            return PartialView("_PartialFutureEventList", model);
         }
 
         //Export to excel
@@ -78,7 +78,7 @@ namespace SNCRegistration.Controllers
             SqlConnection con = new SqlConnection(constring);
             string query = "select LeadContactFirstName, LeadContactLastName, B.BSTypeBSDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
             DataTable dt = new DataTable();
-            dt.TableName = "Volunteers";
+            dt.TableName = "LeadContacts";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -103,7 +103,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                 }
             }
-            return RedirectToAction("Index", " FutureEvents");
+            return RedirectToAction("Index", " FutureEvent");
         }
 
         private void releaseObject(object obj)
