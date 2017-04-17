@@ -8,11 +8,11 @@ namespace SNCRegistration.ViewModels
 {
     public class FutureEventsModel
     {
-        public int VolunteerID { get; set; }
+        public int LeadContactID { get; set; }
         [Display(Name = "First Name")]
-        public string VolunteerFirstName { get; set; }
+        public string LeadContactFirstName { get; set; }
         [Display(Name = "Last Name")]
-        public string VolunteerLastName { get; set; }
+        public string LeadContactLastName { get; set; }
         [Display(Name = "Group")]
         public string BSDescription { get; set; }
         [Display(Name = "Group Number")]

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.FutureEventModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.FutureEventsModel>
 
 <tr>
     <td colspan="3">
@@ -10,10 +10,10 @@
 {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.VolunteerFirstName)
+            @Html.DisplayFor(modelItem => item.LeadContactFirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VolunteerLastName)
+            @Html.DisplayFor(modelItem => item.LeadContactLastName)
         </td>
         <td>
             @Html.DisplayNameFor(model => model.BSDescription)
