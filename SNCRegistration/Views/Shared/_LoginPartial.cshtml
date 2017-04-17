@@ -7,9 +7,13 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink(User.Identity.GetUserName() + "'s Dashboard", "Index", "Admin", routeValues: null, htmlAttributes: new { title = "Home" })
+          
+                @Html.ActionLink(User.Identity.GetUserName() + "'s Dashboard", "Index", "Admin", routeValues: null, htmlAttributes: new { title = "Home" })
+         
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li>
+            <a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span> Logout</a>
+        </li>
     </ul>
     }
 }
@@ -17,6 +21,10 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li>@Html.ActionLink("Administrator Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+       
+        <li>
+       
+        @Html.ActionLink("Administrator Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </li>
     </ul>
 }

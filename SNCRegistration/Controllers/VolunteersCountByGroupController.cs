@@ -7,40 +7,40 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace SNCRegistration.Controllers
-    {
-    
-    public class VolunteersSaturdayOnlyController : Controller
-    {
-        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
-        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+{
+    public class VolunteersCountByGroupController : Controller
 
+    {
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        // GET: VolunteersSaturdayOnly
+        // GET: VolunteersCountByGroupController
         public ActionResult Index(int? eventYear)
             {
 
+            // Dropdown List For Event Year
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
-            List<VolunteersSaturdayOnlyModel> model = new List<VolunteersSaturdayOnlyModel>();
+
+            List<VolunteersCountByGroupModel> model = new List<VolunteersCountByGroupModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
+
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             using (var connection = new SqlConnection(constring))
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 2 AND Volunteers.EventYear = @EventYear");
+                query = String.Concat("SELECT UnitChapterNumber, COUNT(*) As Total FROM Volunteers WHERE EventYear = @EventYear GROUP BY UnitChapterNumber ORDER BY 2");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersSaturdayOnlyModel()
+                    model = dt.AsEnumerable().Select(x => new VolunteersCountByGroupModel()
                         {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        Description = x["Description"].ToString()
+                       UnitChapterNumber = x["UnitChapterNumber"].ToString(),
+                        Total = Convert.ToInt32(x["Total"].ToString())
                         }).ToList();
                     }
                 }
@@ -48,9 +48,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetVolunteersSaturdayOnlyByYear(int eventYear)
+        public ActionResult GetVolunteersCountByGroupByYear(int eventYear)
             {
-            List<VolunteersSaturdayOnlyModel> model = new List<VolunteersSaturdayOnlyModel>();
+            List<VolunteersCountByGroupModel> model = new List<VolunteersCountByGroupModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -58,28 +58,28 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 2 AND Volunteers.EventYear = @EventYear";
+                query = "SELECT UnitChapterNumber, COUNT(*) As Total FROM Volunteers WHERE EventYear = @EventYear GROUP BY UnitChapterNumber ORDER BY 2";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersSaturdayOnlyModel()
+                    model = dt.AsEnumerable().Select(x => new VolunteersCountByGroupModel()
                         {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        Description = x["Description"].ToString()
+                        UnitChapterNumber = x["UnitChapterNumber"].ToString(),
+                        Total = Convert.ToInt32(x["Total"].ToString())
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialVolunteersSaturdayOnlyList", model);
+            return PartialView("_PartialVolunteersCountByGroupList", model);
             }
 
+
         //Export to excel
-        public ActionResult VolunteersSaturdayOnly(int eventYear)
+        public ActionResult VolunteersCountByGroup(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 2 AND Volunteers.EventYear = @EventYear";
+            string query = "SELECT UnitChapterNumber, COUNT(*) As Total FROM Volunteers WHERE EventYear = @EventYear GROUP BY UnitChapterNumber ORDER BY 2";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();
@@ -96,7 +96,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= VolunteersSaturdayOnly.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= TeeShirtOrdersReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -106,7 +106,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", "VolunteersSaturdayOnly");
+            return RedirectToAction("Index", "VolunteersCountByGroup");
             }
 
         private void releaseObject(object obj)

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.TeeShirtCountBySizeModel>
+
+@{
+    ViewBag.Title = "T-Shirt Count By Size Report";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+@using (Html.BeginForm("TeeShirtCountBySize", "TeeShirtCountBySize", FormMethod.Post))
+    {
+
+
+    <h2>T-Shirt Count By Size Report</h2>
+            <div class="row">
+                <div class="col-sm-3">
+                  
+                </div>
+                <div class="col-sm-9 text-right">
+                    <div class="col-sm-7"><h4>Select Event Year:</h4></div>
+                    <div class="col-sm-2">@Html.DropDownList("eventYear", new SelectList(ViewBag.ddlEventYears), new { @class = "form-control", onchange = "updateGrid()" })</div>
+                    <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
+                </div>
+            </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VolunteerShirtSize)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Total)
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @Html.Partial("_PartialTeeShirtCountBySizeList", Model)
+            </tbody>
+        </table>
+    }
+
+
+@section scripts{
+    <script>
+        function updateGrid() {
+            $.post('/TeeShirtCountBySize/GetTeeShirtCountBySizeByYear', { eventYear: $('#eventYear').val() }, function (data) {
+                $('table tbody').html(data);
+            })
+        }
+    </script>
+}

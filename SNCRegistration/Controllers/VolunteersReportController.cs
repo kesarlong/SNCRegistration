@@ -32,7 +32,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC");
+                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, VolunteerShirtSize, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn, '' AS 'Campsite', '' AS 'Balance Due' FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -62,7 +62,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC";
+                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, VolunteerShirtSize, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn, '' AS 'Campsite', '' AS 'Balance Due' FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -86,7 +86,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC";
+            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName AS 'FirstName', VolunteerLastName AS 'LastName', LeadContactFirstName, LeadContactLastName, Description, VolunteerShirtSize, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn, '' AS 'Campsite', '' AS 'Balance Due' FROM Volunteers INNER JOIN Attendance ON Volunteers.VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE Volunteers.EventYear = @EventYear ORDER BY Volunteers.UnitChapterNumber, VolunteerFirstName ASC";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

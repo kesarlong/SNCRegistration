@@ -5,43 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    
  <div class="wrapper">
-
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin animated slideInLeft", role = "form" }))
             {
             @Html.AntiForgeryToken()
-            <h2 class="form-signin-heading">Please Login</h2>
-                    
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                 
-                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-12 control-label" })
-                     
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                     
-                   
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-12 control-label" })
-                     
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-           
-                        <hr />
-                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox col-md-1" })@Html.LabelFor(m => m.RememberMe, new { @class = "col-md-6 control-label" })
-                         
-            <br />
-
-
-            <hr />
-
-                                <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block" />
+           <h2 class="text-center"><img src="https://sncr.blob.core.windows.net/images/CHAMPOINSLOGO.png" alt="Champions"><br /></h2>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-12 control-label" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-12 control-label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <hr />
+                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox col-md-1" })@Html.LabelFor(m => m.RememberMe, new { @class = "col-md-6 control-label" })
                 <br />
-
-             
+                <hr />
+            <input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block" />
             }
 </div>
-         
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

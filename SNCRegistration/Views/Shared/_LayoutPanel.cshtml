@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Special Needs Camporee</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
 </head>
 <body>
@@ -91,19 +92,9 @@
                     <!--/col-span-9-->
                 </div>
                     <!-- /Main -->
-                    <!-- Footer -->
-                   <div class="footer-top"></div>
-    
-     <footer>
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-12">
-                    <p class="copyright">&copy; @DateTime.Now.Year - Special Needs Camporee</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+                   
+    <!-- Footer -->
+    @Html.Partial("_Layout_Footer")
 
                     @Scripts.Render("~/bundles/jquery")
                     @Scripts.Render("~/bundles/bootstrap")
