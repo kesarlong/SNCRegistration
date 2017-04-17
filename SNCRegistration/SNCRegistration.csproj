@@ -598,6 +598,7 @@
     <Content Include="Views\PendingCheckedInCount\Index.cshtml" />
     <Content Include="Views\Shared\_PartialPendingCheckedInList.cshtml" />
     <Content Include="Views\Shared\_Layout_Nav.cshtml" />
+    <Content Include="Views\Volunteers\VolunteersRegisteredView.cshtml" />
     <Content Include="Views\Shared\_PartialTeeShirtCountBySizeList.cshtml" />
     <Content Include="Views\TeeShirtCountBySize\Index.cshtml" />
     <Content Include="Views\Shared\_PartialVolunteersCountByGroupList.cshtml" />

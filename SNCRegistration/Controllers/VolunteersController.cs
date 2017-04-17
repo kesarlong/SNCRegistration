@@ -116,18 +116,21 @@ namespace SNCRegistration.Controllers
 
 
         [OverrideAuthorization]
-        public ActionResult Registered() {
+        public ActionResult Registered()
+        {
+
             return View();
         }
 
         // GET: Volunteers/Create
         [OverrideAuthorization]
-        public ActionResult Create()
+        public ActionResult Create(int LeadContactID)
         {
             ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
+            ViewBag.LeadContactID = LeadContactID;
             return View();
         }
 
@@ -135,9 +138,9 @@ namespace SNCRegistration.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [OverrideAuthorization]
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid")] Volunteer volunteer)
+        public ActionResult Create([Bind(Include = "VolunteerID,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid")] Volunteer volunteer)
         {
 
             if (ModelState.IsValid)
@@ -154,15 +157,20 @@ namespace SNCRegistration.Controllers
                     db.SaveChanges();
 
                     this.Session["lSession"] = volunteer.LeadContactID;
-                    
 
+                    this.Session["gSession"] = volunteer.LeaderGuid;
+
+                    if (Request["submit"].Equals("View volunteers I have registered"))
+                    { return RedirectToAction("VolunteersRegisteredView", "Volunteers", new { LeadContactId = Session["lSession"] }); }
 
                     if (Request["submit"].Equals("Add an additional volunteer"))
                     { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
 
+                    //if (Request["submit"].Equals("Cancel"))              
+                    //{ return RedirectToAction("Redirect", new { LeaderGuid = volunteer.LeaderGuid }); }
+
                     if (Request["submit"].Equals("Cancel"))
                     { return RedirectToAction("Redirect", new { LeaderGuid = volunteer.LeaderGuid }); }
-                    
 
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
@@ -424,9 +432,82 @@ namespace SNCRegistration.Controllers
 
 
         }
-        //public ActionResult Redirect()
+
+
+        //[OverrideAuthorization]
+        //public ActionResult Redirect([Bind(Include = "VolunteerFirstName, VolunteerLastName"),
+        //    ] Volunteer volunteer, string submit)
+        //{
+        //    ModelState.Remove("VolunteerFirstName");
+        //    ModelState.Remove("VolunteerLastName");
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (TempData["myPK"] != null)
+        //        {
+        //            volunteer.LeadContactID = (int)TempData["myPK"];
+
+        //        }
+
+        //        //pass the guardianID to child form as FK                    
+        //        TempData["myPK"] = volunteer.LeadContactID;
+        //        TempData.Keep();
+
+
+
+
+        //        //store year of event
+        //        var thisYear = DateTime.Now.Year.ToString();
+        //        volunteer.EventYear = int.Parse(thisYear);
+
+        //        if (Request["submit"].Equals("Add an additional volunteer"))
+        //        { return RedirectToAction("Create", "Volunteers", new { LeadContactGuid = volunteer.LeaderGuid }); }
+
+        //        if (Request["submit"].Equals("Complete registration"))
+        //        //registration complete, no more people to add
+        //        {
+        //            var total = db.ComputeTotal(volunteer.LeadContactID);
+        //            var email = Session["leaderEmail"] as string;
+        //            var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(volunteer.LeadContactID);
+        //            Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
+        //            return Redirect("Registered");
+        //        }
+
+        //    }
+
+
+        //    return View();
+
+        //}
+
         [OverrideAuthorization]
-        public ActionResult Redirect([Bind(Include = "LeadContactID,LeaderGuid"),
+        public ActionResult Redirect(string submit)
+        {
+            int leadContactID = 0;
+            if (TempData["myPK"] != null)
+            {
+                leadContactID = (int)TempData["myPK"];
+
+            }
+
+            ViewBag.LeadContactID = leadContactID;
+
+            return View();
+        }
+
+        // GET: Volunteers/Create
+        [OverrideAuthorization]
+        public ActionResult VolunteersRegisteredView(int LeadContactID)
+        {
+
+            ViewBag.LeadContactID = LeadContactID;
+
+            var vols = from vol in db.Volunteers where vol.LeadContactID == LeadContactID select vol;
+            return View(vols.ToPagedList(1, 100));
+        }
+
+        [OverrideAuthorization]
+        [HttpPost]
+        public ActionResult VolunteersRegisteredView([Bind(Include = "LeadContactID, VolunteerFirstName, VolunteerLastName"),
             ] Volunteer volunteer, string submit)
         {
             if (ModelState.IsValid)
@@ -437,16 +518,31 @@ namespace SNCRegistration.Controllers
 
                 }
 
-                //pass the guardianID to child form as FK                    
+                //pass the leadID to child form as FK                    
                 TempData["myPK"] = volunteer.LeadContactID;
                 TempData.Keep();
 
 
-
+                this.Session["gSession"] = volunteer.LeaderGuid;
 
                 //store year of event
                 var thisYear = DateTime.Now.Year.ToString();
                 volunteer.EventYear = int.Parse(thisYear);
+
+                this.Session["lSession"] = volunteer.LeadContactID;
+
+                if (Request["submit"].Equals("Continue adding volunteers"))
+                { return RedirectToAction("Create", "Volunteers", new { LeadContactGuid = volunteer.LeaderGuid }); }
+
+                if (Request["submit"].Equals("Complete registration"))
+                //registration complete, no more people to add
+                {
+                    var total = db.ComputeTotal(volunteer.LeadContactID);
+                    var email = Session["leaderEmail"] as string;
+                    var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(volunteer.LeadContactID);
+                    Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
+                    return Redirect("Registered");
+                }
 
             }
 
@@ -454,6 +550,7 @@ namespace SNCRegistration.Controllers
             return View();
 
         }
+
     }
 
 
