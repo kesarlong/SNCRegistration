@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace SNCRegistration.Helpers
 {
@@ -11,10 +12,12 @@ namespace SNCRegistration.Helpers
     {        
         public static void SendEmail(string fAddress, string tAddress, string subj, string bdy, string pdfFolder)
         {
+            string gmailPassword = ConfigurationManager.AppSettings["storedpassword"];
+            string gmailEmail = ConfigurationManager.AppSettings["storedemail"];
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
-            var bcc = "sncracc@gmail.com";
-            const string fromPassword = "Coffee1$";
+            var bcc = "gmailEmail";
+            const string fromPassword = "gmailPassword";
 
             var smtp = new SmtpClient
             {
@@ -45,8 +48,8 @@ namespace SNCRegistration.Helpers
         {
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
-            var bcc = "sncracc@gmail.com";
-            const string fromPassword = "Coffee1$";
+            var bcc = "gmailEmail";
+            const string fromPassword = "gmailPassword";
 
             var smtp = new SmtpClient
             {
