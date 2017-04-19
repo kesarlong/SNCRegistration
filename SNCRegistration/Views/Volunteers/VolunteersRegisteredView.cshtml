@@ -1,4 +1,4 @@
-﻿@model  PagedList.IPagedList<SNCRegistration.ViewModels.Volunteer>
+﻿@model  List<SNCRegistration.ViewModels.Volunteer>
 @using PagedList.Mvc;
 
 @{
@@ -47,7 +47,7 @@
     <hr />
 
         <div class="form-group pull-left">
-            <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered")'" />
+            <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered", new {LeadContactID=ViewBag.LeadContactID })'" />
         </div>
         <div class="form-group pull-left">
             <input type="submit" name="submit" id="AddVolunteer" value="Continue adding volunteers" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
