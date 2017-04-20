@@ -435,6 +435,21 @@
   <ItemGroup>
     <Content Include="App_Start\bin\Antlr3.Runtime.dll" />
     <Content Include="App_Start\bin\ClosedXML.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.CrystalReports.Engine.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommLayer.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommonControls.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.Controllers.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.Prompting.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportSource.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.Shared.dll" />
     <Content Include="App_Start\bin\DocumentFormat.OpenXml.dll" />
     <Content Include="App_Start\bin\EntityFramework.dll" />
     <Content Include="App_Start\bin\EntityFramework.SqlServer.dll" />
@@ -466,7 +481,6 @@
     <Content Include="App_Start\bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
     <Content Include="App_Start\bin\Microsoft.Owin.Security.OAuth.dll" />
     <Content Include="App_Start\bin\Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="App_Start\bin\Microsoft.ReportViewer.WebForms.DLL" />
     <Content Include="App_Start\bin\Microsoft.SqlServer.Types.dll" />
     <Content Include="App_Start\bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="App_Start\bin\Newtonsoft.Json.dll" />
@@ -474,27 +488,8 @@
     <Content Include="App_Start\bin\PagedList.dll" />
     <Content Include="App_Start\bin\PagedList.Mvc.dll" />
     <Content Include="App_Start\bin\ReportViewerForMvc.dll" />
-    <Content Include="App_Start\bin\roslyn\csc.exe" />
-    <Content Include="App_Start\bin\roslyn\csc.exe.config" />
-    <Content Include="App_Start\bin\roslyn\csc.rsp" />
-    <Content Include="App_Start\bin\roslyn\csi.exe" />
-    <Content Include="App_Start\bin\roslyn\csi.rsp" />
-    <Content Include="App_Start\bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="App_Start\bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="App_Start\bin\roslyn\vbc.exe" />
-    <Content Include="App_Start\bin\roslyn\vbc.exe.config" />
-    <Content Include="App_Start\bin\roslyn\vbc.rsp" />
-    <Content Include="App_Start\bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="App_Start\bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="App_Start\bin\SNCRegistration.dll" />
-    <Content Include="App_Start\bin\SNCRegistration.dll.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Start\bin\SNCRegistration.pdb" />
-    <Content Include="App_Start\bin\SqlServerTypes\x64\msvcr120.dll" />
-    <Content Include="App_Start\bin\SqlServerTypes\x64\SqlServerSpatial140.dll" />
-    <Content Include="App_Start\bin\SqlServerTypes\x86\msvcr120.dll" />
-    <Content Include="App_Start\bin\SqlServerTypes\x86\SqlServerSpatial140.dll" />
+    <Content Include="App_Start\bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="App_Start\bin\stdole.dll" />
     <Content Include="App_Start\bin\System.IO.Compression.dll" />
     <Content Include="App_Start\bin\System.Net.Http.dll" />
     <Content Include="App_Start\bin\System.Runtime.CompilerServices.Unsafe.dll" />
