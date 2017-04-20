@@ -216,7 +216,7 @@ namespace SNCRegistration.Controllers
             }
             Volunteer volunteer = db.Volunteers.Find(id);
 
-            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode, volunteer.VolunteerShirtSize);
+            SetAgeAttendanceViewBag(volunteer.BSType, volunteer.VolunteerAge, volunteer.VolunteerAttendingCode, volunteer.VolunteerShirtSize);
 
             if (volunteer == null)
             {
@@ -256,7 +256,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
-            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode, volunteer.VolunteerShirtSize);
+            SetAgeAttendanceViewBag(volunteer.BSType, volunteer.VolunteerAge, volunteer.VolunteerAttendingCode, volunteer.VolunteerShirtSize);
             return View(volunteer);
 
 
@@ -421,8 +421,15 @@ namespace SNCRegistration.Controllers
         }
 
 
-        private void SetAgeAttendanceViewBag(int? age = null, int? attendance = null, string shirtSize = null)
+        private void SetAgeAttendanceViewBag(int? bstgroup = null, int ? age = null, int? attendance = null, string shirtSize = null)
         {
+
+            if (bstgroup == null)
+            {
+                ViewBag.bstID = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
+            }
+            else
+                ViewBag.bstID = new SelectList(db.BSTypes.ToArray(), "BSTypeID", "BSTypeDescription", bstgroup);
 
             if (age == null)
             {
@@ -444,6 +451,7 @@ namespace SNCRegistration.Controllers
             }
             else
                 ViewBag.shirtSizeName = new SelectList(db.ShirtSizes.ToArray(), "ShirtSizeCode", "ShirtSizeDescription", shirtSize);
+
 
         }
 
