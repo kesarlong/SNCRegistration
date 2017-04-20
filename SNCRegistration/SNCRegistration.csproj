@@ -584,7 +584,9 @@
     <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll" />
     <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll" />
     <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.xml" />
-    <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages\EntityFramework.6.1.3\tools\about_EntityFramework.help.txt" />
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
@@ -3456,7 +3458,9 @@
     <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
