@@ -6,10 +6,7 @@
 }
 
 <h2>Check In Volunteer</h2>
-<div>
-    @if (TempData["notice"] != null)
-    {<h2 style="color:green;">@TempData["notice"]</h2> }
-</div>
+
 
 @using (Html.BeginForm())
 {
@@ -39,13 +36,6 @@
             <dd>
                 @Html.DisplayFor(model => model.VolunteerAge)
             </dd>
-            @*<dt>
-                @Html.DisplayNameFor(model => model.LeadContactID)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LeadContactID)
-            </dd>*@
             <dt>
                 @Html.DisplayNameFor(model => model.VolunteerShirtOrder)
             </dt>

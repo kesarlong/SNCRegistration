@@ -216,7 +216,7 @@ namespace SNCRegistration.Controllers
             }
             Volunteer volunteer = db.Volunteers.Find(id);
 
-            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode);
+            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode, volunteer.VolunteerShirtSize);
 
             if (volunteer == null)
             {
@@ -256,7 +256,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
-            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode);
+            SetAgeAttendanceViewBag(volunteer.VolunteerAge, volunteer.VolunteerAttendingCode, volunteer.VolunteerShirtSize);
             return View(volunteer);
 
 
@@ -264,7 +264,7 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Volunteer/Checkin/5
-        public ActionResult CheckIn(int? id)
+        public ActionResult CheckIn(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -276,6 +276,13 @@ namespace SNCRegistration.Controllers
             {
                 return HttpNotFound();
             }
+            if (String.IsNullOrEmpty(returnUrl)
+              && Request.UrlReferrer != null
+              && Request.UrlReferrer.ToString().Length > 0)
+            {
+                return RedirectToAction("CheckIn",
+                    new { returnUrl = Request.UrlReferrer.ToString() });
+            }
             return View(volunteer);
         }
 
@@ -284,7 +291,7 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckInPost(int? id)
+        public ActionResult CheckInPost(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -299,8 +306,10 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-                    TempData["notice"] = "Volunteer Checked In Status Saved!";
-                    return RedirectToAction("CheckIn", "Volunteers", new { id = volunteer.VolunteerID });
+                    if (!String.IsNullOrEmpty(returnUrl))
+                        return Redirect(returnUrl);
+                    else
+                        return RedirectToAction("Index");
                 }
                 catch (DataException /* dex */)
                 {
@@ -412,7 +421,7 @@ namespace SNCRegistration.Controllers
         }
 
 
-        private void SetAgeAttendanceViewBag(int? age = null, int? attendance = null)
+        private void SetAgeAttendanceViewBag(int? age = null, int? attendance = null, string shirtSize = null)
         {
 
             if (age == null)
@@ -429,7 +438,12 @@ namespace SNCRegistration.Controllers
             else
                 ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", attendance);
 
-
+            if (shirtSize == null)
+            {
+                ViewBag.shirtSizeName = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
+            }
+            else
+                ViewBag.shirtSizeName = new SelectList(db.ShirtSizes.ToArray(), "ShirtSizeCode", "ShirtSizeDescription", shirtSize);
 
         }
 

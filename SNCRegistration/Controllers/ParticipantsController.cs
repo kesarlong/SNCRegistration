@@ -271,7 +271,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: Participants/CheckIn/5
-        public ActionResult CheckIn(int? id)
+        public ActionResult CheckIn(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -282,6 +282,13 @@ namespace SNCRegistration.Controllers
             {
                 return HttpNotFound();
             }
+            if (String.IsNullOrEmpty(returnUrl)
+               && Request.UrlReferrer != null
+               && Request.UrlReferrer.ToString().Length > 0)
+            {
+                return RedirectToAction("CheckIn",
+                    new { returnUrl = Request.UrlReferrer.ToString() });
+            }
             return View(participant);
         }
 
@@ -290,7 +297,7 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckInPost(int? id)
+        public ActionResult CheckInPost(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -314,7 +321,10 @@ namespace SNCRegistration.Controllers
                     try
                     {
                         db.SaveChanges();
-                        TempData["notice"] = "Check In Status Saved!";
+                        if (!String.IsNullOrEmpty(returnUrl))
+                            return Redirect(returnUrl);
+                        else
+                            return RedirectToAction("Index");
 
                     }
                     catch (DataException /* dex */)
