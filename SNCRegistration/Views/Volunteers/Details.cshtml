@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SaturdayDinner)
+            Saturday Dinner?
         </dt>
 
         <dd>
@@ -67,7 +67,39 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+            @Html.DisplayNameFor(model => model.BSType)
+        </dt>
+        <dd>
+            @if (Model.BSType == 1)
+            {<p>Individual</p>}
+            else if (Model.BSType == 2)
+            {<p>Troop</p>}
+            else if (Model.BSType == 3)
+            {<p>Troop - WoodBridge</p>}
+            else if (Model.BSType == 4)
+            {<p>OA Chapter: Apieka - Alachua District</p>}
+            else if (Model.BSType == 5)
+            {<p>OA Chapter: Seminole - Baden Powell District</p>}
+            else if (Model.BSType == 6)
+            {<p>OA Chapter: Timucuan - Black Creek District</p>}
+            else if (Model.BSType == 7)
+            {<p>OA Chapter: Oglala - Great Muskogee District</p>}
+            else if (Model.BSType == 8)
+            {<p>OA Chapter: Oklawaha - Marion District</p>}
+            else if (Model.BSType == 9)
+            {<p>OA Chapter: Osceola - Osceola & Timucua Districts</p>}
+            else if (Model.BSType == 10)
+            {<p>OA Chapter: Elemukulek - River Bend District</p>}
+            else if (Model.BSType == 11)
+            {<p>OA Chapter: Saturiwa - Shawnee District</p>}
+            else if (Model.BSType == 12)
+            {<p>OA Chapter: Onathequa - Suwannee River District</p>}
+        </dd>
+
+
+
+        <dt>
+           TCU Number
         </dt>
 
         <dd>

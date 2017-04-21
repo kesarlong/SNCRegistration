@@ -60,13 +60,11 @@ namespace SNCRegistration.Controllers
                     familyMember.GuardianID = (int)TempData["myPK"];
                     
                     //set attendance choice to pass to family member form
-                     TempData["gAttend"] = familyMember.AttendingCode;
-                    //familyMember.AttendingCode = (int)TempData["gAttend"];
-                    
-
+                    TempData["gAttend"] = familyMember.AttendingCode;
                     TempData.Keep();
                 }
 
+                
                 //store year of event
                 var thisYear = DateTime.Now.Year.ToString();
                 familyMember.EventYear = int.Parse(thisYear);
@@ -79,6 +77,9 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
+                    TempData["gAttend"] = familyMember.AttendingCode;
+
+                    this.Session["gSession"] = familyMember.GuardianGuid;
 
 
                     //add another participant for guardian                   
@@ -111,6 +112,10 @@ namespace SNCRegistration.Controllers
                             Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
                         }
                     }
+                }
+                catch (NullReferenceException ex)
+                {
+                    Response.Write("Processor Usage" + ex.Message);
                 }
             }
 

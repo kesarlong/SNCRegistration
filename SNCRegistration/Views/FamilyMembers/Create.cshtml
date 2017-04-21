@@ -44,8 +44,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.FamilyMemberAge, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(model => model.FamilyMemberAge,
-            ViewBag.FamilyMemberAge as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
+        @Html.DropDownListFor(model => model.FamilyMemberAge, ViewBag.FamilyMemberAge as SelectList, "-Select option-", new { @class = "form-control", style = "width: 220px" })
         @Html.ValidationMessageFor(model => model.FamilyMemberAge, "", new { @class = "text-danger" })
     </div>
 
@@ -90,9 +89,7 @@
 
 
     <div class="form-group pull-right">
-        <input type="submit" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");" />
-        @*<input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants",new { GuardianGuid = Model.GuardianGuid));" />*@
-
+     <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Participants") + "'");" />
     </div>
 
 }

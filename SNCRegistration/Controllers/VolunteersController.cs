@@ -29,6 +29,7 @@ namespace SNCRegistration.Controllers
             ViewBag.searchString = searchString;
             ViewBag.page = page;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TcuTypeSortParam = sortOrder == "tcutype_asc" ? "tcutype_desc" : "tcutype_asc";
             ViewBag.TcuNumSortParam = sortOrder == "tcunum_asc" ? "tcunum_desc" : "tcunum_asc";
 
             Session["SessionSortOrder"] = ViewBag.CurrentSort;
@@ -52,31 +53,43 @@ namespace SNCRegistration.Controllers
             ViewBag.CurrentYear = DateTime.Now.Year;
             ViewBag.AllYears = (from y in db.Volunteers select y.EventYear).Distinct();
 
+            //var volunteers = from s in db.Volunteers
+            //                 where s.EventYear == searchYear
+            //                 select s;
+
             var volunteers = from s in db.Volunteers
-                             where s.EventYear == searchYear
-                             select s;
+                               join sa in db.BSTypes on s.BSType equals sa.BSTypeID
+                               where s.EventYear == searchYear
+                               select new LeadContactBST() { volunteer = s, bsttype = sa };
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                volunteers = volunteers.Where(s => s.VolunteerLastName.Contains(searchString) || s.VolunteerFirstName.Contains(searchString) || s.UnitChapterNumber.Contains(searchString));
+                volunteers = volunteers.Where(s => s.volunteer.VolunteerLastName.Contains(searchString) || s.volunteer.VolunteerFirstName.Contains(searchString) || s.volunteer.UnitChapterNumber.Contains(searchString) || s.bsttype.BSTypeDescription.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    volunteers = volunteers.OrderByDescending(s => s.VolunteerLastName);
+                    volunteers = volunteers.OrderByDescending(s => s.volunteer.VolunteerLastName);
                     break;
                 case "tcunum_desc":
-                    volunteers = volunteers.OrderByDescending(s => s.UnitChapterNumber);
+                    volunteers = volunteers.OrderByDescending(s => s.volunteer.UnitChapterNumber);
                     break;
                 case "name_asc":
-                    volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
+                    volunteers = volunteers.OrderBy(s => s.volunteer.VolunteerLastName);
                     break;
                 case "tcunum_asc":
-                    volunteers = volunteers.OrderBy(s => s.UnitChapterNumber);
+                    volunteers = volunteers.OrderBy(s => s.volunteer.UnitChapterNumber);
+                    break;
+                case "tcutype_desc":
+                    volunteers = volunteers.OrderByDescending(s => s.volunteer.BSType);
+                    break;
+                case "tcutype_asc":
+                    volunteers = volunteers.OrderBy(s => s.volunteer.BSType);
                     break;
                 default:
-                    volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
+                    volunteers = volunteers.OrderBy(s => s.volunteer.VolunteerLastName);
                     break;
             }
 

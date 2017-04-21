@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<SNCRegistration.ViewModels.Volunteer>*@ @*<Original, delete if nothing wrong*@
-@model  PagedList.IPagedList<SNCRegistration.ViewModels.Volunteer>
+﻿@model PagedList.IPagedList<SNCRegistration.ViewModels.LeadContactBST>
 @using PagedList.Mvc;
 
 @{
@@ -30,6 +29,9 @@
         <th align="center">
             First Name
         </th>
+        <th>
+            <text>TCU Type</text> @Html.ActionLink("▼", "Index", new { sortOrder = ViewBag.TcuTypeSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
+        </th>
         <th align="center">
             <text>TCU Number</text> @Html.ActionLink("▼", "Index", new { sortOrder = ViewBag.TcuNumSortParam, currentFilter = ViewBag.CurrentFilter, searchYear = ViewBag.currentYearSort })
         </th>
@@ -43,27 +45,56 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.VolunteerLastName)
+                @Html.DisplayFor(modelItem => item.volunteer.VolunteerLastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VolunteerFirstName)
+                @Html.DisplayFor(modelItem => item.volunteer.VolunteerFirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UnitChapterNumber)
+
+                @if (item.volunteer.BSType == 1)
+                {<p>Individual</p>}
+                else if (item.volunteer.BSType == 2)
+                {<p>Troop</p>}
+                else if (item.volunteer.BSType == 3)
+                {<p>Troop - WoodBridge</p>}
+                else if (item.volunteer.BSType == 4)
+                {<p>OA Chapter: Apieka - Alachua District</p>}
+                else if (item.volunteer.BSType == 5)
+                {<p>OA Chapter: Seminole - Baden Powell District</p>}
+                else if (item.volunteer.BSType == 6)
+                {<p>OA Chapter: Timucuan - Black Creek District</p>}
+                else if (item.volunteer.BSType == 7)
+                {<p>OA Chapter: Oglala - Great Muskogee District</p>}
+                else if (item.volunteer.BSType == 8)
+                {<p>OA Chapter: Oklawaha - Marion District</p>}
+                else if (item.volunteer.BSType == 9)
+                {<p>OA Chapter: Osceola - Osceola & Timucua Districts</p>}
+                else if (item.volunteer.BSType == 10)
+                {<p>OA Chapter: Elemukulek - River Bend District</p>}
+                else if (item.volunteer.BSType == 11)
+                {<p>OA Chapter: Saturiwa - Shawnee District</p>}
+                else if (item.volunteer.BSType == 12)
+                {<p>OA Chapter: Onathequa - Suwannee River District</p>}
+
+
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CheckedIn)
+                @Html.DisplayFor(modelItem => item.volunteer.UnitChapterNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.volunteer.CheckedIn)
             </td>
 
             <td align="right">
-                @if (!item.CheckedIn)
+                @if (!item.volunteer.CheckedIn)
                 {
-                    @Html.ActionLink("Check In", "CheckIn", new { id = item.VolunteerID }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Check In", "CheckIn", new { id = item.volunteer.VolunteerID }, new { @class = "btn btn-success" })
 
                 }
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.VolunteerID }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Details", "Details", new { id = item.volunteer.VolunteerID }, new { @class = "btn btn-info" })
 
             </td>
 
