@@ -95,5 +95,7 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.VolunteerID }, new { @class = "btn btn-danger" }) |
-    @Html.ActionLink("Back to Volunteer Search", "Index", "Volunteers", new { }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back to Volunteer Search", "Index", "Volunteers", new { SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] }, new { @class = "btn btn-info" })
+
+
 </p>

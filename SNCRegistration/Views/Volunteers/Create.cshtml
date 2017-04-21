@@ -173,22 +173,28 @@
                             @Html.DropDownListFor(model => model.VolunteerAttendingCode,
             ViewBag.Attendance as SelectList, "- Select option - "
             , new { @class = "form-control", style = "width: 220px" })
-                            @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="btn-group" data-toggle="buttons" id="Dinner">
-                                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
-                                <label class="btn btn-default">
-                                    @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
-                                </label>
-                                <label class="btn btn-default">
-                                    @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False" }) No
-                                </label>
-                            </div>
-                            @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
-                        </div>
-                        <br />
+            @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
+        </div>
+        <br />
+
+        <div>
+            <!--set default values for fields not set in initial form-->
+            @Html.HiddenFor(model => model.SaturdayDinner, new { @Value = false })
+        </div>
+
+        <div class="form-group">
+            <div class="btn-group" data-toggle="buttons"  id="Dinner">
+                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
+                </label>
+                <label class="btn btn-default">
+                    @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False" }) No
+                </label>
+            </div>
+            @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
+        </div>
+    <br />
 
                         <br />
                         <div class="form-group" id="BSType">
