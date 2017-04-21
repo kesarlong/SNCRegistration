@@ -305,6 +305,7 @@
     <Compile Include="Controllers\FamilyFriendsReportController.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
     <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
+    <Compile Include="Controllers\FutureEventController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
@@ -370,6 +371,7 @@
     <Compile Include="ViewModels\FutureEvent.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FutureEventModel.cs" />
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -621,6 +623,7 @@
     <Content Include="Views\Shared\_PartialVolunteersCountByGroupList.cshtml" />
     <Content Include="Views\VolunteersCountByGroup\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_Footer.cshtml" />
+    <Content Include="Views\FamilyMembers\Redirect.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3449,7 +3452,9 @@
     <Folder Include="font-awesome\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
+    <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
+    <Folder Include="Views\Events\" />
     <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>
   <ItemGroup>

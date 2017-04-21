@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -416,7 +415,8 @@ namespace SNCRegistration.Controllers
                 if (TempData["myPK"] != null)
                 {
                     participant.GuardianID = (int)TempData["myPK"];
-                    
+                    TempData["gAttend"] = participant.AttendingCode;
+                    TempData.Keep();
                 }
 
                 //pass the guardianID to child form as FK                    
