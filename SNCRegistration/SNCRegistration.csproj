@@ -415,9 +415,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="ViewModels\Sponsor.cs">
-      <DependentUpon>SNCRegistration.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Table.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
