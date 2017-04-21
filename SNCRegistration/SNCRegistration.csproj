@@ -305,23 +305,26 @@
     <Compile Include="Controllers\FamilyFriendsReportController.cs" />
     <Compile Include="Controllers\FamilyMembersController.cs" />
     <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
+    <Compile Include="Controllers\FutureEventController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ParticipantsSaturdayOnlyController.cs" />
+    <Compile Include="Controllers\VolunteersCheckedInCountController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\ParkingPassController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
     <Compile Include="Controllers\PendingRegistrationReportController.cs" />
     <Compile Include="Controllers\PendingCheckedInCountController.cs" />
-    <Compile Include="Controllers\PeopleCheckedInCountController.cs" />
+    <Compile Include="Controllers\ParticipantsCheckedInCountController.cs" />
     <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
     <Compile Include="Controllers\VolunteersCountByGroupController.cs" />
     <Compile Include="Controllers\TeeShirtCountBySizeController.cs" />
     <Compile Include="Controllers\TeeShirtOrderReportsController.cs" />
     <Compile Include="Controllers\VolunteersFridayOnlyController.cs" />
-    <Compile Include="Controllers\VolunteersFridayThruSaturdayController.cs" />
-    <Compile Include="Controllers\VolunteersOvernightController.cs" />
+    <Compile Include="Controllers\ParticipantsOvernightController.cs" />
+    <Compile Include="Controllers\VolunteersFridayThruSundayController.cs" />
     <Compile Include="Controllers\VolunteersReportController.cs" />
     <Compile Include="Controllers\VolunteersSaturdayOnlyController.cs" />
     <Compile Include="Controllers\WristBandCountController.cs" />
@@ -370,6 +373,7 @@
     <Compile Include="ViewModels\FutureEvent.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FutureEventModel.cs" />
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -386,10 +390,12 @@
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ParticipantsSaturdayOnlyModel.cs" />
+    <Compile Include="ViewModels\VolunteersCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsReportModel.cs" />
     <Compile Include="ViewModels\PendingRegistrationReportModel.cs" />
     <Compile Include="ViewModels\PendingCheckedInCountModel.cs" />
-    <Compile Include="ViewModels\PeopleCheckedInCountModel.cs" />
+    <Compile Include="ViewModels\ParticipantsCheckedInCountModel.cs" />
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
@@ -426,8 +432,8 @@
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\VolunteersFridayOnlyModel.cs" />
-    <Compile Include="ViewModels\VolunteersFridayThruSaturdayModel.cs" />
-    <Compile Include="ViewModels\VolunteersOvernightModel.cs" />
+    <Compile Include="ViewModels\ParticipantsOvernightModel.cs" />
+    <Compile Include="ViewModels\VolunteersFridayThruSundayModel.cs" />
     <Compile Include="ViewModels\VolunteersReportModel.cs" />
     <Compile Include="ViewModels\VolunteersSaturdayOnlyModel.cs" />
     <Compile Include="ViewModels\WristBandCountModel.cs" />
@@ -596,7 +602,7 @@
     <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
     <Content Include="Views\PendingRegistrationReport\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParkingPassList.cshtml" />
-    <Content Include="Views\Shared\_PartialPeopleCheckedInList.cshtml" />
+    <Content Include="Views\Shared\_PartialParticipantsCheckedInList.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -605,9 +611,9 @@
     <Content Include="Views\Shared\_PartialVolunteersReportList.cshtml" />
     <Content Include="Views\CompletedRegistrationReport\Index.cshtml" />
     <Content Include="Views\Shared\_PartialVolunteersSaturdayOnlyList.cshtml" />
-    <Content Include="Views\Shared\_PartialVolunteersOvernightList.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersFridayThruSundayList.cshtml" />
     <Content Include="Views\Shared\_PartialVolunteersFridayOnlyList.cshtml" />
-    <Content Include="Views\Shared\_PartialVolunteersFridayThruSaturdayList.cshtml" />
+    <Content Include="Views\Shared\_PartialParticipantsOvernightList.cshtml" />
     <Content Include="Views\Shared\_PartialFamilyFriendsReportList.cshtml" />
     <Content Include="ClassDiagram2.cd" />
     <Content Include="Views\Shared\_PartialFirstTimeAttendeeList.cshtml" />
@@ -624,6 +630,12 @@
     <Content Include="Views\Shared\_PartialVolunteersCountByGroupList.cshtml" />
     <Content Include="Views\VolunteersCountByGroup\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_Footer.cshtml" />
+    <Content Include="Views\FutureEvent\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialFutureEventList.cshtml" />
+    <Content Include="Views\VolunteersCheckedInCount\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersCheckedInList.cshtml" />
+    <Content Include="Views\ParticipantsSaturdayOnly\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialParticipantsSaturdayOnlyList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3430,12 +3442,12 @@
     <Content Include="Views\LeadContacts\CheckIn.cshtml" />
     <Content Include="Views\AldenRoadReport\Index.cshtml" />
     <Content Include="Views\FirstTimeAttendeeReport\Index.cshtml" />
-    <Content Include="Views\PeopleCheckedInCount\Index.cshtml" />
+    <Content Include="Views\ParticipantsCheckedInCount\Index.cshtml" />
     <Content Include="Views\RepeatAttendeeReport\Index.cshtml" />
     <Content Include="Views\TeeShirtOrdersReport\Index.cshtml" />
     <Content Include="Views\VolunteersFridayOnly\Index.cshtml" />
-    <Content Include="Views\VolunteersFridayThruSaturday\Index.cshtml" />
-    <Content Include="Views\VolunteersOvernight\Index.cshtml" />
+    <Content Include="Views\ParticipantsOvernight\Index.cshtml" />
+    <Content Include="Views\VolunteersFridayThruSunday\Index.cshtml" />
     <Content Include="Views\VolunteersSaturdayOnly\Index.cshtml" />
     <Content Include="Views\WristBandCount\Index.cshtml" />
     <Content Include="Views\LeadContacts\Registered.cshtml" />

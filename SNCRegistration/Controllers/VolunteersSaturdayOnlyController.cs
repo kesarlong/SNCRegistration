@@ -31,16 +31,18 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 2 AND Volunteers.EventYear = @EventYear");
+                query = String.Concat("select UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, Attendance.Description as Attending from leadcontacts inner join Attendance on LeadContacts.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 2 AND leadcontacts.EventYear = @EventYear union " +
+                "select UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, Attendance.Description as Attending  from volunteers inner join Attendance on Volunteers.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 2 AND volunteers.EventYear = @EventYear order by GroupNumber, LastName");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new VolunteersSaturdayOnlyModel()
                         {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        Description = x["Description"].ToString()
+                        GroupNumber = x["GroupNumber"].ToString(),
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        Attending = x["Attending"].ToString()
                         }).ToList();
                     }
                 }
@@ -58,16 +60,18 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 2 AND Volunteers.EventYear = @EventYear";
+                query = "select UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, Attendance.Description as Attending from leadcontacts inner join Attendance on LeadContacts.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 2 AND leadcontacts.EventYear = @EventYear union " +
+                "select UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, Attendance.Description as Attending  from volunteers inner join Attendance on Volunteers.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 2 AND volunteers.EventYear = @EventYear order by GroupNumber, LastName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new VolunteersSaturdayOnlyModel()
                         {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        Description = x["Description"].ToString()
+                        GroupNumber = x["GroupNumber"].ToString(),
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        Attending = x["Attending"].ToString()
                         }).ToList();
                     }
                 }
@@ -79,7 +83,8 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 2 AND Volunteers.EventYear = @EventYear";
+            string query = "select UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, Attendance.Description as Attending from leadcontacts inner join Attendance on LeadContacts.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 2 AND leadcontacts.EventYear = @EventYear union " +
+                "select UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, Attendance.Description as Attending  from volunteers inner join Attendance on Volunteers.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 2 AND volunteers.EventYear = @EventYear order by GroupNumber, LastName";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

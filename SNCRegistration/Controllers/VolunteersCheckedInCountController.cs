@@ -7,19 +7,22 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-
 
 namespace SNCRegistration.Controllers
 {
-    public class VolunteersFridayThruSaturdayController : Controller
+    public class VolunteersCheckedInCountController : Controller
     {
-        // GET: VolunteersFridayThruSaturday
+        readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
+        private SNCRegistrationEntities db = new SNCRegistrationEntities();
+
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        // GET: VolunteersCheckedInCount
         public ActionResult Index(int? eventYear)
             {
-
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
-            List<VolunteersFridayThruSaturdayModel> model = new List<VolunteersFridayThruSaturdayModel>();
+            List<VolunteersCheckedInCountModel> model = new List<VolunteersCheckedInCountModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -27,16 +30,16 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 4 AND Volunteers.EventYear = @EventYear");
+                query = String.Concat("SELECT VolunteerID, VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID, LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersFridayThruSaturdayModel()
+                    model = dt.AsEnumerable().Select(x => new VolunteersCheckedInCountModel()
                         {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        Description = x["Description"].ToString()
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        CheckedIn = x["CheckedIn"].ToString()
                         }).ToList();
                     }
                 }
@@ -44,9 +47,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetVolunteersFridayThruSaturdayByYear(int eventYear)
+        public ActionResult GetVolunteersCheckedInCountByYear(int eventYear)
             {
-            List<VolunteersFridayThruSaturdayModel> model = new List<VolunteersFridayThruSaturdayModel>();
+            List<VolunteersCheckedInCountModel> model = new List<VolunteersCheckedInCountModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -54,28 +57,28 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 4 AND Volunteers.EventYear = @EventYear";
+                query = "SELECT VolunteerID, VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID, LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersFridayThruSaturdayModel()
+                    model = dt.AsEnumerable().Select(x => new VolunteersCheckedInCountModel()
                         {
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        Description = x["Description"].ToString()
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        CheckedIn = x["CheckedIn"].ToString()
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialVolunteersFridayThruSaturdayList", model);
+            return PartialView("_PartialVolunteersCheckedInList", model);
             }
 
         //Export to excel
-        public ActionResult VolunteersFridayThruSaturday(int eventYear)
+        public ActionResult VolunteersCheckedInCount(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, LeadContactFirstName, LeadContactLastName, Description, CASE WHEN Volunteers.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID JOIN LeadContacts ON LeadContacts.LeadcontactID = Volunteers.LeadContactID WHERE AttendanceID = 4 AND Volunteers.EventYear = @EventYear";
+            string query = "SELECT VolunteerID, VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID, LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY FirstName ASC";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();
@@ -92,7 +95,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= VolunteersFridayThruSaturdayReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= VolunteersCheckedInCount.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -102,7 +105,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", " VolunteersFridayThruSaturday");
+            return RedirectToAction("Index", "VolunteersCheckedInCount");
             }
 
         private void releaseObject(object obj)

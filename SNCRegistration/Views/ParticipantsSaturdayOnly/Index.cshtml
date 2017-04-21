@@ -1,15 +1,15 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.PeopleCheckedInCountModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.ParticipantsSaturdayOnlyModel>
 
 @{
-    ViewBag.Title = "People Checked In Count Report";
+    ViewBag.Title = "Participants Saturday Only Report";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-@using (Html.BeginForm("PeopleCheckedInCount", "PeopleCheckedInCount", FormMethod.Post))
+@using (Html.BeginForm("ParticipantsSaturdayOnly", "ParticipantsSaturdayOnly", FormMethod.Post))
     {
 
 
-    <h2>People Checked In Count Report</h2>
+    <h2>Participants Saturday Only Report</h2>
     <div class="row">
         <div class="col-sm-3">
 
@@ -20,36 +20,32 @@
             <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
         </div>
     </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.UnitChapterNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Registrant)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ParticipantFirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ParticipantLastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CheckedIn)
+                    @Html.DisplayNameFor(model => model.FirstName)
                 </th>
 
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
             </tr>
         </thead>
         <tbody>
-            @Html.Partial("_PartialPeopleCheckedInList", Model)
+            @Html.Partial("_PartialParticipantsSaturdayOnlyList", Model)
+        </tbody>
     </table>
     }
 
 @section scripts{
     <script>
         function updateGrid() {
-            $.post('/PeopleCheckedInCount/GetPeopleCheckedInCountByYear', { eventYear: $('#eventYear').val() }, function (data) {
+            $.post('/ParticipantsSaturdayOnly/GetParticipantsSaturdayOnlyByYear', { eventYear: $('#eventYear').val() }, function (data) {
                 $('table tbody').html(data);
             })
         }

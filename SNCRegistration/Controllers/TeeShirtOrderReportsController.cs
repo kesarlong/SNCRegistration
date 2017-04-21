@@ -32,20 +32,17 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, CASE WHEN VolunteerShirtOrder = 1 THEN 'Yes' ELSE 'No' END AS VolunteerShirtOrder, VolunteerShirtSize, LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE  VolunteerShirtOrder = 1 AND volunteers.EventYear = @EventYear ORDER BY LeadContactFirstName ASC");
+                query = String.Concat("SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtorder = 1 union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new TeeShirtOrdersModel()
                         {
-                        UnitChapterNumber = x["UnitChapterNumber"].ToString(),
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        LeadContactFirstName = x["LeadContactFirstName"].ToString(),
-                        LeadContactLastName = x["LeadContactFirstName"].ToString(),
-                        VolunteerShirtOrder = x["VolunteerShirtOrder"].ToString(),
-                        VolunteerShirtSize = x["VolunteerShirtSize"].ToString()
+                        GroupNumber = x["GroupNumber"].ToString(),
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        ShirtSize = x["ShirtSize"].ToString()
                         }).ToList();
                     }
                 }
@@ -63,20 +60,17 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, CASE WHEN VolunteerShirtOrder = 1 THEN 'Yes' ELSE 'No' END AS VolunteerShirtOrder, VolunteerShirtSize, LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE  VolunteerShirtOrder = 1 AND volunteers.EventYear = @EventYear ORDER BY LeadContactFirstName ASC";
+                query = "SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtorder = 1 union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new TeeShirtOrdersModel()
                         {
-                        UnitChapterNumber = x["UnitChapterNumber"].ToString(),
-                        VolunteerFirstName = x["VolunteerFirstName"].ToString(),
-                        VolunteerLastName = x["VolunteerLastName"].ToString(),
-                        LeadContactFirstName = x["LeadContactFirstName"].ToString(),
-                        LeadContactLastName = x["LeadContactFirstName"].ToString(),
-                        VolunteerShirtOrder = x["VolunteerShirtOrder"].ToString(),
-                        VolunteerShirtSize = x["VolunteerShirtSize"].ToString()
+                        GroupNumber = x["GroupNumber"].ToString(),
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        ShirtSize = x["ShirtSize"].ToString()
                         }).ToList();
                     }
                 }
@@ -89,7 +83,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT Volunteers.UnitChapterNumber, VolunteerFirstName, VolunteerLastName, CASE WHEN VolunteerShirtOrder = 1 THEN 'Yes' ELSE 'No' END AS VolunteerShirtOrder, VolunteerShirtSize, LeadContactFirstName, LeadContactLastName FROM Volunteers JOIN LeadContacts ON LeadContacts.LeadContactID = Volunteers.LeadContactID WHERE  VolunteerShirtOrder = 1 AND volunteers.EventYear = @EventYear ORDER BY LeadContactFirstName ASC";
+            string query = "SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtorder = 1 union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();
