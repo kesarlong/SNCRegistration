@@ -1,7 +1,5 @@
-﻿@*@model IEnumerable<SNCRegistration.ViewModels.LeadContact>*@
-@model PagedList.IPagedList<SNCRegistration.ViewModels.LeadContact>
+﻿@model PagedList.IPagedList< SNCRegistration.ViewModels.LeadContactBST>
 @using PagedList.Mvc;
-
 
 @{
     ViewBag.Title = "Lead Contact List";
@@ -51,60 +49,60 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.LeadContactLastName)
+            @Html.DisplayFor(modelItem => item.leadcontact.LeadContactLastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LeadContactFirstName)
+            @Html.DisplayFor(modelItem => item.leadcontact.LeadContactFirstName)
         </td>
         <td>
                 
-             @if (item.BSType == 1)
+             @if (item.leadcontact.BSType == 1)
                 {<p>Individual</p>}
-                else if (item.BSType == 2)
+                else if (item.leadcontact.BSType == 2)
                 {<p>Troop</p>}
-                else if (item.BSType == 3)
+                else if (item.leadcontact.BSType == 3)
                 {<p>Troop - WoodBridge</p>}
-                else if (item.BSType == 4)
+                else if (item.leadcontact.BSType == 4)
                 {<p>OA Chapter: Apieka - Alachua District</p>}
-                else if (item.BSType == 5)
+                else if (item.leadcontact.BSType == 5)
                 {<p>OA Chapter: Seminole - Baden Powell District</p>}
-                else if (item.BSType == 6)
+                else if (item.leadcontact.BSType == 6)
                 {<p>OA Chapter: Timucuan - Black Creek District</p>}
-                else if (item.BSType == 7)
+                else if (item.leadcontact.BSType == 7)
                 {<p>OA Chapter: Oglala - Great Muskogee District</p>}
-                else if (item.BSType == 8)
+                else if (item.leadcontact.BSType == 8)
                 {<p>OA Chapter: Oklawaha - Marion District</p>}
-                else if (item.BSType == 9)
+                else if (item.leadcontact.BSType == 9)
                 {<p>OA Chapter: Osceola - Osceola & Timucua Districts</p>}
-                else if (item.BSType == 10)
+                else if (item.leadcontact.BSType == 10)
                 {<p>OA Chapter: Elemukulek - River Bend District</p>}
-                else if (item.BSType == 11)
+                else if (item.leadcontact.BSType == 11)
                 {<p>OA Chapter: Saturiwa - Shawnee District</p>}
-                else if (item.BSType == 12)
+                else if (item.leadcontact.BSType == 12)
                 {<p>OA Chapter: Onathequa - Suwannee River District</p>}
 
 
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UnitChapterNumber)
+            @Html.DisplayFor(modelItem => item.leadcontact.UnitChapterNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Booth)
+            @Html.DisplayFor(modelItem => item.leadcontact.Booth)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CheckedIn)
+            @Html.DisplayFor(modelItem => item.leadcontact.CheckedIn)
         </td>
 
         <td>
-            @if (!item.CheckedIn)
+            @if (!item.leadcontact.CheckedIn)
             {
-                @Html.ActionLink("Check In", "CheckIn", new { id = item.LeadContactID }, new { @class = "btn btn-success" }) 
+                @Html.ActionLink("Check In", "CheckIn", new { id = item.leadcontact.LeadContactID }, new { @class = "btn btn-success" }) 
 
             }
         </td>
 
         
-        <td>@Html.ActionLink("Details", "Details", new { id = item.LeadContactID }, new { @class = "btn btn-info" })</td>
+        <td>@Html.ActionLink("Details", "Details", new { id = item.leadcontact.LeadContactID }, new { @class = "btn btn-info" })</td>
     </tr>
 }
 

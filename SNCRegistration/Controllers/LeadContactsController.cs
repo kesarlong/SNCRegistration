@@ -54,48 +54,48 @@ namespace SNCRegistration.Controllers
             ViewBag.CurrentYear = DateTime.Now.Year;
             ViewBag.AllYears = (from y in db.LeadContacts select y.EventYear).Distinct();
 
-            var leadContacts = from s in db.LeadContacts
-                               where s.EventYear == searchYear
-                               select s;
-
             //var leadContacts = from s in db.LeadContacts
-            //                   join sa in db.BSTypes on s.BSType equals sa.BSTypeID
             //                   where s.EventYear == searchYear
-            //                   select new { s, sa };
+            //                   select s;
+
+            var leadContacts = from s in db.LeadContacts
+                               join sa in db.BSTypes on s.BSType equals sa.BSTypeID
+                               where s.EventYear == searchYear
+                               select new LeadContactBST() { leadcontact = s, bsttype = sa };
 
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                leadContacts = leadContacts.Where(s => s.LeadContactLastName.Contains(searchString) || s.LeadContactFirstName.Contains(searchString) || s.UnitChapterNumber.Contains(searchString));
+                leadContacts = leadContacts.Where(s => s.leadcontact.LeadContactLastName.Contains(searchString) || s.leadcontact.LeadContactFirstName.Contains(searchString) || s.leadcontact.UnitChapterNumber.Contains(searchString) || s.bsttype.BSTypeDescription.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    leadContacts = leadContacts.OrderByDescending(s => s.LeadContactLastName);
+                    leadContacts = leadContacts.OrderByDescending(s => s.leadcontact.LeadContactLastName);
                     break;
                 case "tcutype_desc":
-                    leadContacts = leadContacts.OrderByDescending(s => s.BSType);
+                    leadContacts = leadContacts.OrderByDescending(s => s.leadcontact.BSType);
                     break;
                 case "tcutype_asc":
-                    leadContacts = leadContacts.OrderBy(s => s.BSType);
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.BSType);
                     break;
                 case "tcunum_desc":
-                    leadContacts = leadContacts.OrderByDescending(s => s.UnitChapterNumber);
+                    leadContacts = leadContacts.OrderByDescending(s => s.leadcontact.UnitChapterNumber);
                     break;
                 case "name_asc":
-                    leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.LeadContactLastName);
                     break;
 
                 case "tcunum_asc":
-                    leadContacts = leadContacts.OrderBy(s => s.UnitChapterNumber);
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.UnitChapterNumber);
                     break;
                 default:
-                    leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.LeadContactLastName);
                     break;
             }
 
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
 
             return View(leadContacts.ToPagedList(pageNumber, pageSize));
