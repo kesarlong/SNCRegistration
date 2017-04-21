@@ -26,7 +26,7 @@ namespace SNCRegistration.Controllers
             {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("select LeadContactFirstName, LeadContactLastName, B.BSTypeDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear");
+                query = String.Concat("select LeadContactFirstName, LeadContactLastName, LeadContactEmail, B.BSTypeDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                 {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -35,6 +35,7 @@ namespace SNCRegistration.Controllers
                     {
                         LeadContactFirstName = x["LeadContactFirstName"].ToString(),
                         LeadContactLastName = x["LeadContactLastName"].ToString(),
+                        LeadContactEmail= x["LeadContactEmail"].ToString(),
                         BSDescription = x["BSTypeDescription"].ToString(),
                         UnitChapterNumber = x["UnitChapterNumber"].ToString()
                     }).ToList();
@@ -54,7 +55,7 @@ namespace SNCRegistration.Controllers
             {
                 dt = new DataTable();
                 connection.Open();
-                query = "select LeadContactFirstName, LeadContactLastName, B.BSTypeDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
+                query = "select LeadContactFirstName, LeadContactLastName, LeadContactEmail, B.BSTypeDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                 {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -63,6 +64,7 @@ namespace SNCRegistration.Controllers
                     {
                         LeadContactFirstName = x["LeadContactFirstName"].ToString(),
                         LeadContactLastName = x["LeadContactLastName"].ToString(),
+                        LeadContactEmail = x["LeadContactEmail"].ToString(),
                         BSDescription = x["BSTypeDescription"].ToString(),
                         UnitChapterNumber = x["UnitChapterNumber"].ToString()
                     }).ToList();
@@ -76,7 +78,7 @@ namespace SNCRegistration.Controllers
         {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "select LeadContactFirstName, LeadContactLastName, B.BSTypeDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
+            string query = "select LeadContactFirstName, LeadContactLastName, LeadContactEmail, B.BSTypeDescription, UnitChapterNumber from LeadContacts as L inner join BSType as B on L.BSType = B.BSTypeID where Marketing = 1 AND EventYear = @EventYear";
             DataTable dt = new DataTable();
             dt.TableName = "LeadContacts";
             con.Open();
