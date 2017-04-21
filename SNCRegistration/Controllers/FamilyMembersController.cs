@@ -60,13 +60,11 @@ namespace SNCRegistration.Controllers
                     familyMember.GuardianID = (int)TempData["myPK"];
                     
                     //set attendance choice to pass to family member form
-                     TempData["gAttend"] = familyMember.AttendingCode;
-                    //familyMember.AttendingCode = (int)TempData["gAttend"];
-                    
-
+                    TempData["gAttend"] = familyMember.AttendingCode;
                     TempData.Keep();
                 }
 
+                
                 //store year of event
                 var thisYear = DateTime.Now.Year.ToString();
                 familyMember.EventYear = int.Parse(thisYear);
@@ -79,6 +77,9 @@ namespace SNCRegistration.Controllers
                 {
                     db.SaveChanges();
 
+                    TempData["gAttend"] = familyMember.AttendingCode;
+
+                    this.Session["gSession"] = familyMember.GuardianGuid;
 
 
                     //add another participant for guardian                   
@@ -111,6 +112,10 @@ namespace SNCRegistration.Controllers
                             Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
                         }
                     }
+                }
+                catch (NullReferenceException ex)
+                {
+                    Response.Write("Processor Usage" + ex.Message);
                 }
             }
 
@@ -246,7 +251,7 @@ namespace SNCRegistration.Controllers
         }
 
         // GET: FamilyMembers/CheckIn/5
-        public ActionResult CheckIn(int? id)
+        public ActionResult CheckIn(int? id, string returnUrl)
         {
 
             if (id == null)
@@ -257,7 +262,19 @@ namespace SNCRegistration.Controllers
             if (familymember == null)
             {
                 return HttpNotFound();
+
+   
+
             }
+
+            if (String.IsNullOrEmpty(returnUrl)
+                   && Request.UrlReferrer != null
+                   && Request.UrlReferrer.ToString().Length > 0)
+            {
+                return RedirectToAction("CheckIn",
+                    new { returnUrl = Request.UrlReferrer.ToString() });
+            }
+
             return View(familymember);
 
         }
@@ -267,7 +284,7 @@ namespace SNCRegistration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckInPost(int? id)
+        public ActionResult CheckInPost(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -293,7 +310,11 @@ namespace SNCRegistration.Controllers
                     {
                         db.SaveChanges();
 
-                        TempData["notice"] = "Check In Status Saved!";
+
+                        if (!String.IsNullOrEmpty(returnUrl))
+                            return Redirect(returnUrl);
+                        else
+                            return RedirectToAction("Index");
                     }
                     catch (DataException /* dex */)
                     {

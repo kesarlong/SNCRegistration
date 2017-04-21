@@ -54,42 +54,48 @@ namespace SNCRegistration.Controllers
             ViewBag.CurrentYear = DateTime.Now.Year;
             ViewBag.AllYears = (from y in db.LeadContacts select y.EventYear).Distinct();
 
+            //var leadContacts = from s in db.LeadContacts
+            //                   where s.EventYear == searchYear
+            //                   select s;
+
             var leadContacts = from s in db.LeadContacts
+                               join sa in db.BSTypes on s.BSType equals sa.BSTypeID
                                where s.EventYear == searchYear
-                               select s;
+                               select new LeadContactBST() { leadcontact = s, bsttype = sa };
 
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                leadContacts = leadContacts.Where(s => s.LeadContactLastName.Contains(searchString) || s.LeadContactFirstName.Contains(searchString) || s.UnitChapterNumber.Contains(searchString));
+                leadContacts = leadContacts.Where(s => s.leadcontact.LeadContactLastName.Contains(searchString) || s.leadcontact.LeadContactFirstName.Contains(searchString) || s.leadcontact.UnitChapterNumber.Contains(searchString) || s.bsttype.BSTypeDescription.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    leadContacts = leadContacts.OrderByDescending(s => s.LeadContactLastName);
+                    leadContacts = leadContacts.OrderByDescending(s => s.leadcontact.LeadContactLastName);
                     break;
                 case "tcutype_desc":
-                    leadContacts = leadContacts.OrderByDescending(s => s.BSType);
-                    break;
-                case "tcunum_desc":
-                    leadContacts = leadContacts.OrderByDescending(s => s.UnitChapterNumber);
-                    break;
-                case "name_asc":
-                    leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
+                    leadContacts = leadContacts.OrderByDescending(s => s.leadcontact.BSType);
                     break;
                 case "tcutype_asc":
-                    leadContacts = leadContacts.OrderBy(s => s.BSType);
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.BSType);
                     break;
+                case "tcunum_desc":
+                    leadContacts = leadContacts.OrderByDescending(s => s.leadcontact.UnitChapterNumber);
+                    break;
+                case "name_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.LeadContactLastName);
+                    break;
+
                 case "tcunum_asc":
-                    leadContacts = leadContacts.OrderBy(s => s.UnitChapterNumber);
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.UnitChapterNumber);
                     break;
                 default:
-                    leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
+                    leadContacts = leadContacts.OrderBy(s => s.leadcontact.LeadContactLastName);
                     break;
             }
 
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
 
             return View(leadContacts.ToPagedList(pageNumber, pageSize));
@@ -262,7 +268,7 @@ namespace SNCRegistration.Controllers
 
 
         // GET: Participants/CheckIn/5
-        public ActionResult CheckIn(int? id)
+        public ActionResult CheckIn(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -273,6 +279,14 @@ namespace SNCRegistration.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (String.IsNullOrEmpty(returnUrl)
+               && Request.UrlReferrer != null
+               && Request.UrlReferrer.ToString().Length > 0)
+            {
+                return RedirectToAction("CheckIn",
+                    new { returnUrl = Request.UrlReferrer.ToString() });
+            }
             return View(leadContact);
         }
 
@@ -282,7 +296,7 @@ namespace SNCRegistration.Controllers
 
         [HttpPost, ActionName("CheckIn")]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckInPost(int? id)
+        public ActionResult CheckInPost(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -297,8 +311,10 @@ namespace SNCRegistration.Controllers
                 try
                 {
                     db.SaveChanges();
-                    TempData["notice"] = "Volunteer Checked In Status Saved!";
-                    return RedirectToAction("CheckIn", "LeadContacts", new { id = leadcontact.LeadContactID });
+                    if (!String.IsNullOrEmpty(returnUrl))
+                        return Redirect(returnUrl);
+                    else
+                        return RedirectToAction("Index");
                 }
                 catch (DataException /* dex */)
                 {
