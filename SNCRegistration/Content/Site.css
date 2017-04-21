@@ -444,7 +444,7 @@ pulse
     .carousel .item img {
         margin: auto;
         height: 100px;
-        width: 100px;
+        width: auto;
     }
     .carousel .icon-container {
 	display: inline-block;
@@ -535,5 +535,20 @@ pulse
     -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .10) !important;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .10) !important;
     z-index:500 !important;
+}
+
+ .panel-title {
+    padding: 10px 0px 10px;
+}
+.panel-title a{
+  display:block;
+}
+
+.panel-title a.collapsed {
+  background: url(http://upload.wikimedia.org/wikipedia/commons/3/36/Vector_skin_right_arrow.png) center right no-repeat;
+}
+
+.panel-title a {
+  background: url(http://www.useragentman.com/blog/wp-content/themes/useragentman/images/widgets/downArrow.png) center right no-repeat;
 }
 
