@@ -9,8 +9,11 @@ namespace SNCRegistration.ViewModels
     public class VolunteersCountByGroupModel
         {
 
-        [Display(Name = "Troop/Unit Chapter Number")]
-        public string UnitChapterNumber { get; set; }
+        [Display(Name = "Group Type")]
+        public string GroupType{ get; set; }
+
+        [Display(Name = "Group Number")]
+        public string GroupNumber { get; set; }
 
         [Display(Name = "Total")]
         public int Total { get; set; }

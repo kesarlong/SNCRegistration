@@ -31,7 +31,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName");
+                query = String.Concat("SELECT DISTINCT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName");
                   
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
@@ -60,7 +60,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
+                query = "SELECT DISTINCT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -82,7 +82,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
+            string query = "SELECT DISTINCT GuardianID, GuardianFirstName, GuardianLastName, GuardianCellphone FROM Guardians WHERE EventYear = @EventYear ORDER BY GuardianFirstName";
             DataTable dt = new DataTable();
             dt.TableName = "Guardians";
             con.Open();

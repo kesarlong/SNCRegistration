@@ -32,14 +32,15 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT VolunteerShirtSize, COUNT(*) As Total FROM Volunteers WHERE EventYear = @EventYear GROUP BY VolunteerShirtSize ORDER BY 2");
+                query = String.Concat("SELECT VolunteerShirtSize as ShirtSize, COUNT(*) As Total FROM Volunteers where volunteershirtsize != '00' AND EventYear = @EventYear GROUP BY VolunteerShirtSize union " +
+                "SELECT LeadContactShirtSize as ShirtSize, COUNT(*) As Total FROM LeadContacts where LeadContactshirtsize != '00' AND EventYear = @EventYear GROUP BY LeadContactShirtSize");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new TeeShirtCountBySizeModel()
                         {
-                        VolunteerShirtSize = x["VolunteerShirtSize"].ToString(),
+                        ShirtSize = x["ShirtSize"].ToString(),
                         Total = Convert.ToInt32(x["Total"].ToString())
                         }).ToList();
                     }
@@ -58,14 +59,15 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT VolunteerShirtSize, COUNT(*) As Total FROM Volunteers WHERE EventYear = @EventYear GROUP BY VolunteerShirtSize ORDER BY 2";
+                query = "SELECT VolunteerShirtSize as ShirtSize, COUNT(*) As Total FROM Volunteers where volunteershirtsize != '00' AND EventYear = @EventYear GROUP BY VolunteerShirtSize union " +
+                "SELECT LeadContactShirtSize as ShirtSize, COUNT(*) As Total FROM LeadContacts where LeadContactshirtsize != '00' AND EventYear = @EventYear GROUP BY LeadContactShirtSize";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
                     model = dt.AsEnumerable().Select(x => new TeeShirtCountBySizeModel()
                         {
-                        VolunteerShirtSize = x["VolunteerShirtSize"].ToString(),
+                        ShirtSize = x["ShirtSize"].ToString(),
                         Total = Convert.ToInt32(x["Total"].ToString())
                         }).ToList();
                     }
@@ -79,7 +81,8 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT VolunteerShirtSize, COUNT(*) As Total FROM Volunteers WHERE EventYear = @EventYear GROUP BY VolunteerShirtSize ORDER BY 2";
+            string query = "SELECT VolunteerShirtSize as ShirtSize, COUNT(*) As Total FROM Volunteers where volunteershirtsize != '00' AND EventYear = @EventYear GROUP BY VolunteerShirtSize union " +
+                "SELECT LeadContactShirtSize as ShirtSize, COUNT(*) As Total FROM LeadContacts where LeadContactshirtsize != '00' AND EventYear = @EventYear GROUP BY LeadContactShirtSize";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

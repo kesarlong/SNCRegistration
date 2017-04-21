@@ -203,13 +203,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="ShirtSizeCode" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="ShirtSizeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Sponsors">
-          <Key>
-            <PropertyRef Name="SponsorID" />
-          </Key>
-          <Property Name="SponsorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="src" Type="varchar" MaxLength="255" />
-        </EntityType>
         <EntityType Name="Table">
           <Key>
             <PropertyRef Name="LoginProvider" />
@@ -228,7 +221,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="VolunteerAge" Type="int" Nullable="false" />
           <Property Name="LeadContactID" Type="int" Nullable="false" />
           <Property Name="VolunteerShirtOrder" Type="bit" Nullable="false" />
-          <Property Name="VolunteerShirtSize" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="VolunteerShirtSize" Type="varchar" MaxLength="10" />
           <Property Name="VolunteerAttendingCode" Type="int" Nullable="false" />
           <Property Name="SaturdayDinner" Type="bit" />
           <Property Name="UnitChapterNumber" Type="nchar" MaxLength="10" />
@@ -355,7 +348,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sponsors" EntityType="Self.Sponsors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" store:Type="Tables" store:Schema="dbo">
@@ -440,7 +432,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Participants" EntityType="SNCRegistrationModel.Participant" />
           <EntitySet Name="Relationships" EntityType="SNCRegistrationModel.Relationship" />
           <EntitySet Name="ShirtSizes" EntityType="SNCRegistrationModel.ShirtSize" />
-          <EntitySet Name="Sponsors" EntityType="SNCRegistrationModel.Sponsor" />
           <EntitySet Name="Tables" EntityType="SNCRegistrationModel.Table" />
           <EntitySet Name="Volunteers" EntityType="SNCRegistrationModel.Volunteer" />
           <EntitySet Name="AspNetUserLogins" EntityType="SNCRegistrationModel.AspNetUserLogin" />
@@ -664,13 +655,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="ShirtSizeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="ShirtSizeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Sponsor">
-          <Key>
-            <PropertyRef Name="SponsorID" />
-          </Key>
-          <Property Name="SponsorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="src" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Table">
           <Key>
             <PropertyRef Name="LoginProvider" />
@@ -689,7 +673,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="VolunteerAge" Type="Int32" Nullable="false" />
           <Property Name="LeadContactID" Type="Int32" Nullable="false" />
           <Property Name="VolunteerShirtOrder" Type="Boolean" Nullable="false" />
-          <Property Name="VolunteerShirtSize" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="VolunteerShirtSize" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="VolunteerAttendingCode" Type="Int32" Nullable="false" />
           <Property Name="SaturdayDinner" Type="Boolean" />
           <Property Name="UnitChapterNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -1006,14 +990,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
               <MappingFragment StoreEntitySet="ShirtSize">
                 <ScalarProperty Name="ShirtSizeDescription" ColumnName="ShirtSizeDescription" />
                 <ScalarProperty Name="ShirtSizeCode" ColumnName="ShirtSizeCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sponsors">
-            <EntityTypeMapping TypeName="SNCRegistrationModel.Sponsor">
-              <MappingFragment StoreEntitySet="Sponsors">
-                <ScalarProperty Name="src" ColumnName="src" />
-                <ScalarProperty Name="SponsorID" ColumnName="SponsorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

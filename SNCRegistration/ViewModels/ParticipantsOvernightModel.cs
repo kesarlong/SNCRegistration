@@ -6,18 +6,13 @@ using System.Web;
 
 namespace SNCRegistration.ViewModels
     {
-    public class VolunteersFridayOnlyModel
+    public class ParticipantsOvernightModel
         {
-        public int VolunteerID { get; set; }
-
-        [Display(Name = "Group Number")]
-        public string GroupNumber { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-
         [Display(Name = "Attending")]
-        public string Attending { get; set; }
+        public string Description { get; set; }
         }
     }
