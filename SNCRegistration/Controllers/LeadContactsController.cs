@@ -58,6 +58,11 @@ namespace SNCRegistration.Controllers
                                where s.EventYear == searchYear
                                select s;
 
+            //var leadContacts = from s in db.LeadContacts
+            //                   join sa in db.BSTypes on s.BSType equals sa.BSTypeID
+            //                   where s.EventYear == searchYear
+            //                   select new { s, sa };
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -72,15 +77,16 @@ namespace SNCRegistration.Controllers
                 case "tcutype_desc":
                     leadContacts = leadContacts.OrderByDescending(s => s.BSType);
                     break;
+                case "tcutype_asc":
+                    leadContacts = leadContacts.OrderBy(s => s.BSType);
+                    break;
                 case "tcunum_desc":
                     leadContacts = leadContacts.OrderByDescending(s => s.UnitChapterNumber);
                     break;
                 case "name_asc":
                     leadContacts = leadContacts.OrderBy(s => s.LeadContactLastName);
                     break;
-                case "tcutype_asc":
-                    leadContacts = leadContacts.OrderBy(s => s.BSType);
-                    break;
+
                 case "tcunum_asc":
                     leadContacts = leadContacts.OrderBy(s => s.UnitChapterNumber);
                     break;

@@ -29,6 +29,7 @@ namespace SNCRegistration.Controllers
             ViewBag.searchString = searchString;
             ViewBag.page = page;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TcuTypeSortParam = sortOrder == "tcutype_asc" ? "tcutype_desc" : "tcutype_asc";
             ViewBag.TcuNumSortParam = sortOrder == "tcunum_asc" ? "tcunum_desc" : "tcunum_asc";
 
             Session["SessionSortOrder"] = ViewBag.CurrentSort;
@@ -74,6 +75,12 @@ namespace SNCRegistration.Controllers
                     break;
                 case "tcunum_asc":
                     volunteers = volunteers.OrderBy(s => s.UnitChapterNumber);
+                    break;
+                case "tcutype_desc":
+                    volunteers = volunteers.OrderByDescending(s => s.BSType);
+                    break;
+                case "tcutype_asc":
+                    volunteers = volunteers.OrderBy(s => s.BSType);
                     break;
                 default:
                     volunteers = volunteers.OrderBy(s => s.VolunteerLastName);
