@@ -69,125 +69,131 @@
     @Html.AntiForgeryToken()
 
 
-        <h4>Volunteer Information</h4><hr />
-        <h5><font color="red">All fields not indicated as optional are required</font></h5>
-            <p>
-                <font color="grey">
-                    1. For Troop/Chapter leaders:<br />
-            <p style="text-indent: 20px">a. Enter information for each volunteer being registered.<br />
-            <p style="text-indent: 20px">b. Complete registration button will save your input and complete the registration process.<br />
-                2. For Individuals:
-            <p style="text-indent: 20px">a. Enter information for the volunteer being registered.<br />
-            <p style="text-indent: 20px">b. Complete registration button will save your input and complete the registration process.<br />
-                <br />
-                </font>
-            </p>
+    <h4>Volunteer Information</h4><hr />
+    <h5><font color="red">All fields not indicated as optional are required</font></h5>
+        <p>
+            <font color="grey">
+                1. For Troop/Chapter leaders:<br />
+        <p style="text-indent: 20px">a. Enter information for each volunteer being registered.<br />
+        <p style="text-indent: 20px">b. Complete registration button will save your input and complete the registration process<br />
+        <p style="text-indent: 20px">c. To add more volunteers, click on the 'Add an Additional Volunteer' button.<br />
+        <p style="text-indent: 20px">d. To see the list of volunteers you just registered, click on the 'View Volunteers I Have Registered' button.<br />
+            <br />
+            2. For Individuals:
+        <p style="text-indent: 20px">a. Enter information for the volunteer being registered.<br />
+        <p style="text-indent: 20px">
+            b. Complete registration button will save your input and complete the registration process.<br />
+            <br />
+        <font color="green">** THE REGISTRATION FEE FOR EACH OA CHAPTER MEMBER REGISTERED IS $20, NON-OA MEMBERS ARE $15 EACH **</font>
+         <br />
+            </font>
+        </p>
+
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <!-- <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.VolunteerID, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.DisplayFor(model => model.VolunteerID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.VolunteerID, "", new { @class = "text-danger" })
+        <div class="col-md-4 text-center">
+            <input type="button" name="submit" id="ViewVolunteers" value="View volunteers I have registered" class="btn btn-success" onclick="location.href='@Url.Action("VolunteersRegisteredView", new { LeadContactID = ViewBag.LeadContactID } )'" />
+        </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <br />
+                        @Html.LabelFor(model => model.VolunteerFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="row">
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.VolunteerFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VolunteerFirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    -->
-    @Html.LabelFor(model => model.VolunteerFirstName, htmlAttributes: new { @class = "control-label col-md-3" })
-    <div class="row">
-        
-        <div class="col-md-9">
-            @Html.EditorFor(model => model.VolunteerFirstName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.VolunteerFirstName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <br />
-    @Html.LabelFor(model => model.VolunteerLastName, htmlAttributes: new { @class = "control-label col-md-3" })
-    <div class="row">
-        <div class="col-md-9">
-            @Html.EditorFor(model => model.VolunteerLastName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.VolunteerLastName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(model => model.VolunteerAge,
+            <br />
+                        @Html.LabelFor(model => model.VolunteerLastName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="row">
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.VolunteerLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VolunteerLastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VolunteerAge, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.VolunteerAge,
         ViewBag.Age as SelectList, "- Select option - "
             , new { @class = "form-control", style = "width: 220px" })
-        @Html.ValidationMessageFor(model => model.VolunteerAge, "", new { @class = "text-danger" })
-    </div>
-<!--
-    <br />
-    @Html.LabelFor(model => model.LeadContactID, htmlAttributes: new { @class = "control-label col-md-3" })
-    <div class="row">
-      
-        <div class="col-md-9">
-            @Html.DisplayFor(model => model.LeadContactID, new { @Value = (Session["lSession"]) })
-            @Html.ValidationMessageFor(model => model.LeadContactID, "", new { @class = "text-danger" })
-        </div>
-    </div>
--->
-    <br />
-    <div class="form-group">
-        <div class="btn-group" data-toggle="buttons" id="ShirtOrder">
-            @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label" })<br />
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { @id = "chkYes", @name = "reqShirt"}) Yes
-            </label>
-            <label class="btn btn-default">
-                @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { @id = "chkNo", @name = "reqShirt" }) No
-            </label>
-        </div>
-        @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
-    </div>
-    <br />
+                            @Html.ValidationMessageFor(model => model.VolunteerAge, "", new { @class = "text-danger" })
+                        </div>
+                        <!--
+                            <br />
+                            @Html.LabelFor(model => model.LeadContactID, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="row">
+
+                                <div class="col-md-9">
+                                    @Html.DisplayFor(model => model.LeadContactID, new { @Value = (Session["lSession"]) })
+                                    @Html.ValidationMessageFor(model => model.LeadContactID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        -->
+                        <br />
+                        <div class="form-group">
+                            <div class="btn-group" data-toggle="buttons" id="ShirtOrder">
+                                @Html.LabelFor(model => model.VolunteerShirtOrder, htmlAttributes: new { @class = "control-label" })<br />
+                                <label class="btn btn-default">
+                                    @Html.RadioButtonFor(model => model.VolunteerShirtOrder, true, new { @id = "chkYes", @name = "reqShirt" }) Yes
+                                </label>
+                                <label class="btn btn-default">
+                                    @Html.RadioButtonFor(model => model.VolunteerShirtOrder, false, new { @id = "chkNo", @name = "reqShirt" }) No
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.VolunteerShirtOrder, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
 
     //set t-shirt value to no shirt default
     <div>
         @Html.HiddenFor(model => model.VolunteerShirtSize, new { @Value = "00" })
     </div>
 
-         <div class="form-group" id="ShirtSize">
-    @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
-    @Html.DropDownListFor(model => model.VolunteerShirtSize,
+                        <div class="form-group" id="ShirtSize">
+                            @Html.LabelFor(model => model.VolunteerShirtSize, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.VolunteerShirtSize,
      ViewBag.ShirtSizes as SelectList, "-Select Option-"
     , new { @class = "form-control", style = "width: 220px" })
-    @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
-</div>
-  
+                            @Html.ValidationMessageFor(model => model.VolunteerShirtSize, "", new { @class = "text-danger" })
+                        </div>
 
-    <br />
-        <div class="form-group"id="Attending">
-            @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownListFor(model => model.VolunteerAttendingCode,
+
+                        <br />
+                        <div class="form-group" id="Attending">
+                            @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.VolunteerAttendingCode,
             ViewBag.Attendance as SelectList, "- Select option - "
             , new { @class = "form-control", style = "width: 220px" })
-            @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
-        </div>
-        <br />
-        <div class="form-group">
-            <div class="btn-group" data-toggle="buttons"  id="Dinner">
-                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
-                <label class="btn btn-default">
-                    @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
-                </label>
-                <label class="btn btn-default">
-                    @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False" }) No
-                </label>
-            </div>
-            @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
-        </div>
-    <br />
+                            @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="btn-group" data-toggle="buttons" id="Dinner">
+                                @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
+                                <label class="btn btn-default">
+                                    @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
+                                </label>
+                                <label class="btn btn-default">
+                                    @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False" }) No
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
 
-    <br />
-                <div class="form-group" id="BSType">
-                    @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.BSType,
+                        <br />
+                        <div class="form-group" id="BSType">
+                            @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.BSType,
                         ViewBag.BSType as SelectList, "- Select option - "
                         //new List<SelectListItem>{
                         //    new SelectListItem{ Value = "", Text = "-Select Type-" },
@@ -195,53 +201,46 @@
                         //    new SelectListItem{ Value = "2", Text = "OA Chapter" },
                         //    new SelectListItem{ Value = "3", Text = "Individual" }
                         , new { @class = "form-control", style = "width: 200px" })
-                    @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
-                </div>
-                <br />
-                    <div class="row" id="UnitChapterNumber">
-                        @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
-
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.UnitChapterNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.BSType, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <br />
-    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-3" })
-    <div class="row">
+                        <br />
+                        <div class="row" id="UnitChapterNumber">
+                            @Html.LabelFor(model => model.UnitChapterNumber, htmlAttributes: new { @class = "control-label col-md-3" })
 
-        <div class="col-md-9">
-            @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.UnitChapterNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="row">
 
-    <hr />
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <div class="form-group pull-right">
-        <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Volunteers") + "'");" />
-    </div>
+                        <hr />
 
-    <div class="form-group pull-left">
-        <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
-    </div>
-   <div class="form-group pull-left">
-        <input type="submit" name="submit" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" onclick="location.href='@Url.Action("Create", new { LeadContactID = ViewBag.LeadContactID } )'" />
-    </div>
-    <div class="form-group pull-left">
-        <input type="button" name="submit" id="ViewVolunteers" value="View volunteers I have registered" class="btn btn-primary" onclick="location.href='@Url.Action("VolunteersRegisteredView", new { LeadContactID = ViewBag.LeadContactID } )'" />
-    </div>
+                        <div class="form-group pull-right">
+                            <input type="button" name="Cancel" id="Cancel" value="Cancel" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Redirect", "Volunteers") + "'");" />
+                        </div>
 
+                        <div class="form-group pull-left">
+                            <input type="submit" name="submit" id="Complete" value="Complete registration" class="btn btn-primary" />
+                        </div>
+                        <div class="form-group pull-left">
+                            <input type="submit" name="submit" id="AddVolunteer" value="Add an additional volunteer" class="btn btn-primary" onclick="location.href='@Url.Action("Create", new { LeadContactID = ViewBag.LeadContactID } )'" />
+                        </div>
 
-                    @*@Html.LabelFor(model => model.LeaderGuid, htmlAttributes: new { @class = "control-label col-md-3" })*@
-
-                        @*@Html.DisplayFor(model => model.LeaderGuid, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.LeaderGuid, "", new { @class = "text-danger" })
 
 
-    @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0 })
-    @Html.HiddenFor(model => model.EventYear, new { @Value = 0 })
-    @Html.HiddenFor(model => model.VolunteerFee, new { @Value = 0 })
+                        @Html.HiddenFor(model => model.LeaderGuid, new { @Value = 0 })
+                        @Html.HiddenFor(model => model.EventYear, new { @Value = 0 })
+                        @Html.HiddenFor(model => model.VolunteerFee, new { @Value = 0 })
 }
 
 
