@@ -359,6 +359,7 @@
     <Compile Include="ViewModels\BSType.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LeadContactBST.cs" />
     <Compile Include="ViewModels\CompletedRegistrationReportModel.cs" />
     <Compile Include="ViewModels\C__MigrationHistory.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>

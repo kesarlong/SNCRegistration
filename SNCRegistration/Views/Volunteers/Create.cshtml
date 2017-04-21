@@ -170,6 +170,12 @@
             @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
         </div>
         <br />
+
+        <div>
+            <!--set default values for fields not set in initial form-->
+            @Html.HiddenFor(model => model.SaturdayDinner, new { @Value = false })
+        </div>
+
         <div class="form-group">
             <div class="btn-group" data-toggle="buttons"  id="Dinner">
                 @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
