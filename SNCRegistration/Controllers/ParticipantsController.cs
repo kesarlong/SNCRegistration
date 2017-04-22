@@ -152,6 +152,7 @@ namespace SNCRegistration.Controllers
 
                     this.Session["gSession"] = participant.GuardianGuid;
 
+
                     if (Request["submit"].Equals("Add another participant"))
                     //add another participant for guardian
                     { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid}); }
@@ -398,10 +399,20 @@ namespace SNCRegistration.Controllers
             base.Dispose(disposing);
         }
 
+        [OverrideAuthorization]
+        //send registration confirmation.  Use in cancel procedure when not on form to publish from there.
+        public ActionResult SendConfirm()
+        {
+            var email = Session["pEmail"] as string;
+            //to do: remove password
+            Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!", Server.MapPath("~/App_Data/PDF/"));
+            return Redirect("Registered");
+        }
 
         [OverrideAuthorization]
         public ActionResult Registered()
         {
+
             return View();
         }
 
@@ -496,6 +507,7 @@ namespace SNCRegistration.Controllers
 
                     this.Session["gUIDSession"] = participant.GuardianGuid;
                     this.Session["gIDSession"] = participant.GuardianID;
+                    
                     db.SaveChanges();
 
 

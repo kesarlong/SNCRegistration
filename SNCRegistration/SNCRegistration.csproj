@@ -3461,7 +3461,10 @@
     <Folder Include="font-awesome\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
+    <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
+    <Folder Include="Views\Events\" />
+    <Folder Include="Views\Reporting\" />
     <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>
   <ItemGroup>

@@ -81,7 +81,7 @@ namespace SNCRegistration.Controllers
 
                     this.Session["gSession"] = familyMember.GuardianGuid;
 
-
+    
                     //add another participant for guardian                   
                     if (Request["submit"].Equals("Add another participant"))
                     { return RedirectToAction("Create", "Participants", new { GuardianGuid = familyMember.GuardianGuid }); }
