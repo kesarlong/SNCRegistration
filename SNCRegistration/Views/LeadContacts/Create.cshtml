@@ -10,7 +10,8 @@
                 $("#ShirtSize").show();
             }
             else {
-                $("#ShirtSize").hide();
+                $("#ShirtSize").hide()
+
             }
         });
     });
@@ -28,6 +29,7 @@
 
                 } else {
                     $("#Dinner").hide();
+                    
                 }
             });
         }).change();
@@ -263,33 +265,17 @@
             </div>
             <br />
 
-            //set t-shirt value to no shirt default
+            @*//set t-shirt value to no shirt default
             <div>
                 @Html.HiddenFor(model => model.LeadContactShirtSize, new { @Value = "00" })
-            </div>
+            </div>*@
 
             //user will select shirt size if select to order a t-shirt
             <div class="form-group" id="ShirtSize">
                 @Html.LabelFor(model => model.LeadContactShirtSize, htmlAttributes: new { @class = "control-label" })
 
                 @Html.DropDownListFor(model => model.LeadContactShirtSize,
-                            ViewBag.ShirtSizes as SelectList, "-Select Option-"
-                            , new { @class = "form-control", style = "width: 200px" })
-
-                @*@Html.DropDownListFor(model => model.LeadContactShirtSize, *@
-                @*//new List<SelectListItem>{
-                    //    new SelectListItem{ Value = "00", Text = "-Select Size-" },
-                    //     new SelectListItem{ Value = "YXS", Text = "Youth - Extra Small" },
-                    //    new SelectListItem{ Value = "YS", Text = "Youth - Small" },
-                    //    new SelectListItem{ Value = "YM", Text = "Youth - Medium" },
-                    //    new SelectListItem{ Value = "YL", Text = "Youth - Large" },
-                    //    new SelectListItem{ Value = "YXL", Text = "Youth - Extra Large" },
-                    //    new SelectListItem{ Value = "AXS", Text = "Adult - Extra Small" },
-                    //    new SelectListItem{ Value = "AS", Text = "Adult - Small" },
-                    //    new SelectListItem{ Value = "AM", Text = "Adult - Medium" },
-                    //    new SelectListItem{ Value = "AL", Text = "Adult - Large" },
-                    //    new SelectListItem{ Value = "AXL", Text = "Adult - Extra Large" },
-                    //}, new { @class = "form-control", style = "width: 200px" })*@
+                            ViewBag.ShirtSizes as SelectList,new { @class = "form-control", style = "width: 200px" })
                 @Html.ValidationMessageFor(model => model.LeadContactShirtSize, "", new { @class = "text-danger" })
             </div>
 
@@ -319,22 +305,11 @@
                     <div class="form-group" id="Attending">
                         @Html.LabelFor(model => model.VolunteerAttendingCode, htmlAttributes: new { @class = "control-label" })
                         @Html.DropDownListFor(model => model.VolunteerAttendingCode,
-                        ViewBag.Attendance as SelectList, "- Select option - "
-                                    //new List<SelectListItem>{
-                                    //    new SelectListItem{ Value = "", Text = "-Select-" },
-                                    //    new SelectListItem{ Value = "1", Text = "Friday Evening Only" },
-                                    //    new SelectListItem{ Value = "2", Text = "Saturday Only" },
-                                    //    new SelectListItem{ Value = "4", Text = "Friday through Sunday" }
-                                    , new { @class = "form-control", style = "width: 200px" })
+                        ViewBag.Attendance as SelectList, "- Select option - ", new { @class = "form-control", style = "width: 200px" })
                         @Html.ValidationMessageFor(model => model.VolunteerAttendingCode, "", new { @class = "text-danger" })
                     </div>
                     <br />
 
-
-                    <div>
-                        <!--set default values for fields not set in initial form-->
-                        @Html.HiddenFor(model => model.SaturdayDinner, new { @Value = false })
-                    </div>
                     <div class="form-group" id="Dinner">
                         <div class="btn-group" data-toggle="buttons">
                             @Html.LabelFor(model => model.SaturdayDinner, htmlAttributes: new { @class = "control-label" })<br />
@@ -342,9 +317,9 @@
                                 @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
                             </label>
                             <label class="btn btn-default">
-                                @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False" }) No
+                                @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False", @checked = true }) No 
                             </label>
-                        </div>
+                       </div>
                         @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
                     </div>
                     <br />

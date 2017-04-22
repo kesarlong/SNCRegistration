@@ -152,6 +152,7 @@ namespace SNCRegistration.Controllers
 
                     this.Session["gSession"] = participant.GuardianGuid;
 
+
                     if (Request["submit"].Equals("Add another participant"))
                     //add another participant for guardian
                     { return RedirectToAction("Create", "Participants", new { GuardianGuid = participant.GuardianGuid}); }
@@ -175,17 +176,6 @@ namespace SNCRegistration.Controllers
         
                 }
                 catch (DbEntityValidationException ex)
-                //{
-                //    //retrieve the error message as a list of strings
-                //    var errorMessages = ex.EntityValidationErrors
-                //        .SelectMany(x => x.ValidationErrors)
-                //        .Select(x => x.ErrorMessage);
-
-                //    //Join the list to a single string
-                //    var fullErrorMessage = string.Join(" ,", errorMessages);
-
-                //    //Combine the original exception message wtih the new one
-                //    var exceptionMessage = string.Concat(ex.Message, "The validation errors are: ", fullErrorMessage);
                 {
                     foreach (var entityValidationErrors in ex.EntityValidationErrors)
                     {
@@ -195,10 +185,6 @@ namespace SNCRegistration.Controllers
                         }
                     }
                 }
-                //    // Throw a new DbEntityValidationException with the improved exception message.
-                //    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
-                //}
-
 
             }
                 return View(participant);
@@ -398,10 +384,20 @@ namespace SNCRegistration.Controllers
             base.Dispose(disposing);
         }
 
+        [OverrideAuthorization]
+        //send registration confirmation.  Use in cancel procedure when not on form to publish from there.
+        public ActionResult SendConfirm()
+        {
+            var email = Session["pEmail"] as string;
+            //to do: remove password
+            Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!", Server.MapPath("~/App_Data/PDF/"));
+            return Redirect("Registered");
+        }
 
         [OverrideAuthorization]
         public ActionResult Registered()
         {
+
             return View();
         }
 
@@ -496,6 +492,7 @@ namespace SNCRegistration.Controllers
 
                     this.Session["gUIDSession"] = participant.GuardianGuid;
                     this.Session["gIDSession"] = participant.GuardianID;
+                    
                     db.SaveChanges();
 
 

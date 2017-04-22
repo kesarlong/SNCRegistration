@@ -60,8 +60,6 @@ public partial class SNCRegistrationEntities : DbContext
 
     public virtual DbSet<ShirtSize> ShirtSizes { get; set; }
 
-    public virtual DbSet<Sponsor> Sponsors { get; set; }
-
     public virtual DbSet<Table> Tables { get; set; }
 
     public virtual DbSet<Volunteer> Volunteers { get; set; }

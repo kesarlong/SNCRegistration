@@ -10,7 +10,7 @@ namespace SNCRegistration.ViewModels
         {
 
         [Display(Name = "Volunteer Shirt Sizes")]
-        public string VolunteerShirtSize { get; set; }
+        public string ShirtSize { get; set; }
 
         [Display(Name = "Total")]
         public int Total { get; set; }

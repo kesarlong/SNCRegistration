@@ -7,12 +7,10 @@
 
 @using (Html.BeginForm("VolunteersSaturdayOnly", "VolunteersSaturdayOnly", FormMethod.Post))
     {
-
-
+    
     <h2>Volunteers Saturday Only Report</h2>
     <div class="row">
         <div class="col-sm-3">
-
         </div>
         <div class="col-sm-9 text-right">
             <div class="col-sm-7"><h4>Select Event Year:</h4></div>
@@ -20,19 +18,21 @@
             <input type="submit" name="btnExportLicensing" value="Export To Excel" id="exportLicensing" class="btn btn-primary" />
         </div>
     </div>
-
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.VolunteerFirstName)
+                    @Html.DisplayNameFor(model => model.GroupNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.VolunteerLastName)
+                    @Html.DisplayNameFor(model => model.LastName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.Attending)
                 </th>
             </tr>
         </thead>

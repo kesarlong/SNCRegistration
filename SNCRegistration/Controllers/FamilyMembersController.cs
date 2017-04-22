@@ -81,7 +81,7 @@ namespace SNCRegistration.Controllers
 
                     this.Session["gSession"] = familyMember.GuardianGuid;
 
-
+    
                     //add another participant for guardian                   
                     if (Request["submit"].Equals("Add another participant"))
                     { return RedirectToAction("Create", "Participants", new { GuardianGuid = familyMember.GuardianGuid }); }
@@ -97,7 +97,6 @@ namespace SNCRegistration.Controllers
                     if (Request["submit"].Equals("Complete registration"))
                     {
                         var email = Session["pEmail"] as string;
-                        //to do: remove password
                         Helpers.EmailHelpers.SendEmail("sncracc@gmail.com", email, "Registration Confirmation", "You have successfully registered for the Special Needs Camporee. Please complete and return the required forms.  We look forward to seeing you!!", Server.MapPath("~/App_Data/PDF/"));
                         return Redirect("Registered");
                     }
@@ -163,8 +162,6 @@ namespace SNCRegistration.Controllers
                     db.SaveChanges();
 
                     TempData["notice"] = "Edits Saved.";
-
-                    //return RedirectToAction("Details", "Guardians", new { id = guardian.GuardianID });
                 }
                 catch (DataException /* dex */)
                 {

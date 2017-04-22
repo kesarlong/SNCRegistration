@@ -1,15 +1,15 @@
-﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersOvernightModel>
+﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersFridayThruSundayModel>
 
 @{
-    ViewBag.Title = "Volunteers Overnight Report";
+    ViewBag.Title = "Volunteers Friday Thru Sunday Report";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-@using (Html.BeginForm("VolunteersOvernight", "VolunteersOvernight", FormMethod.Post))
+@using (Html.BeginForm("VolunteersFridayThruSunday", "VolunteersFridayThruSunday", FormMethod.Post))
     {
 
 
-    <h2>Volunteers Overnight Report</h2>
+    <h2>Volunteers Friday Thru Sunday Report</h2>
     <div class="row">
     <div class="col-sm-3">
       
@@ -25,19 +25,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.VolunteerFirstName)
+                @Html.DisplayNameFor(model => model.GroupNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.VolunteerLastName)
+                @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Attending)
             </th>
         </tr>
     </thead>
     <tbody>
-        @Html.Partial("_PartialVolunteersOvernightList", Model)
+        @Html.Partial("_PartialVolunteersFridayThruSundayList", Model)
     </tbody>
 </table>
     }
@@ -45,7 +48,7 @@
 @section scripts{
     <script>
         function updateGrid() {
-            $.post('/VolunteersOvernight/GetVolunteersOvernightByYear', { eventYear: $('#eventYear').val() }, function (data) {
+            $.post('/VolunteersFridayThruSunday/GetVolunteersFridayThruSundayByYear', { eventYear: $('#eventYear').val() }, function (data) {
                 $('table tbody').html(data);
             })
         }

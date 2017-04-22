@@ -130,7 +130,8 @@ namespace SNCRegistration.Controllers
         [OverrideAuthorization]
         public ActionResult Create(int LeadContactID)
         {
-            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
+            //ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
@@ -275,6 +276,7 @@ namespace SNCRegistration.Controllers
             {
                 return HttpNotFound();
             }
+
             if (String.IsNullOrEmpty(returnUrl)
               && Request.UrlReferrer != null
               && Request.UrlReferrer.ToString().Length > 0)
@@ -282,6 +284,7 @@ namespace SNCRegistration.Controllers
                 return RedirectToAction("CheckIn",
                     new { returnUrl = Request.UrlReferrer.ToString() });
             }
+
             return View(volunteer);
         }
 
@@ -300,15 +303,21 @@ namespace SNCRegistration.Controllers
 
 
             if (TryUpdateModel(volunteer, "",
-               new string[] { "CheckedIn" }))
+               new string[] { "CheckedIn"}))
             {
                 try
                 {
                     db.SaveChanges();
-                    if (!String.IsNullOrEmpty(returnUrl))
-                        return Redirect(returnUrl);
-                    else
-                        return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] });
+
+                    //if (!String.IsNullOrEmpty(returnUrl))
+                    //    return Redirect(returnUrl);
+                    //else
+                    //    return RedirectToAction("Index");
+                }
+                catch (NullReferenceException ex)
+                {
+                    Response.Write("Processor Usage" + ex.Message);
                 }
                 catch (DataException /* dex */)
                 {
@@ -316,6 +325,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
+
             return View(volunteer);
 
 
@@ -456,7 +466,7 @@ namespace SNCRegistration.Controllers
         
 
         [OverrideAuthorization]
-        public ActionResult Redirect(string submit)
+        public new ActionResult Redirect(string submit)
         {
             int leadContactID = 0;
             if (TempData["myPK"] != null)

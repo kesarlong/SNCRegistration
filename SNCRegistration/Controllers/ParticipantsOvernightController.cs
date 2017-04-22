@@ -9,16 +9,17 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 
+
 namespace SNCRegistration.Controllers
 {
-    public class VolunteersFridayOnlyController : Controller
+    public class ParticipantsOvernightController : Controller
     {
-        // GET: VolunteersFridayOnly
+        // GET: ParticipantsOvernight
         public ActionResult Index(int? eventYear)
             {
 
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
-            List<VolunteersFridayOnlyModel> model = new List<VolunteersFridayOnlyModel>();
+            List<ParticipantsOvernightModel> model = new List<ParticipantsOvernightModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -26,18 +27,16 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("select UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, Attendance.Description as Attending from leadcontacts inner join Attendance on LeadContacts.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 1 AND leadcontacts.EventYear = @EventYear union " +
-                "select UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, Attendance.Description as Attending  from volunteers inner join Attendance on Volunteers.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 1 AND volunteers.EventYear = @EventYear order by GroupNumber, LastName");
+                query = String.Concat("SELECT ParticipantID, ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', Description FROM Participants INNER JOIN Attendance ON Participants.AttendingCode = AttendanceID WHERE AttendanceID = 3 AND Participants.EventYear = @EventYear Union Select GuardianID, GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', Description From Guardians INNER JOIN Attendance ON Guardians.AttendingCode = AttendanceID Where AttendanceID = 3 And Guardians.EventYear = @EventYear Union Select FamilyMemberID, FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName', Description From FamilyMembers INNER JOIN Attendance ON FamilyMembers.AttendingCode = AttendanceID Where AttendanceID = 3 And FamilyMembers.EventYear = @EventYear Order By FirstName ASC;");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersFridayOnlyModel()
+                    model = dt.AsEnumerable().Select(x => new ParticipantsOvernightModel()
                         {
-                        GroupNumber = x["GroupNumber"].ToString(),
                         FirstName = x["FirstName"].ToString(),
                         LastName = x["LastName"].ToString(),
-                        Attending = x["Attending"].ToString()
+                        Description = x["Description"].ToString()
                         }).ToList();
                     }
                 }
@@ -45,9 +44,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetVolunteersFridayOnlyByYear(int eventYear)
+        public ActionResult GetParticipantsOvernightByYear(int eventYear)
             {
-            List<VolunteersFridayOnlyModel> model = new List<VolunteersFridayOnlyModel>();
+            List<ParticipantsOvernightModel> model = new List<ParticipantsOvernightModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -55,33 +54,30 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "select UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, Attendance.Description as Attending from leadcontacts inner join Attendance on LeadContacts.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 1 AND leadcontacts.EventYear = @EventYear union " +
-                "select UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, Attendance.Description as Attending  from volunteers inner join Attendance on Volunteers.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 1 AND volunteers.EventYear = @EventYear order by GroupNumber, LastName";
+                query = "SELECT ParticipantID, ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', Description FROM Participants INNER JOIN Attendance ON Participants.AttendingCode = AttendanceID WHERE AttendanceID = 3 AND Participants.EventYear = @EventYear Union Select GuardianID, GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', Description From Guardians INNER JOIN Attendance ON Guardians.AttendingCode = AttendanceID Where AttendanceID = 3 And Guardians.EventYear = @EventYear Union Select FamilyMemberID, FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName', Description From FamilyMembers INNER JOIN Attendance ON FamilyMembers.AttendingCode = AttendanceID Where AttendanceID = 3 And FamilyMembers.EventYear = @EventYear Order By FirstName ASC;";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersFridayOnlyModel()
+                    model = dt.AsEnumerable().Select(x => new ParticipantsOvernightModel()
                         {
-                        GroupNumber = x["GroupNumber"].ToString(),
                         FirstName = x["FirstName"].ToString(),
                         LastName = x["LastName"].ToString(),
-                        Attending = x["Attending"].ToString()
+                        Description = x["Description"].ToString()
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialVolunteersFridayOnlyList", model);
+            return PartialView("_PartialParticipantsOvernightList", model);
             }
 
         //Export to excel
-        public ActionResult VolunteersFridayOnly(int eventYear)
+        public ActionResult ParticipantsOvernight(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "select UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, Attendance.Description as Attending from leadcontacts inner join Attendance on LeadContacts.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 1 AND leadcontacts.EventYear = @EventYear union " +
-                "select UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, Attendance.Description as Attending  from volunteers inner join Attendance on Volunteers.VolunteerAttendingCode = Attendance.AttendanceID where volunteerattendingcode = 1 AND volunteers.EventYear = @EventYear order by GroupNumber, LastName";
+            string query = "SELECT ParticipantID, ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', Description FROM Participants INNER JOIN Attendance ON Participants.AttendingCode = AttendanceID WHERE AttendanceID = 3 AND Participants.EventYear = @EventYear Union Select GuardianID, GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', Description From Guardians INNER JOIN Attendance ON Guardians.AttendingCode = AttendanceID Where AttendanceID = 3 And Guardians.EventYear = @EventYear Union Select FamilyMemberID, FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName', Description From FamilyMembers INNER JOIN Attendance ON FamilyMembers.AttendingCode = AttendanceID Where AttendanceID = 3 And FamilyMembers.EventYear = @EventYear Order By FirstName ASC;";
             DataTable dt = new DataTable();
-            dt.TableName = "Volunteers";
+            dt.TableName = "Participants";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -96,7 +92,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= VolunteersFridayOnlyReport.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsOvernightReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -106,7 +102,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", " VolunteersFridayOnly");
+            return RedirectToAction("Index", "ParticipantsOvernight");
             }
 
         private void releaseObject(object obj)

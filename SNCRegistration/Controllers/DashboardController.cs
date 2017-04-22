@@ -59,7 +59,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT Count(*)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID";
+                string query = "SELECT Count(VolunteerID)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID AND EventYear = 2017";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@AttendanceID", 1);
@@ -73,7 +73,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT Count(*)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID";
+                string query = "SELECT Count(VolunteerID)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@AttendanceID", 2);
@@ -87,7 +87,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT Count(*)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID";
+                string query = "SELECT Count(VolunteerID)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@AttendanceID", 3);
@@ -101,7 +101,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT Count(*)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID";
+                string query = "SELECT Count(VolunteerID)  FROM Volunteers INNER JOIN Attendance ON VolunteerAttendingCode = AttendanceID WHERE AttendanceID = @AttendanceID";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@AttendanceID", 4);
@@ -115,7 +115,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT Count(*)  FROM Volunteers";
+                string query = "SELECT Count(VolunteerID)  FROM Volunteers";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     return (int)cmd.ExecuteScalar();
@@ -128,7 +128,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "select COUNT(*) from ( SELECT ParticipantFirstName, ParticipantLastName, HealthForm, PhotoAck FROM Participants WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck UNION SELECT GuardianFirstName, GuardianLastName, HealthForm, PhotoAck FROM Guardians WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck) as totalCount";
+                string query = "SELECT COUNT(*) from ( SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, HealthForm, PhotoAck FROM Participants WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck AND Participants.EventYear = 2017 UNION SELECT GuardianID, GuardianFirstName, GuardianLastName, HealthForm, PhotoAck FROM Guardians WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck AND Guardians.EventYear = 2017 UNION SELECT FamilyMemberID, FamilyMemberFirstName, FamilyMemberLastName, HealthForm, PhotoAck FROM FamilyMembers WHERE HealthForm = @HealthForm AND PhotoAck = @PhotoAck AND FamilyMembers.EventYear = 2017) as totalCount";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@HealthForm", 0);
@@ -186,11 +186,12 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT COUNT(*) FROM ( SELECT LeadContactFirstName, LeadContactLastName, LeadContactShirtOrder, LeadContactShirtSize FROM LeadContacts WHERE LeadContactShirtOrder = @LeadContactShirtOrder UNION SELECT VolunteerFirstName, VolunteerLastName, VolunteerShirtOrder, VolunteerShirtSize FROM Volunteers WHERE VolunteerShirtOrder = @VolunteerShirtOrder) AS totalCount";
+                string query = "SELECT COUNT(*) FROM ( SELECT LeadContactID, LeadContactFirstName, LeadContactLastName, LeadContactShirtOrder, LeadContactShirtSize FROM LeadContacts WHERE LeadContactShirtOrder = @LeadContactShirtOrder AND EventYear = 2017 UNION SELECT VolunteerID, VolunteerFirstName, VolunteerLastName, VolunteerShirtOrder, VolunteerShirtSize FROM Volunteers WHERE VolunteerShirtOrder = @VolunteerShirtOrder) AS totalCount";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@LeadContactShirtOrder", 1);
                     cmd.Parameters.AddWithValue("@VolunteerShirtOrder", 1);
+                   
                     return (int)cmd.ExecuteScalar();
                     }
                 }
@@ -214,7 +215,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT COUNT(*) FROM (SELECT LeadContactFirstName, LeadContactLastName FROM LeadContacts UNION SELECT VolunteerFirstName, VolunteerLastName FROM Volunteers) AS totalCount";
+                string query = "SELECT COUNT(*) FROM (SELECT LeadContactID, LeadContactFirstName, LeadContactLastName FROM LeadContacts UNION SELECT VolunteerID, VolunteerFirstName, VolunteerLastName FROM Volunteers WHERE EventYear = 2017) AS totalCount";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     return (int)cmd.ExecuteScalar();
@@ -227,7 +228,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT COUNT(*) from (SELECT ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = @CheckedIn UNION SELECT GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = @CheckedIn UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = @CheckedIn UNION SELECT LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = @CheckedIn UNION SELECT VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = @CheckedIn) as totalCount";
+                string query = "SELECT COUNT(*) from (SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = @CheckedIn UNION SELECT GuardianID, GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = @CheckedIn UNION SELECT FamilyMemberID, FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = @CheckedIn UNION SELECT LeadContactID, LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = @CheckedIn UNION SELECT VolunteerID, VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = @CheckedIn) as totalCount";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@CheckedIn", 1);
@@ -241,7 +242,7 @@ namespace SNCRegistration.Controllers
             using (var connection = new SqlConnection(constring))
                 {
                 connection.Open();
-                string query = "SELECT COUNT(*) from (SELECT ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = @CheckedIn UNION SELECT GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = @CheckedIn UNION SELECT FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = @CheckedIn UNION SELECT LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = @CheckedIn UNION SELECT VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = @CheckedIn) as totalCount";
+                string query = "SELECT COUNT(*) from (SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, CheckedIn FROM Participants WHERE CheckedIn = @CheckedIn UNION SELECT GuardianID, GuardianFirstName, GuardianLastName, CheckedIn FROM Guardians WHERE CheckedIn = @CheckedIn UNION SELECT FamilyMemberID, FamilyMemberFirstName, FamilyMemberLastName, CheckedIn FROM FamilyMembers WHERE CheckedIn = @CheckedIn UNION SELECT LeadContactID, LeadContactFirstName, LeadContactLastName, CheckedIn FROM LeadContacts WHERE CheckedIn = @CheckedIn UNION SELECT VolunteerID, VolunteerFirstName, VolunteerLastName, CheckedIn FROM Volunteers WHERE CheckedIn = @CheckedIn) as totalCount";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                     cmd.Parameters.AddWithValue("@CheckedIn", 0);

@@ -10,24 +10,16 @@ namespace SNCRegistration.ViewModels
         {
 
         [Display(Name = "Troop/Unit Number")]
-        public string UnitChapterNumber { get; set; }
+        public string GroupNumber { get; set; }
 
-        [Display(Name = "Volunteer First Name")]
-        public string VolunteerFirstName { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
 
-        [Display(Name = "Volunteer Last Name")]
-        public string VolunteerLastName { get; set; }
-
-        [Display(Name = "Lead First Name")]
-        public string LeadContactFirstName { get; set; }
-        [Display(Name = "Lead Last Name")]
-        public string LeadContactLastName { get; set; }      
-
-        [Display(Name = "Shirt Order")]
-        public string VolunteerShirtOrder { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
         [Display(Name = "Shirt Size")]
-        public string VolunteerShirtSize { get; set; }
+        public string ShirtSize { get; set; }
 
         }
     }

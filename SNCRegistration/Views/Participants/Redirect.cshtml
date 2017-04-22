@@ -20,18 +20,18 @@
 
     //complete registration
     <div class="form-group pull-left">
-        <input type="button" name="Complete" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("Registered")'"/> 
+        <input type="button" name="Complete" id="Complete" value="Complete registration" class="btn btn-primary" onclick="location.href='@Url.Action("SendConfirm")'"/> 
     </div>
 
 
     //add another participant
     <div class="form-group pull-left">
-        <input type="button" name="addParticipant" id="addParticipant" value="Add another participant" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
+        <input type="submit" name="addParticipant" id="addParticipant" value="Add another participant" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
     </div>
 
     //add a family member (non-participant) attending
     <div class="form-group pull-left">
-        <input type="button" name="AddFamily" id="AddFamily" value="Add a family member" class="btn btn-primary" onclick="location.href='@Url.Action("Create","FamilyMembers")'" />
+        <input type="submit" name="AddFamily" id="AddFamily" value="Add a family member" class="btn btn-primary" onclick="location.href='@Url.Action("Create","FamilyMembers")'" />
     </div>
 
     @section Scripts
