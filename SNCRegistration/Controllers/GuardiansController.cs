@@ -369,7 +369,7 @@ namespace SNCRegistration.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch (Exception err)
+            catch (Exception)
             {
 
                 ModelState.AddModelError("DBerror", "Unable to Delete Guardian. Please delete associated participant and family member records first before deleting Guardian.");

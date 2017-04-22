@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using PagedList;
-using System.Net.Mail;
-using System.Web.Hosting;
 using SNCRegistration.Helpers;
 
 namespace SNCRegistration.Controllers
@@ -133,7 +128,8 @@ namespace SNCRegistration.Controllers
         [OverrideAuthorization]
         public ActionResult Create()
         {
-            ViewBag.ShirtSizes = new SelectList (db.ShirtSizes.Where(s=>s.ShirtSizeCode!="00"), "ShirtSizeCode", "ShirtSizeDescription");
+            //ViewBag.ShirtSizes = new SelectList (db.ShirtSizes.Where(s=>s.ShirtSizeCode!="00"), "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
 
@@ -368,7 +364,7 @@ namespace SNCRegistration.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch (Exception err)
+            catch (Exception)
             {
 
                 ModelState.AddModelError("DBerror", "Unable to Delete Lead Contact. Please delete associated volunteer records first before deleting Lead Contact.");
