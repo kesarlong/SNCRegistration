@@ -265,7 +265,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [MinLength(1)]
         [MaxLength(10)]
-        [Display(Name = "Troop/Chapter/Unit #")]
+        [Display(Name = "Troop/Chapter/Unit # (Optional)")]
         public string UnitChapterNumber;
 
         [Required]
@@ -273,6 +273,8 @@ namespace SNCRegistration.ViewModels.Metadata
         public string VolunteerAttendingCode;
 
         [Display(Name = "Are you joining us for Saturday dinner?")]
+        [DefaultValue(false)]
+        [Required]
         public bool SaturdayDinner;
 
         [MaxLength(50)]
@@ -335,11 +337,12 @@ namespace SNCRegistration.ViewModels.Metadata
 
 
         [Display(Name = "Are you joining us for Saturday dinner?")]
-        public Nullable<bool> SaturdayDinner;
+        [DefaultValue(false)]
+        public bool SaturdayDinner;
 
         [MinLength(1)]
         [MaxLength(10)]
-        [Display(Name = "Troop/Chapter/Unit Number")]
+        [Display(Name = "Troop/Chapter/Unit # (Optional)")]
         public string UnitChapterNumber;
 
         [MaxLength(200)]

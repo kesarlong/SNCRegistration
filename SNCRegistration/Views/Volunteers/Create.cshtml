@@ -175,6 +175,7 @@
                         @Html.RadioButtonFor(model => model.SaturdayDinner, true, new { id = "saturday_Dinner_True" }) Yes
                     </label>
                     <label class="btn btn-default">
+                        @Html.RadioButtonFor(model => model.SaturdayDinner, false, new { id = "saturday_Dinner_False", @checked = true }) No
                     </label>
                 </div>
                 @Html.ValidationMessageFor(model => model.SaturdayDinner, "", new { @class = "text-danger" })
