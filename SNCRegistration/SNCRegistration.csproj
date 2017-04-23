@@ -311,12 +311,13 @@
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsSaturdayOnlyController.cs" />
+    <Compile Include="Controllers\ParticipantsPendingCheckedInCountController.cs" />
     <Compile Include="Controllers\VolunteersCheckedInCountController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\ParkingPassController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
     <Compile Include="Controllers\PendingRegistrationReportController.cs" />
-    <Compile Include="Controllers\PendingCheckedInCountController.cs" />
+    <Compile Include="Controllers\VolunteersPendingCheckedInCountController.cs" />
     <Compile Include="Controllers\ParticipantsCheckedInCountController.cs" />
     <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
     <Compile Include="Controllers\VolunteersCountByGroupController.cs" />
@@ -391,12 +392,13 @@
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\VolunteersPendingCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsSaturdayOnlyModel.cs" />
     <Compile Include="ViewModels\PDFImages.cs" />
     <Compile Include="ViewModels\VolunteersCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsReportModel.cs" />
     <Compile Include="ViewModels\PendingRegistrationReportModel.cs" />
-    <Compile Include="ViewModels\PendingCheckedInCountModel.cs" />
+    <Compile Include="ViewModels\ParticipantsPendingCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsCheckedInCountModel.cs" />
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -619,8 +621,8 @@
     <Content Include="Views\Shared\_PartialAldenRoadReportList.cshtml" />
     <Content Include="Views\Volunteers\Redirect.cshtml" />
     <Content Include="App_Data\PDF\EventInfo.pdf" />
-    <Content Include="Views\PendingCheckedInCount\Index.cshtml" />
-    <Content Include="Views\Shared\_PartialPendingCheckedInList.cshtml" />
+    <Content Include="Views\ParticipantsPendingCheckedInCount\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialParticipantsPendingCheckedInList.cshtml" />
     <Content Include="Views\Shared\_Layout_Nav.cshtml" />
     <Content Include="Views\Volunteers\VolunteersRegisteredView.cshtml" />
     <Content Include="Views\Shared\_PartialTeeShirtCountBySizeList.cshtml" />
@@ -634,8 +636,6 @@
     <Content Include="Views\Shared\_PartialVolunteersCheckedInList.cshtml" />
     <Content Include="Views\ParticipantsSaturdayOnly\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParticipantsSaturdayOnlyList.cshtml" />
-    <Content Include="Views\Admin\PDFFileManagement.cshtml" />
-    <Content Include="Views\Admin\SponsorImageFileManagement.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3465,7 +3465,10 @@
     <Folder Include="font-awesome\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\AdminConfigurations\" />
+    <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
+    <Folder Include="Views\Events\" />
+    <Folder Include="Views\Reporting\" />
     <Folder Include="Views\TroopCheckIn\" />
   </ItemGroup>
   <ItemGroup>
