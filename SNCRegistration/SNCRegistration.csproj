@@ -664,6 +664,7 @@
     <Content Include="Views\Shared\_PartialVolunteersPendingCheckedInList.cshtml" />
     <Content Include="Views\VolunteersPendingCheckedInCount\Index.cshtml" />
     <Content Include="Views\Shared\_PartialGuardianList.cshtml" />
+    <None Include="Properties\PublishProfiles\Einar -Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
