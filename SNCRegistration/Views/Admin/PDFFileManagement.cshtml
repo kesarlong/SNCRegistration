@@ -6,6 +6,26 @@
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
+
+<h2>Before uploading a PDF please note!</h2>
+<ul>
+
+    <li>Files must be in PDF format.</li>
+    <li>There are six (6) PDF files that the SNCR utilizes, they must all be uploaded and named exactly as listed below with the correct extensions.</li>
+    <li>
+        The six (6) required files are as follows
+        <ul>
+            <li>EventInfo.pdf</li>
+            <li>MediaRelease.pdf</li>
+            <li>ParticipantHealthForm.pdf </li>
+            <li>ParticipantWelcomePacket.pdf </li>
+            <li>VolunteerHealthForm.pdf </li>
+            <li>VolunteerInformation.pdf </li>
+        </ul>
+    </li>
+    <li>Uploading a PDF file with the same name as a PDF that is currently uploaded will overwrite the uploaded PDF. So it is not necessary to delete a PDF first in order to replace it.</li>
+</ul>
+
 @using (Html.BeginForm("UploadPDF", "Admin", FormMethod.Post,
                 new { enctype = "multipart/form-data" }))
 {
@@ -29,10 +49,16 @@
 }
 
 <h2>Uploaded PDF Files</h2>
-<table>
+
+<br />
+
+<table class="table table-condensed table-striped">
     <tr>
         <th>File Name</th>
+
         <th>Link</th>
+
+        <th>Delete File?</th>
     </tr>
     @for (var i = 0; i <= Model.Count - 1; i++)
     {
