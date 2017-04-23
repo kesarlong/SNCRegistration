@@ -127,14 +127,7 @@
             </dt>
 
             <dd>
-                @if (Model.AttendingCode == 1)
-                {
-                    <p>Saturday Only</p>
-                }
-                else
-                {
-                    <p>Overnight</p>
-                }
+                @ViewBag.attend
             </dd>
 
             <dt>
@@ -142,34 +135,7 @@
             </dt>
 
             <dd>
-                @if (Model.Relationship == 1)
-                {
-                    <p>Mother / Father</p>
-                }
-                else if (Model.Relationship == 2)
-                {
-                    <p>Legal Guardian</p>
-                }
-                else if (Model.Relationship == 3)
-                {
-                    <p>Sister / Brother</p>
-                }
-                else if (Model.Relationship == 4)
-                {
-                    <p>Grandmother / Grandfather</p>
-                }
-                else if (Model.Relationship == 5)
-                {
-                    <p>Teacher / Instructor</p>
-                }
-                else if (Model.Relationship == 6)
-                {
-                    <p>Other - Family - relationship not listed</p>
-                }
-                else if (Model.Relationship == 7)
-                {
-                    <p>Other - See Comments</p>
-                }
+                @ViewBag.rela
 
             </dd>
 

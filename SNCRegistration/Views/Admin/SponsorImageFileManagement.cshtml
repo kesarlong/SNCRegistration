@@ -6,6 +6,21 @@
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
+<h2>Before uploading a sponsor image please note!</h2>
+<ul>
+
+    <li>Files must be in .PNG format.</li>
+    <li>There are eight (8) .PNG files that SNCR uses for sponsor images, they must all be uploaded and named exactly as listed below with the correct extensions.</li>
+    <li>
+        The eight (8) required .PNG should be saved as such:
+        <ul>
+            <li>Sponsor1.png, Sponsor2.png, Sponsor3.png ....  Sponsor6.png, Sponsor7.png, Sponsor8.png</li>
+        </ul>
+    </li>
+    <li>Note that all 8 images need to be uploaded. If is only one sponsors then all files should be of that one sponsor.</li>
+</ul>
+
+
 @using (Html.BeginForm("UploadSponsorImage", "Admin", FormMethod.Post,
                 new { enctype = "multipart/form-data" }))
 {
@@ -29,7 +44,7 @@
 }
 
 <h2>Uploaded Sponsor Image Files</h2>
-<table>
+<table class="table table-condensed table-striped">
     <tr>
         <th>File Name</th>
         <th>Link</th>

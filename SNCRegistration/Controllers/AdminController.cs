@@ -764,7 +764,7 @@ namespace SNCRegistration.Controllers
         public ActionResult SponsorImageFileManagement()
         {
 
-            var dir = new System.IO.DirectoryInfo(Server.MapPath("~/App_Data/SponsorImages/"));
+            var dir = new System.IO.DirectoryInfo(Server.MapPath("~/Resources/SponsorImages/"));
             System.IO.FileInfo[] fileNames = dir.GetFiles("*.*");
             List<string> items = new List<string>();
 
@@ -808,7 +808,7 @@ namespace SNCRegistration.Controllers
                 if (file.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/App_Data/SponsorImages"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/Resources/SponsorImages/"), fileName);
                     file.SaveAs(path);
 
                 }
@@ -825,7 +825,28 @@ namespace SNCRegistration.Controllers
         [OverrideAuthorization]
         public ActionResult GetSponsorImage(string file)
         {
-            var appData = Server.MapPath("~/App_Data/SponsorImages");
+            var appData = Server.MapPath("~/Resources/SponsorImages/");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData))
+            {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(path))
+            {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Image.Jpeg);
+        }
+
+        [OverrideAuthorization]
+        public ActionResult GetAsset(string file)
+        {
+            var appData = Server.MapPath("~/Resources/WebsiteImages/");
             var path = Path.Combine(appData, file);
             path = Path.GetFullPath(path);
             if (!path.StartsWith(appData))
@@ -865,7 +886,7 @@ namespace SNCRegistration.Controllers
         public ActionResult DeleteImgFile(string FileName)
         {
 
-            string fullPath = Request.MapPath("~/App_Data/SponsorImages/" + FileName);
+            string fullPath = Request.MapPath("~/Resources/SponsorImages/" + FileName);
             if (System.IO.File.Exists(fullPath))
             {
                 System.IO.File.Delete(fullPath);
@@ -885,7 +906,7 @@ namespace SNCRegistration.Controllers
         }
         public FileResult DownloadIMG(string FileName)
         {
-            return File("~/App_Data/SponsorImages/" + FileName, System.Net.Mime.MediaTypeNames.Application.Octet, FileName);
+            return File("~/Resources/SponsorImages/" + FileName, System.Net.Mime.MediaTypeNames.Application.Octet, FileName);
         }
 
 

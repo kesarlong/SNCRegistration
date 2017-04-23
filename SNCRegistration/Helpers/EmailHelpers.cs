@@ -68,7 +68,7 @@ namespace SNCRegistration.Helpers
             {
                 message.Bcc.Add(new MailAddress(bcc));
 
-                message.Attachments.Add(new Attachment(pdfFolder + "EventInfo.pdf"));
+                message.Attachments.Add(new Attachment(pdfFolder + "VolunteerInformation.pdf"));
                 message.Attachments.Add(new Attachment(pdfFolder + "VolunteerHealthForm.pdf"));
                 smtp.Send(message);
             }

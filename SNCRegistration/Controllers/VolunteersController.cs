@@ -113,6 +113,19 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Volunteer volunteer = db.Volunteers.Find(id);
+
+            var shirtsize = db.ShirtSizes.Find(volunteer.VolunteerShirtSize);
+            ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            var attendance = db.Attendances.Find(volunteer.VolunteerAttendingCode);
+            ViewBag.attendancedesc = attendance.Description;
+
+            var bsttype = db.BSTypes.Find(volunteer.BSType);
+            ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+            var age = db.Ages.Find(volunteer.VolunteerAge);
+            ViewBag.agereal = age.AgeDescription;
+
             if (volunteer == null)
             {
                 return HttpNotFound();
@@ -300,6 +313,18 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Volunteer volunteer = db.Volunteers.Find(id);
+
+            var shirtsize = db.ShirtSizes.Find(volunteer.VolunteerShirtSize);
+            ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            var attendance = db.Attendances.Find(volunteer.VolunteerAttendingCode);
+            ViewBag.attendancedesc = attendance.Description;
+
+            var bsttype = db.BSTypes.Find(volunteer.BSType);
+            ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+            var age = db.Ages.Find(volunteer.VolunteerAge);
+            ViewBag.agereal = age.AgeDescription;
 
             if (volunteer == null)
             {

@@ -27,6 +27,12 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             FamilyMember familyMember = db.FamilyMembers.Find(id);
+
+            var attend = db.Attendances.Find(familyMember.AttendingCode);
+
+            ViewBag.attende = attend.Description;
+
+
             if (familyMember == null)
             {
                 return HttpNotFound();
@@ -256,6 +262,9 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             FamilyMember familymember = db.FamilyMembers.Find(id);
+            var attend = db.Attendances.Find(familymember.AttendingCode);
+
+            ViewBag.attende = attend.Description;
             if (familymember == null)
             {
                 return HttpNotFound();
