@@ -160,6 +160,15 @@ namespace SNCRegistration.Controllers
 
                 try
                 {
+
+                    if (leadContact.VolunteerAttendingCode == 1)
+                    {
+                        leadContact.SaturdayDinner = false;
+                    }
+                    else if (leadContact.VolunteerAttendingCode == 4)
+                    {
+                        leadContact.SaturdayDinner = true;
+                    }
                     db.SaveChanges();
                     //added back for cancel feature
                     this.Session["gSession"] = leadContact.LeaderGuid;
