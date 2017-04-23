@@ -3361,10 +3361,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll" />
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />
-    <Content Include="SqlServerTypes\x86\msvcr120.dll" />
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
