@@ -516,10 +516,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Start\bin\SNCRegistration.pdb" />
-    <Content Include="App_Start\bin\SqlServerTypes\x64\msvcr120.dll" />
-    <Content Include="App_Start\bin\SqlServerTypes\x64\SqlServerSpatial140.dll" />
-    <Content Include="App_Start\bin\SqlServerTypes\x86\msvcr120.dll" />
-    <Content Include="App_Start\bin\SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="App_Start\bin\stdole.dll" />
     <Content Include="App_Start\bin\System.IO.Compression.dll" />
     <Content Include="App_Start\bin\System.Net.Http.dll" />
