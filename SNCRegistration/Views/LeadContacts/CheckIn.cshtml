@@ -15,7 +15,7 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.lead)
+        @Html.HiddenFor(model => model.LeadContactID)
 
         <dl class="dl-horizontal">
             <dt>
@@ -32,7 +32,14 @@
             <dd>
                 @ViewBag.bsttypedec
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitChapterNumber)
+            </dt>
 
+            <dd>
+                @Html.DisplayFor(model => model.UnitChapterNumber)
+                @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
+            </dd>
             <dt>
                 <p>Lead Contact Address </p>
             </dt>
@@ -63,14 +70,7 @@
                 @Html.DisplayFor(model => model.LeadContactEmail)
                 @Html.ValidationMessageFor(model => model.LeadContactEmail, "", new { @class = "text-danger" })
             </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.UnitChapterNumber)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitChapterNumber)
-                @Html.ValidationMessageFor(model => model.UnitChapterNumber, "", new { @class = "text-danger" })
-            </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.VolunteerAttendingCode)
             </dt>

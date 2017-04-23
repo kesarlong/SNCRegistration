@@ -97,6 +97,14 @@ namespace SNCRegistration.Controllers
 			model.guardian = db.Guardians.Find(id);
 			model.participants = db.Participants.Where(i => i.GuardianID == id);
 			model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == id);
+            model.attendance = db.Attendances.Find(model.guardian.AttendingCode);
+            model.relation = db.Relationships.Find(model.guardian.Relationship);
+
+
+            ViewBag.attend = model.attendance.Description;
+            ViewBag.relation = model.relation.RelationshipDescription;
+
+
 
             this.Session["gUIDSession"] = model.guardian.GuardianGuid;
             this.Session["gIDSession"] = model.guardian.GuardianID;
@@ -273,6 +281,14 @@ namespace SNCRegistration.Controllers
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
 			Guardian guardian = db.Guardians.Find(id);
+
+            var attending = db.Attendances.Find(guardian.AttendingCode);
+            ViewBag.attend = attending.Description;
+
+            var relation = db.Relationships.Find(guardian.Relationship);
+            ViewBag.rela = relation.RelationshipDescription;
+
+
 			if (guardian == null)
 			{
 				return HttpNotFound();

@@ -20,7 +20,13 @@
         </dt>
         <dd>
             @ViewBag.bsttypedec
-        </dd>       
+        </dd>    
+        <dt>
+            Troop/Chapter/Unit #
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.leadContact.UnitChapterNumber)
+        </dd>   
         <dt>
             <p>Lead Contact Address </p>
         </dt>
@@ -43,15 +49,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.leadContact.LeadContactEmail)
-        </dd>
-
-
-
-        <dt>
-            Troop/Chapter/Unit #
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.leadContact.UnitChapterNumber)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.leadContact.VolunteerAttendingCode)
