@@ -524,6 +524,8 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
+    <Content Include="Resources\SponsorImages\Sponsor1.png" />
+    <Content Include="Resources\SponsorImages\Sponsor2.png" />
     <Content Include="Scripts\campfire.js" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
@@ -3395,7 +3397,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\SponsorImages\" />
-    <Folder Include="Resources\SponsorImages\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
