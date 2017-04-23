@@ -116,8 +116,22 @@ namespace SNCRegistration.Controllers
             model.leadContact = db.LeadContacts.Find(id);
             model.volunteers = db.Volunteers.Where(i => i.LeadContactID == id);
 
+            model.shirtsize = db.ShirtSizes.Find(model.leadContact.LeadContactShirtSize);
+            ViewBag.shirtsizedesc = model.shirtsize.ShirtSizeDescription;
+
+            model.attendance = db.Attendances.Find(model.leadContact.VolunteerAttendingCode);
+            ViewBag.attendancedesc = model.attendance.Description;
+
+            model.bsttype = db.BSTypes.Find(model.leadContact.BSType);
+            ViewBag.bsttypedec = model.bsttype.BSTypeDescription;
+
+
+
             this.Session["lGuidSession"] = model.leadContact.LeaderGuid;
             this.Session["lIDSession"] = model.leadContact.LeadContactID;
+
+
+            SetGroupAttendingViewBag(model.leadContact.BSType, model.leadContact.VolunteerAttendingCode, model.leadContact.LeadContactShirtSize);
 
             if (model == null)
             {
@@ -274,6 +288,17 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             LeadContact leadContact = db.LeadContacts.Find(id);
+
+            var shirtsize = db.ShirtSizes.Find(leadContact.LeadContactShirtSize);
+            ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            var attendance = db.Attendances.Find(leadContact.VolunteerAttendingCode);
+            ViewBag.attendancedesc = attendance.Description;
+
+            var bsttype = db.BSTypes.Find(leadContact.BSType);
+            ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+
             if (leadContact == null)
             {
                 return HttpNotFound();
@@ -297,14 +322,43 @@ namespace SNCRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CheckInPost(int? id, string returnUrl)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var leadcontact = db.LeadContacts.Find(id);
 
 
-            if (TryUpdateModel(leadcontact, "",
+            //var leadcontact = db.LeadContacts.Find(id);
+
+
+
+            //var shirtsize = db.ShirtSizes.Find(leadcontact.LeadContactShirtSize);
+            //ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            //var attendance = db.Attendances.Find(leadcontact.VolunteerAttendingCode);
+            //ViewBag.attendancedesc = attendance.Description;
+
+            //var bsttype = db.BSTypes.Find(leadcontact.BSType);
+            //ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+            var model = new LeadContactVolunteer();
+
+            model.leadContact = db.LeadContacts.Find(id);
+            model.volunteers = db.Volunteers.Where(i => i.LeadContactID == id);
+
+            model.shirtsize = db.ShirtSizes.Find(model.leadContact.LeadContactShirtSize);
+            ViewBag.shirtsizedesc = model.shirtsize.ShirtSizeDescription;
+
+            model.attendance = db.Attendances.Find(model.leadContact.VolunteerAttendingCode);
+            ViewBag.attendancedesc = model.attendance.Description;
+
+            model.bsttype = db.BSTypes.Find(model.leadContact.BSType);
+            ViewBag.bsttypedec = model.bsttype.BSTypeDescription;
+
+
+            if (TryUpdateModel(model.leadContact, "",
                new string[] { "CheckedIn" }))
             {
                 try
@@ -321,7 +375,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
-            return View(leadcontact);
+            return View(model.leadContact);
 
 
         }
