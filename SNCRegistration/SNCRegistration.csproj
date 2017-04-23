@@ -307,6 +307,7 @@
     <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
     <Compile Include="Controllers\FutureEventController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
+    <Compile Include="Controllers\GuardiansReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -378,6 +379,7 @@
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GuardiansReportModel.cs" />
     <Compile Include="ViewModels\LeadContactBST.cs" />
     <Compile Include="ViewModels\ParkingPassModel.cs" />
     <Compile Include="ViewModels\GuardianParticipantFamily.cs" />
@@ -638,6 +640,10 @@
     <Content Include="Views\Shared\_PartialParticipantsSaturdayOnlyList.cshtml" />
     <Content Include="Views\Admin\PDFFileManagement.cshtml" />
     <Content Include="Views\Admin\SponsorImageFileManagement.cshtml" />
+    <Content Include="Views\GuardiansReport\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersPendingCheckedInList.cshtml" />
+    <Content Include="Views\VolunteersPendingCheckedInCount\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialGuardianList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3435,7 +3441,7 @@
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Participants\Redirect.cshtml" />
     <Content Include="Views\BoothCount\Index.cshtml" />
-    <Content Include="Views\ParticipantsReport\Index.cshtml" />
+    <Content Include="Views\ParticipantsOvernight\ParticipantsReport\Index.cshtml" />
     <Content Include="Views\VolunteersReport\Index.cshtml" />
     <Content Include="Views\Participants\CheckIn.cshtml" />
     <Content Include="Views\Volunteers\CheckIn.cshtml" />
