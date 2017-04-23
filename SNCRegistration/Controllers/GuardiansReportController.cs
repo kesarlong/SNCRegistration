@@ -6,23 +6,23 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace SNCRegistration.Controllers
-{
-    public class VolunteersCheckedInCountController : Controller
     {
+    public class GuardiansReportController : Controller
+        {
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
-        // GET: VolunteersCheckedInCount
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
+        // GET: Reporting
         public ActionResult Index(int? eventYear)
             {
+
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
-            List<VolunteersCheckedInCountModel> model = new List<VolunteersCheckedInCountModel>();
+            List<GuardiansReportModel> model = new List<GuardiansReportModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -30,16 +30,18 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT VolunteerID as 'ID', VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID  as 'ID', LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC");
+                query = String.Concat("SELECT GuardianID, GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+                + "CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck, CASE WHEN Guardians.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' "
+                + "FROM Guardians WHERE Guardians.EventYear = @EventYear ORDER BY GuardianFirstName");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersCheckedInCountModel()
+                    model = dt.AsEnumerable().Select(x => new GuardiansReportModel()
                         {
-                        FirstName = x["FirstName"].ToString(),
-                        LastName = x["LastName"].ToString(),
-                        CheckedIn = x["CheckedIn"].ToString()
+                        GuardianID = Convert.ToInt32(x["GuardianID"]),
+                        GuardianFirstName = x["GuardianFirstName"].ToString(),
+                        GuardianLastName = x["GuardianLastName"].ToString(),
                         }).ToList();
                     }
                 }
@@ -47,9 +49,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetVolunteersCheckedInCountByYear(int eventYear)
+        public ActionResult GetGuardiansByYear(int eventYear)
             {
-            List<VolunteersCheckedInCountModel> model = new List<VolunteersCheckedInCountModel>();
+            List<GuardiansReportModel> model = new List<GuardiansReportModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -57,30 +59,34 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT VolunteerID as 'ID', VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID as 'ID', LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC";
+                query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+                + "CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck, CASE WHEN Guardians.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' "
+                + "FROM Guardians WHERE Guardians.EventYear = @EventYear ORDER BY GuardianFirstName";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new VolunteersCheckedInCountModel()
+                    model = dt.AsEnumerable().Select(x => new GuardiansReportModel()
                         {
-                        FirstName = x["FirstName"].ToString(),
-                        LastName = x["LastName"].ToString(),
-                        CheckedIn = x["CheckedIn"].ToString()
+                        GuardianID = Convert.ToInt32(x["GuardianID"]),
+                        GuardianFirstName = x["GuardianFirstName"].ToString(),
+                        GuardianLastName = x["GuardianLastName"].ToString(),
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialVolunteersCheckedInList", model);
+            return PartialView("_PartialGuardianList", model);
             }
 
         //Export to excel
-        public ActionResult VolunteersCheckedInCount(int eventYear)
+        public ActionResult GuardiansReport(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT VolunteerID as 'ID', VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID  as 'ID', LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY FirstName ASC";
+            string query = "SELECT GuardianID, GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HeatlhForm, "
+                + "CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck, CASE WHEN Guardians.CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS Checkedin, '' AS 'Campsite' "
+                + "FROM Guardians WHERE Guardians.EventYear = @EventYear ORDER BY GuardianFirstName";
             DataTable dt = new DataTable();
-            dt.TableName = "Volunteers";
+            dt.TableName = "Guardians";
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             da.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -95,7 +101,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= VolunteersCheckedInCount.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= GuardiansReport.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -105,7 +111,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", "VolunteersCheckedInCount");
+            return RedirectToAction("Index", "GuardiansReport");
             }
 
         private void releaseObject(object obj)
