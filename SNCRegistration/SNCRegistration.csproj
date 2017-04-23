@@ -636,6 +636,8 @@
     <Content Include="Views\Shared\_PartialVolunteersCheckedInList.cshtml" />
     <Content Include="Views\ParticipantsSaturdayOnly\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParticipantsSaturdayOnlyList.cshtml" />
+    <Content Include="Views\Admin\PDFFileManagement.cshtml" />
+    <Content Include="Views\Admin\SponsorImageFileManagement.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
