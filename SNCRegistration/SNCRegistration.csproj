@@ -498,8 +498,6 @@
     <Content Include="App_Start\bin\PagedList.dll" />
     <Content Include="App_Start\bin\PagedList.Mvc.dll" />
     <Content Include="App_Start\bin\ReportViewerForMvc.dll" />
-    <Content Include="App_Start\bin\roslyn\csc.exe" />
-    <Content Include="App_Start\bin\roslyn\csc.exe.config" />
     <Content Include="App_Start\bin\roslyn\csc.rsp" />
     <Content Include="App_Start\bin\roslyn\csi.exe" />
     <Content Include="App_Start\bin\roslyn\csi.rsp" />
