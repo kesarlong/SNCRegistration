@@ -662,7 +662,6 @@
     <Content Include="Views\Shared\_PartialRepeatAttendeeList.cshtml" />
     <Content Include="Views\Shared\_PartialAldenRoadReportList.cshtml" />
     <Content Include="Views\Volunteers\Redirect.cshtml" />
-    <Content Include="App_Data\PDF\EventInfo.pdf" />
     <Content Include="Views\ParticipantsPendingCheckedInCount\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParticipantsPendingCheckedInList.cshtml" />
     <Content Include="Views\Shared\_Layout_Nav.cshtml" />
