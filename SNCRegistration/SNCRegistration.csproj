@@ -491,7 +491,6 @@
     <Content Include="App_Start\bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
     <Content Include="App_Start\bin\Microsoft.Owin.Security.OAuth.dll" />
     <Content Include="App_Start\bin\Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="App_Start\bin\Microsoft.ReportViewer.WebForms.DLL" />
     <Content Include="App_Start\bin\Microsoft.SqlServer.Types.dll" />
     <Content Include="App_Start\bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="App_Start\bin\Newtonsoft.Json.dll" />
