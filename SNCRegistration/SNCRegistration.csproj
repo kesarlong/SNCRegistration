@@ -3465,7 +3465,7 @@
   <ItemGroup>
     <Folder Include="App_Data\SponsorImages\" />
     <Folder Include="font-awesome\" />
-    <Folder Include="Resources\" />
+    <Folder Include="Resources\SponsorImages\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
