@@ -62,6 +62,8 @@ namespace SNCRegistration.Controllers
                                select new LeadContactBST() { leadcontact = s, bsttype = sa };
 
 
+
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 leadContacts = leadContacts.Where(s => s.leadcontact.LeadContactLastName.Contains(searchString) || s.leadcontact.LeadContactFirstName.Contains(searchString) || s.leadcontact.UnitChapterNumber.Contains(searchString) || s.bsttype.BSTypeDescription.Contains(searchString));
@@ -125,7 +127,8 @@ namespace SNCRegistration.Controllers
             model.bsttype = db.BSTypes.Find(model.leadContact.BSType);
             ViewBag.bsttypedec = model.bsttype.BSTypeDescription;
 
-
+            model.bsttype = db.BSTypes.Find(model.leadContact.BSType);
+            ViewBag.bsttypedec = model.bsttype.BSTypeDescription;
 
             this.Session["lGuidSession"] = model.leadContact.LeaderGuid;
             this.Session["lIDSession"] = model.leadContact.LeadContactID;

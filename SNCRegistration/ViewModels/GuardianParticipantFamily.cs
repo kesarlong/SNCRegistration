@@ -12,6 +12,12 @@ namespace SNCRegistration.ViewModels
         public Participant participant { get; set; }
         public FamilyMember familymember { get; set; }
 
+        public Attendance attendance { get; set; }
+
+        public Relationship relation { get; set; }
+
+        public Age age { get; set; }
+
         public IEnumerable<Guardian> guardians { get; set; }
         public IEnumerable<Participant> participants { get; set; }
         public IEnumerable<FamilyMember> familymembers { get; set; }
