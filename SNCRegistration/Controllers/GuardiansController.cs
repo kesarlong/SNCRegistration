@@ -10,6 +10,8 @@ using System.Data.Entity.Validation;
 using System;
 using PagedList;
 using System.Data;
+using System.IO;
+using System.Net.Mime;
 
 namespace SNCRegistration.Controllers
 
@@ -204,8 +206,8 @@ namespace SNCRegistration.Controllers
 			return View(guardian);
 		}
 
-
-		public ActionResult GetFile(string file) {
+        [OverrideAuthorization]
+        public ActionResult GetSponsorImage(string file) {
 			var appData = Server.MapPath("~/App_Data/PDF");
 			var path = Path.Combine(appData, file);
 			path = Path.GetFullPath(path);
@@ -221,6 +223,7 @@ namespace SNCRegistration.Controllers
 
 			return File(path, MediaTypeNames.Application.Pdf);
 		}
+
         
         // POST: Guardians/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -400,6 +403,8 @@ namespace SNCRegistration.Controllers
                 ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", attendance);
             
         }
+
+
 
     }
 }

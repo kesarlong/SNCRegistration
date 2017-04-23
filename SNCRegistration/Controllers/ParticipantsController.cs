@@ -372,6 +372,8 @@ namespace SNCRegistration.Controllers
             db.SaveChanges();
             return RedirectToAction("Details", "Guardians", new { id = prevID });
         }
+
+        [OverrideAuthorization]
         public ActionResult GetFile(string file) {
             var appData = Server.MapPath("~/App_Data/PDF");
             var path = Path.Combine(appData, file);
