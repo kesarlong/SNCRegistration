@@ -32,7 +32,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtorder = 1 union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber");
+                query = String.Concat("SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtsize != '00' AND volunteershirtorder = 1 AND EventYear = @EventYear union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where LeadContactshirtsize != '00' AND leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -60,7 +60,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtorder = 1 union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber";
+                query = "SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtsize != '00' AND volunteershirtorder = 1 AND EventYear = @EventYear union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where LeadContactshirtsize != '00' AND leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -83,7 +83,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtorder = 1 union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber";
+            string query = "SELECT VolunteerID, Volunteers.UnitChapterNumber as GroupNumber, VolunteerFirstName as FirstName, VolunteerLastName as LastName, VolunteerShirtSize as ShirtSize FROM Volunteers where volunteershirtsize != '00' AND volunteershirtorder = 1 AND EventYear = @EventYear union SELECT LeadContactID, LeadContacts.UnitChapterNumber as GroupNumber, LeadContactFirstName as FirstName, LeadContactLastName as LastName, LeadContactShirtSize as ShirtSize FROM LeadContacts where LeadContactshirtsize != '00' AND leadcontactshirtorder = 1 AND EventYear = @EventYear Order By GroupNumber";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

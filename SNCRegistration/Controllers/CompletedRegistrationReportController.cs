@@ -34,7 +34,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear");
+                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck  FROM Participants  WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Guardians  WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -43,7 +43,9 @@ namespace SNCRegistration.Controllers
                         {
                         Registrant = x["Registrant"].ToString(),
                         ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString()
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        HealthForm = x["HealthForm"].ToString(),
+                        PhotoAck = x["PhotoACk"].ToString()
                         }).ToList();
                     }
                 }
@@ -61,7 +63,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear";
+                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck  FROM Participants  WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Guardians  WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -70,7 +72,9 @@ namespace SNCRegistration.Controllers
                         {
                         Registrant = x["Registrant"].ToString(),
                         ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString()
+                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        HealthForm = x["HealthForm"].ToString(),
+                        PhotoAck = x["PhotoACk"].ToString()
                         }).ToList();
                     }
                 }
@@ -82,7 +86,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName FROM Participants UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName FROM Guardians UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear";
+            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck  FROM Participants  WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Guardians  WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers WHERE HealthForm = 1 AND PhotoAck = 1 AND EventYear = @EventYear";
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             dt.TableName = "Participants";
