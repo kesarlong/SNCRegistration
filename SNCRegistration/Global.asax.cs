@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using SNCRegistration.ViewModels.Metadata;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -16,6 +13,10 @@ namespace SNCRegistration
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredIfAttribute),
+                                                  typeof(RequiredAttributeAdapter));
         }
     }
+
+
 }

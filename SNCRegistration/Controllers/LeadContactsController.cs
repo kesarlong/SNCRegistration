@@ -412,5 +412,8 @@ namespace SNCRegistration.Controllers
             else
                 ViewBag.shirtSizeName = new SelectList(db.ShirtSizes.ToArray(), "ShirtSizeCode", "ShirtSizeDescription", shirtSize);
         }
+
+        
+
     }
 }
