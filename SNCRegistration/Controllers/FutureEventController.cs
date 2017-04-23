@@ -74,7 +74,7 @@ namespace SNCRegistration.Controllers
         }
 
         //Export to excel
-        public ActionResult FutureEvents(int eventYear)
+        public ActionResult FutureEvent(int eventYear)
         {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
