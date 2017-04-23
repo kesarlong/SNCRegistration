@@ -36,30 +36,7 @@
         </dt>
 
         <dd>
-            @if (Model.participant.ParticipantAge == 1)
-            {
-                <p>Under 6</p>
-            }
-            else if (Model.participant.ParticipantAge == 2)
-            {
-                <p>7-10</p>
-            }
-            else if (Model.participant.ParticipantAge == 3)
-            {
-                <p>11-13</p>
-            }
-            else if (Model.participant.ParticipantAge == 4)
-            {
-                <p>14-17</p>
-            }
-            else if (Model.participant.ParticipantAge == 5)
-            {
-                <p>18-20</p>
-            }
-            else if (Model.participant.ParticipantAge == 6)
-            {
-                <p>Over 21</p>
-            }
+            @ViewBag.agedesc
         </dd>
 
         <dt>
@@ -107,14 +84,7 @@
         </dt>
 
         <dd>
-            @if (Model.participant.AttendingCode == 2)
-            {
-                <p>Saturday Only</p>
-            }
-            else if (Model.participant.AttendingCode == 3)
-            {
-                <p>Overnight</p>
-            }
+            @ViewBag.attend
         </dd>
 
         <dt>

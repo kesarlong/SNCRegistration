@@ -9,6 +9,8 @@ using System.Data.Entity.Validation;
 using System;
 using PagedList;
 using System.Data;
+using System.IO;
+using System.Net.Mime;
 
 namespace SNCRegistration.Controllers
 
@@ -95,6 +97,14 @@ namespace SNCRegistration.Controllers
 			model.guardian = db.Guardians.Find(id);
 			model.participants = db.Participants.Where(i => i.GuardianID == id);
 			model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == id);
+            model.attendance = db.Attendances.Find(model.guardian.AttendingCode);
+            model.relation = db.Relationships.Find(model.guardian.Relationship);
+
+
+            ViewBag.attend = model.attendance.Description;
+            ViewBag.relation = model.relation.RelationshipDescription;
+
+
 
             this.Session["gUIDSession"] = model.guardian.GuardianGuid;
             this.Session["gIDSession"] = model.guardian.GuardianID;
@@ -203,8 +213,8 @@ namespace SNCRegistration.Controllers
 			return View(guardian);
 		}
 
-
-		public ActionResult GetFile(string file) {
+        [OverrideAuthorization]
+        public ActionResult GetSponsorImage(string file) {
 			var appData = Server.MapPath("~/App_Data/PDF");
 			var path = Path.Combine(appData, file);
 			path = Path.GetFullPath(path);
@@ -220,6 +230,7 @@ namespace SNCRegistration.Controllers
 
 			return File(path, MediaTypeNames.Application.Pdf);
 		}
+
         
         // POST: Guardians/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -270,6 +281,14 @@ namespace SNCRegistration.Controllers
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
 			Guardian guardian = db.Guardians.Find(id);
+
+            var attending = db.Attendances.Find(guardian.AttendingCode);
+            ViewBag.attend = attending.Description;
+
+            var relation = db.Relationships.Find(guardian.Relationship);
+            ViewBag.rela = relation.RelationshipDescription;
+
+
 			if (guardian == null)
 			{
 				return HttpNotFound();
@@ -399,6 +418,8 @@ namespace SNCRegistration.Controllers
                 ViewBag.AttendanceID = new SelectList(db.Attendances.Where(i => i.Participant == true), "AttendanceID", "Description", attendance);
             
         }
+
+
 
     }
 }

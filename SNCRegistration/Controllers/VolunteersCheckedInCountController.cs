@@ -30,7 +30,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT VolunteerID, VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID, LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC");
+                query = String.Concat("SELECT VolunteerID as 'ID', VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID  as 'ID', LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -57,7 +57,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT VolunteerID, VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID, LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC";
+                query = "SELECT VolunteerID as 'ID', VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID as 'ID', LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear  ORDER BY FirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -78,7 +78,7 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT VolunteerID, VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID, LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY FirstName ASC";
+            string query = "SELECT VolunteerID as 'ID', VolunteerFirstName as 'FirstName', VolunteerLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Volunteers WHERE CheckedIn = 1 AND EventYear = @EventYear UNION SELECT LeadContactID  as 'ID', LeadContactFirstName as 'FirstName', LeadContactLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM LeadContacts WHERE CheckedIn = 1 AND EventYear = @EventYear ORDER BY FirstName ASC";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

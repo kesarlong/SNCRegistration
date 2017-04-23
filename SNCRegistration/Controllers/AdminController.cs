@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using SNCRegistration.ViewModels;
 using PagedList;
 using System.Web.Security;
+using System.IO;
+using System.Net.Mime;
 
 namespace SNCRegistration.Controllers
     {
@@ -288,7 +290,21 @@ namespace SNCRegistration.Controllers
                 }
             }
 
+        private void DeleteUser(ExpandedUserDTO paramExpandedUserDTO)
+        {
+            ApplicationUser user =
+                UserManager.FindByName(paramExpandedUserDTO.UserName);
 
+            // If we could not find the user, throw an exception
+            if (user == null)
+            {
+                throw new Exception("Could not find the User");
+            }
+
+            UserManager.RemoveFromRoles(user.Id, UserManager.GetRoles(user.Id).ToArray());
+            UserManager.Update(user);
+            UserManager.Delete(user);
+        }
         //User edit roles. Only System Admins can edit user roles.
         // GET: /Admin/ManageUsers/EditRoles/TestUser 
 
@@ -671,21 +687,7 @@ namespace SNCRegistration.Controllers
             return paramExpandedUserDTO;
             }
 
-        private void DeleteUser(ExpandedUserDTO paramExpandedUserDTO)
-            {
-            ApplicationUser user =
-                UserManager.FindByName(paramExpandedUserDTO.UserName);
 
-            // If we could not find the user, throw an exception
-            if (user == null)
-                {
-                throw new Exception("Could not find the User");
-                }
-
-            UserManager.RemoveFromRoles(user.Id, UserManager.GetRoles(user.Id).ToArray());
-            UserManager.Update(user);
-            UserManager.Delete(user);
-            }
 
         private UserAndRolesDTO GetUserAndRoles(string UserName)
             {
@@ -741,5 +743,153 @@ namespace SNCRegistration.Controllers
             return colRolesUserInNotIn;
             }
 
+
+        public ActionResult PDFFileManagement()
+        {
+
+            var dir = new System.IO.DirectoryInfo(Server.MapPath("~/App_Data/PDF/"));
+            System.IO.FileInfo[] fileNames = dir.GetFiles("*.*");
+            List<string> items = new List<string>();
+
+            foreach (var file in fileNames)
+            {
+                items.Add(file.Name);
+
+            }
+
+            return View(items);
+           // return View();
         }
+
+        public ActionResult SponsorImageFileManagement()
+        {
+
+            var dir = new System.IO.DirectoryInfo(Server.MapPath("~/Resources/SponsorImages/"));
+            System.IO.FileInfo[] fileNames = dir.GetFiles("*.*");
+            List<string> items = new List<string>();
+
+            foreach (var file in fileNames)
+            {
+                items.Add(file.Name);
+
+            }
+
+            return View(items);
+            // return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadPDF(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/App_Data/PDF"), fileName);
+                    file.SaveAs(path);
+                    
+                }
+                ViewBag.PDFMessage = "PDF Upload successful";
+                return RedirectToAction("PDFFileManagement");
+            }
+            catch
+            {
+                ViewBag.PDFMessage = "PDF Upload failed";
+                return RedirectToAction("PDFFileManagement");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UploadSponsorImage(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Resources/SponsorImages/"), fileName);
+                    file.SaveAs(path);
+
+                }
+                ViewBag.IMGMessage = "Sponsor Image Upload successful";
+                return RedirectToAction("SponsorImageFileManagement");
+            }
+            catch
+            {
+                ViewBag.IMGMessage = "Sponsor Image Upload failed";
+                return RedirectToAction("SponsorImageFileManagement");
+            }
+        }
+
+        [OverrideAuthorization]
+        public ActionResult GetSponsorImage(string file)
+        {
+            var appData = Server.MapPath("~/Resources/SponsorImages/");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData))
+            {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(path))
+            {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Image.Jpeg);
+        }
+
+
+        public ActionResult DeletePDFFile(string FileName)
+        {
+
+            string fullPath = Request.MapPath("~/App_Data/PDF/" + FileName);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+                ViewBag.Message = "File successfully deleted.";
+            }
+            else
+            {
+                ViewBag.Message = "File cannot be deleted.";
+            }
+
+            return RedirectToAction("PDFFileManagement");
+        }
+
+
+        public ActionResult DeleteImgFile(string FileName)
+        {
+
+            string fullPath = Request.MapPath("~/Resources/SponsorImages/" + FileName);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+                ViewBag.Message = "File successfully deleted.";
+            }
+            else
+            {
+                ViewBag.Message = "File cannot be deleted.";
+            }
+
+            return RedirectToAction("SponsorImageFileManagement");
+        }
+
+        public FileResult DownloadPDF(string FileName)
+        {
+            return File("~/App_Data/PDF/" + FileName, System.Net.Mime.MediaTypeNames.Application.Octet, FileName);
+        }
+        public FileResult DownloadIMG(string FileName)
+        {
+            return File("~/Resources/SponsorImages/" + FileName, System.Net.Mime.MediaTypeNames.Application.Octet, FileName);
+        }
+
+
+
+    
+}
     }

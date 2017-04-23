@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using SNCRegistration.Helpers;
+using System.IO;
+using System.Net.Mime;
 
 namespace SNCRegistration.Controllers
 {
@@ -120,6 +122,19 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Volunteer volunteer = db.Volunteers.Find(id);
+
+            var shirtsize = db.ShirtSizes.Find(volunteer.VolunteerShirtSize);
+            ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            var attendance = db.Attendances.Find(volunteer.VolunteerAttendingCode);
+            ViewBag.attendancedesc = attendance.Description;
+
+            var bsttype = db.BSTypes.Find(volunteer.BSType);
+            ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+            var age = db.Ages.Find(volunteer.VolunteerAge);
+            ViewBag.agereal = age.AgeDescription;
+
             if (volunteer == null)
             {
                 return HttpNotFound();
@@ -241,7 +256,26 @@ namespace SNCRegistration.Controllers
             return View(volunteer);
         }
 
+        [OverrideAuthorization]
+        public ActionResult GetFile(string file)
+        {
+            var appData = Server.MapPath("~/App_Data/PDF");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData))
+            {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
 
+            if (!System.IO.File.Exists(path))
+            {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Application.Pdf);
+        }
 
         [OverrideAuthorization]
         [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
@@ -285,6 +319,18 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Volunteer volunteer = db.Volunteers.Find(id);
+
+            var shirtsize = db.ShirtSizes.Find(volunteer.VolunteerShirtSize);
+            ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            var attendance = db.Attendances.Find(volunteer.VolunteerAttendingCode);
+            ViewBag.attendancedesc = attendance.Description;
+
+            var bsttype = db.BSTypes.Find(volunteer.BSType);
+            ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+            var age = db.Ages.Find(volunteer.VolunteerAge);
+            ViewBag.agereal = age.AgeDescription;
 
             if (volunteer == null)
             {

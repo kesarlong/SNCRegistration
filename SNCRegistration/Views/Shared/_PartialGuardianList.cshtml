@@ -1,0 +1,21 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.GuardiansReportModel>
+
+
+
+<tr>
+    <td colspan="2">
+        <h4>Total: @Model.Count()</h4>
+    </td>
+</tr>
+
+@foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuardianLastName)
+        </td>
+    </tr>
+    }

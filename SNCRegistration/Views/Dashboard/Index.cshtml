@@ -18,10 +18,12 @@
                     </div>
                     <div id="collapse1" class="panel-collapse collapse">
                         <ul class="list-group">
+                            <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "GuardiansReport")">Guardians Report</a></li>
                             <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "ParticipantsReport")">Participants Report</a></li>
                             <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "FamilyFriendsReport")">Family Members and Friends Report</a></li>
                             <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "AldenRoadReport")">Alden Road Group Report</a></li>
-                            <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "ParticipantsCheckedInCount")">Participants Checkedin Report</a></li>
+                            <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "ParticipantsCheckedInCount")">Participants Check In Report</a></li>
+                            <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "ParticipantsPendingCheckedInCount")">Participant Pending Check In Report</a></li>
                             <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "ParkingPass")">Parking Pass Report</a></li>
                         </ul>
                         <div class="panel-footer"></div>
@@ -42,7 +44,8 @@
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "VolunteersReport")">Volunteers Report</a></li>
                         <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "VolunteersCountByGroup")">Volunteers Report By Group</a></li>
-                        <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "ParticipantsCheckedInCount")">Volunteers Checkedin Report</a></li>
+                        <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "VolunteersCheckedInCount")">Volunteers Check In Report</a></li>
+                        <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "VolunteersPendingCheckedInCount")">Volunteers Pending Check In Report</a></li>
                     </ul>
                     <div class="panel-footer"></div>
                 </div>
@@ -84,16 +87,14 @@
             <div id="collapse4" class="panel-collapse collapse">
                 <ul class="list-group">
                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "CompletedRegistrationReport")">Completed Registration Report</a></li>
-                    <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "FirstTimeAttendeeReport")">First-Time Attendee Report</a></li>
+                    <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "PendingRegistrationReport")">Incomplete Registration Report</a></li>
+                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "FirstTimeAttendeeReport")">First-Time Attendee Report</a></li>
                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "RepeatAttendeeReport")">Repeat Attendee Report</a></li>
                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "TeeShirtOrdersReport")">Total T-Shirt Orders Report</a></li>
                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "TeeShirtCountBySize")">T-Shirt Count By Size Report </a></li>
                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "BoothCount")">Booth Report</a></li>
                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "WristBandCount")">Wristband Report </a></li>
                     <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "FutureEvent")">Future Event Report</a></li>
-                    <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "PendingCheckedInCount")">Participant Pending Checkedin Report</a></li>
-                    <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "PendingCheckedInCount")">Volunteers Pending Checkedin Report</a></li>
-                    <li class="list-group-item list-group-item-action justify-content-between"><a href="@Url.Action("Index", "PendingRegistrationReport")">Pending Registration Report</a></li>
                 </ul>
                 <div class="panel-footer"></div>
             </div>

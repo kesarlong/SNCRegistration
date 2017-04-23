@@ -7,6 +7,9 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using PagedList;
 using SNCRegistration.Helpers;
+using System.IO;
+using System.Net.Mime;
+using System.Web;
 
 namespace SNCRegistration.Controllers
 {
@@ -57,6 +60,8 @@ namespace SNCRegistration.Controllers
                                join sa in db.BSTypes on s.BSType equals sa.BSTypeID
                                where s.EventYear == searchYear
                                select new LeadContactBST() { leadcontact = s, bsttype = sa };
+
+
 
 
             if (!String.IsNullOrEmpty(searchString))
@@ -113,8 +118,23 @@ namespace SNCRegistration.Controllers
             model.leadContact = db.LeadContacts.Find(id);
             model.volunteers = db.Volunteers.Where(i => i.LeadContactID == id);
 
+            model.shirtsize = db.ShirtSizes.Find(model.leadContact.LeadContactShirtSize);
+            ViewBag.shirtsizedesc = model.shirtsize.ShirtSizeDescription;
+
+            model.attendance = db.Attendances.Find(model.leadContact.VolunteerAttendingCode);
+            ViewBag.attendancedesc = model.attendance.Description;
+
+            model.bsttype = db.BSTypes.Find(model.leadContact.BSType);
+            ViewBag.bsttypedec = model.bsttype.BSTypeDescription;
+
+            model.bsttype = db.BSTypes.Find(model.leadContact.BSType);
+            ViewBag.bsttypedec = model.bsttype.BSTypeDescription;
+
             this.Session["lGuidSession"] = model.leadContact.LeaderGuid;
             this.Session["lIDSession"] = model.leadContact.LeadContactID;
+
+
+            SetGroupAttendingViewBag(model.leadContact.BSType, model.leadContact.VolunteerAttendingCode, model.leadContact.LeadContactShirtSize);
 
             if (model == null)
             {
@@ -271,6 +291,17 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             LeadContact leadContact = db.LeadContacts.Find(id);
+
+            var shirtsize = db.ShirtSizes.Find(leadContact.LeadContactShirtSize);
+            ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            var attendance = db.Attendances.Find(leadContact.VolunteerAttendingCode);
+            ViewBag.attendancedesc = attendance.Description;
+
+            var bsttype = db.BSTypes.Find(leadContact.BSType);
+            ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+
             if (leadContact == null)
             {
                 return HttpNotFound();
@@ -294,14 +325,43 @@ namespace SNCRegistration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CheckInPost(int? id, string returnUrl)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var leadcontact = db.LeadContacts.Find(id);
 
 
-            if (TryUpdateModel(leadcontact, "",
+            //var leadcontact = db.LeadContacts.Find(id);
+
+
+
+            //var shirtsize = db.ShirtSizes.Find(leadcontact.LeadContactShirtSize);
+            //ViewBag.shirtsizedesc = shirtsize.ShirtSizeDescription;
+
+            //var attendance = db.Attendances.Find(leadcontact.VolunteerAttendingCode);
+            //ViewBag.attendancedesc = attendance.Description;
+
+            //var bsttype = db.BSTypes.Find(leadcontact.BSType);
+            //ViewBag.bsttypedec = bsttype.BSTypeDescription;
+
+            var model = new LeadContactVolunteer();
+
+            model.leadContact = db.LeadContacts.Find(id);
+            model.volunteers = db.Volunteers.Where(i => i.LeadContactID == id);
+
+            model.shirtsize = db.ShirtSizes.Find(model.leadContact.LeadContactShirtSize);
+            ViewBag.shirtsizedesc = model.shirtsize.ShirtSizeDescription;
+
+            model.attendance = db.Attendances.Find(model.leadContact.VolunteerAttendingCode);
+            ViewBag.attendancedesc = model.attendance.Description;
+
+            model.bsttype = db.BSTypes.Find(model.leadContact.BSType);
+            ViewBag.bsttypedec = model.bsttype.BSTypeDescription;
+
+
+            if (TryUpdateModel(model.leadContact, "",
                new string[] { "CheckedIn" }))
             {
                 try
@@ -318,7 +378,7 @@ namespace SNCRegistration.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
-            return View(leadcontact);
+            return View(model.leadContact);
 
 
         }
@@ -381,6 +441,27 @@ namespace SNCRegistration.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [OverrideAuthorization]
+        public ActionResult GetFile(string file)
+        {
+            var appData = Server.MapPath("~/App_Data/PDF");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData))
+            {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(path))
+            {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Application.Pdf);
         }
 
         public ActionResult GetYear()

@@ -91,6 +91,12 @@ namespace SNCRegistration.Controllers
             model.relatedparticipants = db.Participants.Where(i => i.GuardianID == model.participant.GuardianID && i.ParticipantID != id);
             model.guardians = db.Guardians.Where(i => i.GuardianID == model.participant.GuardianID);
             model.familymembers = db.FamilyMembers.Where(i => i.GuardianID == model.participant.GuardianID);
+            model.age = db.Ages.Find(model.participant.ParticipantAge);
+            model.attendance = db.Attendances.Find(model.participant.AttendingCode);
+
+
+            ViewBag.agedesc = model.age.AgeDescription;
+            ViewBag.attend = model.attendance.Description;
 
 
    //             string.Equals(db.Ages, "AgeID", "AgeDescription");
@@ -263,6 +269,17 @@ namespace SNCRegistration.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Participant participant = db.Participants.Find(id);
+
+            var age = db.Ages.Find(participant.ParticipantAge);
+
+            ViewBag.agedesc = age.AgeDescription;
+
+            var attend = db.Attendances.Find(participant.AttendingCode);
+
+            ViewBag.attenda = attend.Description;
+
+
+
             if (participant == null)
             {
                 return HttpNotFound();
@@ -358,6 +375,8 @@ namespace SNCRegistration.Controllers
             db.SaveChanges();
             return RedirectToAction("Details", "Guardians", new { id = prevID });
         }
+
+        [OverrideAuthorization]
         public ActionResult GetFile(string file) {
             var appData = Server.MapPath("~/App_Data/PDF");
             var path = Path.Combine(appData, file);

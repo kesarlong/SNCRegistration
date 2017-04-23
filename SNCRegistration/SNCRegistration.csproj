@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -308,16 +308,18 @@
     <Compile Include="Controllers\FirstTimeAttendeeReportController.cs" />
     <Compile Include="Controllers\FutureEventController.cs" />
     <Compile Include="Controllers\GuardiansController.cs" />
+    <Compile Include="Controllers\GuardiansReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantsSaturdayOnlyController.cs" />
+    <Compile Include="Controllers\ParticipantsPendingCheckedInCountController.cs" />
     <Compile Include="Controllers\VolunteersCheckedInCountController.cs" />
     <Compile Include="Controllers\ParticipantsController.cs" />
     <Compile Include="Controllers\ParkingPassController.cs" />
     <Compile Include="Controllers\ParticipantsReportController.cs" />
     <Compile Include="Controllers\PendingRegistrationReportController.cs" />
-    <Compile Include="Controllers\PendingCheckedInCountController.cs" />
+    <Compile Include="Controllers\VolunteersPendingCheckedInCountController.cs" />
     <Compile Include="Controllers\ParticipantsCheckedInCountController.cs" />
     <Compile Include="Controllers\RepeatAttendeeReportController.cs" />
     <Compile Include="Controllers\VolunteersCountByGroupController.cs" />
@@ -378,6 +380,7 @@
     <Compile Include="ViewModels\Guardian.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GuardiansReportModel.cs" />
     <Compile Include="ViewModels\LeadContactBST.cs" />
     <Compile Include="ViewModels\ParkingPassModel.cs" />
     <Compile Include="ViewModels\GuardianParticipantFamily.cs" />
@@ -392,11 +395,13 @@
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\VolunteersPendingCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsSaturdayOnlyModel.cs" />
+    <Compile Include="ViewModels\PDFImages.cs" />
     <Compile Include="ViewModels\VolunteersCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsReportModel.cs" />
     <Compile Include="ViewModels\PendingRegistrationReportModel.cs" />
-    <Compile Include="ViewModels\PendingCheckedInCountModel.cs" />
+    <Compile Include="ViewModels\ParticipantsPendingCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsCheckedInCountModel.cs" />
     <Compile Include="ViewModels\Relationship.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
@@ -440,6 +445,21 @@
   <ItemGroup>
     <Content Include="App_Start\bin\Antlr3.Runtime.dll" />
     <Content Include="App_Start\bin\ClosedXML.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.CrystalReports.Engine.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommLayer.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommonControls.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.Controllers.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.Prompting.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.ReportSource.dll" />
+    <Content Include="App_Start\bin\CrystalDecisions.Shared.dll" />
     <Content Include="App_Start\bin\DocumentFormat.OpenXml.dll" />
     <Content Include="App_Start\bin\EntityFramework.dll" />
     <Content Include="App_Start\bin\EntityFramework.SqlServer.dll" />
@@ -486,6 +506,7 @@
     <Content Include="App_Start\bin\roslyn\csi.rsp" />
     <Content Include="App_Start\bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="App_Start\bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="App_Start\bin\roslyn\System.IO.Compression.dll" />
     <Content Include="App_Start\bin\roslyn\vbc.exe" />
     <Content Include="App_Start\bin\roslyn\vbc.exe.config" />
     <Content Include="App_Start\bin\roslyn\vbc.rsp" />
@@ -500,6 +521,7 @@
     <Content Include="App_Start\bin\SqlServerTypes\x64\SqlServerSpatial140.dll" />
     <Content Include="App_Start\bin\SqlServerTypes\x86\msvcr120.dll" />
     <Content Include="App_Start\bin\SqlServerTypes\x86\SqlServerSpatial140.dll" />
+    <Content Include="App_Start\bin\stdole.dll" />
     <Content Include="App_Start\bin\System.IO.Compression.dll" />
     <Content Include="App_Start\bin\System.Net.Http.dll" />
     <Content Include="App_Start\bin\System.Runtime.CompilerServices.Unsafe.dll" />
@@ -595,6 +617,8 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
+    <Content Include="Resources\SponsorImages\Sponsor1.png" />
+    <Content Include="Resources\SponsorImages\Sponsor2.png" />
     <Content Include="Scripts\campfire.js" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\FamilyFriendsReport\Index.cshtml" />
@@ -619,8 +643,8 @@
     <Content Include="Views\Shared\_PartialAldenRoadReportList.cshtml" />
     <Content Include="Views\Volunteers\Redirect.cshtml" />
     <Content Include="App_Data\PDF\EventInfo.pdf" />
-    <Content Include="Views\PendingCheckedInCount\Index.cshtml" />
-    <Content Include="Views\Shared\_PartialPendingCheckedInList.cshtml" />
+    <Content Include="Views\ParticipantsPendingCheckedInCount\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialParticipantsPendingCheckedInList.cshtml" />
     <Content Include="Views\Shared\_Layout_Nav.cshtml" />
     <Content Include="Views\Volunteers\VolunteersRegisteredView.cshtml" />
     <Content Include="Views\Shared\_PartialTeeShirtCountBySizeList.cshtml" />
@@ -634,6 +658,12 @@
     <Content Include="Views\Shared\_PartialVolunteersCheckedInList.cshtml" />
     <Content Include="Views\ParticipantsSaturdayOnly\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParticipantsSaturdayOnlyList.cshtml" />
+    <Content Include="Views\Admin\PDFFileManagement.cshtml" />
+    <Content Include="Views\Admin\SponsorImageFileManagement.cshtml" />
+    <Content Include="Views\GuardiansReport\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersPendingCheckedInList.cshtml" />
+    <Content Include="Views\VolunteersPendingCheckedInCount\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialGuardianList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3305,39 +3335,39 @@
     <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />
     <Content Include="SqlServerTypes\x86\msvcr120.dll" />
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll" />
-    <Content Include="ViewModels\font-awesome\css\font-awesome.css" />
-    <Content Include="ViewModels\font-awesome\css\font-awesome.min.css" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="ViewModels\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="ViewModels\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="ViewModels\font-awesome\less\bordered-pulled.less" />
-    <Content Include="ViewModels\font-awesome\less\core.less" />
-    <Content Include="ViewModels\font-awesome\less\fixed-width.less" />
-    <Content Include="ViewModels\font-awesome\less\font-awesome.less" />
-    <Content Include="ViewModels\font-awesome\less\icons.less" />
-    <Content Include="ViewModels\font-awesome\less\larger.less" />
-    <Content Include="ViewModels\font-awesome\less\list.less" />
-    <Content Include="ViewModels\font-awesome\less\mixins.less" />
-    <Content Include="ViewModels\font-awesome\less\path.less" />
-    <Content Include="ViewModels\font-awesome\less\rotated-flipped.less" />
-    <Content Include="ViewModels\font-awesome\less\spinning.less" />
-    <Content Include="ViewModels\font-awesome\less\stacked.less" />
-    <Content Include="ViewModels\font-awesome\less\variables.less" />
-    <Content Include="ViewModels\font-awesome\scss\font-awesome.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_bordered-pulled.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_core.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_fixed-width.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_icons.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_larger.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_list.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_mixins.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_path.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_rotated-flipped.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_spinning.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_stacked.scss" />
-    <Content Include="ViewModels\font-awesome\scss\_variables.scss" />
+    <Content Include="font-awesome\css\font-awesome.css" />
+    <Content Include="font-awesome\css\font-awesome.min.css" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="font-awesome\less\bordered-pulled.less" />
+    <Content Include="font-awesome\less\core.less" />
+    <Content Include="font-awesome\less\fixed-width.less" />
+    <Content Include="font-awesome\less\font-awesome.less" />
+    <Content Include="font-awesome\less\icons.less" />
+    <Content Include="font-awesome\less\larger.less" />
+    <Content Include="font-awesome\less\list.less" />
+    <Content Include="font-awesome\less\mixins.less" />
+    <Content Include="font-awesome\less\path.less" />
+    <Content Include="font-awesome\less\rotated-flipped.less" />
+    <Content Include="font-awesome\less\spinning.less" />
+    <Content Include="font-awesome\less\stacked.less" />
+    <Content Include="font-awesome\less\variables.less" />
+    <Content Include="font-awesome\scss\font-awesome.scss" />
+    <Content Include="font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="font-awesome\scss\_core.scss" />
+    <Content Include="font-awesome\scss\_fixed-width.scss" />
+    <Content Include="font-awesome\scss\_icons.scss" />
+    <Content Include="font-awesome\scss\_larger.scss" />
+    <Content Include="font-awesome\scss\_list.scss" />
+    <Content Include="font-awesome\scss\_mixins.scss" />
+    <Content Include="font-awesome\scss\_path.scss" />
+    <Content Include="font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="font-awesome\scss\_spinning.scss" />
+    <Content Include="font-awesome\scss\_stacked.scss" />
+    <Content Include="font-awesome\scss\_variables.scss" />
     <Content Include="ViewModels\SNCRegistration.Context.tt">
       <DependentUpon>SNCRegistration.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3459,8 +3489,7 @@
     <Content Include="Views\Shared\_PartialCompletedRegistrationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="font-awesome\" />
-    <Folder Include="Resources\" />
+    <Folder Include="App_Data\SponsorImages\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
@@ -3516,7 +3545,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

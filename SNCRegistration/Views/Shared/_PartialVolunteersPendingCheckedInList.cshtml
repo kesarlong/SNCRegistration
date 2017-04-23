@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SNCRegistration.ViewModels.VolunteersPendingCheckedInCountModel>
+<tr>
+    <td colspan="3">
+        <h4>Total: @Model.Count()</h4>
+    </td>
+</tr>
+
+@foreach (var item in Model)
+    {
+    <tr>    
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitChapterNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckedIn)
+        </td>
+    </tr>
+    }
+  
