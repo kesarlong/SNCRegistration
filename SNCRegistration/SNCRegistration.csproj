@@ -636,6 +636,7 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
+    <Content Include="Resources\WebsiteImages\CHAMPOINSLOGO.png" />
     <Content Include="Resources\SponsorImages\Sponsor1.png" />
     <Content Include="Resources\SponsorImages\Sponsor2.png" />
     <Content Include="Scripts\campfire.js" />
