@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,11 +40,12 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Zip (Optional)")]
         public int GuardianZip;
 
-        [Phone]
+        //[Phone]
         [MaxLength(10)]
         [MinLength(10)]
         [Required]
         [Display(Name = "Cell Phone")]
+        [RegularExpression("([1-9][0-9]*)",ErrorMessage ="Please enter numbers 0-9 only")]
         public string GuardianCellPhone;
 
 
@@ -65,6 +67,11 @@ namespace SNCRegistration.ViewModels.Metadata
         [Required]
         [Display(Name = "Tent Required")]
         public bool Tent;
+
+        
+        [Display(Name = "Number of people in tent")]
+        [DefaultValue(0)]
+        public int NumberInTent;
 
         [Required]
         [Display(Name = "Attending")]
@@ -258,7 +265,7 @@ namespace SNCRegistration.ViewModels.Metadata
 
         [MinLength(1)]
         [MaxLength(10)]
-        [Display(Name = "Troop/Chapter/Unit #")]
+        [Display(Name = "Troop/Chapter/Unit # (Optional)")]
         public string UnitChapterNumber;
 
         [Required]
@@ -266,6 +273,8 @@ namespace SNCRegistration.ViewModels.Metadata
         public string VolunteerAttendingCode;
 
         [Display(Name = "Are you joining us for Saturday dinner?")]
+        [DefaultValue(false)]
+        [Required]
         public bool SaturdayDinner;
 
         [MaxLength(50)]
@@ -328,11 +337,12 @@ namespace SNCRegistration.ViewModels.Metadata
 
 
         [Display(Name = "Are you joining us for Saturday dinner?")]
-        public Nullable<bool> SaturdayDinner;
+        [DefaultValue(false)]
+        public bool SaturdayDinner;
 
         [MinLength(1)]
         [MaxLength(10)]
-        [Display(Name = "Troop/Chapter/Unit Number")]
+        [Display(Name = "Troop/Chapter/Unit # (Optional)")]
         public string UnitChapterNumber;
 
         [MaxLength(200)]
@@ -352,9 +362,7 @@ namespace SNCRegistration.ViewModels.Metadata
         [Display(Name = "Group Type")]
         public string BSType;
 
-        //Messing things up with LeadContact/Details
-        //[Display(Name = "Number of people in tent")]
-        //public int NumberInTent;
+
     }
 
 }

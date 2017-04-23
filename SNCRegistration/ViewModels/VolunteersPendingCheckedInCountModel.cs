@@ -6,16 +6,14 @@ using System.Web;
 
 namespace SNCRegistration.ViewModels
     {
-    public class PendingCheckedInCountModel
+    public class VolunteersPendingCheckedInCountModel
         {
-        [Display(Name = "Unit Number")]
+        [Display(Name = "UnitChapterNumber")]
         public string UnitChapterNumber { get; set; }
-        [Display(Name = "Registrant")]
-        public string Registrant { get; set; }
         [Display(Name = "First Name")]
-        public string ParticipantFirstName { get; set; }
+        public string FirstName { get; set; }
         [Display(Name = "Last Name")]
-        public string ParticipantLastName { get; set; }
+        public string LastName { get; set; }
         [Display(Name = "Checked In")]
         public string CheckedIn { get; set; }
         }

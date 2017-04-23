@@ -141,7 +141,8 @@ namespace SNCRegistration.Controllers
         [OverrideAuthorization]
         public ActionResult Create(int LeadContactID)
         {
-            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
+            //ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
+            ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
@@ -545,7 +546,7 @@ namespace SNCRegistration.Controllers
         //}
 
         [OverrideAuthorization]
-        public ActionResult Redirect(string submit)
+        public new ActionResult Redirect(string submit)
         {
             int leadContactID = 0;
             if (TempData["myPK"] != null)

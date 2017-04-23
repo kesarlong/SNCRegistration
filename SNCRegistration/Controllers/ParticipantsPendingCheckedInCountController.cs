@@ -11,21 +11,18 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace SNCRegistration.Controllers
+{
+    public class ParticipantsPendingCheckedInCountController : Controller
     {
-    public class FirstTimeAttendeeReportController: Controller
-        {
         readonly string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
         private SNCRegistrationEntities db = new SNCRegistrationEntities();
 
-        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin")]
-
-        // GET: FirstTimeAttendeeReportController
+        [CustomAuthorize(Roles = "SystemAdmin, FullAdmin, VolunteerAdmin")]
+        // GET: ParticipantsPendingCheckedInCount
         public ActionResult Index(int? eventYear)
             {
-
             ViewBag.ddlEventYears = Enumerable.Range(2016, (DateTime.Now.Year - 2016) + 1).OrderByDescending(x => x).ToList();
-
-            List<FirstTimeAttendeeModel> model = new List<FirstTimeAttendeeModel>();
+            List<ParticipantsPendingCheckedInCountModel> model = new List<ParticipantsPendingCheckedInCountModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -33,19 +30,18 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 0 AND EventYear = @EventYear Order By Description");
-
+                query = String.Concat("SELECT ParticipantID as 'ID', ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 0 AND EventYear = @EventYear " 
+                + "UNION SELECT GuardianID as 'ID', GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 0 AND EventYear = @EventYear "
+                + "UNION SELECT FamilyMemberID as 'ID', FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName',  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new FirstTimeAttendeeModel()
+                    model = dt.AsEnumerable().Select(x => new ParticipantsPendingCheckedInCountModel()
                         {
-                       
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
-                        Returning = x["Returning"].ToString(),
-                        Description = x["Description"].ToString()
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        CheckedIn = x["CheckedIn"].ToString()
                         }).ToList();
                     }
                 }
@@ -53,9 +49,9 @@ namespace SNCRegistration.Controllers
             }
 
         //Get the year onchange javascript
-        public ActionResult GetFirstTimeAttendeeByYear(int eventYear)
+        public ActionResult GetParticipantsPendingCheckedInCountByYear(int eventYear)
             {
-            List<FirstTimeAttendeeModel> model = new List<FirstTimeAttendeeModel>();
+            List<ParticipantsPendingCheckedInCountModel> model = new List<ParticipantsPendingCheckedInCountModel>();
             string query = String.Empty;
             DataTable dt = new DataTable();
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
@@ -63,30 +59,32 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
+                query = "SELECT ParticipantID as 'ID', ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 0 AND EventYear = @EventYear "
+                + "UNION SELECT GuardianID as 'ID', GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 0 AND EventYear = @EventYear "
+                + "UNION SELECT FamilyMemberID as 'ID', FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName',  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
                     adapter.Fill(dt);
-                    model = dt.AsEnumerable().Select(x => new FirstTimeAttendeeModel()
+                    model = dt.AsEnumerable().Select(x => new ParticipantsPendingCheckedInCountModel()
                         {
-                        
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
-                        Returning = x["Returning"].ToString(),
-                        Description = x["Description"].ToString()
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
+                        CheckedIn = x["CheckedIn"].ToString()
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialFirstTimeAttendeeList", model);
+            return PartialView("_PartialParticipantsPendingCheckedInList", model);
             }
 
         //Export to excel
-        public ActionResult FirstTimeAttendeeReport(int eventYear)
+        public ActionResult ParticipantsPendingCheckedInCount(int eventYear)
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning FROM Participants WHERE Returning = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName";
+            string query = "SELECT ParticipantID as 'ID', ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Participants WHERE CheckedIn = 0 AND EventYear = @EventYear "
+                + "UNION SELECT GuardianID as 'ID', GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM Guardians WHERE CheckedIn = 0 AND EventYear = @EventYear "
+                + "UNION SELECT FamilyMemberID as 'ID', FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName',  CASE WHEN CheckedIn = 1 THEN 'Yes' ELSE 'No' END AS CheckedIn FROM FamilyMembers WHERE CheckedIn = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
             DataTable dt = new DataTable();
             dt.TableName = "Participants";
             con.Open();
@@ -103,7 +101,7 @@ namespace SNCRegistration.Controllers
                 Response.Buffer = true;
                 Response.Charset = "";
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename= FirstTimeAttendee.xlsx");
+                Response.AddHeader("content-disposition", "attachment;filename= ParticipantsPendingCheckedInCount.xlsx");
 
                 using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
@@ -113,7 +111,7 @@ namespace SNCRegistration.Controllers
                     Response.End();
                     }
                 }
-            return RedirectToAction("Index", "FirstTimeAttendeeReport");
+            return RedirectToAction("Index", "ParticipantsPendingCheckedInCount");
             }
 
         private void releaseObject(object obj)
