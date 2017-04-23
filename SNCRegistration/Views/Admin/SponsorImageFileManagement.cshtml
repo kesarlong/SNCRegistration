@@ -1,0 +1,75 @@
+﻿@model List<string>
+
+
+@{
+    ViewBag.Title = "SNCR Spnosor Image File Uploader";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+@using (Html.BeginForm("UploadSponsorImage", "Admin", FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div>
+        <fieldset>
+            <h2>Upload a Sponsor Image</h2>
+            <div class="editor-field">
+                @Html.TextBox("file", "", new { type = "file" })
+            </div>
+            <div class="editor-field">
+                <input type="submit" value="UploadSponsorImage" />
+            </div>
+            <br />
+        </fieldset>
+        @ViewBag.IMGMessage
+    </div>
+
+}
+
+<h2>Uploaded Sponsor Image Files</h2>
+<table>
+    <tr>
+        <th>File Name</th>
+        <th>Link</th>
+    </tr>
+    @for (var i = 0; i <= Model.Count - 1; i++)
+    {
+        <tr>
+            <td>
+                @Model[i].ToString()
+            </td>
+            <td>
+                @Html.ActionLink("Download", "DownloadIMG", new { FileName = @Model[i].ToString() })
+            </td>
+            <td>
+                @Html.ActionLink("Delete File", "DeleteImgFile", new { FileName = @Model[i].ToString() })
+            </td>
+        </tr>
+    }
+</table>
+
+@*@using (Html.BeginForm("UploadSponsorImage", "Admin", FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div>
+        <br />
+        <fieldset>
+            <legend>Upload a Sponsor Image</legend>
+            <div class="editor-field">
+                @Html.TextBox("file", "", new { type = "file" })
+            </div>
+            <div class="editor-field">
+                <input type="submit" value="UploadSponsorImage" />
+            </div>
+            <br />
+            <div class="alert alert-info">
+                @ViewBag.IMGMessage
+            </div>
+        </fieldset>
+    </div>
+}*@

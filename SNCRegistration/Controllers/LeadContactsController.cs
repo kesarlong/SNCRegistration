@@ -7,6 +7,9 @@ using SNCRegistration.ViewModels;
 using System.Data.Entity.Validation;
 using PagedList;
 using SNCRegistration.Helpers;
+using System.IO;
+using System.Net.Mime;
+using System.Web;
 
 namespace SNCRegistration.Controllers
 {
@@ -381,6 +384,27 @@ namespace SNCRegistration.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [OverrideAuthorization]
+        public ActionResult GetFile(string file)
+        {
+            var appData = Server.MapPath("~/App_Data/PDF");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData))
+            {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(path))
+            {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Application.Pdf);
         }
 
         public ActionResult GetYear()
