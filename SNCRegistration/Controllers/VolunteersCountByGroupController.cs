@@ -32,8 +32,8 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM Volunteers inner join bstype as B on volunteers.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber union " 
-                + "SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM LeadContacts inner join bstype as B on leadContacts.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber");
+                query = String.Concat("SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM Volunteers inner join bstype as B on volunteers.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber "
++ "union SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM LeadContacts inner join bstype as B on leadContacts.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -60,8 +60,8 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM Volunteers inner join bstype as B on volunteers.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber union "
-                + "SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM LeadContacts inner join bstype as B on leadContacts.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber";
+                query = "SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM Volunteers inner join bstype as B on volunteers.bstype = B.bstypeid Where UnitChapterNumber != 'NULL' AND EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber "
++ "union SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM LeadContacts inner join bstype as B on leadContacts.bstype = B.bstypeid Where UnitChapterNumber != 'NULL' AND EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -83,8 +83,8 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM Volunteers inner join bstype as B on volunteers.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber union "
-                + "SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM LeadContacts inner join bstype as B on leadContacts.bstype = B.bstypeid Where EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber";
+            string query = "SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM Volunteers inner join bstype as B on volunteers.bstype = B.bstypeid Where UnitChapterNumber != 'NULL' AND EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber "
++ "union SELECT B.BSTypeDescription as GroupType, UnitChapterNumber as GroupNumber, COUNT(*) As Total FROM LeadContacts inner join bstype as B on leadContacts.bstype = B.bstypeid Where UnitChapterNumber != 'NULL' AND EventYear = @EventYear GROUP BY B.BSTypeDescription, UnitChapterNumber";
             DataTable dt = new DataTable();
             dt.TableName = "Volunteers";
             con.Open();

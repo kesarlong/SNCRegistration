@@ -33,7 +33,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 1 AND EventYear = @EventYear Order By Description");
+                query = String.Concat("SELECT ParticipantID, ParticipantFirstName, ParticipantLastName, CASE WHEN Returning = 1 THEN 'Yes' ELSE 'No' END AS Returning, Description FROM Participants INNER JOIN Attendance ON AttendingCode = AttendanceID WHERE Returning = 0 AND EventYear = @EventYear Order By Description");
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
