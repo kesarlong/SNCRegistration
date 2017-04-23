@@ -35,8 +35,8 @@
                                         <li><a href="@Url.Action("Index", "Manage")"><em class="glyphicon glyphicon-cog"></em> Manage Your Account</a></li>
                                     </ul>
 
-@if (ViewContext.HttpContext.User.IsInRole("SystemAdmin"))
-{
+                    @if (ViewContext.HttpContext.User.IsInRole("SystemAdmin"))
+                    {
                                 <li class="nav-header">
                                     <a href="#" data-toggle="collapse" data-target="#menu1"><em class="glyphicon glyphicon-lock"></em> Full Admin Options<i class="glyphicon glyphicon-chevron-right"></i></a>
                                     <ul class="nav nav-stacked collapse" id="menu1">
@@ -53,10 +53,10 @@
 
 
                                 </li>
-}
+                    }
                                 <li class="nav-header">
-                                    <a href="#" data-toggle="collapse" data-target="#menu1"><em class="glyphicon glyphicon-th-list"></em> Manage Attendees<i class="glyphicon glyphicon-chevron-right"></i></a>
-                                    <ul class="nav nav-stacked collapse" id="menu1">
+                                    <a href="#" data-toggle="collapse" data-target="#menu2"><em class="glyphicon glyphicon-th-list"></em> Manage Attendees<i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    <ul class="nav nav-stacked collapse" id="menu2">
                                         <li>
                                             <a href="@Url.Action("Index", "Guardians")"><em class="glyphicon glyphicon-user"></em> Guardians</a>
                                         </li>

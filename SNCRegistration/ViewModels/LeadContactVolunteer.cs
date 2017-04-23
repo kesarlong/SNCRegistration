@@ -10,6 +10,11 @@ namespace SNCRegistration.ViewModels
         public LeadContact leadContact { get; set; }
         public Volunteer volunteer { get; set; }
 
+        public ShirtSize shirtsize { get; set; }
+
+        public Attendance attendance { get;set;}
+
+        public BSType bsttype{ get; set; }
 
         public IEnumerable<Volunteer> volunteers { get; set; }
         public IEnumerable<LeadContact> leadcontacts { get; set; }
