@@ -16,10 +16,13 @@
             @Html.DisplayFor(modelItem => item.LeadContactLastName)
         </td>
         <td>
-            @Html.DisplayNameFor(model => model.BSDescription)
+            @Html.DisplayFor(modelItem => item.LeadContactEmail)
         </td>
         <td>
-            @Html.DisplayNameFor(model => model.UnitChapterNumber)
+            @Html.DisplayFor(model => item.BSDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.UnitChapterNumber)
         </td>
     </tr>
 }

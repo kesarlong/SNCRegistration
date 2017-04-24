@@ -13,6 +13,8 @@ namespace SNCRegistration.ViewModels
         public string LeadContactFirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LeadContactLastName { get; set; }
+        [Display(Name = "Email")]
+        public string LeadContactEmail { get; set; }
         [Display(Name = "Group")]
         public string BSDescription { get; set; }
         [Display(Name = "Group Number")]

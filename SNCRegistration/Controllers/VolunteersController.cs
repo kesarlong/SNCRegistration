@@ -103,15 +103,6 @@ namespace SNCRegistration.Controllers
 
             return View(volunteers.ToPagedList(pageNumber, pageSize));
 
-
-
-
-            //Original Class before changes. Delete if no problems. -Einar
-            //public ActionResult Index()
-            //{
-
-            //    return View(db.Volunteers.ToList());
-            //}
         }
 
         // GET: Volunteers/Details/5
@@ -169,7 +160,7 @@ namespace SNCRegistration.Controllers
         [OverrideAuthorization]
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid")] Volunteer volunteer)
+        public ActionResult Create([Bind(Include = "VolunteerID,VolunteerFirstName,VolunteerLastName,VolunteerAge,LeadContactID,VolunteerShirtOrder,VolunteerShirtSize,VolunteerAttendingCode,SaturdayDinner,UnitChapterNumber,Comments, LeaderGuid, BSType")] Volunteer volunteer)
         {
 
             if (ModelState.IsValid)
@@ -194,9 +185,6 @@ namespace SNCRegistration.Controllers
 
                     if (Request["submit"].Equals("Add an additional volunteer"))
                     { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
-
-                    //if (Request["submit"].Equals("Cancel"))              
-                    //{ return RedirectToAction("Redirect", new { LeaderGuid = volunteer.LeaderGuid }); }
 
                     if (Request["submit"].Equals("Cancel"))
                     { return RedirectToAction("Redirect", new { LeaderGuid = volunteer.LeaderGuid }); }
@@ -227,9 +215,7 @@ namespace SNCRegistration.Controllers
                     // Throw a new DbEntityValidationException with the improved exception message.
                     throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
                 }
-                //Session["lSession"] = volunteer.LeadContactID;
 
-                //return RedirectToAction("Registered");
             }
             return View(volunteer);
         }
@@ -523,52 +509,7 @@ namespace SNCRegistration.Controllers
 
 
         }
-
-
-        //[OverrideAuthorization]
-        //public ActionResult Redirect([Bind(Include = "VolunteerFirstName, VolunteerLastName"),
-        //    ] Volunteer volunteer, string submit)
-        //{
-        //    ModelState.Remove("VolunteerFirstName");
-        //    ModelState.Remove("VolunteerLastName");
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (TempData["myPK"] != null)
-        //        {
-        //            volunteer.LeadContactID = (int)TempData["myPK"];
-
-        //        }
-
-        //        //pass the guardianID to child form as FK                    
-        //        TempData["myPK"] = volunteer.LeadContactID;
-        //        TempData.Keep();
-
-
-
-
-        //        //store year of event
-        //        var thisYear = DateTime.Now.Year.ToString();
-        //        volunteer.EventYear = int.Parse(thisYear);
-
-        //        if (Request["submit"].Equals("Add an additional volunteer"))
-        //        { return RedirectToAction("Create", "Volunteers", new { LeadContactGuid = volunteer.LeaderGuid }); }
-
-        //        if (Request["submit"].Equals("Complete registration"))
-        //        //registration complete, no more people to add
-        //        {
-        //            var total = db.ComputeTotal(volunteer.LeadContactID);
-        //            var email = Session["leaderEmail"] as string;
-        //            var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(volunteer.LeadContactID);
-        //            Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
-        //            return Redirect("Registered");
-        //        }
-
-        //    }
-
-
-        //    return View();
-
-        //}
+        
 
         [OverrideAuthorization]
         public new ActionResult Redirect(string submit)
@@ -591,10 +532,7 @@ namespace SNCRegistration.Controllers
         {
 
             ViewBag.LeadContactID = LeadContactID;
-
-            //var vols = from vol in db.Volunteers where vol.LeadContactID == LeadContactID select vol;
             var vols = (from vol in db.Volunteers where vol.LeadContactID == LeadContactID select vol).Take(1000);
-            //var vols = (from v in db.Volunteers where v.VolunteerAge == 1  select v).Take(1000);
             return View(vols.ToList());
         }
 
