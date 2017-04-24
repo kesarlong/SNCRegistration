@@ -610,6 +610,12 @@
     <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
     <Content Include="App_Data\PDF\VolunteerHealthForm.pdf" />
+    <Content Include="Resources\SponsorImages\Sponsor3.png" />
+    <Content Include="Resources\SponsorImages\Sponsor4.png" />
+    <Content Include="Resources\SponsorImages\Sponsor5.png" />
+    <Content Include="Resources\SponsorImages\Sponsor6.png" />
+    <Content Include="Resources\SponsorImages\Sponsor7.png" />
+    <Content Include="Resources\SponsorImages\Sponsor8.png" />
     <Content Include="Resources\WebsiteImages\CHAMPOINSLOGO.png" />
     <Content Include="Resources\SponsorImages\Sponsor1.png" />
     <Content Include="Resources\SponsorImages\Sponsor2.png" />
