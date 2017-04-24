@@ -45,6 +45,8 @@
                 var optionValue = $(this).attr("value");
                 if (optionValue >= 3) {
                     $("#UnitChapterNumber").hide();
+                    //not require troop number for OA.  Remove required status for field
+                    //$("#UnitChapterNumber").rules("remove", "required");
                    
                 } else {
                     $("#UnitChapterNumber").show();
@@ -279,6 +281,7 @@
                 @Html.ValidationMessageFor(model => model.LeadContactShirtSize, "", new { @class = "text-danger" })
             </div>
 
+            
             <br />
             <div class="form-group" id="BSType">
                 @Html.LabelFor(model => model.BSType, htmlAttributes: new { @class = "control-label" })

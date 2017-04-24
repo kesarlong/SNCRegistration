@@ -843,6 +843,27 @@ namespace SNCRegistration.Controllers
             return File(path, MediaTypeNames.Image.Jpeg);
         }
 
+        [OverrideAuthorization]
+        public ActionResult GetAsset(string file)
+        {
+            var appData = Server.MapPath("~/Resources/WebsiteImages/");
+            var path = Path.Combine(appData, file);
+            path = Path.GetFullPath(path);
+            if (!path.StartsWith(appData))
+            {
+                // Ensure that we are serving file only inside the App_Data folder
+                // and block requests outside like "../web.config"
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(path))
+            {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Image.Jpeg);
+        }
+
 
         public ActionResult DeletePDFFile(string FileName)
         {
