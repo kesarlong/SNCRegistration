@@ -174,6 +174,14 @@ namespace SNCRegistration.Controllers
 
                 try
                 {
+                    if (volunteer.VolunteerAttendingCode == 1)
+                    {
+                        volunteer.SaturdayDinner = false;
+                    }
+                    else if (volunteer.VolunteerAttendingCode == 4)
+                    {
+                        volunteer.SaturdayDinner = true;
+                    }
                     db.SaveChanges();
 
                     this.Session["lSession"] = volunteer.LeadContactID;
@@ -536,6 +544,8 @@ namespace SNCRegistration.Controllers
             return View(vols.ToList());
         }
 
+        
+
         [OverrideAuthorization]
         [HttpPost]
         public ActionResult VolunteersRegisteredView(int LeadContactID, string submit)
@@ -549,7 +559,7 @@ namespace SNCRegistration.Controllers
             if (Request["submit"].Equals("Complete registration"))
             //registration complete, no more people to add
             {
-                var total = db.ComputeTotal(LeadContactID);
+                var total = db.ComputeTotal(int.Parse(this.Session["lSession"].ToString()) );
                 var email = Session["leaderEmail"] as string;
                 var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(LeadContactID);
                 Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
