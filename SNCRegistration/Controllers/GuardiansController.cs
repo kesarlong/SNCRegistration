@@ -9,8 +9,7 @@ using System.Data.Entity.Validation;
 using System;
 using PagedList;
 using System.Data;
-using System.IO;
-using System.Net.Mime;
+
 
 namespace SNCRegistration.Controllers
 

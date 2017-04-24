@@ -312,6 +312,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ParticipantsCoverSheetController.cs" />
     <Compile Include="Controllers\ParticipantsSaturdayOnlyController.cs" />
     <Compile Include="Controllers\ParticipantsPendingCheckedInCountController.cs" />
     <Compile Include="Controllers\VolunteersCheckedInCountController.cs" />
@@ -395,6 +396,7 @@
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ParticipantsCoverSheetModel.cs" />
     <Compile Include="ViewModels\VolunteersPendingCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsSaturdayOnlyModel.cs" />
     <Compile Include="ViewModels\PDFImages.cs" />
@@ -445,21 +447,6 @@
   <ItemGroup>
     <Content Include="App_Start\bin\Antlr3.Runtime.dll" />
     <Content Include="App_Start\bin\ClosedXML.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.CrystalReports.Engine.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommLayer.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommonControls.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.Controllers.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.Prompting.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.ReportSource.dll" />
-    <Content Include="App_Start\bin\CrystalDecisions.Shared.dll" />
     <Content Include="App_Start\bin\DocumentFormat.OpenXml.dll" />
     <Content Include="App_Start\bin\EntityFramework.dll" />
     <Content Include="App_Start\bin\EntityFramework.SqlServer.dll" />
@@ -509,38 +496,21 @@
     <Content Include="App_Start\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
     <Content Include="App_Start\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
     <Content Include="App_Start\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
-    <Content Include="App_Start\bin\roslyn\Microsoft.Win32.Primitives.dll" />
     <Content Include="App_Start\bin\roslyn\System.AppContext.dll" />
     <Content Include="App_Start\bin\roslyn\System.Collections.Immutable.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Console.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Diagnostics.Process.dll" />
     <Content Include="App_Start\bin\roslyn\System.Diagnostics.StackTrace.dll" />
     <Content Include="App_Start\bin\roslyn\System.IO.Compression.dll" />
     <Content Include="App_Start\bin\roslyn\System.IO.FileSystem.dll" />
-    <Content Include="App_Start\bin\roslyn\System.IO.FileSystem.DriveInfo.dll" />
     <Content Include="App_Start\bin\roslyn\System.IO.FileSystem.Primitives.dll" />
-    <Content Include="App_Start\bin\roslyn\System.IO.Pipes.dll" />
     <Content Include="App_Start\bin\roslyn\System.Reflection.Metadata.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Security.AccessControl.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Security.Claims.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Security.Cryptography.Encoding.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Security.Cryptography.Primitives.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Security.Principal.Windows.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Text.Encoding.CodePages.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Threading.Thread.dll" />
-    <Content Include="App_Start\bin\roslyn\System.ValueTuple.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Xml.ReaderWriter.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Xml.XmlDocument.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Xml.XPath.dll" />
-    <Content Include="App_Start\bin\roslyn\System.Xml.XPath.XDocument.dll" />
     <Content Include="App_Start\bin\roslyn\vbc.exe" />
     <Content Include="App_Start\bin\roslyn\VBCSCompiler.exe" />
     <Content Include="App_Start\bin\SNCRegistration.dll" />
     <Content Include="App_Start\bin\SNCRegistration.pdb" />
-    <Content Include="App_Start\bin\stdole.dll" />
+    <Content Include="App_Start\bin\SqlServerTypes\x64\msvcr120.dll" />
+    <Content Include="App_Start\bin\SqlServerTypes\x64\SqlServerSpatial140.dll" />
+    <Content Include="App_Start\bin\SqlServerTypes\x86\msvcr120.dll" />
+    <Content Include="App_Start\bin\SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="App_Start\bin\System.IO.Compression.dll" />
     <Content Include="App_Start\bin\System.Net.Http.dll" />
     <Content Include="App_Start\bin\System.Runtime.CompilerServices.Unsafe.dll" />
@@ -685,7 +655,6 @@
     <Content Include="Views\Shared\_PartialGuardianList.cshtml" />
     <Content Include="App_Start\bin\roslyn\csc.exe.config" />
     <Content Include="App_Start\bin\roslyn\csc.rsp" />
-    <Content Include="App_Start\bin\roslyn\csi.exe.config" />
     <Content Include="App_Start\bin\roslyn\csi.rsp" />
     <Content Include="App_Start\bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="App_Start\bin\roslyn\Microsoft.VisualBasic.Core.targets" />
@@ -693,7 +662,8 @@
     <Content Include="App_Start\bin\roslyn\vbc.rsp" />
     <Content Include="App_Start\bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="App_Start\bin\SNCRegistration.dll.config" />
-    <None Include="Properties\PublishProfiles\Einar -Web Deploy.pubxml" />
+    <Content Include="Views\ParticipantsCoverSheet\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialParticipantsCoverSheetList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3337,7 +3307,7 @@
     <Content Include="packages\System.Xml.XDocument.4.3.0\System.Xml.XDocument.4.3.0.nupkg" />
     <Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
     <Content Include="packages\WindowsAzure.Storage.8.0.1\WindowsAzure.Storage.8.0.1.nupkg" />
-    <None Include="Properties\PublishProfiles\SNCRegistration - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Kesar - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -3361,6 +3331,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll" />
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />
+    <Content Include="SqlServerTypes\x86\msvcr120.dll" />
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
