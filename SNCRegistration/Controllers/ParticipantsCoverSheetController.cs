@@ -73,7 +73,7 @@ namespace SNCRegistration.Controllers
                         }).ToList();
                     }
                 }
-            return PartialView("_PartialParticipantList", model);
+            return PartialView("_PartialParticipantsCoverSheetList", model);
             }
 
         //Export to excel

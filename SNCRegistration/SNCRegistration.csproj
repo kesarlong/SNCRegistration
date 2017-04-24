@@ -312,6 +312,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadContactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\VolunteersCoverSheetController.cs" />
     <Compile Include="Controllers\ParticipantsCoverSheetController.cs" />
     <Compile Include="Controllers\ParticipantsSaturdayOnlyController.cs" />
     <Compile Include="Controllers\ParticipantsPendingCheckedInCountController.cs" />
@@ -396,6 +397,7 @@
     <Compile Include="ViewModels\Participant.cs">
       <DependentUpon>SNCRegistration.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\VolunteersCoverSheetModel.cs" />
     <Compile Include="ViewModels\ParticipantsCoverSheetModel.cs" />
     <Compile Include="ViewModels\VolunteersPendingCheckedInCountModel.cs" />
     <Compile Include="ViewModels\ParticipantsSaturdayOnlyModel.cs" />
@@ -445,6 +447,8 @@
     <Compile Include="ViewModels\WristBandCountModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SponsorImages\Sponsor1.png" />
+    <Content Include="App_Data\SponsorImages\Sponsor2.png" />
     <Content Include="App_Start\bin\Antlr3.Runtime.dll" />
     <Content Include="App_Start\bin\ClosedXML.dll" />
     <Content Include="App_Start\bin\DocumentFormat.OpenXml.dll" />
@@ -664,6 +668,8 @@
     <Content Include="App_Start\bin\SNCRegistration.dll.config" />
     <Content Include="Views\ParticipantsCoverSheet\Index.cshtml" />
     <Content Include="Views\Shared\_PartialParticipantsCoverSheetList.cshtml" />
+    <Content Include="Views\VolunteersCoverSheet\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialVolunteersCoverSheetList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3489,7 +3495,6 @@
     <Content Include="Views\Shared\_PartialCompletedRegistrationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\SponsorImages\" />
     <Folder Include="Views\AdminConfigurations\" />
     <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
