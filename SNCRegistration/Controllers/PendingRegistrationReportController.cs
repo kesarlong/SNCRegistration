@@ -33,7 +33,7 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
+                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantID as ID, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
                    + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck From Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
                    + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers "
                    + "WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC");
