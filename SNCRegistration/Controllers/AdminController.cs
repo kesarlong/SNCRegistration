@@ -422,32 +422,32 @@ namespace SNCRegistration.Controllers
 
         // Roles 
 
-        // GET: /Admin/ViewAllRoles
-        public ActionResult ViewAllRoles()
-            {
-            var roleManager =
-                new RoleManager<IdentityRole>
-                (
-                    new RoleStore<IdentityRole>(new ApplicationDbContext())
-                    );
+        //// GET: /Admin/ViewAllRoles
+        //public ActionResult ViewAllRoles()
+        //    {
+        //    var roleManager =
+        //        new RoleManager<IdentityRole>
+        //        (
+        //            new RoleStore<IdentityRole>(new ApplicationDbContext())
+        //            );
 
-            List<RoleDTO> colRoleDTO = (from objRole in roleManager.Roles
-                                        select new RoleDTO
-                                            {
-                                            Id = objRole.Id,
-                                            RoleName = objRole.Name
-                                            }).ToList();
+        //    List<RoleDTO> colRoleDTO = (from objRole in roleManager.Roles
+        //                                select new RoleDTO
+        //                                    {
+        //                                    Id = objRole.Id,
+        //                                    RoleName = objRole.Name
+        //                                    }).ToList();
 
-            return View(colRoleDTO);
-            }
+        //    return View(colRoleDTO);
+        //    }
 
         // GET: /Admin/ManageUsers/AddRole
-        public ActionResult AddRole()
-            {
-            RoleDTO objRoleDTO = new RoleDTO();
+        //public ActionResult AddRole()
+        //    {
+        //    RoleDTO objRoleDTO = new RoleDTO();
 
-            return View(objRoleDTO);
-            }
+        //    return View(objRoleDTO);
+        //    }
 
         // PUT: /Admin/AddRole
         [HttpPost]
