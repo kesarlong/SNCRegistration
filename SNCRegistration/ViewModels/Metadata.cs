@@ -162,7 +162,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public bool? PhotoAck;
 
         [Required]
-        [Display(Name = "Attendance")]
+        [Display(Name = "Attending")]
         public int AttendingCode;
 
         [Required]
@@ -204,7 +204,7 @@ namespace SNCRegistration.ViewModels.Metadata
         public Nullable<bool> PhotoAck;
 
         [Required]
-        [Display(Name = "Attendance")]
+        [Display(Name = "Attending")]
         public string AttendingCode;
 
         [MaxLength(200)]
