@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="SNCRegistrationModel.Age" Width="1.5" PointX="0.75" PointY="7.375" />
         <EntityTypeShape EntityType="SNCRegistrationModel.AspNetRole" Width="1.5" PointX="4.75" PointY="3.25" />
         <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserClaim" Width="1.5" PointX="5.75" PointY="11.25" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserLogin" Width="1.5" PointX="2.75" PointY="11.25" />
         <EntityTypeShape EntityType="SNCRegistrationModel.Attendance" Width="1.5" PointX="8.75" PointY="9.25" />
         <EntityTypeShape EntityType="SNCRegistrationModel.BSType" Width="1.5" PointX="8.75" PointY="4.875" />
         <EntityTypeShape EntityType="SNCRegistrationModel.FamilyMember" Width="1.5" PointX="3" PointY="6.375" />
@@ -27,11 +28,10 @@
         <EntityTypeShape EntityType="SNCRegistrationModel.Guardian" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="SNCRegistrationModel.LeadContact" Width="1.5" PointX="0.75" PointY="11.625" />
         <EntityTypeShape EntityType="SNCRegistrationModel.Participant" Width="1.5" PointX="6" PointY="6" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Relationship" Width="1.5" PointX="2.75" PointY="11.25" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.ShirtSize" Width="1.5" PointX="7.75" PointY="12.25" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.Table" Width="1.5" PointX="9.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Relationship" Width="1.5" PointX="7.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.ShirtSize" Width="1.5" PointX="9.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SNCRegistrationModel.Table" Width="1.5" PointX="10.75" PointY="9.25" />
         <EntityTypeShape EntityType="SNCRegistrationModel.Volunteer" Width="1.5" PointX="11" PointY="3.625" />
-        <EntityTypeShape EntityType="SNCRegistrationModel.AspNetUserLogin" Width="1.5" PointX="10.75" PointY="9.25" />
         <AssociationConnector Association="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C" />
         <AssociationConnector Association="SNCRegistrationModel.FK__Participa__Parti__41EDCAC5" />
         <AssociationConnector Association="SNCRegistrationModel.FK__Volunteer__BSTyp__3CF40B7E" />
