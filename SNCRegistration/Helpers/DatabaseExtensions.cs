@@ -11,7 +11,8 @@ namespace SNCRegistration.Helpers
     {
         public static decimal ComputeTotal(this SNCRegistrationEntities db, LeadContact leadContact)
         {
-           
+
+            int count = db.Volunteers.Where(x => x.LeadContactID == leadContact.LeadContactID).Count();
 
             var volSum = db.Volunteers.Where(x => x.LeadContactID == leadContact.LeadContactID).Sum(x=>x.BSType1.BSFee);
             var leadFee = db.BSTypes.Single(x => x.BSTypeID == leadContact.BSType).BSFee;
