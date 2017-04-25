@@ -612,7 +612,7 @@
     <Content Include="Resources\SponsorImages\Sponsor6.png" />
     <Content Include="Resources\SponsorImages\Sponsor7.png" />
     <Content Include="Resources\SponsorImages\Sponsor8.png" />
-    <Content Include="Resources\WebsiteImages\CHAMPOINSLOGO.png" />
+    <Content Include="Resources\WebsiteImages\CHAMPIONSLOGO.png" />
     <Content Include="Resources\SponsorImages\Sponsor1.png" />
     <Content Include="Resources\SponsorImages\Sponsor2.png" />
     <Content Include="Scripts\campfire.js" />
