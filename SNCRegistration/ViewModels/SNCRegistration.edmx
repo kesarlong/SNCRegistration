@@ -38,12 +38,8 @@
           <Property Name="ClaimType" Type="nvarchar(max)" />
           <Property Name="ClaimValue" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AspNetUserLogins">
           <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -337,6 +333,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Age" EntityType="Self.Age" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
@@ -350,13 +347,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="ShirtSize" EntityType="Self.ShirtSize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AspNetUserLogins].[LoginProvider] AS [LoginProvider], 
-    [AspNetUserLogins].[ProviderKey] AS [ProviderKey], 
-    [AspNetUserLogins].[UserId] AS [UserId]
-    FROM [dbo].[AspNetUserLogins] AS [AspNetUserLogins]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="Self.FK__FamilyMem__Famil__40F9A68C">
             <End Role="Age" EntitySet="Age" />
             <End Role="FamilyMembers" EntitySet="FamilyMembers" />
@@ -423,6 +413,7 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="Ages" EntityType="SNCRegistrationModel.Age" />
           <EntitySet Name="AspNetRoles" EntityType="SNCRegistrationModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="SNCRegistrationModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="SNCRegistrationModel.AspNetUserLogin" />
           <EntitySet Name="Attendances" EntityType="SNCRegistrationModel.Attendance" />
           <EntitySet Name="BSTypes" EntityType="SNCRegistrationModel.BSType" />
           <EntitySet Name="FamilyMembers" EntityType="SNCRegistrationModel.FamilyMember" />
@@ -434,7 +425,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <EntitySet Name="ShirtSizes" EntityType="SNCRegistrationModel.ShirtSize" />
           <EntitySet Name="Tables" EntityType="SNCRegistrationModel.Table" />
           <EntitySet Name="Volunteers" EntityType="SNCRegistrationModel.Volunteer" />
-          <EntitySet Name="AspNetUserLogins" EntityType="SNCRegistrationModel.AspNetUserLogin" />
           <AssociationSet Name="FK__FamilyMem__Famil__40F9A68C" Association="SNCRegistrationModel.FK__FamilyMem__Famil__40F9A68C">
             <End Role="Age" EntitySet="Ages" />
             <End Role="FamilyMember" EntitySet="FamilyMembers" />
@@ -517,6 +507,14 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Attendance">
           <Key>
@@ -685,16 +683,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
           <Property Name="BSType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BSType1" Relationship="SNCRegistrationModel.FK__Volunteer__BSTyp__3CF40B7E" FromRole="Volunteer" ToRole="BSType" />
         </EntityType>
-        <EntityType Name="AspNetUserLogin">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
         <Association Name="FK__FamilyMem__Famil__40F9A68C">
           <End Type="SNCRegistrationModel.Age" Role="Age" Multiplicity="1" />
           <End Type="SNCRegistrationModel.FamilyMember" Role="FamilyMember" Multiplicity="*" />
@@ -853,6 +841,15 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
                 <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1021,15 +1018,6 @@ warning 6002: The table/view 'SNCRegistration.dbo.AspNetUserLogins' does not hav
                 <ScalarProperty Name="VolunteerLastName" ColumnName="VolunteerLastName" />
                 <ScalarProperty Name="VolunteerFirstName" ColumnName="VolunteerFirstName" />
                 <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="SNCRegistrationModel.AspNetUserLogin">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

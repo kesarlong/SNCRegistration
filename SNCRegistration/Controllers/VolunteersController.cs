@@ -143,14 +143,13 @@ namespace SNCRegistration.Controllers
 
         // GET: Volunteers/Create
         [OverrideAuthorization]
-        public ActionResult Create(int LeadContactID)
+        public ActionResult Create()
         {
             //ViewBag.ShirtSizes = new SelectList(db.ShirtSizes.Where(s => s.ShirtSizeCode != "00"), "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.ShirtSizes = new SelectList(db.ShirtSizes, "ShirtSizeCode", "ShirtSizeDescription");
             ViewBag.Attendance = new SelectList(db.Attendances.Where(i => i.Volunteer == true), "AttendanceID", "Description");
             ViewBag.Age = new SelectList(db.Ages, "AgeID", "AgeDescription");
             ViewBag.BSType = new SelectList(db.BSTypes, "BSTypeID", "BSTypeDescription");
-            ViewBag.LeadContactID = LeadContactID;
             return View();
         }
 
@@ -174,6 +173,9 @@ namespace SNCRegistration.Controllers
 
                 try
                 {
+                    volunteer.LeadContactID = int.Parse(this.Session["lSession"].ToString());
+                    volunteer.LeaderGuid = this.Session["gSession"].ToString();
+
                     if (volunteer.VolunteerAttendingCode == 1)
                     {
                         volunteer.SaturdayDinner = false;
@@ -184,25 +186,22 @@ namespace SNCRegistration.Controllers
                     }
                     db.SaveChanges();
 
-                    this.Session["lSession"] = volunteer.LeadContactID;
-
-                    this.Session["gSession"] = volunteer.LeaderGuid;
 
                     if (Request["submit"].Equals("View volunteers I have registered"))
-                    { return RedirectToAction("VolunteersRegisteredView", "Volunteers", new { LeadContactId = Session["lSession"] }); }
+                    { return RedirectToAction("VolunteersRegisteredView", "Volunteers"); }
 
                     if (Request["submit"].Equals("Add an additional volunteer"))
-                    { return RedirectToAction("Create", "Volunteers", new { LeadContactId = this.Session["lSession"] }); }
+                    { return RedirectToAction("Create", "Volunteers"); }
 
                     if (Request["submit"].Equals("Cancel"))
-                    { return RedirectToAction("Redirect", new { LeaderGuid = volunteer.LeaderGuid }); }
+                    { return RedirectToAction("Redirect"); }
 
                     if (Request["submit"].Equals("Complete registration"))
                     //registration complete, no more people to add
                     {
-                        var total = db.ComputeTotal(volunteer.LeadContactID);
+                        var total = db.ComputeTotal(int.Parse(Session["lSession"].ToString()));
                         var email = Session["leaderEmail"] as string;
-                        var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(volunteer.LeadContactID);
+                        var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(int.Parse(Session["lSession"].ToString()));
                         Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
                         return RedirectToAction("Registered");
                     }
@@ -536,11 +535,11 @@ namespace SNCRegistration.Controllers
 
         // GET: Volunteers/Create
         [OverrideAuthorization]
-        public ActionResult VolunteersRegisteredView(int LeadContactID)
+        public ActionResult VolunteersRegisteredView()
         {
 
-            ViewBag.LeadContactID = LeadContactID;
-            var vols = (from vol in db.Volunteers where vol.LeadContactID == LeadContactID select vol).Take(1000);
+            int leadContactID = int.Parse(Session["lSession"].ToString());
+            var vols = (from vol in db.Volunteers where vol.LeadContactID == leadContactID select vol).Take(1000);
             return View(vols.ToList());
         }
 
@@ -548,12 +547,13 @@ namespace SNCRegistration.Controllers
 
         [OverrideAuthorization]
         [HttpPost]
-        public ActionResult VolunteersRegisteredView(int LeadContactID, string submit)
+        public ActionResult VolunteersRegisteredView(string submit)
         {
 
+            int leadContactID = int.Parse(Session["lSession"].ToString());
             if (Request["submit"].Equals("Continue adding volunteers"))
             {
-                return RedirectToAction("Create", "Volunteers", new { LeadContactID = LeadContactID });
+                return RedirectToAction("Create", "Volunteers");
             }
 
             if (Request["submit"].Equals("Complete registration"))
@@ -561,7 +561,7 @@ namespace SNCRegistration.Controllers
             {
                 var total = db.ComputeTotal(int.Parse(this.Session["lSession"].ToString()) );
                 var email = Session["leaderEmail"] as string;
-                var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(LeadContactID);
+                var body = "You have successfully registered for the Special Needs Camporee.The total fee due is " + total.ToString("c") + "<br />" + "Your registered volunteers are:" + "<br />" + db.GetVolunteerList(int.Parse(Session["lSession"].ToString()));
                 Helpers.EmailHelpers.SendVolEmail("sncracc@gmail.com", email, "Registration Confirmation", body, Server.MapPath("~/App_Data/PDF/"));
                 return RedirectToAction("Registered");
             }

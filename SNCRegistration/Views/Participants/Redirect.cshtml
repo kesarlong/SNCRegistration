@@ -26,12 +26,12 @@
 
     //add another participant
     <div class="form-group pull-left">
-        <input type="submit" name="addParticipant" id="addParticipant" value="Add another participant" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
+        <input type="button" name="addParticipant" id="addParticipant" value="Add another participant" class="btn btn-primary" onclick="location.href='@Url.Action("Create")'" />
     </div>
 
     //add a family member (non-participant) attending
     <div class="form-group pull-left">
-        <input type="submit" name="AddFamily" id="AddFamily" value="Add a family member" class="btn btn-primary" onclick="location.href='@Url.Action("Create","FamilyMembers")'" />
+        <input type="button" name="AddFamily" id="AddFamily" value="Add a family member" class="btn btn-primary" onclick="location.href='@Url.Action("Create","FamilyMembers")'" />
     </div>
 
     @section Scripts

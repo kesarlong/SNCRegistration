@@ -117,7 +117,14 @@
 
 <p>
     <input type="submit" value="Save" class="btn btn-primary" /> |
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) |
+    @if (ViewContext.HttpContext.User.IsInRole("SystemAdmin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) { <text>|</text>}
+    }
+    @if (ViewContext.HttpContext.User.IsInRole("FullAdmin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }, new { @class = "btn btn-info" }) { <text>|</text>}
+    }
     @Html.ActionLink("Back to Volunteer Search", "Index", "Volunteers", new {SearchString = Session["SessionSearchString"], sortOrder = Session["SessionSortOrder"], currentFilter = Session["SessionCurrentFilter"], searchYear = Session["SessionSearchYear"], page = Session["SessionPage"] }, new { @class = "btn btn-info" })
 </p>
 
