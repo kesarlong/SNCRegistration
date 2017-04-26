@@ -672,6 +672,7 @@
     <Content Include="Views\Shared\_PartialParticipantsCoverSheetList.cshtml" />
     <Content Include="Views\VolunteersCoverSheet\Index.cshtml" />
     <Content Include="Views\Shared\_PartialVolunteersCoverSheetList.cshtml" />
+    <Content Include="App.Config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
