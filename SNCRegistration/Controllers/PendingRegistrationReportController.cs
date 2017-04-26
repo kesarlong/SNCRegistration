@@ -33,10 +33,9 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = String.Concat("SELECT 'Participant' AS Registrant, ParticipantID as ID, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                   + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck From Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                   + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers "
-                   + "WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC");
+                query = String.Concat("SELECT ParticipantID as ID, 'Participant' AS Registrant, ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0) and EventYear = @EventYear "
+                + "UNION SELECT GuardianID as ID, 'Guardian', GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck From Guardians WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0)  and  EventYear = @EventYear "
+                + "UNION SELECT FamilyMemberID, 'FamilyMember', FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName', CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0)  and EventYear = @EventYear ORDER BY LastName, FirstName ASC");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear != null ? eventYear.ToString() : DateTime.Now.Year.ToString());
@@ -44,8 +43,8 @@ namespace SNCRegistration.Controllers
                     model = dt.AsEnumerable().Select(x => new PendingRegistrationReportModel()
                         {
                         Registrant = x["Registrant"].ToString(),
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
                         HealthForm = x["HealthForm"].ToString(),
                         PhotoAck = x["PhotoAck"].ToString()
                         }).ToList();
@@ -65,10 +64,9 @@ namespace SNCRegistration.Controllers
                 {
                 dt = new DataTable();
                 connection.Open();
-                query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                   + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck From Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                   + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers "
-                   + "WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+                query = "SELECT ParticipantID as ID, 'Participant' AS Registrant, ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0) and EventYear = @EventYear "
+                + "UNION SELECT GuardianID as ID, 'Guardian', GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck From Guardians WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0)  and  EventYear = @EventYear "
+                + "UNION SELECT FamilyMemberID, 'FamilyMember', FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName', CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0)  and EventYear = @EventYear ORDER BY LastName, FirstName ASC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                     {
                     adapter.SelectCommand.Parameters.AddWithValue("@EventYear", eventYear);
@@ -76,8 +74,8 @@ namespace SNCRegistration.Controllers
                     model = dt.AsEnumerable().Select(x => new PendingRegistrationReportModel()
                         {
                         Registrant = x["Registrant"].ToString(),
-                        ParticipantFirstName = x["ParticipantFirstName"].ToString(),
-                        ParticipantLastName = x["ParticipantLastName"].ToString(),
+                        FirstName = x["FirstName"].ToString(),
+                        LastName = x["LastName"].ToString(),
                         HealthForm = x["HealthForm"].ToString(),
                         PhotoAck = x["PhotoAck"].ToString()
                         }).ToList();
@@ -91,10 +89,9 @@ namespace SNCRegistration.Controllers
             {
             string constring = ConfigurationManager.ConnectionStrings["SNCRegistrationConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT 'Participant' AS Registrant, ParticipantFirstName, ParticipantLastName, CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                   + "UNION SELECT 'Guardian', GuardianFirstName, GuardianLastName, CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck From Guardians WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear "
-                   + "UNION SELECT 'FamilyMember', FamilyMemberFirstName, FamilyMemberLastName, CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers "
-                   + "WHERE HealthForm = 0 OR PhotoAck = 0 AND EventYear = @EventYear ORDER BY ParticipantFirstName ASC";
+            string query = "SELECT ParticipantID as ID, 'Participant' AS Registrant, ParticipantFirstName as 'FirstName', ParticipantLastName as 'LastName', CASE WHEN Participants.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Participants.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM Participants WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0) and EventYear = @EventYear "
+                + "UNION SELECT GuardianID as ID, 'Guardian', GuardianFirstName as 'FirstName', GuardianLastName as 'LastName', CASE WHEN Guardians.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN Guardians.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck From Guardians WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0)  and  EventYear = @EventYear "
+                + "UNION SELECT FamilyMemberID, 'FamilyMember', FamilyMemberFirstName as 'FirstName', FamilyMemberLastName as 'LastName', CASE WHEN FamilyMembers.HealthForm = 1 THEN 'Yes' ELSE 'No' END AS HealthForm, CASE WHEN FamilyMembers.PhotoAck = 1 THEN 'Yes' ELSE 'No' END AS PhotoAck FROM FamilyMembers WHERE (HealthForm = 0 and PhotoAck= 1) or (HealthForm= 1 and PhotoAck= 0) or (HealthForm=0 and PhotoAck= 0)  and EventYear = @EventYear ORDER BY LastName, FirstName ASC";
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             dt.TableName = "Participants";

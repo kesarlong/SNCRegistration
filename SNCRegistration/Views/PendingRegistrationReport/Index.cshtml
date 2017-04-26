@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SNCRegistration.ViewModels.PendingRegistrationReportModel>
 
 @{
-    ViewBag.Title = "Pending Registrations Count Report";
+    ViewBag.Title = "Incomplete Registrations Count Report";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
 @using (Html.BeginForm("PendingRegistrationReport", "PendingRegistrationReport", FormMethod.Post))
     {
-    <h2>Pending Registration Count Report</h2>
+    <h2>Incomplete Registration Count Report</h2>
     <div class="row">
         <div class="col-sm-3">
           
@@ -25,10 +25,10 @@
                     @Html.DisplayNameFor(model => model.Registrant)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ParticipantFirstName)
+                    @Html.DisplayNameFor(model => model.FirstName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ParticipantLastName)
+                    @Html.DisplayNameFor(model => model.LastName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.HealthForm)

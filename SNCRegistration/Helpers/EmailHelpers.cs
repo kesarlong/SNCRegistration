@@ -14,7 +14,7 @@ namespace SNCRegistration.Helpers
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
             var bcc = "sncracc@gmail.com";
-            const string fromPassword = "Coffee1$";
+            const string fromPassword = "storedpassword";
 
             var smtp = new SmtpClient
             {
@@ -46,7 +46,7 @@ namespace SNCRegistration.Helpers
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
             var bcc = "sncracc@gmail.com";
-            const string fromPassword = "Coffee1$";
+            const string fromPassword = "storedpassword";
 
             var smtp = new SmtpClient
             {

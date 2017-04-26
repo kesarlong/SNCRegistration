@@ -3496,7 +3496,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AdminConfigurations\" />
-    <Folder Include="Views\CompletedRegistration\" />
     <Folder Include="Views\CustomAuthorize\" />
     <Folder Include="Views\Events\" />
     <Folder Include="Views\Reporting\" />
