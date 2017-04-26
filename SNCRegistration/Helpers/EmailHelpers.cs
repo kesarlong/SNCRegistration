@@ -11,10 +11,11 @@ namespace SNCRegistration.Helpers
     {        
         public static void SendEmail(string fAddress, string tAddress, string subj, string bdy, string pdfFolder)
         {
+            var pass = System.Configuration.ConfigurationManager.AppSettings["emailPassword"];
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
             var bcc = "sncracc@gmail.com";
-            const string fromPassword = "Coffee1$";
+            string fromPassword = pass;
 
             var smtp = new SmtpClient
             {
@@ -43,10 +44,11 @@ namespace SNCRegistration.Helpers
 
         public static void SendVolEmail(string fAddress, string tAddress, string subj, string bdy, string pdfFolder)
         {
+            var pass = System.Configuration.ConfigurationManager.AppSettings["emailPassword"];
             var fromAddress = new MailAddress(fAddress);
             var toAddress = new MailAddress(tAddress);
             var bcc = "sncracc@gmail.com";
-            const string fromPassword = "Coffee1$";
+            string fromPassword = pass;
 
             var smtp = new SmtpClient
             {
